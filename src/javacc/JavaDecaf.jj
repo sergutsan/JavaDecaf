@@ -1102,10 +1102,7 @@ void TryStatement() :
 
 void DecafBlock() :
 {Token t;}
-{
-    ({
-    t = getToken(1);
-    }/*@bgen(jjtree) DecafBlock */
+{/*@bgen(jjtree) DecafBlock */
     {
       ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
       boolean jjtc001 = true;
@@ -1113,7 +1110,19 @@ void DecafBlock() :
     }
     try {
 /*@egen*/
-    ((BlockStatement())+)/*@bgen(jjtree)*/
+    ({
+    t = getToken(1);
+    }
+    (BlockStatement())+/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    }
+/*@egen*/
+    {
+    jjtn001.setFirstToken(t);
+    jjtn001.setLastToken(getToken(0));
+    })/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
         jjtree.clearNodeScope(jjtn001);
@@ -1133,9 +1142,5 @@ void DecafBlock() :
         jjtree.closeNodeScope(jjtn001, true);
       }
     }
-/*@egen*/            
-    {
-    jjtn000.setFirstToken(t);
-    jjtn000.setLastToken(getToken(0));
-    })
+/*@egen*/             
 }

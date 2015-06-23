@@ -18,7 +18,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         return;
       }
     } else {
-      System.out.println("JavaDecaf Compiler:  Usage is \u005c"java JDCParser inputfile outputfile\u005c"");
+      System.out.println("JavaDecaf Compiler:  Usage is \"java JDCParser inputfile outputfile\"");
       return;
     }
     try {
@@ -2616,11 +2616,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
  */
   static final public void DecafBlock() throws ParseException {
  Token t;
-    t = getToken(1);
       ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     try {
+    t = getToken(1);
       label_41:
       while (true) {
         BlockStatement();
@@ -2670,6 +2670,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           break label_41;
         }
       }
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    jjtn001.setFirstToken(t);
+    jjtn001.setLastToken(getToken(0));
     } catch (Throwable jjte001) {
       if (jjtc001) {
         jjtree.clearNodeScope(jjtn001);
@@ -2689,8 +2693,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         jjtree.closeNodeScope(jjtn001, true);
       }
     }
-    jjtn000.setFirstToken(t);
-    jjtn000.setLastToken(getToken(0));
   }
 
   static private boolean jj_2_1(int xla) {
