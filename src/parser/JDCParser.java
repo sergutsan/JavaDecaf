@@ -16,7 +16,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         return;
       }
     } else {
-      System.out.println("Toy Preprocessor:  Usage is \u005c"java JDCParser inputfile outputfile\u005c"");
+      System.out.println("Toy Preprocessor:  Usage is\"java JDCParser inputfile outputfile\"");
       return;
     }
     try {
