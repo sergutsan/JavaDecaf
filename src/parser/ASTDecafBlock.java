@@ -37,8 +37,11 @@ package parser;
 import java.io.*;
 
 public class ASTDecafBlock extends SimpleNode{
-  ASTDecafBlock(int id) {
+    String className;
+
+  ASTDecafBlock(int id, String className) {
     super(id);
+      this.className = className;
   }
 
 
@@ -46,7 +49,7 @@ public class ASTDecafBlock extends SimpleNode{
 
   public void process (PrintWriter ostr) {
     Token t = begin; // t corresponds to the "{" of the special block.
-    t.image = "{ try {";
+    t.image = "public class" + className + "{ \n public static void main(String[] args){";
     while (t != end) {
       print(t, ostr);
       t = t.next;
