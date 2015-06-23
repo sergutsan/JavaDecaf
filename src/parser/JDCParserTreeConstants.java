@@ -5,11 +5,13 @@ public interface JDCParserTreeConstants
 {
   public int JJTCOMPILATIONUNIT = 0;
   public int JJTVOID = 1;
+  public int JJTDECAFBLOCK = 2;
 
 
   public String[] jjtNodeName = {
     "CompilationUnit",
     "void",
+    "DecafBlock",
   };
 }
-/* JavaCC - OriginalChecksum=31461405c3de46c37e82de3dc369f49a (do not edit this line) */
+/* JavaCC - OriginalChecksum=2e6157c31f6fa330a9f7008d7f9d0d55 (do not edit this line) */

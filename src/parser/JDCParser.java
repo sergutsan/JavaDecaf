@@ -9,6 +9,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     ASTCompilationUnit node;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
+      String className = args[0].split(".")[0]; //get the name of the file without extension
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -22,7 +23,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     try {
       node = parser.CompilationUnit();
       PrintWriter ostr = new PrintWriter(new FileWriter(args[1]));
-      node.process(ostr);
+      node.process(ostr, className);
       ostr.close();
       System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
     } catch (ParseException e) {
@@ -2610,56 +2611,79 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
 /*
- * Decaf Grammar
+ * Decaf Grammar starts here
  */
   static final public void DecafBlock() throws ParseException {
-    label_41:
-    while (true) {
-      BlockStatement();
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case BOOLEAN:
-      case BREAK:
-      case BYTE:
-      case CHAR:
-      case CLASS:
-      case CONTINUE:
-      case DO:
-      case DOUBLE:
-      case FALSE:
-      case FINAL:
-      case FLOAT:
-      case FOR:
-      case IF:
-      case INT:
-      case INTERFACE:
-      case LONG:
-      case NEW:
-      case NULL:
-      case RETURN:
-      case SHORT:
-      case SUPER:
-      case SWITCH:
-      case SYNCHRONIZED:
-      case THIS:
-      case THROW:
-      case TRUE:
-      case TRY:
-      case WHILE:
-      case INTEGER_LITERAL:
-      case FLOATING_POINT_LITERAL:
-      case CHARACTER_LITERAL:
-      case STRING_LITERAL:
-      case IDENTIFIER:
-      case LPAREN:
-      case LBRACE:
-      case SEMICOLON:
-      case INCR:
-      case DECR:
-        ;
-        break;
-      default:
-        jj_la1[110] = jj_gen;
-        break label_41;
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
+      boolean jjtc001 = true;
+      jjtree.openNodeScope(jjtn001);
+    try {
+      label_41:
+      while (true) {
+        BlockStatement();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case BOOLEAN:
+        case BREAK:
+        case BYTE:
+        case CHAR:
+        case CLASS:
+        case CONTINUE:
+        case DO:
+        case DOUBLE:
+        case FALSE:
+        case FINAL:
+        case FLOAT:
+        case FOR:
+        case IF:
+        case INT:
+        case INTERFACE:
+        case LONG:
+        case NEW:
+        case NULL:
+        case RETURN:
+        case SHORT:
+        case SUPER:
+        case SWITCH:
+        case SYNCHRONIZED:
+        case THIS:
+        case THROW:
+        case TRUE:
+        case TRY:
+        case WHILE:
+        case INTEGER_LITERAL:
+        case FLOATING_POINT_LITERAL:
+        case CHARACTER_LITERAL:
+        case STRING_LITERAL:
+        case IDENTIFIER:
+        case LPAREN:
+        case LBRACE:
+        case SEMICOLON:
+        case INCR:
+        case DECR:
+          ;
+          break;
+        default:
+          jj_la1[110] = jj_gen;
+          break label_41;
+        }
+      }
+    } catch (Throwable jjte001) {
+      if (jjtc001) {
+        jjtree.clearNodeScope(jjtn001);
+        jjtc001 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte001 instanceof RuntimeException) {
+        {if (true) throw (RuntimeException)jjte001;}
+      }
+      if (jjte001 instanceof ParseException) {
+        {if (true) throw (ParseException)jjte001;}
+      }
+      {if (true) throw (Error)jjte001;}
+    } finally {
+      if (jjtc001) {
+        jjtree.closeNodeScope(jjtn001, true);
       }
     }
   }
@@ -2886,70 +2910,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     try { return !jj_3_32(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(31, xla); }
-  }
-
-  static private boolean jj_3R_248() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(92)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(93)) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_170() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_3()) {
-    jj_scanpos = xsp;
-    if (jj_3R_173()) {
-    jj_scanpos = xsp;
-    if (jj_3R_174()) {
-    jj_scanpos = xsp;
-    if (jj_3R_175()) {
-    jj_scanpos = xsp;
-    if (jj_3R_176()) {
-    jj_scanpos = xsp;
-    if (jj_3R_177()) return true;
-    }
-    }
-    }
-    }
-    }
-    return false;
-  }
-
-  static private boolean jj_3_3() {
-    if (jj_3R_44()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_72() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_90()) {
-    jj_scanpos = xsp;
-    if (jj_3R_91()) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(50)) {
-    jj_scanpos = xsp;
-    if (jj_3R_92()) {
-    jj_scanpos = xsp;
-    if (jj_3R_93()) {
-    jj_scanpos = xsp;
-    if (jj_3R_94()) return true;
-    }
-    }
-    }
-    }
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_90() {
-    if (jj_3R_102()) return true;
-    return false;
   }
 
   static private boolean jj_3_21() {
@@ -5144,6 +5104,70 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static private boolean jj_3R_91() {
     if (jj_3R_48()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_248() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(92)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(93)) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_170() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_3()) {
+    jj_scanpos = xsp;
+    if (jj_3R_173()) {
+    jj_scanpos = xsp;
+    if (jj_3R_174()) {
+    jj_scanpos = xsp;
+    if (jj_3R_175()) {
+    jj_scanpos = xsp;
+    if (jj_3R_176()) {
+    jj_scanpos = xsp;
+    if (jj_3R_177()) return true;
+    }
+    }
+    }
+    }
+    }
+    return false;
+  }
+
+  static private boolean jj_3_3() {
+    if (jj_3R_44()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_72() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_90()) {
+    jj_scanpos = xsp;
+    if (jj_3R_91()) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(50)) {
+    jj_scanpos = xsp;
+    if (jj_3R_92()) {
+    jj_scanpos = xsp;
+    if (jj_3R_93()) {
+    jj_scanpos = xsp;
+    if (jj_3R_94()) return true;
+    }
+    }
+    }
+    }
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_90() {
+    if (jj_3R_102()) return true;
     return false;
   }
 
