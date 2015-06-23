@@ -307,7 +307,11 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
 		}
   [ PackageDeclaration() ]
   ( ImportDeclaration() )*
+  (
   ( TypeDeclaration() )*
+  |
+  DecafBlock()
+  )
   <EOF>
 		{
 		  return jjtThis;
@@ -1053,4 +1057,16 @@ void TryStatement() :
   "try" Block()
   ( "catch" "(" FormalParameter() ")" Block() )*
   [ "finally" Block() ]
+}
+
+/*
+ * Decaf Grammar
+ */
+
+void DecafBlock() :
+{}
+{
+
+    (BlockStatement())+
+
 }
