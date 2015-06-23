@@ -32,6 +32,7 @@ options {
                
                            
   JAVA_UNICODE_ESCAPE = true;
+  OUTPUT_DIRECTORY = "../parser";
 }
 
 PARSER_BEGIN(JDCParser)
