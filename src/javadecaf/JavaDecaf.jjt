@@ -468,30 +468,12 @@ void ArrayInitializer() :
 
 void MethodDeclaration() :
 		{
-		  Token t;
 		}
 {
   ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
   ResultType() MethodDeclarator() [ "throws" NameList() ]
   (
-		{
-		  t = getToken(1);
-		}
     Block()
-    [
-      (
-        (
-          ( "catch" "(" FormalParameter() ")" Block() )+
-          [ "finally" Block() ]
-        |
-          "finally" Block()
-        )
-		{
-		  jjtThis.setFirstToken(t);
-		  jjtThis.setLastToken(getToken(0));
-		}
-      ) #SpecialBlock
-    ]
   |
     ";"
   )
