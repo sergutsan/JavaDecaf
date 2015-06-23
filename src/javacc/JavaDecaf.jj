@@ -48,15 +48,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     JDCParser parser;
     ASTCompilationUnit node;
     if (args.length == 2) {
-      System.out.println("Toy Preprocessor:  Reading from file " + args[0] + " . . .");
+      System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
-        System.out.println("Toy Preprocessor:  File " + args[0] + " not found.");
+        System.out.println("JavaDecaf Compiler:  File " + args[0] + " not found.");
         return;
       }
     } else {
-      System.out.println("Toy Preprocessor:  Usage is \"java JDCParser inputfile outputfile\"");
+      System.out.println("JavaDecaf Compiler:  Usage is \"java JDCParser inputfile outputfile\"");
       return;
     }
     try {
@@ -64,11 +64,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
       PrintWriter ostr = new PrintWriter(new FileWriter(args[1]));
       node.process(ostr);
       ostr.close();
-      System.out.println("Toy Preprocessor:  Transformation completed successfully.");
+      System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
     } catch (ParseException e) {
-      System.out.println("Toy Preprocessor:  Encountered errors during parse.");
+      System.out.println("JavaDecaf Compiler:  Encountered errors during parse.");
     } catch (IOException e) {
-      System.out.println("Toy Preprocessor:  Could not create file " + args[1]);
+      System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
     }
   }
 
@@ -317,7 +317,11 @@ ASTCompilationUnit CompilationUnit()                  :
 		}
   [ PackageDeclaration() ]
   ( ImportDeclaration() )*
+  (
   ( TypeDeclaration() )*
+  |
+  DecafBlock()
+  )
   <EOF>/*@bgen(jjtree)*/
                 {
                   jjtree.closeNodeScope(jjtn000, true);
@@ -1088,4 +1092,16 @@ void TryStatement() :
   "try" Block()
   ( "catch" "(" FormalParameter() ")" Block() )*
   [ "finally" Block() ]
+}
+
+/*
+ * Decaf Grammar
+ */
+
+void DecafBlock() :
+{}
+{
+
+    (BlockStatement())+
+
 }
