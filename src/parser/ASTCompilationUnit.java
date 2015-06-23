@@ -45,7 +45,7 @@ public class ASTCompilationUnit extends SimpleNode {
 
 // Manually inserted code begins here
 
-  public void process (PrintWriter ostr) {
+  public void process (PrintWriter ostr, String className) {
     Token t = begin;
     ASTDecafBlock bnode;
     for (int i = 0; i < jjtGetNumChildren(); i++) {
@@ -54,7 +54,7 @@ public class ASTCompilationUnit extends SimpleNode {
         print(t, ostr);
         t = t.next;
       } while (t != bnode.begin);
-      bnode.process(ostr);
+      bnode.process(ostr, className);
       t = bnode.end.next;
     }
     while (t != null) {
