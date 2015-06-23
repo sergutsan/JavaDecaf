@@ -38,7 +38,7 @@ import java.io.*;
 
 public class ASTDecafBlock extends SimpleNode{
 
-  ASTDecafBlock(int id, String className) {
+  ASTDecafBlock(int id) {
     super(id);
   }
 
