@@ -1103,7 +1103,7 @@ void TryStatement() :
 void DecafBlock() :
 {Token t;}
 {
-    {
+    ({
     t = getToken(1);
     }/*@bgen(jjtree) DecafBlock */
     {
@@ -1113,7 +1113,7 @@ void DecafBlock() :
     }
     try {
 /*@egen*/
-    (BlockStatement())+/*@bgen(jjtree)*/
+    ((BlockStatement())+)/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
         jjtree.clearNodeScope(jjtn001);
@@ -1137,5 +1137,5 @@ void DecafBlock() :
     {
     jjtn000.setFirstToken(t);
     jjtn000.setLastToken(getToken(0));
-    }
+    })
 }
