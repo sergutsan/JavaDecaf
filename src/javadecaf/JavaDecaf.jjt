@@ -467,8 +467,7 @@ void ArrayInitializer() :
 }
 
 void MethodDeclaration() :
-		{
-		}
+{}
 {
   ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
   ResultType() MethodDeclarator() [ "throws" NameList() ]
