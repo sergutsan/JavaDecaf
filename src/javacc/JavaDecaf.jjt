@@ -1071,9 +1071,9 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    ((BlockStatement())+) #DecafBlock
+    (BlockStatement())+
     {
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));
-    })
+    })  #DecafBlock
 }
