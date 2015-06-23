@@ -1068,12 +1068,12 @@ void TryStatement() :
 void DecafBlock() :
 {Token t;}
 {
-    {
+    ({
     t = getToken(1);
     }
-    (BlockStatement())+ #DecafBlock
+    ((BlockStatement())+) #DecafBlock
     {
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));
-    }
+    })
 }
