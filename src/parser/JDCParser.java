@@ -8,15 +8,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     JDCParser parser;
     ASTCompilationUnit node;
     if (args.length == 2) {
-      System.out.println("Java Decaf Compiler:  Reading from file " + args[0] + " . . .");
+      System.out.println("Toy Preprocessor:  Reading from file " + args[0] + " . . .");
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
-        System.out.println("Java Decaf Compiler:  File " + args[0] + " not found.");
+        System.out.println("Toy Preprocessor:  File " + args[0] + " not found.");
         return;
       }
     } else {
-      System.out.println("Java Decaf Compiler:  Usage is\"java JDCParser inputfile outputfile\"");
+      System.out.println("Toy Preprocessor:  Usage is \u005c"java JDCParser inputfile outputfile\u005c"");
       return;
     }
     try {
@@ -24,11 +24,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       PrintWriter ostr = new PrintWriter(new FileWriter(args[1]));
       node.process(ostr);
       ostr.close();
-      System.out.println("Java Decaf Compiler:  Transformation completed successfully.");
+      System.out.println("Toy Preprocessor:  Transformation completed successfully.");
     } catch (ParseException e) {
-      System.out.println("Java Decaf Compiler:  Encountered errors during parse.");
+      System.out.println("Toy Preprocessor:  Encountered errors during parse.");
     } catch (IOException e) {
-      System.out.println("Java Decaf Compiler:  Could not create file " + args[1]);
+      System.out.println("Toy Preprocessor:  Could not create file " + args[1]);
     }
   }
 
