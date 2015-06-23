@@ -317,8 +317,8 @@ ASTCompilationUnit CompilationUnit()                  :
 		}
   [ PackageDeclaration() ]
   ( ImportDeclaration() )*
-  (
-  ( TypeDeclaration() )*
+  ( LOOKAHEAD(3) //avoid choice conflict
+  ( TypeDeclaration() )+
   |
   DecafBlock()
   )
