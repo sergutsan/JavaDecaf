@@ -7,9 +7,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   public static void main(String args[]) throws Exception {
     JDCParser parser;
     ASTCompilationUnit node;
+    String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      String className = args[0].split(".")[0]; //get the name of the file without extension
+      className = args[0].split(".")[0]; //get the name of the file without extension
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -17,7 +18,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         return;
       }
     } else {
-      System.out.println("JavaDecaf Compiler:  Usage is \u005c"java JDCParser inputfile outputfile\u005c"");
+      System.out.println("JavaDecaf Compiler:  Usage is \"java JDCParser inputfile outputfile \"");
       return;
     }
     try {
