@@ -47,9 +47,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
   public static void main(String args[]) throws Exception {
     JDCParser parser;
     ASTCompilationUnit node;
+    String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      String className = args[0].split(".")[0]; //get the name of the file without extension
+      className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -1100,8 +1101,11 @@ void TryStatement() :
  */
 
 void DecafBlock() :
-{}
-{/*@bgen(jjtree) DecafBlock */
+{Token t;}
+{
+    {
+    t = getToken(1);
+    }/*@bgen(jjtree) DecafBlock */
     {
       ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
       boolean jjtc001 = true;
@@ -1109,7 +1113,6 @@ void DecafBlock() :
     }
     try {
 /*@egen*/
-
     (BlockStatement())+/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
@@ -1131,5 +1134,8 @@ void DecafBlock() :
       }
     }
 /*@egen*/            
-
+    {
+    jjtn000.setFirstToken(t);
+    jjtn000.setLastToken(getToken(0));
+    }
 }

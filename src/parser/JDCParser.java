@@ -10,7 +10,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      className = args[0].split("\\.")[0]; //get the name of the file without extension
+      className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -18,7 +18,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         return;
       }
     } else {
-      System.out.println("JavaDecaf Compiler:  Usage is \"java JDCParser inputfile outputfile \"");
+      System.out.println("JavaDecaf Compiler:  Usage is \u005c"java JDCParser inputfile outputfile\u005c"");
       return;
     }
     try {
@@ -2615,6 +2615,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
  * Decaf Grammar starts here
  */
   static final public void DecafBlock() throws ParseException {
+ Token t;
+    t = getToken(1);
       ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
@@ -2687,6 +2689,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         jjtree.closeNodeScope(jjtn001, true);
       }
     }
+    jjtn000.setFirstToken(t);
+    jjtn000.setLastToken(getToken(0));
   }
 
   static private boolean jj_2_1(int xla) {
