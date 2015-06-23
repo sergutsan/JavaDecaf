@@ -43,9 +43,10 @@ public class JDCParser {
   public static void main(String args[]) throws Exception {
     JDCParser parser;
     ASTCompilationUnit node;
+    String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      String className = args[0].split(".")[0]; //get the name of the file without extension
+      className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
