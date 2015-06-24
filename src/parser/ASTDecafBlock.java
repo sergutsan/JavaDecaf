@@ -46,10 +46,19 @@ public class ASTDecafBlock extends SimpleNode{
     super(id);
   }
 
+    /**
+     * Encapsulate a "loose" block of Decaf code in a Java class with a main method.
+     * @param ostr - output stream writer defined in JDCParser
+     * @param className - the name of the class (from filename at args[0] in JDCParser)
+     */
   public void process (PrintWriter ostr, String className) {
      Token t = begin;  // t is first token in class.
       Token encapsulation = new Token();
-      encapsulation.image = "public class " + className + " { \n public static void main(String[] args){\n "; //class and method declarations
+      /*
+      *This is where the class and main method declarations are defined.
+      * Spaces are for indentation to make the output code resemble what good practice Java should look like.
+      */
+      encapsulation.image = "public class " + className + " { \n    public static void main(String[] args){\n    ";
       print(encapsulation, ostr);
 
       while (t != end) {
@@ -57,7 +66,7 @@ public class ASTDecafBlock extends SimpleNode{
       t = t.next;
     }
     // t is final semicolon
-    encapsulation.image = "\n}\n}";
+    encapsulation.image = "\n    }\n}";
     print(encapsulation, ostr);
   }
 
