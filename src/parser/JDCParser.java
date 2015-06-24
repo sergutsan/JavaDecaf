@@ -10,7 +10,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
+      className = args[0].split("//.")[0].replace("/",""); //get the name of the file without extension - remove slashes
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
