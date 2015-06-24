@@ -293,7 +293,10 @@ TOKEN : /* OPERATORS */
 | < RUNSIGNEDSHIFTASSIGN: ">>>=" >
 }
 
-
+TOKEN : /* JAVADECAF TOKENS - SK */
+{
+ < PRINTLN: " println" >
+ }
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
  *****************************************/
