@@ -48,17 +48,17 @@ public class ASTCompilationUnit extends SimpleNode {
   public void process (PrintWriter ostr, String className) {
     Token t = begin;
     ASTDecafBlock bnode;
+      /*
+       * Children will be null (therefore 0) if the code is straight Java.
+       * Otherwise there should be one child for each change to make
+       */
     for (int i = 0; i < jjtGetNumChildren(); i++) {
       bnode = (ASTDecafBlock)jjtGetChild(i);
-//      do {
-//        print(t, ostr);
-//        t = t.next;
-//      } while (t.next != null);
       bnode.process(ostr, className);
       t = bnode.end.next;
     }
     while (t != null) {
-      print(t, ostr);
+      print(t, ostr); //Normal code printing
       t = t.next;
     }
   }
