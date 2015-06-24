@@ -53,7 +53,7 @@ public class ASTCompilationUnit extends SimpleNode {
       do {
         print(t, ostr);
         t = t.next;
-      } while (t != bnode.begin);
+      } while (t.next != null);
       bnode.process(ostr, className);
       t = bnode.end.next;
     }

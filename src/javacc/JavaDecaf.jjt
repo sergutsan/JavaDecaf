@@ -54,7 +54,7 @@ public class JDCParser {
         return;
       }
     } else {
-      System.out.println("JavaDecaf Compiler:  Usage is \"java JDCParser inputfile outputfile\"");
+      System.out.println("JavaDecaf Compiler:  Usage is java JDCParser inputfile outputfile");
       return;
     }
     try {
@@ -300,7 +300,9 @@ TOKEN : /* OPERATORS */
 /*
  * Program structuring syntax follows.
  */
-
+/*
+ * Edited by Sophie Koonin
+ */
 ASTCompilationUnit CompilationUnit() #CompilationUnit :
 {}
 {
@@ -1061,8 +1063,9 @@ void TryStatement() :
   [ "finally" Block() ]
 }
 
-/*
+/**
  * Decaf Grammar starts here
+ * @Author Sophie Koonin
  */
 
 void DecafBlock() :
