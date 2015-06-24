@@ -31,7 +31,7 @@ options {
   MULTI = true;
   NODE_DEFAULT_VOID = true;
   JAVA_UNICODE_ESCAPE = true;
-  //DEBUG_PARSER = true;
+  DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../parser";
 }
 
@@ -583,8 +583,11 @@ void Name() :
 {}
 {
   <IDENTIFIER>
-  ( LOOKAHEAD(2) "." <IDENTIFIER>
+
+  (( LOOKAHEAD(2) "." <IDENTIFIER>
   )*
+  [ <PRINTLN> ])
+
 }
 
 void NameList() :
