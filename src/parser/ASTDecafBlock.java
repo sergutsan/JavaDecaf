@@ -48,15 +48,17 @@ public class ASTDecafBlock extends SimpleNode{
 
   public void process (PrintWriter ostr, String className) {
      Token t = begin;  // t is first token in class.
-      String firstToken = t.image;
-      t.image = "public class " + className + " { \n public static void main(String[] args){\n " + t.image; //class and method declarations
-    while (t != end) {
+      Token encapsulation = new Token();
+      encapsulation.image = "public class " + className + " { \n public static void main(String[] args){\n "; //class and method declarations
+      print(encapsulation, ostr);
+
+      while (t != end) {
       print(t, ostr);
       t = t.next;
     }
     // t is final semicolon
-    t.image = "\n}\n}";
-    print(t, ostr);
+    encapsulation.image = "\n}\n}";
+    print(encapsulation, ostr);
   }
 
 }
