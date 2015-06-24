@@ -40,7 +40,7 @@ package parser;
 
 import java.io.PrintWriter;
 
-public class ASTDecafPrintln extends SimpleNode{
+public class ASTDecafPrintln extends ASTDecafMethod{
 
   ASTDecafPrintln(int id) {
     super(id);
