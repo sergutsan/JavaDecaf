@@ -54,17 +54,10 @@ public class ASTCompilationUnit extends SimpleNode {
        * Otherwise there should be one child for each change to make
        */
     for (int i = 0; i < jjtGetNumChildren(); i++) {
-        if (jjtGetChild(i).toString().equals("DecafBlock")){
-            bnode = (ASTDecafBlock)jjtGetChild(i);
-            bnode.process(ostr, className);
-            t = bnode.end.next;
-        } else if (jjtGetChild(i).toString().equals("DecafPrintln")){
-            mnode = (ASTDecafPrintln) jjtGetChild(i);
-            mnode.process(ostr);
-            t = mnode.end.next;
+        bnode = (ASTDecafBlock)jjtGetChild(i);
+        bnode.process(ostr, className);
+        t = bnode.end.next;
         }
-
-    }
     while (t != null) {
       print(t, ostr); //Normal code printing
       t = t.next;
