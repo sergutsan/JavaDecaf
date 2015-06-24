@@ -94,7 +94,7 @@ SPECIAL_TOKEN : /* COMMENTS */
 
 TOKEN : /* JAVADECAF TOKENS - SK */
 {
- < PRINTLN: " println" >
+ < PRINTLN: "println" >
  }
 
 TOKEN : /* RESERVED WORDS AND LITERALS */
@@ -1097,5 +1097,5 @@ void DecafBlock() :
 void DecafPrintln() :
 {}
 {
-    ("println") #DecafPrintln
+    (<PRINTLN>) #DecafPrintln
 }
