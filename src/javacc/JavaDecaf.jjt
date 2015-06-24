@@ -92,6 +92,11 @@ SPECIAL_TOKEN : /* COMMENTS */
 | <MULTI_LINE_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 }
 
+TOKEN : /* JAVADECAF TOKENS - SK */
+{
+ < PRINTLN: " println" >
+ }
+
 TOKEN : /* RESERVED WORDS AND LITERALS */
 {
   < ABSTRACT: "abstract" >
@@ -293,10 +298,6 @@ TOKEN : /* OPERATORS */
 | < RUNSIGNEDSHIFTASSIGN: ">>>=" >
 }
 
-TOKEN : /* JAVADECAF TOKENS - SK */
-{
- < PRINTLN: " println" >
- }
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
  *****************************************/
