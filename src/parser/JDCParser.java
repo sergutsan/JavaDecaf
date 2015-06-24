@@ -10,8 +10,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      //className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
-      className = "Test";
+      className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -25,9 +24,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     try {
       node = parser.CompilationUnit();
       PrintWriter ostr = new PrintWriter(new FileWriter(args[1]));
-      enable_tracing();
       node.process(ostr, className);
-
       ostr.close();
       System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
     } catch (ParseException e) {
