@@ -50,10 +50,10 @@ public class ASTCompilationUnit extends SimpleNode {
     ASTDecafBlock bnode;
     for (int i = 0; i < jjtGetNumChildren(); i++) {
       bnode = (ASTDecafBlock)jjtGetChild(i);
-      do {
-        print(t, ostr);
-        t = t.next;
-      } while (t.next != null);
+//      do {
+//        print(t, ostr);
+//        t = t.next;
+//      } while (t.next != null);
       bnode.process(ostr, className);
       t = bnode.end.next;
     }
