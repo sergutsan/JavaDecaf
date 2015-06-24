@@ -32,6 +32,7 @@ options {
                
                            
   JAVA_UNICODE_ESCAPE = true;
+  DEBUG_PARSER = true; //TODO
   OUTPUT_DIRECTORY = "../parser";
 }
 
@@ -58,7 +59,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
         return;
       }
     } else {
-      System.out.println("JavaDecaf Compiler:  Usage is \"java JDCParser inputfile outputfile\"");
+      System.out.println("JavaDecaf Compiler:  Usage is java JDCParser inputfile outputfile");
       return;
     }
     try {
@@ -304,7 +305,9 @@ TOKEN : /* OPERATORS */
 /*
  * Program structuring syntax follows.
  */
-
+/*
+ * Edited by Sophie Koonin
+ */
 ASTCompilationUnit CompilationUnit()                  :
 {/*@bgen(jjtree) CompilationUnit */
   ASTCompilationUnit jjtn000 = new ASTCompilationUnit(JJTCOMPILATIONUNIT);
@@ -974,7 +977,7 @@ void EmptyStatement() :
 void StatementExpression() :
 /*
  * The last expansion of this production accepts more than the legal
- * Java expansions for StatementExpression.
+ * Java expansions for StatementExpression. TODO
  */
 {}
 {
@@ -1096,8 +1099,9 @@ void TryStatement() :
   [ "finally" Block() ]
 }
 
-/*
+/**
  * Decaf Grammar starts here
+ * @Author Sophie Koonin
  */
 
 void DecafBlock() :
