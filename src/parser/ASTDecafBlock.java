@@ -44,7 +44,7 @@ public class ASTDecafBlock extends SimpleNode{
 
   public void process (PrintWriter ostr, String className) {
     Token t = begin; // t corresponds to the "{" of the special block.
-    t.image = "public class" + className + "{ \n public static void main(String[] args){";
+    t.image = "public class " + className + "{ \n public static void main(String[] args){";
     while (t != end) {
       print(t, ostr);
       t = t.next;

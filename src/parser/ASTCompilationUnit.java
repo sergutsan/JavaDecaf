@@ -43,7 +43,7 @@ public class ASTCompilationUnit extends SimpleNode {
   }
 
 
-// Manually inserted code begins here
+// Manually inserted code begins here - edited by Sophie Koonin
 
   public void process (PrintWriter ostr, String className) {
     Token t = begin;
