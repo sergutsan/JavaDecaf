@@ -31,6 +31,10 @@ package parser;
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Original code from JavaCC (see above copyright notice).
+ * Modified by Sophie Koonin 2015.
+ */
 
 /* JJT: 0.2.2 */
 
@@ -43,13 +47,13 @@ public class ASTDecafBlock extends SimpleNode{
   }
 
   public void process (PrintWriter ostr, String className) {
-    Token t = begin; // t corresponds to the "{" of the special block.
-    t.image = "public class " + className + "{ \n public static void main(String[] args){";
+     Token t = begin;  // t is first token in class.
+      t.image = "public class " + className + " { \n public static void main(String[] args){"; //class and method declarations
     while (t != end) {
       print(t, ostr);
       t = t.next;
     }
-    // t now corresponds to the last "}" of the special block.
+    // t is final semicolon
     t.image = "} }";
     print(t, ostr);
   }
