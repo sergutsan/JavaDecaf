@@ -618,8 +618,10 @@ void Name() :
 {}
 {
   <IDENTIFIER>
-  ( LOOKAHEAD(2) "." <IDENTIFIER>
+
+  ( LOOKAHEAD(2) "." (<IDENTIFIER> | <PRINTLN>)
   )*
+
 }
 
 void NameList() :
