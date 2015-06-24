@@ -1069,6 +1069,9 @@ void TryStatement() :
  * @Author Sophie Koonin
  */
 
+/*
+ * Unencapsulated Decaf code blocks
+ */
 void DecafBlock() :
 {Token t;}
 {
@@ -1080,4 +1083,13 @@ void DecafBlock() :
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));
     })  #DecafBlock
+}
+
+/*
+ * calls to println()
+ */
+void DecafPrintln() :
+{}
+{
+    ("println") #DecafPrintln
 }
