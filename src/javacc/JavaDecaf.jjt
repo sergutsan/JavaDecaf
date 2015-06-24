@@ -31,7 +31,7 @@ options {
   MULTI = true;
   NODE_DEFAULT_VOID = true;
   JAVA_UNICODE_ESCAPE = true;
-  DEBUG_PARSER = true; //TODO
+  //DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../parser";
 }
 
@@ -47,7 +47,7 @@ public class JDCParser {
     String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      className = "TestClass"; //args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes TODO
+      className = args[0].split(".")[0].replace("/",""); //get the name of the file without extension - remove slashes
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
