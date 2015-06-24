@@ -32,7 +32,7 @@ options {
                
                            
   JAVA_UNICODE_ESCAPE = true;
-  DEBUG_PARSER = true; //TODO
+  //DEBUG_PARSER = true; //TODO
   OUTPUT_DIRECTORY = "../parser";
 }
 
@@ -95,6 +95,11 @@ SPECIAL_TOKEN : /* COMMENTS */
 | <FORMAL_COMMENT: "/**" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 | <MULTI_LINE_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 }
+
+TOKEN : /* JAVADECAF TOKENS - SK */
+{
+ < PRINTLN: "println" >
+ }
 
 TOKEN : /* RESERVED WORDS AND LITERALS */
 {
@@ -296,7 +301,6 @@ TOKEN : /* OPERATORS */
 | < RSIGNEDSHIFTASSIGN: ">>=" >
 | < RUNSIGNEDSHIFTASSIGN: ">>>=" >
 }
-
 
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
@@ -801,6 +805,8 @@ void PrimaryPrefix() :
 {
   Literal()
 |
+    DecafPrintln()
+|
   Name()
 |
   "this"
@@ -1104,6 +1110,9 @@ void TryStatement() :
  * @Author Sophie Koonin
  */
 
+/*
+ * Unencapsulated Decaf code blocks
+ */
 void DecafBlock() :
 {Token t;}
 {/*@bgen(jjtree) DecafBlock */
@@ -1147,4 +1156,26 @@ void DecafBlock() :
       }
     }
 /*@egen*/             
+}
+
+/*
+ * calls to println()
+ */
+void DecafPrintln() :
+{}
+{/*@bgen(jjtree) DecafPrintln */
+    {
+      ASTDecafPrintln jjtn001 = new ASTDecafPrintln(JJTDECAFPRINTLN);
+      boolean jjtc001 = true;
+      jjtree.openNodeScope(jjtn001);
+    }
+    try {
+/*@egen*/
+    (<PRINTLN>)/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc001) {
+        jjtree.closeNodeScope(jjtn001, true);
+      }
+    }
+/*@egen*/              
 }
