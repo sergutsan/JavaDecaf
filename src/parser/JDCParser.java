@@ -11,7 +11,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
       int index = args[0].indexOf("."); //get the index of the full stop for substring
-      String className = args[0].substring(0,index);
+      className = args[0].substring(0,index);
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
