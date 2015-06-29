@@ -580,7 +580,7 @@ void Name() :
 {
   <IDENTIFIER>
 
-  ( LOOKAHEAD(2) "." (<IDENTIFIER> | <PRINTLN>)
+  ( LOOKAHEAD(2) "." <IDENTIFIER>
   )*
 
 }
