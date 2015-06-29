@@ -96,10 +96,6 @@ SPECIAL_TOKEN : /* COMMENTS */
 | <MULTI_LINE_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 }
 
-TOKEN : /* JAVADECAF TOKENS - SK */
-{
- < PRINTLN: "println" >
- }
 
 TOKEN : /* RESERVED WORDS AND LITERALS */
 {
@@ -619,7 +615,7 @@ void Name() :
 {
   <IDENTIFIER>
 
-  ( LOOKAHEAD(2) "." (<IDENTIFIER> | <PRINTLN>)
+  ( LOOKAHEAD(2) "." <IDENTIFIER>
   )*
 
 }
@@ -806,8 +802,6 @@ void PrimaryPrefix() :
 {}
 {
   Literal()
-|
-    DecafPrintln()
 |
   Name()
 |
@@ -1158,26 +1152,4 @@ void DecafBlock() :
       }
     }
 /*@egen*/             
-}
-
-/*
- * calls to println()
- */
-void DecafPrintln() :
-{}
-{/*@bgen(jjtree) DecafPrintln */
-    {
-      ASTDecafPrintln jjtn001 = new ASTDecafPrintln(JJTDECAFPRINTLN);
-      boolean jjtc001 = true;
-      jjtree.openNodeScope(jjtn001);
-    }
-    try {
-/*@egen*/
-    (<PRINTLN>)/*@bgen(jjtree)*/
-    } finally {
-      if (jjtc001) {
-        jjtree.closeNodeScope(jjtn001, true);
-      }
-    }
-/*@egen*/              
 }
