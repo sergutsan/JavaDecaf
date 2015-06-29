@@ -60,17 +60,25 @@ public class ASTDecafBlock extends SimpleNode{
       */
       encapsulation.image = "public class " + className + " { \n    public static void main(String[] args){\n    ";
       print(encapsulation, ostr);
-
-      int thisChild = 0;
+      String prevToken = ""; // value of previous token image
       while (t != end) {
-          if (t.image.equals("println") && jjtGetNumChildren() > 0){
-              if (jjtGetChild(thisChild).toString().equals("DecafPrintLn")){
-                  t.image = "System.out.println";
-              } else if (jjtGetChild(thisChild).toString().equals("DecafPrint")) {
-                  t.image = "System.out.print";
+          /*
+           * Replace all JavaDecaf method calls with the Java equivalents.
+           * To avoid nesting when used with Java method calls, e.g.
+           * System.out.System.out.println, check value of previous token
+           */
+          if (!prevToken.equals(".")) { //if period, probably Java call
+              switch (t.image) {
+                  case "println":
+                      t.image = "System.out.println";
+                      break;
+                  case "print":
+                      t.image = "System.out.print";
+                      break;
+              }
           }
-
           print(t, ostr);
+          prevToken = t.image;
           t = t.next;
       }
     // t is final semicolon
