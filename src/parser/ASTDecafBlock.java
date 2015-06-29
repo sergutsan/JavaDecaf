@@ -60,18 +60,18 @@ public class ASTDecafBlock extends SimpleNode{
       */
       encapsulation.image = "import java.util.Scanner;\n" +
               "public class " + className + " { \n    " +
-              "private Scanner input = new Scanner(System.in);\n\n    " +
+              "private Scanner input = new Scanner(System.in);\n\n    " + //init Scanner for reading from stdin
               "public static void main(String[] args){\n    ";
 
 
       print(encapsulation, ostr);
       String prevToken = ""; // value of previous token image
-      while (t != end) {
+      while (t != end) {    //stop when t is equal to the end token, final semicolon
           /*
            * Replace all JavaDecaf method calls with the Java equivalents.
            * To avoid nesting when used with Java method calls, e.g.
            * System.out.System.out.println, check value of previous token
-           * If it's a full stop, it's likely a Java method call.
+           * If it's a full stop, it's likely a Java method call, so no replacement.
            */
           if (!prevToken.equals(".")) {
               switch (t.image) {
@@ -89,12 +89,12 @@ public class ASTDecafBlock extends SimpleNode{
                       break;
               }
           }
-          print(t, ostr);
-          prevToken = t.image;
-          t = t.next;
+          print(t, ostr);   //print the token to output stream
+          prevToken = t.image;  //assign value of prevToken to the current token's image
+          t = t.next;   //assign t to next token
       }
     // t is final semicolon
-    encapsulation.image = "\n    }\n}";
+    encapsulation.image = "\n    }\n}";     //final closing braces
     print(encapsulation, ostr);
   }
 
