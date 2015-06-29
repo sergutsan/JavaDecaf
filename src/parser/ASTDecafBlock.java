@@ -60,7 +60,7 @@ public class ASTDecafBlock extends SimpleNode{
       */
       encapsulation.image = "import java.util.Scanner;\n" +
               "public class " + className + " { \n    " +
-              "private Scanner input = new Scanner(System.in);\n\n" +
+              "private Scanner input = new Scanner(System.in);\n\n    " +
               "public static void main(String[] args){\n    ";
 
 
