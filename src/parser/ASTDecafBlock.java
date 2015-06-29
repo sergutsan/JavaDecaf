@@ -58,7 +58,12 @@ public class ASTDecafBlock extends SimpleNode{
       *This is where the class and main method declarations are defined.
       * Spaces are for indentation to make the output code resemble what good practice Java should look like.
       */
-      encapsulation.image = "public class " + className + " { \n    public static void main(String[] args){\n    ";
+      encapsulation.image = "import java.util.Scanner;\n" +
+              "public class " + className + " { \n    " +
+              "private Scanner input = new Scanner(System.in);\n\n" +
+              "public static void main(String[] args){\n    ";
+
+
       print(encapsulation, ostr);
       String prevToken = ""; // value of previous token image
       while (t != end) {
@@ -66,8 +71,9 @@ public class ASTDecafBlock extends SimpleNode{
            * Replace all JavaDecaf method calls with the Java equivalents.
            * To avoid nesting when used with Java method calls, e.g.
            * System.out.System.out.println, check value of previous token
+           * If it's a full stop, it's likely a Java method call.
            */
-          if (!prevToken.equals(".")) { //if period, probably Java call
+          if (!prevToken.equals(".")) {
               switch (t.image) {
                   case "println":
                       t.image = "System.out.println";
