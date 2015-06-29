@@ -92,10 +92,6 @@ SPECIAL_TOKEN : /* COMMENTS */
 | <MULTI_LINE_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 }
 
-TOKEN : /* JAVADECAF TOKENS - SK */
-{
- < PRINTLN: "println" >
- }
 
 TOKEN : /* RESERVED WORDS AND LITERALS */
 {
