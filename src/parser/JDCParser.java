@@ -10,7 +10,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     String className;
     if (args.length == 2) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-      className = args[0].split("//.")[0].replace("/",""); //get the name of the file without extension - remove slashes
+      int index = args[0].indexOf("."); //get the index of the full stop for substring
+      String className = args[0].substring(0,index);
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -2927,28 +2928,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(31, xla); }
   }
 
-  static private boolean jj_3R_187() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(46)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(9)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(25)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(43)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(42)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(41)) return true;
-    }
-    }
-    }
-    }
-    }
-    return false;
-  }
-
   static private boolean jj_3R_180() {
     Token xsp;
     while (true) {
@@ -5183,6 +5162,28 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   static private boolean jj_3_20() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_58()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_187() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(46)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(9)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(25)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(43)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(42)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(41)) return true;
+    }
+    }
+    }
+    }
+    }
     return false;
   }
 
