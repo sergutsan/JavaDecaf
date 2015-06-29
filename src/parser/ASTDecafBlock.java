@@ -81,6 +81,12 @@ public class ASTDecafBlock extends SimpleNode{
                   case "print":
                       t.image = "System.out.print";
                       break;
+                  case "readLine":
+                      t.image = "input.readLine";
+                      break;
+                  case "readInt":
+                      t.image = "input.readInt";
+                      break;
               }
           }
           print(t, ostr);
