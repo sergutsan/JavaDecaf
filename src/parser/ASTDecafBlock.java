@@ -61,10 +61,18 @@ public class ASTDecafBlock extends SimpleNode{
       encapsulation.image = "public class " + className + " { \n    public static void main(String[] args){\n    ";
       print(encapsulation, ostr);
 
+      int thisChild = 0;
       while (t != end) {
-      print(t, ostr);
-      t = t.next;
-    }
+          if (t.image.equals("println") && jjtGetNumChildren() > 0){
+              if (jjtGetChild(thisChild).toString().equals("DecafPrintLn")){
+                  t.image = "System.out.println";
+              } else if (jjtGetChild(thisChild).toString().equals("DecafPrint")) {
+                  t.image = "System.out.print";
+          }
+
+          print(t, ostr);
+          t = t.next;
+      }
     // t is final semicolon
     encapsulation.image = "\n    }\n}";
     print(encapsulation, ostr);
