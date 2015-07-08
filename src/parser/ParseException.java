@@ -114,7 +114,7 @@ public class ParseException extends Exception {
       retval += currentToken.image; //print the token appearing before the error
       retval += "\" followed by \"";
       retval += add_escapes(tok.image); //print the offending token
-      retval += " \"";
+      //retval += " \"";
       //tok = tok.next;
     }
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
