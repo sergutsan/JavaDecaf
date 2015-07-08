@@ -30,6 +30,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
     } catch (ParseException e) {
       System.out.println("JavaDecaf Compiler:  Encountered errors during parse.");
+      System.out.println(e.getMessage());
     } catch (IOException e) {
       System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
     }
