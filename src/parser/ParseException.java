@@ -107,15 +107,15 @@ public class ParseException extends Exception {
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
-      if (tok.kind == 0) {
-        retval += tokenImage[0];
+      if (tok.kind == 0) {  //end of file
+        retval += "end of file";
         break;
       }
       retval += currentToken.image; //print the token appearing before the error
       //retval += " \"";
       retval += add_escapes(tok.image); //print the offending token
      // retval += " \"";
-      tok = tok.next;
+      //tok = tok.next;
     }
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     retval += "." + eol;
@@ -124,7 +124,7 @@ public class ParseException extends Exception {
 //    } else {
 //      retval += "Was expecting one of:" + eol + "    ";
 //    }
-      if (currentToken.kind == 67) {    //if current token is IDENTIFIER
+      if (currentToken.kind == 67 && (tok.kind >= 59 && tok.kind <= 66)) {    //if current token is IDENTIFIER and next is a literal
           retval += "Did you remember to include parentheses? \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
           retval += "Unexpected end of file. You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
