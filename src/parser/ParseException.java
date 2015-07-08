@@ -119,12 +119,15 @@ public class ParseException extends Exception {
     }
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     retval += "." + eol;
-    if (expectedTokenSequences.length == 1) {
-      retval += "Was expecting:" + eol + "    ";
-    } else {
-      retval += "Was expecting one of:" + eol + "    ";
-    }
-    retval += expected.toString();
+//    if (expectedTokenSequences.length == 1) {
+//      retval += "Was expecting:" + eol + "    ";
+//    } else {
+//      retval += "Was expecting one of:" + eol + "    ";
+//    }
+      if (currentToken.kind == 67) {
+          retval += "Did you remember to include parentheses? e.g. println(\"Hello World!\")";
+      }
+    //retval += expected.toString();
     return retval;
   }
 
