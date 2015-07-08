@@ -2929,21 +2929,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(31, xla); }
   }
 
-  static private boolean jj_3R_180() {
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_187()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_3R_106()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_164() {
-    if (jj_3R_170()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_247() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_63()) return true;
@@ -5185,6 +5170,21 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
     }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_180() {
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_187()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_3R_106()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_164() {
+    if (jj_3R_170()) return true;
     return false;
   }
 
