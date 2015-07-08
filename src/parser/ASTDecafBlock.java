@@ -57,6 +57,7 @@ public class ASTDecafBlock extends SimpleNode{
       /*
       *This is where the class and main method declarations are defined.
       * Spaces are for indentation to make the output code resemble what good practice Java should look like.
+      * Init Scanner for any readLine/readInt calls.
       */
       encapsulation.image = "import java.util.Scanner;\n" +
               "public class " + className + " { \n    " +
@@ -82,7 +83,7 @@ public class ASTDecafBlock extends SimpleNode{
                       t.image = "System.out.print";
                       break;
                   case "readLine":
-                      t.image = "input.readLine";
+                      t.image = "input.readLine"; //input is Scanner
                       break;
                   case "readInt":
                       t.image = "input.readInt";

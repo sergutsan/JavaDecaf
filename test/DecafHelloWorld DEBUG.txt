@@ -1,0 +1,70 @@
+JavaDecaf Compiler:  Reading from file DecafHelloWorld.jdc . . .
+Call:   CompilationUnit
+  Call:   DecafBlock
+    Call:   BlockStatement
+      Call:   Statement
+        Call:   StatementExpression
+          Call:   PostfixExpression
+            Call:   PrimaryExpression
+              Call:   PrimaryPrefix
+                Call:   Name
+                  Consumed token: <<IDENTIFIER>: "println" at line 1 column 1>
+                Return: Name
+              Return: PrimaryPrefix
+              Call:   PrimarySuffix
+                Call:   Arguments
+                  Consumed token: <"(" at line 1 column 8>
+                  Call:   ArgumentList
+                    Call:   Expression
+                      Call:   ConditionalExpression
+                        Call:   ConditionalOrExpression
+                          Call:   ConditionalAndExpression
+                            Call:   InclusiveOrExpression
+                              Call:   ExclusiveOrExpression
+                                Call:   AndExpression
+                                  Call:   EqualityExpression
+                                    Call:   InstanceOfExpression
+                                      Call:   RelationalExpression
+                                        Call:   ShiftExpression
+                                          Call:   AdditiveExpression
+                                            Call:   MultiplicativeExpression
+                                              Call:   UnaryExpression
+                                                Call:   UnaryExpressionNotPlusMinus
+                                                  Call:   PostfixExpression
+                                                    Call:   PrimaryExpression
+                                                      Call:   PrimaryPrefix
+                                                        Call:   Literal
+                                                          Consumed token: <<STRING_LITERAL>: ""Hello world!"" at line 1 column 9>
+                                                        Return: Literal
+                                                      Return: PrimaryPrefix
+                                                    Return: PrimaryExpression
+                                                  Return: PostfixExpression
+                                                Return: UnaryExpressionNotPlusMinus
+                                              Return: UnaryExpression
+                                            Return: MultiplicativeExpression
+                                          Return: AdditiveExpression
+                                        Return: ShiftExpression
+                                      Return: RelationalExpression
+                                    Return: InstanceOfExpression
+                                  Return: EqualityExpression
+                                Return: AndExpression
+                              Return: ExclusiveOrExpression
+                            Return: InclusiveOrExpression
+                          Return: ConditionalAndExpression
+                        Return: ConditionalOrExpression
+                      Return: ConditionalExpression
+                    Return: Expression
+                  Return: ArgumentList
+                  Consumed token: <")" at line 1 column 23>
+                Return: Arguments
+              Return: PrimarySuffix
+            Return: PrimaryExpression
+          Return: PostfixExpression
+        Return: StatementExpression
+        Consumed token: <";" at line 1 column 24>
+      Return: Statement
+    Return: BlockStatement
+  Return: DecafBlock
+  Consumed token: <<EOF> at line 1 column 24>
+Return: CompilationUnit
+JavaDecaf Compiler:  Transformation completed successfully.
