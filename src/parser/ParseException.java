@@ -127,7 +127,7 @@ public class ParseException extends Exception {
       if (currentToken.kind == 67 && (tok.kind >= 59 && tok.kind <= 66)) {    //if current token is IDENTIFIER and next is a literal
           retval += "Did you remember to include parentheses? \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
-          retval += "Unexpected end of file. You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
+          retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
       } else if ((currentToken.kind == 71 || currentToken.kind==67) && tok.kind == 0) {
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
       }
