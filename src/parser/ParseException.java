@@ -128,9 +128,9 @@ public class ParseException extends Exception {
           retval += "Did you remember to include parentheses? e.g. println(\"Hello World!\");";
       } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
           retval += "Unexpected end of file. You may have forgotten a closing brace: }";
-      } else if (currentToken.kind == 75 && tok.specialToken.image.equals("\n")) {
-          retval += "Detected parentheses followed by a line break. You may be missing a semicolon.";
-      }
+//      } else if (currentToken.kind == 71 && (tok.specialToken.image.equals("\n") || tok.kind == 0)) { //right bracket followed by newline or EOF
+//          retval += "Detected parentheses followed by a line break. You may be missing a semicolon.";
+//      }
     //retval += expected.toString();
     return retval;
   }
