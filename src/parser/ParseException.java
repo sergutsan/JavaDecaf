@@ -112,7 +112,7 @@ public class ParseException extends Exception {
         break;
       }
       retval += currentToken.image; //print the token appearing before the error
-      //retval += " \"";
+      retval += " followed by ";
       retval += add_escapes(tok.image); //print the offending token
      // retval += " \"";
       //tok = tok.next;
@@ -128,7 +128,9 @@ public class ParseException extends Exception {
           retval += "Did you remember to include parentheses? \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
           retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
-      } else if ((currentToken.kind == 71 || currentToken.kind==67) && tok.kind == 0) {
+      } else if ((currentToken.kind == 71 || currentToken.kind==67) && //rparen or identifier
+              (tok.kind == 0|| //followed by EOF...
+                      ((tok.specialToken!=null && tok.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
       }
 //      } else if (currentToken.kind == 71 && (tok.specialToken.image.equals("\n") || tok.kind == 0)) { //right bracket followed by newline or EOF
