@@ -111,10 +111,10 @@ public class ParseException extends Exception {
         retval += tokenImage[0];
         break;
       }
-      retval += " " + tokenImage[tok.kind];
-      retval += " \"";
-      retval += add_escapes(tok.image);
-      retval += " \"";
+      retval += currentToken.image; //print the token appearing before the error
+      //retval += " \"";
+      retval += add_escapes(tok.image); //print the offending token
+     // retval += " \"";
       tok = tok.next;
     }
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
@@ -124,8 +124,10 @@ public class ParseException extends Exception {
 //    } else {
 //      retval += "Was expecting one of:" + eol + "    ";
 //    }
-      if (currentToken.kind == 67) {
+      if (currentToken.kind == 67) {    //if current token is IDENTIFIER
           retval += "Did you remember to include parentheses? e.g. println(\"Hello World!\")";
+      } else if (tok.kind == 0) {   //EOF
+          retval += "Unexpected end of file. You may have forgotten a closing brace. }";
       }
     //retval += expected.toString();
     return retval;
