@@ -125,9 +125,11 @@ public class ParseException extends Exception {
 //      retval += "Was expecting one of:" + eol + "    ";
 //    }
       if (currentToken.kind == 67) {    //if current token is IDENTIFIER
-          retval += "Did you remember to include parentheses? e.g. println(\"Hello World!\")";
-      } else if (tok.kind == 0) {   //EOF
-          retval += "Unexpected end of file. You may have forgotten a closing brace. }";
+          retval += "Did you remember to include parentheses? e.g. println(\"Hello World!\");";
+      } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
+          retval += "Unexpected end of file. You may have forgotten a closing brace: }";
+      } else if (currentToken.kind == 75 && tok.specialToken.image.equals("\n")) {
+          retval += "Detected parentheses followed by a line break. You may be missing a semicolon.";
       }
     //retval += expected.toString();
     return retval;
