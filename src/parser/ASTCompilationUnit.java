@@ -78,7 +78,7 @@ public class ASTCompilationUnit extends SimpleNode {
 
     public void printFinalClosingBrace(PrintWriter ostr){
         Token close = new Token();
-        close.image = "}\n";
+        close.image = "\n}\n";
         print(close, ostr);
     }
 }
