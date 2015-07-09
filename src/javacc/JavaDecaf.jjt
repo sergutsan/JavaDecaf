@@ -318,8 +318,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   ( LOOKAHEAD(3) //avoid choice conflict
   ( TypeDeclaration() )+
   |
-  (DecafBlock() (  LOOKAHEAD( MethodDeclarationLookahead() )
-                   MethodDeclaration())* )
+  (DecafBlock()  (DecafMethod())* )
   )
   <EOF>
 		{
@@ -485,12 +484,10 @@ void MethodDeclaration() :
 {
   ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
   ResultType() MethodDeclarator() [ "throws" NameList() ]
-  (LOOKAHEAD(3)
+  (
     Block()
   |
    ";"
-  |
-    DecafBlock()
   )
 }
 
@@ -1091,4 +1088,15 @@ void DecafBlock() :
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));
     })  #DecafBlock
+}
+
+/*
+* Method that comes after the "floating" code in a Decaf file.
+* Prevents being confused for Block() and Decaf method calls not being substituted
+*/
+void DecafMethod() :
+{}
+{
+  ResultType() MethodDeclarator() [ "throws" NameList() ]
+  "{" DecafBlock() "}"
 }
