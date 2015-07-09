@@ -1,0 +1,9 @@
+int i = 10;
+
+int increment(int i) {
+    return i++;
+}
+
+int decrement(int i) {
+    return i--;
+}
