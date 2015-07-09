@@ -67,8 +67,9 @@ public class ASTDecafBlock extends SimpleNode{
           prevToken = t.image;  //assign value of prevToken to the current token's image
           t = t.next;   //assign t to next token
       }
-    // t is final semicolon
-    encapsulation.image = ";\n    }\n";     //final semicolon plus final closing brace of main
+    // t is final semicolon (for floating code) or closing brace (for method)
+      print(t, ostr); // print final t
+    encapsulation.image = "\n    }\n";     //final semicolon plus final closing brace of main
     print(encapsulation, ostr);
   }
 
