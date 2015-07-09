@@ -485,10 +485,10 @@ void MethodDeclaration() :
 {
   ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
   ResultType() MethodDeclarator() [ "throws" NameList() ]
-  (
+  (LOOKAHEAD(3)
     Block()
   |
-    ";"
+   ";"
   |
     DecafBlock()
   )
@@ -1086,7 +1086,7 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (BlockStatement())+
+    (LOOKAHEAD(2) BlockStatement())+
     {
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));

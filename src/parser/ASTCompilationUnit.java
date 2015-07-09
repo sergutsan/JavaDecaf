@@ -62,7 +62,7 @@ public class ASTCompilationUnit extends SimpleNode {
           child = (ASTDecafBlock) jjtGetChild(i);   //the "floating" code will always be first
           child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
           t = child.end.next;
-          if (i==0) encapsulation.image = "public ";  //after first iteration, change encapsulation for methods.
+          if (i==0) encapsulation.image = "private static ";  //after first iteration, change encapsulation for methods.
       }
     while (t != null) {
       print(t, ostr); //Normal code printing
