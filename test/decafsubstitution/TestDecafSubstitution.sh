@@ -9,7 +9,7 @@ do
 	echo "Compiling $file"
 	java -cp ../../target/classes/ parser.JDCParser $file
 	echo "-----"
-	diff -b -s $filejava expected/$filejava
+	diff -b -s $filejava ../expected/$filejava
 	echo "-------------------"
 done
 echo "Finished!"
