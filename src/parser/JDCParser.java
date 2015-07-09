@@ -2691,20 +2691,49 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 * Prevents being confused for Block() and Decaf method calls not being substituted
 */
   static final public void DecafMethod() throws ParseException {
-    ResultType();
-    MethodDeclarator();
-    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case THROWS:
-      jj_consume_token(THROWS);
-      NameList();
-      break;
-    default:
-      jj_la1[111] = jj_gen;
-      ;
+ Token t;
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
+      boolean jjtc001 = true;
+      jjtree.openNodeScope(jjtn001);
+    try {
+    t = getToken(1);
+      ResultType();
+      MethodDeclarator();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case THROWS:
+        jj_consume_token(THROWS);
+        NameList();
+        break;
+      default:
+        jj_la1[111] = jj_gen;
+        ;
+      }
+      jj_consume_token(LBRACE);
+      DecafBlock();
+      jj_consume_token(RBRACE);
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+      jjtn001.setFirstToken(t);
+      jjtn001.setLastToken(getToken(0));
+    } catch (Throwable jjte001) {
+      if (jjtc001) {
+        jjtree.clearNodeScope(jjtn001);
+        jjtc001 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte001 instanceof RuntimeException) {
+        {if (true) throw (RuntimeException)jjte001;}
+      }
+      if (jjte001 instanceof ParseException) {
+        {if (true) throw (ParseException)jjte001;}
+      }
+      {if (true) throw (Error)jjte001;}
+    } finally {
+      if (jjtc001) {
+        jjtree.closeNodeScope(jjtn001, true);
+      }
     }
-    jj_consume_token(LBRACE);
-    DecafBlock();
-    jj_consume_token(RBRACE);
   }
 
   static private boolean jj_2_1(int xla) {
