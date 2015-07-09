@@ -58,19 +58,22 @@ public class ASTCompilationUnit extends SimpleNode {
               "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
               "public static void main(String[] args){\n    ";
 
+      if (jjtGetNumChildren() > 0) {    //check that there are children
+          bnode = (ASTDecafBlock) jjtGetChild(0);   //the "floating" code will always be first
+          bnode.process(ostr, classDec);   //pass classDec through so it will be printed first
+          t = bnode.end.next;
 
-      bnode = (ASTDecafBlock)jjtGetChild(0);   //the "floating" code will always be first
-      bnode.process(ostr, classDec);   //pass classDec through so it will be printed first
-      t = bnode.end.next;
-      for (int i = 1; i < jjtGetNumChildren(); i++) {   //iterate through remaining children
-        //etc
-        }
+          for (int i = 1; i < jjtGetNumChildren(); i++) {   //iterate through remaining children
+          }
+      }
     while (t != null) {
       print(t, ostr); //Normal code printing
       t = t.next;
     }
-      classDec.image = "}";
-      print(classDec, ostr);    //print final closing brace
+      if (jjtGetNumChildren() > 0) {    //Check if there are children - don't do this if the code is plain java
+          classDec.image = "}";
+          print(classDec, ostr);    //print final closing brace
+      }
   }
 
 }
