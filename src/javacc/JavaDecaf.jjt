@@ -318,7 +318,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   ( LOOKAHEAD(3) //avoid choice conflict
   ( TypeDeclaration() )+
   |
-  DecafBlock()
+  (DecafBlock() (MethodDeclaration())* )
   )
   <EOF>
 		{
