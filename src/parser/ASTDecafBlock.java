@@ -47,34 +47,29 @@ public class ASTDecafBlock extends SimpleNode{
   }
 
     /**
-     * Encapsulate a "loose" block of Decaf code in a Java class with a main method.
+     * Encapsulate a "loose" block of Decaf code and perform any requisite substitutions.
      * @param ostr - output stream writer defined in JDCParser
      * @param className - the name of the class (from filename at args[0] in JDCParser)
+     * @param encapsulation - token containing encapsulation code needed
+     * @see ASTCompilationUnit
      */
-  public void process (PrintWriter ostr, String className) {
+  public void process (PrintWriter ostr, Token encapsulation) {
      Token t = begin;  // t is first token in class.
-      Token encapsulation = new Token();
       /*
       *This is where the class and main method declarations are defined.
       * Spaces are for indentation to make the output code resemble what good practice Java should look like.
       * Init Scanner for any readLine/readInt calls.
       */
-      encapsulation.image = "import java.util.Scanner;\n" +
-              "public class " + className + " { \n    " +
-              "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
-              "public static void main(String[] args){\n    ";
-
-
       print(encapsulation, ostr);
       String prevToken = ""; // value of previous token image
       while (t != end) {    //stop when t is equal to the end token, final semicolon
-          t = JavaDecafUtils.checkForSubstitutions(t,prevToken);
+          t = JavaDecafUtils.checkForSubstitutions(t,prevToken); //check to see if token needs to be substituted
           print(t, ostr);   //print the token to output stream
           prevToken = t.image;  //assign value of prevToken to the current token's image
           t = t.next;   //assign t to next token
       }
     // t is final semicolon
-    encapsulation.image = ";\n    }\n}";     //final semicolon plus final closing braces
+    encapsulation.image = ";\n    }\n";     //final semicolon plus final closing brace of main
     print(encapsulation, ostr);
   }
 

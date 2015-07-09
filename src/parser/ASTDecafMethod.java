@@ -3,7 +3,6 @@ package parser;
 /* Modified from Transformer example provided in package for JavaCC
  *
  */
-
 /* Copyright (c) 2006, Sun Microsystems, Inc.
  * All rights reserved.
  *
@@ -32,45 +31,48 @@ package parser;
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Original code from JavaCC (see above copyright notice).
+ * Modified by Sophie Koonin 2015.
+ */
 
 /* JJT: 0.2.2 */
 
-import java.io.*;
+import java.io.PrintWriter;
 
-public class ASTCompilationUnit extends SimpleNode {
-  ASTCompilationUnit(int id) {
+public class ASTDecafMethod extends SimpleNode{
+
+  ASTDecafMethod(int id) {
     super(id);
   }
 
-
-// Manually inserted code begins here - edited by Sophie Koonin
-
+    /**
+     * Put "public" on the beginning of a method, perform any necessary substitutions
+     * @param ostr - output stream writer defined in JDCParser
+     * @param className - the name of the class (from filename at args[0] in JDCParser)
+     */
   public void process (PrintWriter ostr, String className) {
-    Token t = begin;
-    ASTDecafBlock bnode;
+     Token t = begin;  // t is first token in class.
+      Token encapsulation = new Token();
       /*
-       * Children will be null (therefore 0) if the code is straight Java.
-       * Otherwise there should be one child for each change to make
-       */
-      Token classDec = new Token(); //this is for the class and main method declarations
-      classDec.image = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
-              "public class " + className + " { \n    " +
-              "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
-              "public static void main(String[] args){\n    ";
+      *This is where the class and main method declarations are defined.
+      * Spaces are for indentation to make the output code resemble what good practice Java should look like.
+      * Init Scanner for any readLine/readInt calls.
+      */
+      encapsulation.image = "public ";
 
 
-      bnode = (ASTDecafBlock)jjtGetChild(0);   //the "floating" code will always be first
-      bnode.process(ostr, classDec);   //pass classDec through so it will be printed first
-      t = bnode.end.next;
-      for (int i = 1; i < jjtGetNumChildren(); i++) {   //iterate through remaining children
-        //etc
-        }
-    while (t != null) {
-      print(t, ostr); //Normal code printing
-      t = t.next;
-    }
-      classDec.image = "}";
-      print(classDec, ostr);    //print final closing brace
+      print(encapsulation, ostr);
+      String prevToken = ""; // value of previous token image
+      while (t != end) {    //stop when t is equal to the end token, final semicolon
+          t = JavaDecafUtils.checkForSubstitutions(t,prevToken); //check to see if token needs to be substituted
+          print(t, ostr);   //print the token to output stream
+          prevToken = t.image;  //assign value of prevToken to the current token's image
+          t = t.next;   //assign t to next token
+      }
+    // t is final semicolon
+    encapsulation.image = ";\n    }\n";     //final semicolon plus final closing brace of main
+    print(encapsulation, ostr);
   }
 
 }
