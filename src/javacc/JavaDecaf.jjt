@@ -318,7 +318,8 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   ( LOOKAHEAD(3) //avoid choice conflict
   ( TypeDeclaration() )+
   |
-  (DecafBlock() (MethodDeclaration())* )
+  (DecafBlock() (  LOOKAHEAD( MethodDeclarationLookahead() )
+                   MethodDeclaration())* )
   )
   <EOF>
 		{
@@ -487,9 +488,9 @@ void MethodDeclaration() :
   (
     Block()
   |
-    DecafBlock()
-  |
     ";"
+  |
+    DecafBlock()
   )
 }
 
