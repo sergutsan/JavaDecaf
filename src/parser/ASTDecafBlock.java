@@ -69,8 +69,6 @@ public class ASTDecafBlock extends SimpleNode{
       }
     // t is final semicolon (for floating code) or closing brace (for method)
       print(t, ostr); // print final t
-    encapsulation.image = "\n    }\n";     //final semicolon plus final closing brace of main
-    print(encapsulation, ostr);
   }
 
 }
