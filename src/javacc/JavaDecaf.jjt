@@ -487,6 +487,8 @@ void MethodDeclaration() :
   (
     Block()
   |
+    DecafBlock()
+  |
     ";"
   )
 }
@@ -1075,7 +1077,7 @@ void TryStatement() :
  */
 
 /*
- * Unencapsulated Decaf code blocks
+ * Unencapsulated Decaf floating code or methods
  */
 void DecafBlock() :
 {Token t;}
