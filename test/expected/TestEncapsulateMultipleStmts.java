@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class DecafMultipleStatements {
+public class TestEncapsulateMultipleStmts {
 	private Scanner input = new Scanner(System.in);
 	public static void main(String[] args){
 	System.out.println("Hello world!");
