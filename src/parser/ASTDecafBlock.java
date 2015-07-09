@@ -61,8 +61,30 @@ public class ASTDecafBlock extends SimpleNode{
       */
       print(encapsulation, ostr);
       String prevToken = ""; // value of previous token image
+     /*
+     * Replace all JavaDecaf method calls with the Java equivalents.
+     * To avoid nesting when used with Java method calls, e.g.
+     * System.out.System.out.println, check value of previous token
+     * If it's a full stop, it's likely a Java method call, so no replacement.
+      */
+
       while (t != end) {    //stop when t is equal to the end token, final semicolon
-          t = JavaDecafUtils.checkForSubstitutions(t,prevToken); //check to see if token needs to be substituted
+          if (!prevToken.equals(".")) {
+              switch (t.image) {
+                  case "println":
+                      t.image = "System.out.println";
+                      break;
+                  case "print":
+                      t.image = "System.out.print";
+                      break;
+                  case "readLine":
+                      t.image = "input.readLine"; //input is Scanner
+                      break;
+                  case "readInt":
+                      t.image = "input.readInt";
+                      break;
+              }
+          }
           print(t, ostr);   //print the token to output stream
           prevToken = t.image;  //assign value of prevToken to the current token's image
           t = t.next;   //assign t to next token
