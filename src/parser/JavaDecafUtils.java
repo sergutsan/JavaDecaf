@@ -12,8 +12,8 @@ public class JavaDecafUtils {
      * System.out.System.out.println, check value of previous token
      * If it's a full stop, it's likely a Java method call, so no replacement.
      */
-    public static void checkForSubstitutions(Token t, String prevtoken){
-        if (prevtoken.equals(".")) {
+    public static Token checkForSubstitutions(Token t, String prevtoken){
+        if (!prevtoken.equals(".")) {
             switch (t.image) {
                 case "println":
                     t.image = "System.out.println";
@@ -29,5 +29,6 @@ public class JavaDecafUtils {
                     break;
             }
         }
+        return t;
     }
 }
