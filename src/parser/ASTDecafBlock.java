@@ -49,7 +49,6 @@ public class ASTDecafBlock extends SimpleNode{
     /**
      * Encapsulate a "loose" block of Decaf code and perform any requisite substitutions.
      * @param ostr - output stream writer defined in JDCParser
-     * @param className - the name of the class (from filename at args[0] in JDCParser)
      * @param encapsulation - token containing encapsulation code needed
      * @see ASTCompilationUnit
      */
