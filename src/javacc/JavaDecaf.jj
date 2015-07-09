@@ -1125,7 +1125,7 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (LOOKAHEAD(2) BlockStatement())+/*@bgen(jjtree)*/
+    (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn001, true);
       jjtc001 = false;
