@@ -2,7 +2,7 @@
 
 #compile all jdc test files
 
-for file in decafsubstitution/*.jdc
+for file in *.jdc
 do
 	filejava="${file%.*}"
 	filejava="$filejava.java"

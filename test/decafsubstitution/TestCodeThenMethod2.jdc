@@ -1,0 +1,6 @@
+sayHi();
+
+void sayHi() {
+    println("Hi");bash decaf
+
+}
