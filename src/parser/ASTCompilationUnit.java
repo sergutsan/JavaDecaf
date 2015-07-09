@@ -47,32 +47,30 @@ public class ASTCompilationUnit extends SimpleNode {
 
   public void process (PrintWriter ostr, String className) {
     Token t = begin;
-    ASTDecafBlock bnode;
+    ASTDecafBlock child;
       /*
        * Children will be null (therefore 0) if the code is straight Java.
        * Otherwise there should be one child for each change to make
        */
-      Token classDec = new Token(); //this is for the class and main method declarations
-      classDec.image = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
+      Token encapsulation = new Token(); //this is for the class and main method declarations
+      encapsulation.image = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
               "public class " + className + " { \n    " +
               "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
               "public static void main(String[] args){\n    ";
 
-      if (jjtGetNumChildren() > 0) {    //check that there are children
-          bnode = (ASTDecafBlock) jjtGetChild(0);   //the "floating" code will always be first
-          bnode.process(ostr, classDec);   //pass classDec through so it will be printed first
-          t = bnode.end.next;
-
-          for (int i = 1; i < jjtGetNumChildren(); i++) {   //iterate through remaining children
-          }
+      for (int i = 1; i < jjtGetNumChildren(); i++) {   //check that there are children
+          child = (ASTDecafBlock) jjtGetChild(i);   //the "floating" code will always be first
+          child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
+          t = child.end.next;
+          if (i==0) encapsulation.image = "public ";  //after first iteration, change encapsulation for methods.
       }
     while (t != null) {
       print(t, ostr); //Normal code printing
       t = t.next;
     }
       if (jjtGetNumChildren() > 0) {    //Check if there are children - don't do this if the code is plain java
-          classDec.image = "}";
-          print(classDec, ostr);    //print final closing brace
+          encapsulation.image = "}";
+          print(encapsulation, ostr);    //print final closing brace
       }
   }
 
