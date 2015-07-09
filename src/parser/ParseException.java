@@ -102,7 +102,7 @@ public class ParseException extends Exception {
         expected.append("...");
       }
       expected.append(eol).append("    ");
-    }
+    } //TODO could delete this?
     String retval = "Encountered \"";
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
@@ -124,8 +124,8 @@ public class ParseException extends Exception {
 //    } else {
 //      retval += "Was expecting one of:" + eol + "    ";
 //    }
-      if (currentToken.kind == 67 && (tok.kind >= 59 && tok.kind <= 66)) {    //if current token is IDENTIFIER and next is a literal
-          retval += "Did you remember to include parentheses? \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
+      if (currentToken.kind == 67 && (tok.kind >= 59 && tok.kind <= 66)) {    //if current token is IDENTIFIER and next is any literal
+          retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
           retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
       } else if ((currentToken.kind == 71 || currentToken.kind==67) && //rparen or identifier
@@ -133,9 +133,6 @@ public class ParseException extends Exception {
                       ((tok.specialToken!=null && tok.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
       }
-//      } else if (currentToken.kind == 71 && (tok.specialToken.image.equals("\n") || tok.kind == 0)) { //right bracket followed by newline or EOF
-//          retval += "Detected parentheses followed by a line break. You may be missing a semicolon.";
-//      }
 
     //retval += expected.toString();
     return retval;
