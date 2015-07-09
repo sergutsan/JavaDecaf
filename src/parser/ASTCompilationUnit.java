@@ -58,7 +58,7 @@ public class ASTCompilationUnit extends SimpleNode {
               "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
               "public static void main(String[] args){\n    ";
 
-      for (int i = 1; i < jjtGetNumChildren(); i++) {   //check that there are children
+      for (int i = 0; i < jjtGetNumChildren(); i++) {   //check that there are children
           child = (ASTDecafBlock) jjtGetChild(i);   //the "floating" code will always be first
           child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
           t = child.end.next;
