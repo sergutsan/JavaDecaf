@@ -133,6 +133,8 @@ public class ParseException extends Exception {
           retval += "Did you mean: " + tok.image + currentToken.image; //suggest correct order
       } else if (currentToken.kind == JDCParserConstants.IDENTIFIER && tok.kind == JDCParserConstants.CLASS) {
           retval += "Did you mean one of: public, private, protected"; //access modifiers before 'class'
+      } else if (currentToken.kind == JDCParserConstants.RPAREN && tok.kind == JDCParserConstants.LBRACE) {
+          retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
       }
 
     retval += expected.toString();    //DEBUG - print list of tokens expected afterwards
