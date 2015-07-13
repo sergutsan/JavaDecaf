@@ -124,15 +124,15 @@ public class ParseException extends Exception {
 //    } else {
 //      retval += "Was expecting one of:" + eol + "    ";
 //    }
-      if (currentToken.kind == 67 && (tok.kind >= 59 && tok.kind <= 66)) {    //if current token is IDENTIFIER and next is any literal
+      if (currentToken.kind == JDCParserConstants.IDENTIFIER && (tok.kind >= JDCParserConstants.INTEGER_LITERAL && tok.kind <= JDCParserConstants.STRING_LITERAL)) {    //if current token is IDENTIFIER and next is any literal
           retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
-      } else if ((currentToken.kind == 76 || currentToken.kind == 73) && tok.kind == 0) {   //semicolon or closing brace followed by EOF
+      } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && tok.kind == JDCParserConstants.EOF) {   //semicolon or closing brace followed by EOF
           retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
-      } else if ((currentToken.kind == 71 || currentToken.kind==67) && //rparen or identifier
-              (tok.kind == 0|| //followed by EOF...
+      } else if ((currentToken.kind == JDCParserConstants.RPAREN || currentToken.kind == JDCParserConstants.IDENTIFIER) && //rparen or identifier
+              (tok.kind == JDCParserConstants.EOF || //followed by EOF...
                       ((tok.specialToken!=null && tok.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
-      } else if (currentToken.kind == 66 && tok.kind == 67) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
+      } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && tok.kind == JDCParserConstants.IDENTIFIER) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
           retval += "You may need to escape quotation marks within the string, by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
                   "\nIf you are trying to print a String in quotations followed by a variable, \nmake sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
       } else if (currentToken.kind == JDCParserConstants.EQ && (tok.kind == JDCParserConstants.GT || tok.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
