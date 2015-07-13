@@ -33,7 +33,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       System.out.println(e.getMessage());
     } catch (IOException e) {
       System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
-    }
+    } catch (TokenMgrError e) {
+        System.out.println(e.getMessage());
+      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace();
+      }
   }
 
 /*****************************************
