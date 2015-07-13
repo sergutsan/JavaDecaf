@@ -109,7 +109,7 @@ public class TokenMgrError extends Error
           errorLine + ", column " +
           errorColumn + ".  Encountered: " +
           (EOFSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int)curChar + "), ") +
-          "after : \"" + addEscapes(errorAfter) + "\"");
+          "after : \"" + addEscapes(errorAfter) + "\" You may have forgotten a quotation mark around your String.");
   }
 
   /**
