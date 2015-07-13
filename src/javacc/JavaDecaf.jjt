@@ -74,6 +74,7 @@ public class JDCParser {
     } catch (TokenMgrError e) {
         System.out.println(e.getMessage());
       if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace();
+      }
   }
 
 }
