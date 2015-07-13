@@ -103,7 +103,7 @@ public class ParseException extends Exception {
       }
       expected.append(eol).append("    ");
     } //TODO could delete this?
-    String retval = "Encountered \"";
+    String retval = "\nEncountered \"";
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
