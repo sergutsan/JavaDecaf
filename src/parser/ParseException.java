@@ -135,6 +135,8 @@ public class ParseException extends Exception {
       } else if (currentToken.kind == 66 && tok.kind == 67) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
           retval += "You may need to escape quotation marks within the string, by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
                   "\nIf you are trying to print a String in quotations followed by a variable, \nmake sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
+      } else if (currentToken.kind == JDCParserConstants.EQ && (tok.kind == JDCParserConstants.GT || tok.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
+          retval += "Did you mean: " + tok.image + currentToken.image; //suggest correct order
       }
 
     //retval += expected.toString();
