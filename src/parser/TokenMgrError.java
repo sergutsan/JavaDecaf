@@ -108,7 +108,7 @@ public class TokenMgrError extends Error
     return("Lexical error at line " +
           errorLine + ", column " +
           errorColumn + ".  Encountered: " +
-          (EOFSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int)curChar + "), ") +
+          (EOFSeen ? "end of file " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int)curChar + "), ") +
           "after : \"" + addEscapes(errorAfter) + "\" You may have forgotten a quotation mark around your String.");
   }
 
