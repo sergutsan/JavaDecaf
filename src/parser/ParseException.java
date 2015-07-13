@@ -132,6 +132,9 @@ public class ParseException extends Exception {
               (tok.kind == 0|| //followed by EOF...
                       ((tok.specialToken!=null && tok.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
+      } else if (currentToken.kind == 66 && tok.kind == 67) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
+          retval += "You may need to escape quotation marks within the string, by adding a backslash: e.g. println(\"say \\\"hello\\\"!\") ." +
+                  " If you are trying to print a String in quotations followed by a variable, make sure you concatenate them with +: e.g. println(\"hello\" + name + \"!\")\"; ."
       }
 
     //retval += expected.toString();
