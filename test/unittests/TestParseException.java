@@ -21,4 +21,11 @@ public class TestParseException {
         assertTrue(ParseException.isIdentifier(67));
     }
 
+    @Test
+    public void testIsLiteral(){
+        for (int i = 59; i<67; i++) {
+            assertTrue(ParseException.isLiteral(i));
+        }
+    }
+
 }
