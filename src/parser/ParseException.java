@@ -78,6 +78,8 @@ public class ParseException extends Exception {
    */
   public String[] tokenImage;
 
+    /* Begin modified code by SK */
+
   /**
    * It uses "currentToken" and "expectedTokenSequences" to generate a parse
    * error message and returns it.  If this object has been created
@@ -154,10 +156,18 @@ public class ParseException extends Exception {
      * Check to see if a token is a reserved keyword
      * @return true if token is a reserved keyword
      */
-    public static boolean isReservedKeyword(int tok){
-        return (tok >= JDCParserConstants.ABSTRACT || tok <= JDCParserConstants.WHILE);
+    public static boolean isReservedKeyword(int kind){
+        return (kind >= JDCParserConstants.ABSTRACT || kind <= JDCParserConstants.WHILE);
     }
 
+    /**
+     * Check to see if token is an identifier
+     * @return true if identifier
+     */
+    public static boolean isIdentifier(int kind) {
+        return (kind == JDCParserConstants.IDENTIFIER);
+    }
+    /* End of modified code by SK */
 
   /**
    * The end of line string for this machine.
