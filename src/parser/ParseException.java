@@ -124,26 +124,26 @@ public class ParseException extends Exception {
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     retval += "." + eol;
 
-      if (currentToken.kind == JDCParserConstants.IDENTIFIER && (tok.kind >= JDCParserConstants.INTEGER_LITERAL && tok.kind <= JDCParserConstants.STRING_LITERAL)) {    //if current token is IDENTIFIER and next is any literal
+      if (isIdentifier(currentToken.kind) && (tok.kind >= JDCParserConstants.INTEGER_LITERAL && tok.kind <= JDCParserConstants.STRING_LITERAL)) {    //if current token is IDENTIFIER and next is any literal
           retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && tok.kind == JDCParserConstants.EOF) {   //semicolon or closing brace followed by EOF
           retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
-      } else if ((currentToken.kind == JDCParserConstants.RPAREN || currentToken.kind == JDCParserConstants.IDENTIFIER) && //rparen or identifier
+      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind)) && //rparen or identifier
               (tok.kind == JDCParserConstants.EOF || //followed by EOF...
                       ((tok.specialToken!=null && tok.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
-      } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && tok.kind == JDCParserConstants.IDENTIFIER) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
+      } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(tok.kind)) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
           retval += "You may need to escape quotation marks within the string, by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
                   "\nIf you are trying to print a String in quotations followed by a variable, \nmake sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
       } else if (currentToken.kind == JDCParserConstants.ASSIGN && (tok.kind == JDCParserConstants.GT || tok.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
           retval += "Did you mean: " + tok.image + currentToken.image; //suggest correct order
-      } else if (currentToken.kind == JDCParserConstants.IDENTIFIER && tok.kind == JDCParserConstants.CLASS) {
+      } else if (isIdentifier(currentToken.kind) && tok.kind == JDCParserConstants.CLASS) {
           retval += "Did you mean one of: public, private, protected"; //access modifiers before 'class'
       } else if (currentToken.kind == JDCParserConstants.RPAREN && tok.kind == JDCParserConstants.LBRACE) {
           retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
       } else if (currentToken.kind == JDCParserConstants.RPAREN && tok.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
           retval += "There are no semicolons in method declarations.";
-      } else if ((currentToken.kind == JDCParserConstants.IDENTIFIER || currentToken.image.equals("void") || isReservedKeyword(currentToken.kind)) && //identifier or "void" followed by reserved keyword
+      } else if ((isIdentifier(currentToken.kind)|| currentToken.image.equals("void") || isReservedKeyword(currentToken.kind)) && //identifier or "void" followed by reserved keyword
               isReservedKeyword(tok.kind)) {
           retval += "\"" + tok.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
       }
