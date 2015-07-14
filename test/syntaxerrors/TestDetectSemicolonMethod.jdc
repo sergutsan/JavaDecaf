@@ -1,0 +1,5 @@
+meth();
+
+void meth(); {
+    //do something
+}

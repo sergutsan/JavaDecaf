@@ -1,0 +1,5 @@
+return();
+
+void return {
+   //do something
+}
