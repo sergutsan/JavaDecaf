@@ -150,6 +150,14 @@ public class ParseException extends Exception {
     return retval;
   }
 
+    /**
+     * Check to see if a token is a reserved keyword
+     * @return true if token is a reserved keyword
+     */
+    public boolean isReservedKeyword(int tok){
+        return (tok >= JDCParserConstants.ABSTRACT || tok <= JDCParserConstants.WHILE);
+    }
+
   /**
    * The end of line string for this machine.
    */
