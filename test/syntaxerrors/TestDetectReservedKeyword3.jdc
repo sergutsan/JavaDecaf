@@ -1,4 +1,4 @@
-return();
+System.out.println("hello world");
 
 void return {
    //do something
