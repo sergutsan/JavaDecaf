@@ -124,7 +124,7 @@ public class ParseException extends Exception {
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     retval += "." + eol;
 
-      if (isIdentifier(currentToken.kind) && (tok.kind >= JDCParserConstants.INTEGER_LITERAL && tok.kind <= JDCParserConstants.STRING_LITERAL)) {    //if current token is IDENTIFIER and next is any literal
+      if (isIdentifier(currentToken.kind) && isLiteral(tok.kind)) {    //if current token is IDENTIFIER and next is any literal
           retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && tok.kind == JDCParserConstants.EOF) {   //semicolon or closing brace followed by EOF
           retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
@@ -167,6 +167,15 @@ public class ParseException extends Exception {
     public static boolean isIdentifier(int kind) {
         return (kind == JDCParserConstants.IDENTIFIER);
     }
+
+    /**
+     * Check to see if a token is a literal
+     * @return true if literal
+     */
+    public static boolean isLiteral(int kind){
+        return (kind >= JDCParserConstants.INTEGER_LITERAL && kind <= JDCParserConstants.STRING_LITERAL);
+    }
+
     /* End of modified code by SK */
 
   /**
