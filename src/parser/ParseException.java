@@ -142,7 +142,7 @@ public class ParseException extends Exception {
       } else if (currentToken.kind == JDCParserConstants.RPAREN && tok.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
           retval += "There are no semicolons in method declarations.";
       } else if ((currentToken.kind == JDCParserConstants.IDENTIFIER || currentToken.image.equals("void")) && //identifier or "void" followed by reserved keyword
-              (tok.kind >= JDCParserConstants.ABSTRACT || tok.kind <= JDCParserConstants.WHILE)) {
+              isReservedKeyword(tok.kind)) {
           retval += "\"" + tok.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
       }
 
@@ -154,7 +154,7 @@ public class ParseException extends Exception {
      * Check to see if a token is a reserved keyword
      * @return true if token is a reserved keyword
      */
-    public boolean isReservedKeyword(int tok){
+    public static boolean isReservedKeyword(int tok){
         return (tok >= JDCParserConstants.ABSTRACT || tok <= JDCParserConstants.WHILE);
     }
 
