@@ -103,7 +103,11 @@ public class ParseException extends Exception {
       }
       expected.append(eol).append("    ");
     } //TODO could delete this?
+
     String retval = "\nEncountered \"";
+      if (currentToken.image == null) {   //if current token is null, probably caused by lookahead, move to next token (avoid NullPointerException)
+          currentToken = currentToken.next;
+      }
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
@@ -117,10 +121,7 @@ public class ParseException extends Exception {
     }
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
     retval += "." + eol;
-    if (currentToken.image == null) {   //if current token is null, probably caused by lookahead, move to next token (avoid NullPointerException)
-        currentToken = currentToken.next;
-        tok = currentToken.next;
-    }
+
       if (currentToken.kind == JDCParserConstants.IDENTIFIER && (tok.kind >= JDCParserConstants.INTEGER_LITERAL && tok.kind <= JDCParserConstants.STRING_LITERAL)) {    //if current token is IDENTIFIER and next is any literal
           retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && tok.kind == JDCParserConstants.EOF) {   //semicolon or closing brace followed by EOF
