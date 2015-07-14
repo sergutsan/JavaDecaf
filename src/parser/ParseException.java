@@ -141,7 +141,7 @@ public class ParseException extends Exception {
           retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
       } else if (currentToken.kind == JDCParserConstants.RPAREN && tok.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
           retval += "There are no semicolons in method declarations.";
-      } else if ((currentToken.kind == JDCParserConstants.IDENTIFIER || currentToken.image.equals("void")) && //identifier or "void" followed by reserved keyword
+      } else if ((currentToken.kind == JDCParserConstants.IDENTIFIER || currentToken.image.equals("void") || isReservedKeyword(currentToken.kind)) && //identifier or "void" followed by reserved keyword
               isReservedKeyword(tok.kind)) {
           retval += "\"" + tok.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
       }
@@ -157,6 +157,7 @@ public class ParseException extends Exception {
     public static boolean isReservedKeyword(int tok){
         return (tok >= JDCParserConstants.ABSTRACT || tok <= JDCParserConstants.WHILE);
     }
+
 
   /**
    * The end of line string for this machine.
