@@ -22,5 +22,9 @@ public class TestParseException {
         }
     }
 
+    @Test
+    public void testIsIdentifier(){
+        assertTrue(ex.isIdentifier(67));
+    }
 
 }
