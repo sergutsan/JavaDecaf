@@ -135,6 +135,8 @@ public class ParseException extends Exception {
           retval += "Did you mean one of: public, private, protected"; //access modifiers before 'class'
       } else if (currentToken.kind == JDCParserConstants.RPAREN && tok.kind == JDCParserConstants.LBRACE) {
           retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
+      } else if (currentToken.kind == JDCParserConstants.RPAREN &&tok.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
+          retval += "There are no semicolons in method declarations.";
       }
 
     retval += expected.toString();    //DEBUG - print list of tokens expected afterwards
