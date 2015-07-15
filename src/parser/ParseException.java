@@ -134,12 +134,12 @@ public class ParseException extends Exception {
                       ((nextToken.specialToken!=null && nextToken.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
       } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
-          retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
-                  "\nIf you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
+          retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash, e.g.: \nprintln(\"say \\\"hello\\\"!\") ." +
+                  "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(\"hello\" + name + \"!\")\"; .";
       } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
           retval += "You may be missing a quotation mark." +
-                  "\nIf you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(greeting + name + \"!\")\"; ." +
-                  "\nIf these variables are separate method arguments, they should be separated by commas: e.g. method(arg1, arg 2);";
+                  "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(greeting + name + \"!\")\"; ." +
+                  "\nIf these variables are separate method arguments, they should be separated by commas, e.g.: \nmethod(arg1, arg 2);";
       } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
           retval += "Did you mean: " + nextToken.image + currentToken.image; //suggest correct order
       } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.CLASS) {
@@ -147,22 +147,28 @@ public class ParseException extends Exception {
       } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
               && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
               && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
-          retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
+          retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
-          retval += "There are no semicolons in method declarations.";
-      } else if ((isIdentifier(currentToken.kind)|| currentToken.image.equals("void") || isReservedKeyword(currentToken.kind)) && //identifier or "void" followed by reserved keyword
+          retval += "You do not need a semicolon in the first line of a method declaration, e.g.: \nvoid greet(String name) { \n    println(\"Hello\" + name); \n}";
+      } else if ((isIdentifier(currentToken.kind)|| currentToken.image.equals("void") || isPrimitive(currentToken.kind)) && //identifier or "void" followed by reserved keyword
               isReservedKeyword(nextToken.kind)) {
-          retval += "\"" + nextToken.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
+          retval += "You cannot use \"" + nextToken.image + "\" as a method or variable name in Java because it is a reserved keyword.";
       } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE)
               && nextToken.next.kind != JDCParserConstants.RPAREN) {   //lookahead spots an error in loop declaration - nextToken is loop keyword
-        retval += "You may have forgotten parentheses around the loop condition: e.g. if (x > y) { println(x); }" +
-                "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }.";
+        retval += "You may have forgotten parentheses around the loop condition."+
+                "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
+                "if (x > y) {\n" +
+                "    println(x);\n" +
+                "}";
       } else if ((currentToken.kind == JDCParserConstants.IF || currentToken.kind == JDCParserConstants.FOR || currentToken.kind == JDCParserConstants.WHILE)
               && nextToken.kind != JDCParserConstants.RPAREN) { //error with loop, no lookahead - currentToken is loop keyword
-          retval += "You may have forgotten parentheses around the loop condition: e.g. if (x > y) { println(x); }" +
-                  "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }.";
+          retval += "You may have forgotten parentheses around the loop condition."+
+                  "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
+                  "if (x > y) {\n" +
+                  "    println(x);\n" +
+                  "}";
       } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind)) && nextToken.kind == JDCParserConstants.ASSIGN) {
-          retval += "You may have forgotten to define a name for a variable: e.g. int myNum = 5; ";
+          retval += "You may have forgotten to define a name for a variable, e.g.: int myNum = 5; ";
       } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && (expectedTokenSequences[1][0] == JDCParserConstants.RPAREN || expectedTokenSequences[0][0] == JDCParserConstants.RPAREN)) {
           retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
       }
