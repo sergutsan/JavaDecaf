@@ -133,8 +133,11 @@ public class ParseException extends Exception {
                       ((nextToken.specialToken!=null && nextToken.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
       } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
-          retval += "You may need to escape quotation marks within the string, by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
+          retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
                   "\nIf you are trying to join multiple strings, \nmake sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
+      } else if (isIdentifier(currentToken.kind) && isIdentifier(nextToken.kind) && nextToken.next.kind == JDCParserConstants.RPAREN) {
+          retval += "If you are trying to join multiple strings, \nmake sure you concatenate them with +: \ne.g. println(greeting + name + \"!\")\"; ." +
+                  "\n If these variables are separate method arguments, they should be separated by commas.";
       } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
           retval += "Did you mean: " + nextToken.image + currentToken.image; //suggest correct order
       } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.CLASS) {
