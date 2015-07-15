@@ -28,4 +28,18 @@ public class TestParseException {
         }
     }
 
+    @Test
+    public void testIsPrimitive() {
+        assertTrue(ParseException.isPrimitive(34));//int
+        assertTrue(ParseException.isPrimitive(12));//byte
+        assertTrue(ParseException.isPrimitive(15));//char
+        assertTrue(ParseException.isPrimitive(21));//double
+        assertTrue(ParseException.isPrimitive(27));//long
+        assertTrue(ParseException.isPrimitive(45));//short
+
+
+
+
+    }
+
 }
