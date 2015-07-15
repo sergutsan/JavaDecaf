@@ -153,10 +153,13 @@ public class ParseException extends Exception {
       } else if ((isIdentifier(currentToken.kind)|| currentToken.image.equals("void") || isReservedKeyword(currentToken.kind)) && //identifier or "void" followed by reserved keyword
               isReservedKeyword(nextToken.kind)) {
           retval += "\"" + nextToken.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
-      } else if (nextToken.kind == JDCParserConstants.IF && nextToken.next.kind != JDCParserConstants.RPAREN) {
-        retval += "You may have forgotten parentheses round the if statement: e.g. if (x > y) { ... }";
+      } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE) && nextToken.next.kind != JDCParserConstants.RPAREN) {
+        retval += "You may have forgotten parentheses around the loop condition: e.g. if (x > y) { ... }" +
+                "\n\'if\', \'for\' and \'while\' loop conditions should be enclosed in parentheses (), not square brackets [] or braces { }.";
       } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind)) && nextToken.kind == JDCParserConstants.ASSIGN) {
           retval += "You may have forgotten to define a name for a variable: e.g. int myNum = 5; ";
+      } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
+          retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
       }
 
     retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
