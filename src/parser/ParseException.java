@@ -113,12 +113,13 @@ public class ParseException extends Exception {
     Token nextToken = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
-      if (nextToken.kind == 0) {  //end of file
-        retval += "end of file";
-        break;
-      }
+
       retval += currentToken.image; //print the token appearing before the error
       retval += "\" followed by \"";
+        if (nextToken.kind == 0) {  //end of file
+            retval += "end of file";
+            break;
+        }
       retval += add_escapes(nextToken.image); //print the offending token
     }
     retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
@@ -151,7 +152,7 @@ public class ParseException extends Exception {
           retval += "\"" + nextToken.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
       }
 
-    retval += expected.toString();    //DEBUG - print list of tokens expected afterwards
+    retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
     return retval;
   }
 
