@@ -1,0 +1,4 @@
+String hello = "Hello ";
+String world = "world";
+
+println(hello world);

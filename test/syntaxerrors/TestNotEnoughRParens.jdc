@@ -1,7 +1,0 @@
-int i = 10;
-int j = 10;
-int k = 50;
-
-if (k > (i + j) {
-    println("yes");
-}
