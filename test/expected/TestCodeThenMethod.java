@@ -1,9 +1,10 @@
 public class TestCodeThenMethod {
+    private Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         int i = 0;
     }
 
-    public void pointlessMethod(){
+    private static void pointlessMethod(){
         String pointless = "I don't do anything";
     }
 }
