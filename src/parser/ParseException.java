@@ -137,8 +137,9 @@ public class ParseException extends Exception {
           retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
                   "\nIf you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
       } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
-          retval += "If you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(greeting + name + \"!\")\"; ." +
-                  "\nIf these variables are separate method arguments, they should be separated by commas.";
+          retval += "You may be missing a quotation mark." +
+                  "\nIf you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(greeting + name + \"!\")\"; ." +
+                  "\nIf these variables are separate method arguments, they should be separated by commas: e.g. method(arg1, arg 2);";
       } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
           retval += "Did you mean: " + nextToken.image + currentToken.image; //suggest correct order
       } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.CLASS) {
