@@ -129,7 +129,7 @@ public class ParseException extends Exception {
           retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
       } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && nextToken.kind == JDCParserConstants.EOF) {   //semicolon or closing brace followed by EOF
           retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
-      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind)) && //rparen or identifier
+      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) && //rparen or identifier
               (nextToken.kind == JDCParserConstants.EOF || //followed by EOF...
                       ((nextToken.specialToken!=null && nextToken.specialToken.image.equals(eol))))) {  //...or newline
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
