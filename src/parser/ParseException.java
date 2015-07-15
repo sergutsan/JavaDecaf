@@ -155,6 +155,8 @@ public class ParseException extends Exception {
           retval += "\"" + nextToken.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
       } else if (nextToken.kind == JDCParserConstants.IF && nextToken.next.kind != JDCParserConstants.RPAREN) {
         retval += "You may have forgotten parentheses round the if statement: e.g. if (x > y) { ... }";
+      } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.ASSIGN) {
+          retval += "You may have forgotten to define a name for a variable: e.g. int myNum = 5; ";
       }
 
     retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
@@ -185,6 +187,19 @@ public class ParseException extends Exception {
         return (kind >= JDCParserConstants.INTEGER_LITERAL && kind <= JDCParserConstants.STRING_LITERAL);
     }
 
+    /**
+     * Check to see if a token is a primitive type
+     * @return true if primitive type
+     */
+    public static boolean isPrimitive(int kind){
+        return (kind == JDCParserConstants.INT
+                || kind == JDCParserConstants.FLOAT
+                || kind == JDCParserConstants.SHORT
+                || kind == JDCParserConstants.BYTE
+                || kind == JDCParserConstants.DOUBLE
+                || kind == JDCParserConstants.CHAR
+                || kind == JDCParserConstants.LONG);
+    }
     /* End of modified code by SK */
 
   /**
@@ -220,7 +235,7 @@ public class ParseException extends Exception {
            case '\r':
               retval.append("\\r");
               continue;
-           case '\"':
+           case '\"':;
               retval.append("\\\"");
               continue;
            case '\'':
