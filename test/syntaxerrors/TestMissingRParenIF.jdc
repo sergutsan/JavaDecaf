@@ -1,0 +1,6 @@
+int i = 10;
+int j = 5;
+
+if (i > (j * 2) {
+    //do something
+}
