@@ -155,7 +155,10 @@ public class ParseException extends Exception {
           retval += "\"" + nextToken.image + "\" is a reserved keyword in Java and cannot be used as a method or variable name.";
       } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE) && nextToken.next.kind != JDCParserConstants.RPAREN) {
         retval += "You may have forgotten parentheses around the loop condition: e.g. if (x > y) { ... }" +
-                "\n\'if\', \'for\' and \'while\' loop conditions should be enclosed in parentheses (), not square brackets [] or braces { }.";
+                "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }.";
+      } else if ((currentToken.kind == JDCParserConstants.IF || currentToken.kind == JDCParserConstants.FOR || currentToken.kind == JDCParserConstants.WHILE) && nextToken.kind != JDCParserConstants.RPAREN) {
+          retval += "You may have forgotten parentheses around the loop condition: e.g. if (x > y) { ... }" +
+                  "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }.";
       } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind)) && nextToken.kind == JDCParserConstants.ASSIGN) {
           retval += "You may have forgotten to define a name for a variable: e.g. int myNum = 5; ";
       } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
@@ -189,6 +192,7 @@ public class ParseException extends Exception {
     public static boolean isLiteral(int kind){
         return (kind >= JDCParserConstants.INTEGER_LITERAL && kind <= JDCParserConstants.STRING_LITERAL);
     }
+
 
     /**
      * Check to see if a token is a primitive type
