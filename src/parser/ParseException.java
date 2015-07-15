@@ -157,7 +157,7 @@ public class ParseException extends Exception {
      * @return true if token is a reserved keyword
      */
     public static boolean isReservedKeyword(int kind){
-        return (kind >= JDCParserConstants.ABSTRACT || kind <= JDCParserConstants.WHILE);
+        return (kind >= JDCParserConstants.ABSTRACT && kind <= JDCParserConstants.WHILE);
     }
 
     /**
