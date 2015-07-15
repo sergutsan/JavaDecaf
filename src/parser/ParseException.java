@@ -143,7 +143,7 @@ public class ParseException extends Exception {
           retval += "Did you mean: " + nextToken.image + currentToken.image; //suggest correct order
       } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.CLASS) {
           retval += "Did you mean one of: public, private, protected"; //access modifiers before 'class'
-      } else if (currentToken.kind == JDCParserConstants.RPAREN && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)) {
+      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind)) && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)) {
           retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
           retval += "There are no semicolons in method declarations.";
