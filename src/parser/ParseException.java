@@ -134,7 +134,7 @@ public class ParseException extends Exception {
           retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
       } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
           retval += "You may need to escape quotation marks within the string, by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
-                  "\nIf you are trying to print a String in quotations followed by a variable, \nmake sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
+                  "\nIf you are trying to join multiple strings, \nmake sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
       } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
           retval += "Did you mean: " + nextToken.image + currentToken.image; //suggest correct order
       } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.CLASS) {
