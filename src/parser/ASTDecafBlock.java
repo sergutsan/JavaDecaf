@@ -68,7 +68,7 @@ public class ASTDecafBlock extends SimpleNode{
      * If it's a full stop, it's likely a Java method call, so no replacement.
       */
 
-      while (t != end) {    //stop when t is equal to the end token, final semicolon
+      while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon
           if (!prevToken.equals(".")) {
               switch (t.image) {
                   case "println":
