@@ -136,14 +136,16 @@ public class ParseException extends Exception {
       } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) { //String literal followed by identifier - didn't escape quotations or use + for concatenation
           retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash: \ne.g. println(\"say \\\"hello\\\"!\") ." +
                   "\nIf you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(\"hello\" + name + \"!\")\"; .";
-      } else if (isIdentifier(currentToken.kind) && isIdentifier(nextToken.kind) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
+      } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
           retval += "If you are trying to join multiple strings, make sure you concatenate them with +: \ne.g. println(greeting + name + \"!\")\"; ." +
                   "\nIf these variables are separate method arguments, they should be separated by commas.";
       } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {  //Equals followed by gt/lt - wrong order
           retval += "Did you mean: " + nextToken.image + currentToken.image; //suggest correct order
       } else if (isIdentifier(currentToken.kind) && nextToken.kind == JDCParserConstants.CLASS) {
           retval += "Did you mean one of: public, private, protected"; //access modifiers before 'class'
-      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind)) && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)) {
+      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
+              && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
+              && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
           retval += "Unmatched parentheses: you may be missing a closing parenthesis.";
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
           retval += "There are no semicolons in method declarations.";
