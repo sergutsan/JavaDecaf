@@ -171,9 +171,11 @@ public class ParseException extends Exception {
           retval += "You may have forgotten to define a name for a variable, e.g.: int myNum = 5; ";
       } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && (expectedTokenSequences[1][0] == JDCParserConstants.RPAREN || expectedTokenSequences[0][0] == JDCParserConstants.RPAREN)) {
           retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
+      } else if (currentToken.kind == JDCParserConstants.SEMICOLON && nextToken.kind == JDCParserConstants.LBRACE) {
+          retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
       }
 
-    retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
+   // retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
     return retval;
   }
 
