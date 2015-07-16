@@ -3,7 +3,8 @@ package parser;
 import java.io.*;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
-  protected static JJTJDCParserState jjtree = new JJTJDCParserState();
+  protected static JJTJDCParserState jjtree = new JJTJDCParserState();static boolean inLoopCondition; //indicates whether or not the current expansion is within a loop condition e.g. if (...)
+
   public static void main(String args[]) throws Exception {
     JDCParser parser;
     ASTCompilationUnit node;
@@ -23,7 +24,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       return;
     }
     try {
-      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");}
+      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");} //SK
       node = parser.CompilationUnit();
       PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
       node.process(ostr, className);
@@ -692,6 +693,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ASSIGN:
       jj_consume_token(ASSIGN);
+                                 if (inLoopCondition) {
+        Token t = getToken(0);
+        System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+        "Assignment operator \u005c'=\u005c' used in loop condition. To check for equality, use double equals \u005c'==\u005c'.");
+            }
       VariableInitializer();
       break;
     default:
@@ -1357,7 +1363,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(BIT_OR);
                                   Token t = getToken(0);
                                   System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-                                  ": You have used single \u005c'|\u005c' instead of double \u005c'||\u005c'. Logical OR in Java is represented using \u005c'||\u005c'.");
+                                  ": You have used single \u005c'|\u005c' instead of double \u005c'||\u005c'. Logical OR in Java is represented using \u005c'||\u005c'."); //SK
+
       ExclusiveOrExpression();
     }
   }
@@ -1394,7 +1401,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(BIT_AND);
                                Token t = getToken(0);
   System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-  ": You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using \u005c'&&\u005c'.");
+  ": You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using \u005c'&&\u005c'."); //SK
+
       EqualityExpression();
     }
   }
@@ -2378,6 +2386,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   static final public void IfStatement() throws ParseException {
+ inLoopCondition = true;
     jj_consume_token(IF);
     jj_consume_token(LPAREN);
     Expression();
@@ -2392,6 +2401,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_la1[100] = jj_gen;
       ;
     }
+   inLoopCondition = false;
   }
 
   static final public void WhileStatement() throws ParseException {
@@ -2974,21 +2984,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     try { return !jj_3_33(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(32, xla); }
-  }
-
-  static private boolean jj_3_19() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_49()) return true;
-    if (jj_scan_token(LBRACKET)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_170() {
-    if (jj_3R_55()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_175()) jj_scanpos = xsp;
-    return false;
   }
 
   static private boolean jj_3R_77() {
@@ -3772,21 +3767,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_138() {
-    if (jj_scan_token(ASSIGN)) return true;
-    if (jj_3R_53()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_212() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_114()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_157() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_scan_token(RBRACKET)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_138() {
+    if (jj_scan_token(ASSIGN)) return true;
+    if (jj_3R_53()) return true;
     return false;
   }
 
@@ -3798,6 +3787,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     xsp = jj_scanpos;
     if (jj_scan_token(77)) jj_scanpos = xsp;
     if (jj_scan_token(RBRACE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_212() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_114()) return true;
     return false;
   }
 
@@ -5237,6 +5232,21 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_3R_64()) return true;
     if (jj_scan_token(RPAREN)) return true;
     if (jj_3R_225()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_19() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_49()) return true;
+    if (jj_scan_token(LBRACKET)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_170() {
+    if (jj_3R_55()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_175()) jj_scanpos = xsp;
     return false;
   }
 

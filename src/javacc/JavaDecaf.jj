@@ -45,6 +45,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
   protected static JJTJDCParserState jjtree = new JJTJDCParserState();
 
 /*@egen*/
+    static boolean inLoopCondition; //indicates whether or not the current expansion is within a loop condition e.g. if (...)
 
   public static void main(String args[]) throws Exception {
     JDCParser parser;
@@ -65,7 +66,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
       return;
     }
     try {
-      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");}
+      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");} //SK
       node = parser.CompilationUnit();
       PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
       node.process(ostr, className);
@@ -495,7 +496,12 @@ void FieldDeclaration() :
 void VariableDeclarator() :
 {}
 {
-  VariableDeclaratorId() [ "=" VariableInitializer() ]
+  VariableDeclaratorId() [ "=" { if (inLoopCondition) {
+        Token t = getToken(0);
+        System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+        "Assignment operator \'=\' used in loop condition. To check for equality, use double equals \'==\'.");
+            }
+        } VariableInitializer() ]
 }
 
 void VariableDeclaratorId() :
@@ -684,7 +690,7 @@ void InclusiveOrExpression() :
 {
   ExclusiveOrExpression() ( "|" { Token t = getToken(0);
                                   System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-                                  ": You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'.");
+                                  ": You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'."); //SK
                                   } ExclusiveOrExpression() )*
 }
 
@@ -699,7 +705,7 @@ void AndExpression() :
 {
   EqualityExpression() ( "&" { Token t = getToken(0);
   System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-  ": You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.");
+  ": You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'."); //SK
   } EqualityExpression() )*
 }
 
@@ -1028,9 +1034,10 @@ void IfStatement() :
  * else's to the innermost if statement.  The LOOKAHEAD specification
  * is to tell JavaCC that we know what we are doing.
  */
-{}
+{inLoopCondition = true;}
 {
   "if" "(" Expression() ")" Statement() [ LOOKAHEAD(1) "else" Statement() ]
+  {inLoopCondition = false;} //change back to false once expansion returns
 }
 
 void WhileStatement() :
