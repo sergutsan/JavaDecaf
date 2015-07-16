@@ -1,8 +1,12 @@
 package parser;
 
 import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The main compiler class. Runs the precompiler on an input file then calls the system java compiler on it.
@@ -10,7 +14,6 @@ import java.io.*;
  * @author Sophie Koonin
  */
 public class JDCCompiler {
-    private JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
     private String filename = ""; //the filename of the java file
 
     public static void main(String[] args) throws Exception {
@@ -28,6 +31,7 @@ public class JDCCompiler {
      */
     public void launch(String [] args){
         String filename = precompile(args[0]);
+        if (filename != null) compileJava(filename);
 
     }
 
@@ -65,6 +69,20 @@ public class JDCCompiler {
             }
         return null;
     }
+
+    /**
+     * Run the system Java compiler on a java class.
+     * @param filename the name of the file to compile
+     */
+    public void compileJava(String filename) {
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
+        StandardJavaFileManager fileMgr = compiler.getStandardFileManager(null, null, null); //get file manager
+        Iterable<? extends JavaFileObject> fileToCompile = fileMgr.getJavaFileObjects(filename); //init file to compile from filename
+        List<String> argOptions = Arrays.asList("-cp", "."); //command line options - set classpath to current working directory
+        JavaCompiler.CompilationTask compTask = compiler.getTask(null, fileMgr, null, null, null, fileToCompile); //init compilation task with file mgr and file to compile
+        compTask.call(); //compile the file
+    }
+
 
 }
 
