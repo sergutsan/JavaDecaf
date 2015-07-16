@@ -33,7 +33,7 @@ options {
                            
   ERROR_REPORTING = true;
   JAVA_UNICODE_ESCAPE = true;
-  DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../parser";
 }
 
@@ -45,7 +45,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
   protected static JJTJDCParserState jjtree = new JJTJDCParserState();
 
 /*@egen*/
-    static boolean inLoopCondition; //indicates whether or not the current expansion is within a loop condition e.g. if (...)
+    static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
 
   public static void main(String args[]) throws Exception {
     JDCParser parser;
@@ -992,13 +992,7 @@ void LocalVariableDeclaration() :
 void EmptyStatement() :
 {}
 {
-  ";" {
-        if(inLoopCondition) {
-             Token t = getToken(0);
-             System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-              ": Semicolon after loop condition. \nThis will prevent the condition from being correctly evaluated.");
-        }
-     }
+  ";"
 }
 
 void StatementExpression() :
@@ -1044,10 +1038,11 @@ void IfStatement() :
     inLoopCondition = true;
     }
 {
-  "if" "(" Expression() ")" Statement() [ LOOKAHEAD(1) "else" Statement() ]
-  {
-    inLoopCondition = false;
-    } //change back to false once expansion returns
+  "if" "(" Expression() ")" {
+                              inLoopCondition = false;
+                              } //change back to false once condition complete
+                              Statement() [ LOOKAHEAD(1) "else" Statement() ]
+
 }
 
 void WhileStatement() :
@@ -1055,10 +1050,11 @@ void WhileStatement() :
     inLoopCondition = true;
 }
 {
-  "while" "(" Expression() ")" Statement()
-  {
-    inLoopCondition = false;
-    }
+  "while" "(" Expression() ")" {
+                                 inLoopCondition = false;
+                                 }
+                                 Statement()
+
 }
 
 void DoStatement() :
