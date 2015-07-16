@@ -7,7 +7,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
 
-  public void parse() throws Exception {
+  public void parse() {
     ASTCompilationUnit node;
 
     try {
