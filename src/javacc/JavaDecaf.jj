@@ -998,7 +998,7 @@ void EmptyStatement() :
   {if (inIfLoop) {
       Token t = getToken(0);
       System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-      ": Semicolon after loop condition. Any statements in following braces will not execute.");
+      ": Semicolon after loop condition. Any statements in braces immediately following loop condition will not execute.");
         }
     }
 }
