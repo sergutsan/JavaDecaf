@@ -1034,22 +1034,36 @@ void IfStatement() :
  * else's to the innermost if statement.  The LOOKAHEAD specification
  * is to tell JavaCC that we know what we are doing.
  */
-{inLoopCondition = true;}
+{
+    inLoopCondition = true;
+    }
 {
   "if" "(" Expression() ")" Statement() [ LOOKAHEAD(1) "else" Statement() ]
-  {inLoopCondition = false;} //change back to false once expansion returns
+  {
+    inLoopCondition = false;
+    } //change back to false once expansion returns
 }
 
 void WhileStatement() :
-{}
+{
+    inLoopCondition = true;
+}
 {
   "while" "(" Expression() ")" Statement()
+  {
+    inLoopCondition = false;
+    }
 }
 
 void DoStatement() :
 {}
 {
-  "do" Statement() "while" "(" Expression() ")" ";"
+  "do" Statement() "while" {
+                            inLoopCondition = true;
+                            } "(" Expression() ")" ";"
+                            {
+                              inLoopCondition = false;
+                              }
 }
 
 void ForStatement() :
