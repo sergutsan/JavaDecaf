@@ -41,8 +41,7 @@ package parser;
 import java.io.*;
 
 public class JDCParser {
-    static boolean inIfCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
-    static boolean inWhileCondition; //within while loop condition
+    static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
 
   public static void main(String args[]) throws Exception {
     JDCParser parser;
@@ -1001,11 +1000,11 @@ void IfStatement() :
  * is to tell JavaCC that we know what we are doing.
  */
 {
-    inIfCondition = true;
+    inLoopCondition = true;
     }
 {
   "if" "(" Expression() ")" {
-                              inIfCondition = false;
+                              inLoopCondition = false;
                               } //change back to false once condition complete
                               Statement() [ LOOKAHEAD(1) "else" Statement() ]
 
@@ -1013,11 +1012,11 @@ void IfStatement() :
 
 void WhileStatement() :
 {
-    inWhileCondition = true;
+    inLoopCondition = true;
 }
 {
   "while" "(" Expression() ")" {
-                                 inWhileCondition = false;
+                                 inLoopCondition = false;
                                  }
                                  Statement()
 
