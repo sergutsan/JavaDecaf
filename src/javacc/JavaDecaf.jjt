@@ -45,23 +45,9 @@ public class JDCParser {
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
 
-  public static void main(String args[]) throws Exception {
-    JDCParser parser;
+  public void parse() throws Exception {
     ASTCompilationUnit node;
-    String className;
-    if (args.length == 1) {
-      int index = args[0].indexOf("."); //get the index of the full stop for substring
-      className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
-      try {
-        parser = new JDCParser(new FileInputStream(args[0]));
-      } catch (FileNotFoundException e) {
-        System.out.println("File " + args[0] + " not found.");
-        return;
-      }
-    } else {
-      System.out.println("JavaDecaf Compiler:  Usage is java JDCParser inputfile");
-      return;
-    }
+
     try {
       if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");} //SK
       node = parser.CompilationUnit();

@@ -7,23 +7,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
 
-  public static void main(String args[]) throws Exception {
-    JDCParser parser;
+  public void parse() throws Exception {
     ASTCompilationUnit node;
-    String className;
-    if (args.length == 1) {
-      int index = args[0].indexOf("."); //get the index of the full stop for substring
-      className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
-      try {
-        parser = new JDCParser(new FileInputStream(args[0]));
-      } catch (FileNotFoundException e) {
-        System.out.println("File " + args[0] + " not found.");
-        return;
-      }
-    } else {
-      System.out.println("JavaDecaf Compiler:  Usage is java JDCParser inputfile");
-      return;
-    }
+
     try {
       if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");} //SK
       node = parser.CompilationUnit();
@@ -3006,6 +2992,47 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
+  static private boolean jj_3R_255() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_239()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_250() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_254()) {
+    jj_scanpos = xsp;
+    if (jj_3R_255()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_254() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_228()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_19() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_49()) return true;
+    if (jj_scan_token(LBRACKET)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_173() {
+    if (jj_3R_55()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_178()) jj_scanpos = xsp;
+    return false;
+  }
+
   static private boolean jj_3R_78() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
@@ -5241,47 +5268,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3_22()) { jj_scanpos = xsp; break; }
     }
-    return false;
-  }
-
-  static private boolean jj_3R_255() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_239()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_250() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_254()) {
-    jj_scanpos = xsp;
-    if (jj_3R_255()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_254() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_228()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_19() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_49()) return true;
-    if (jj_scan_token(LBRACKET)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_173() {
-    if (jj_3R_55()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_178()) jj_scanpos = xsp;
     return false;
   }
 
