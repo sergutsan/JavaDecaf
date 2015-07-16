@@ -34,6 +34,7 @@ options {
   JAVA_UNICODE_ESCAPE = true;
   //DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../parser";
+  JJTREE_OUTPUT_DIRECTORY = ".";
 }
 
 PARSER_BEGIN(JDCParser)
