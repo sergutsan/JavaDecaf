@@ -12,13 +12,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     ASTCompilationUnit node;
     String className;
     if (args.length == 1) {
-      System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
       int index = args[0].indexOf("."); //get the index of the full stop for substring
       className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
-        System.out.println("JavaDecaf Compiler:  File " + args[0] + " not found.");
+        System.out.println("File " + args[0] + " not found.");
         return;
       }
     } else {
@@ -31,12 +30,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
       node.process(ostr, className);
       ostr.close();
-      System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
+      System.out.println("OK"); //DEBUG
     } catch (ParseException e) {
-      System.out.println("JavaDecaf Compiler:  Encountered errors during parse.");
+      System.out.println("Encountered errors in compilation: ");
       System.out.println(e.getMessage());
     } catch (IOException e) {
-      System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
+      System.out.println("Could not create file " + args[1]);
     } catch (TokenMgrError e) {
         System.out.println(e.getMessage());
       if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
