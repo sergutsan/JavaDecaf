@@ -2259,7 +2259,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static final public void EmptyStatement() throws ParseException {
     jj_consume_token(SEMICOLON);
-   if (inIfLoop && token.next.kind == JDCParserConstants.LBRACE) {
+   if (inIfLoop) {
       Token t = getToken(0);
       System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
       ": Semicolon after loop condition. Any statements in following braces will not execute.");
