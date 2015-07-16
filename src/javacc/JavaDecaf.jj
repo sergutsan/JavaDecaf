@@ -496,12 +496,7 @@ void FieldDeclaration() :
 void VariableDeclarator() :
 {}
 {
-  VariableDeclaratorId() [ "=" { if (inLoopCondition) {
-        Token t = getToken(0);
-        System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-        "Assignment operator \'=\' used in loop condition. To check for equality, use double equals \'==\'.");
-            }
-        } VariableInitializer() ]
+  VariableDeclaratorId() [ "=" VariableInitializer() ]
 }
 
 void VariableDeclaratorId() :
@@ -664,7 +659,12 @@ void Assignment() :
 void AssignmentOperator() :
 {}
 {
-  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+  "=" { if (inLoopCondition) {
+              Token t = getToken(0);
+              System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+              ": Assignment operator \'=\' used in loop condition. \nTo check for equality, use double equals \'==\'.");
+                  }
+              }  | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :
