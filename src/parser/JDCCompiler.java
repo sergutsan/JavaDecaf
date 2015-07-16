@@ -11,15 +11,24 @@ import java.io.*;
  */
 public class JDCCompiler {
     private JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
+    private String filename = ""; //the filename of the java file
 
-    public static void main(String args[]) throws Exception {
-        String filename;
-
+    public static void main(String[] args) throws Exception {
+        JDCCompiler jdcc = new JDCCompiler();
         if (args.length == 1) {
-            precompile(args[0]);  //precompile the file
+            jdcc.launch(args);
         } else {
             System.out.println("Usage: \"javadecaf filename\"");
         }
+    }
+
+    /**
+     * Launcher class
+     * @param args - the arguments from the command line
+     */
+    public void launch(String [] args){
+        String filename = precompile(args[0]);
+
     }
 
     /**
@@ -27,7 +36,7 @@ public class JDCCompiler {
      * @param inputFile the name of the file to be used as input
      * @return the filename of the converted java file, null if something goes wrong
      */
-    public static String precompile(String inputFile) {
+    public String precompile(String inputFile) {
         JDCParser parser;
         ASTCompilationUnit node;
         String className = "";
