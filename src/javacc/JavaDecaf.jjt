@@ -646,7 +646,10 @@ void ConditionalAndExpression() :
 void InclusiveOrExpression() :
 {}
 {
-  ExclusiveOrExpression() ( "|" ExclusiveOrExpression() )*
+  ExclusiveOrExpression() ( "|" { Token t = getToken(0);
+                                  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+                                  ": You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'.");
+                                  } ExclusiveOrExpression() )*
 }
 
 void ExclusiveOrExpression() :
@@ -659,7 +662,8 @@ void AndExpression() :
 {}
 {
   EqualityExpression() ( "&" { Token t = getToken(0);
-  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn + ": You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using &&.");
+  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+  ": You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.");
   } EqualityExpression() )*
 }
 
