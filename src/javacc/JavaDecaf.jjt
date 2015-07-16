@@ -42,6 +42,8 @@ import java.io.*;
 
 public class JDCParser {
     static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
+    static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
+    static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
 
   public static void main(String args[]) throws Exception {
     JDCParser parser;
@@ -1000,23 +1002,27 @@ void IfStatement() :
  * is to tell JavaCC that we know what we are doing.
  */
 {
-    inLoopCondition = true;
+    inLoopCondition = true; //SK
+    inIfLoop = true; //SK
     }
 {
   "if" "(" Expression() ")" {
                               inLoopCondition = false;
-                              } //change back to false once condition complete
+                              } //change back to false once condition complete - SK
                               Statement() [ LOOKAHEAD(1) "else" Statement() ]
+                              {
+                              inIfLoop = false; //change back to false once loop ends - SK
+                              }
 
 }
 
 void WhileStatement() :
 {
-    inLoopCondition = true;
+    inLoopCondition = true; //SK
 }
 {
   "while" "(" Expression() ")" {
-                                 inLoopCondition = false;
+                                 inLoopCondition = false; //SK
                                  }
                                  Statement()
 
@@ -1026,17 +1032,24 @@ void DoStatement() :
 {}
 {
   "do" Statement() "while" {
-                            inLoopCondition = true;
+                            inLoopCondition = true; //SK
                             } "(" Expression() ")" ";"
                             {
-                              inLoopCondition = false;
+                              inLoopCondition = false; //SK
                               }
 }
 
 void ForStatement() :
 {}
 {
-  "for" "(" [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ] ")" Statement()
+  "for" "(" {
+            inForLoopCondition = true; //SK
+            }
+            [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
+            {
+            inForLoopCondition = false; //SK
+            }
+            ")" Statement()
 }
 
 void ForInit() :
