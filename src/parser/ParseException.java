@@ -213,6 +213,7 @@ public class ParseException extends Exception {
                 || kind == JDCParserConstants.BYTE
                 || kind == JDCParserConstants.DOUBLE
                 || kind == JDCParserConstants.CHAR
+                || kind == JDCParserConstants.BOOLEAN
                 || kind == JDCParserConstants.LONG);
     }
     /* End of modified code by SK */
