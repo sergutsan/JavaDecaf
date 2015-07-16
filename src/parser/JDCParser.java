@@ -1376,7 +1376,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   static final public void AndExpression() throws ParseException {
-System.out.println("Warning: You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using &&.");
     EqualityExpression();
     label_26:
     while (true) {
@@ -1389,6 +1388,7 @@ System.out.println("Warning: You have used single \u005c'&\u005c' instead of dou
         break label_26;
       }
       jj_consume_token(BIT_AND);
+  System.out.println("Warning: You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using &&.");
       EqualityExpression();
     }
   }
