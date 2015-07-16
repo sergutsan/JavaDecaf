@@ -1388,7 +1388,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         break label_26;
       }
       jj_consume_token(BIT_AND);
-  System.out.println("Warning: You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using &&.");
+                               Token t = getToken(0);
+  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn + ": You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using &&.");
       EqualityExpression();
     }
   }
