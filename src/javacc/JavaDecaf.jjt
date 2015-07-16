@@ -50,6 +50,7 @@ public class JDCParser {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
       int index = args[0].indexOf("."); //get the index of the full stop for substring
       className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
+      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");}
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
