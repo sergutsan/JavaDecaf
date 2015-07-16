@@ -32,7 +32,7 @@ options {
   NODE_DEFAULT_VOID = true;
   ERROR_REPORTING = true;
   JAVA_UNICODE_ESCAPE = true;
-  DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../parser";
 }
 
@@ -41,7 +41,8 @@ package parser;
 import java.io.*;
 
 public class JDCParser {
-    static boolean inLoopCondition; //indicates whether or not the current expansion is within a loop condition e.g. if (...)
+    static boolean inIfCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
+    static boolean inWhileCondition; //within while loop condition
 
   public static void main(String args[]) throws Exception {
     JDCParser parser;
@@ -624,7 +625,7 @@ void Assignment() :
 void AssignmentOperator() :
 {}
 {
-  "=" { if (inLoopCondition) {
+  "=" { if (inIfCondition || inWhileCondition) {
               Token t = getToken(0);
               System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
               ": Assignment operator \'=\' used in loop condition. \nTo check for equality, use double equals \'==\'.");
@@ -958,7 +959,7 @@ void EmptyStatement() :
 {}
 {
   ";" {
-        if(inLoopCondition) {
+        if(inIfCondition) {
              Token t = getToken(0);
              System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
               ": Semicolon after loop condition. \nThis will prevent the condition from being correctly evaluated.");
@@ -1006,24 +1007,26 @@ void IfStatement() :
  * is to tell JavaCC that we know what we are doing.
  */
 {
-    inLoopCondition = true;
+    inIfCondition = true;
     }
 {
-  "if" "(" Expression() ")" Statement() [ LOOKAHEAD(1) "else" Statement() ]
-  {
-    inLoopCondition = false;
-    } //change back to false once expansion returns
+  "if" "(" Expression() ")" {
+                              inIfCondition = false;
+                              } //change back to false once condition complete
+                              Statement() [ LOOKAHEAD(1) "else" Statement() ]
+
 }
 
 void WhileStatement() :
 {
-    inLoopCondition = true;
+    inWhileCondition = true;
 }
 {
-  "while" "(" Expression() ")" Statement()
-  {
-    inLoopCondition = false;
-    }
+  "while" "(" Expression() ")" {
+                                 inWhileCondition = false;
+                                 }
+                                 Statement()
+
 }
 
 void DoStatement() :
