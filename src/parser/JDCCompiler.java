@@ -30,9 +30,11 @@ public class JDCCompiler {
      * @param args - the arguments from the command line
      */
     public void launch(String [] args){
+        long startTime = System.nanoTime();
         String filename = precompile(args[0]);
         if (filename != null) compileJava(filename);
-
+        long endTime = System.nanoTime();
+        System.out.println("Compilation finished in " + ((endTime - startTime)/1000000) + " ms");
     }
 
     /**
@@ -54,7 +56,6 @@ public class JDCCompiler {
                 PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
                 node.process(ostr, className);
                 ostr.close();
-                System.out.println("OK");
                 return className + ".java"; //return the finished filename to signal successful compilation
             } catch (ParseException e) {
                 System.out.println("Errors during compilation: ");
