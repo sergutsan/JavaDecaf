@@ -175,7 +175,7 @@ public class ParseException extends Exception {
           retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
       } else if (JDCParser.inForLoopCondition && expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON) {
           retval += "For loop elements must be separated by semicolons, e.g.: " +
-                  "for (int i = 0; i < 10; i++) {" +
+                  "\nfor (int i = 0; i < 10; i++) {" +
                   "\n    println(i);" +
                   "\n}";
       }
