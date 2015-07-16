@@ -34,7 +34,7 @@ public class JDCCompiler {
         String filename = precompile(args[0]);
         if (filename != null) compileJava(filename);
         long endTime = System.nanoTime();
-        System.out.println("Compilation finished in " + ((endTime - startTime)/1000000) + " ms");
+        System.out.println("JavaDecaf: Compilation finished in " + ((endTime - startTime)/1000000) + " ms");
     }
 
     /**
