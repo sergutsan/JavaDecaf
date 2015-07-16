@@ -1354,6 +1354,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         break label_24;
       }
       jj_consume_token(BIT_OR);
+                                  Token t = getToken(0);
+                                  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+                                  ": You have used single \u005c'|\u005c' instead of double \u005c'||\u005c'. Logical OR in Java is represented using \u005c'||\u005c'.");
       ExclusiveOrExpression();
     }
   }
@@ -1389,7 +1392,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       }
       jj_consume_token(BIT_AND);
                                Token t = getToken(0);
-  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn + ": You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using &&.");
+  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+  ": You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using \u005c'&&\u005c'.");
       EqualityExpression();
     }
   }
@@ -2971,24 +2975,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  static private boolean jj_3R_247() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_251()) {
-    jj_scanpos = xsp;
-    if (jj_3R_252()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_251() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_225()) return true;
-    return false;
-  }
-
   static private boolean jj_3_19() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
@@ -3274,12 +3260,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_182() {
-    if (jj_scan_token(BIT_OR)) return true;
-    if (jj_3R_167()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_184() {
     if (jj_3R_191()) return true;
     Token xsp;
@@ -3294,9 +3274,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_178() {
-    if (jj_scan_token(SC_AND)) return true;
-    if (jj_3R_156()) return true;
+  static private boolean jj_3R_182() {
+    if (jj_scan_token(BIT_OR)) return true;
+    if (jj_3R_167()) return true;
     return false;
   }
 
@@ -3307,6 +3287,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3R_199()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_178() {
+    if (jj_scan_token(SC_AND)) return true;
+    if (jj_3R_156()) return true;
     return false;
   }
 
@@ -5232,6 +5218,24 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_3R_64()) return true;
     if (jj_scan_token(RPAREN)) return true;
     if (jj_3R_236()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_247() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_251()) {
+    jj_scanpos = xsp;
+    if (jj_3R_252()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_251() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_225()) return true;
     return false;
   }
 
