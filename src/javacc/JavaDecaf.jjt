@@ -960,6 +960,12 @@ void EmptyStatement() :
 {}
 {
   ";"
+  {if (inIfLoop && token.next.kind == JDCParserConstants.LBRACE) {
+      Token t = getToken(0);
+      System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
+      ": Semicolon after loop condition. Any statements in following braces will not execute.");
+        }
+    }
 }
 
 void StatementExpression() :
