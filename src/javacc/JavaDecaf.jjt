@@ -461,7 +461,7 @@ void FieldDeclaration() :
 void VariableDeclarator() :
 {}
 {
-  VariableDeclaratorId() [ "=" { if (isLoopCondition) {
+  VariableDeclaratorId() [ "=" { if (inLoopCondition) {
         Token t = getToken(0);
         System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
         "Assignment operator \'=\' used in loop condition. To check for equality, use double equals \'==\'.");
