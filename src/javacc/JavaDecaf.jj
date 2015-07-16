@@ -53,7 +53,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     if (args.length == 1) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
       int index = args[0].indexOf("."); //get the index of the full stop for substring
-      className = args[0].substring(0,index);
+      className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -77,7 +77,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
       System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
     } catch (TokenMgrError e) {
         System.out.println(e.getMessage());
-      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace();
+      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
       }
   }
 
@@ -328,10 +328,10 @@ ASTCompilationUnit CompilationUnit()                  :
 		}
   [ PackageDeclaration() ]
   ( ImportDeclaration() )*
-  ( LOOKAHEAD(3) //avoid choice conflict
+  ( LOOKAHEAD(3) //avoid choice conflict - SK
   ( TypeDeclaration() )+
   |
-  (DecafBlock()  (DecafMethod())* )
+  (DecafBlock()  (DecafMethod())* )	//SK
   )
   <EOF>/*@bgen(jjtree)*/
                 {
@@ -691,7 +691,9 @@ void ExclusiveOrExpression() :
 }
 
 void AndExpression() :
-{}
+{
+System.out.println("Warning: You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using &&.");
+}
 {
   EqualityExpression() ( "&" EqualityExpression() )*
 }
@@ -1108,8 +1110,7 @@ void TryStatement() :
 }
 
 /**
- * Decaf Grammar starts here
- * @Author Sophie Koonin
+ * Decaf Grammar starts here - SK
  */
 
 /*

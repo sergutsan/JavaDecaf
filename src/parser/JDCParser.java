@@ -11,7 +11,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (args.length == 1) {
       System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
       int index = args[0].indexOf("."); //get the index of the full stop for substring
-      className = args[0].substring(0,index);
+      className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
       try {
         parser = new JDCParser(new FileInputStream(args[0]));
       } catch (FileNotFoundException e) {
@@ -35,7 +35,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
     } catch (TokenMgrError e) {
         System.out.println(e.getMessage());
-      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace();
+      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
       }
   }
 
@@ -1376,6 +1376,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   static final public void AndExpression() throws ParseException {
+System.out.println("Warning: You have used single \u005c'&\u005c' instead of double \u005c'&&\u005c'. Logical AND in Java is represented using &&.");
     EqualityExpression();
     label_26:
     while (true) {
@@ -2641,8 +2642,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
 /**
- * Decaf Grammar starts here
- * @Author Sophie Koonin
+ * Decaf Grammar starts here - SK
  */
 
 /*
@@ -2968,14 +2968,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     try { return !jj_3_33(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(32, xla); }
-  }
-
-  static private boolean jj_3R_252() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_236()) return true;
-    return false;
   }
 
   static private boolean jj_3R_247() {
@@ -5231,6 +5223,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3_22()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_252() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_236()) return true;
     return false;
   }
 

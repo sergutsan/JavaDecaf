@@ -656,7 +656,9 @@ void ExclusiveOrExpression() :
 }
 
 void AndExpression() :
-{}
+{
+System.out.println("Warning: You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using &&.");
+}
 {
   EqualityExpression() ( "&" EqualityExpression() )*
 }
