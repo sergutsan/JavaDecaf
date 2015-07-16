@@ -958,13 +958,7 @@ void LocalVariableDeclaration() :
 void EmptyStatement() :
 {}
 {
-  ";" {
-        if(inIfCondition) {
-             Token t = getToken(0);
-             System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-              ": Semicolon after loop condition. \nThis will prevent the condition from being correctly evaluated.");
-        }
-     }
+  ";"
 }
 
 void StatementExpression() :
