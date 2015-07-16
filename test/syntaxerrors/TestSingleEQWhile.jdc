@@ -1,0 +1,5 @@
+int x = 10;
+
+while (x = 9) {
+    //do something
+}
