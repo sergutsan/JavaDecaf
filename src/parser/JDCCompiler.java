@@ -18,15 +18,18 @@ import java.util.List;
  * @author Sophie Koonin
  */
 public class JDCCompiler {
-    private String filename = ""; //the filename of the java file
+    @Parameter(description="Filename") //Final parameter - the name of the jdc file
+    private List<String> filename = new ArrayList<>();
 
-    @Parameter
-    private List<String> parameters = new ArrayList<>();
-
-    @Parameter(names = {"-parse", "-p"}, description = "Parse only mode - no compilation")
+    @Parameter(names = "-p", description = "Parse only mode - no compilation")
     private boolean parseOnly = false;
 
-    @Parameter(names = {"-version", "-v"}, description = "Version")
+    @Parameter(names = "-v", description = "Show version")
+    private boolean versionEnabled = false;
+
+    @Parameter(names= "-help", description = "Show usage")
+    private boolean help;
+
     private static final double VERSION = 1.0;
 
     public static void main(String[] args) throws Exception {
@@ -34,8 +37,8 @@ public class JDCCompiler {
 
         String inputFile;
         if (args.length > 0) {
+            JCommander paramParser = new JCommander(jdcc,args); //parse command line parameters using JCommander
             jdcc.launch(args[args.length-1]);
-            new JCommander(jdcc,args); //parse command line parameters
         } else {
             System.out.println("Usage: \"javadecaf filename\"");
         }
@@ -46,6 +49,13 @@ public class JDCCompiler {
      * @param inputFile  - the filename from the command line
      */
     public void launch(String inputFile){
+        if (versionEnabled) {
+            System.out.println("JavaDecaf Compiler version " + VERSION);
+        }
+        if (parseOnly) {
+            System.out.println("Parse only mode enabled");
+        }
+
         long startTime = System.nanoTime();
         String precompiledClass = precompile(inputFile);
         if (precompiledClass != null && !parseOnly) {
