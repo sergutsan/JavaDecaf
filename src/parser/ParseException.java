@@ -146,7 +146,7 @@ public class ParseException extends Exception {
           retval += "Did you mean one of: public, private, protected"; //access modifiers before 'class'
       } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
               && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
-              && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
+              && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN)) {
           retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
           retval += "You do not need a semicolon in the first line of a method declaration, e.g.: \nvoid greet(String name) { \n    println(\"Hello\" + name); \n}";
