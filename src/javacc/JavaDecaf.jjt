@@ -1135,7 +1135,7 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (LOOKAHEAD(3) BlockStatement())+
+    (LOOKAHEAD(3) BlockStatement())*
     {
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));
