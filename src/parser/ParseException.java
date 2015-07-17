@@ -174,12 +174,12 @@ public class ParseException extends Exception {
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
           retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
       } else if (JDCParser.inForLoopCondition && expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON) {
-          retval += "For loop elements must be separated by semicolons, e.g.: " +
+          retval += "For loop elements must be separated by semicolons, e.g.:" +
                   "\nfor (int i = 0; i < 10; i++) {" +
                   "\n    println(i);" +
                   "\n}";
-      } else if ((JDCParser.inLoopCondition || JDCParser.inForLoopCondition) && currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE ) {
-          retval += "Loop statements must be contained in curly braces, e.g.: " +
+      } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
+          retval += "Loop statements must be contained in curly braces, e.g.:\n " +
                   "if (x > y) {\n" +
                   "    println(x);\n" +
                   "}";
