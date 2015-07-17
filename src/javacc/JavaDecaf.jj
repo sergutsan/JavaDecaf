@@ -406,7 +406,11 @@ void ClassDeclaration() :
 void UnmodifiedClassDeclaration() :
 {}
 {
-  "class" <IDENTIFIER> [ "extends" Name() ] [ "implements" NameList() ]
+  "class" <IDENTIFIER> {
+  if (Character.isLowerCase(getToken(0).image.charAt(0))) {
+    throw new ParseException("Encountered \"" + getToken(0).image + "\" at line " + getToken(0).endLine + ", column " + getToken(0).endColumn + ": \nClass names in Java must begin with a capital letter. Please rename your class.");
+  }
+   } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
 }
 
