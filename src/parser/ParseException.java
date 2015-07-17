@@ -208,7 +208,7 @@ public class ParseException extends Exception {
         switch (reason) {
             case "method" :
                 retval += "Method names should begin with a lower case letter. They should also be verbs. e.g.:" + eol +
-                        "getNumber()" + eol + "update()"+ "reverseString()" + "increment()";
+                        "getNumber()" + eol + "update()"+ eol + "reverseString()" +eol + "increment()";
                 break;
             case "variable" :
                 retval += "Variable names should begin with a lower case letter. They should also be nouns. e.g.:" + eol +
@@ -216,7 +216,7 @@ public class ParseException extends Exception {
                 break;
             case "class" :
                 retval += "Class names should begin with a capital letter. They should also be nouns. e.g.:" + eol +
-                        "class Person" + "class FractionCalculator" + "class FlyingAnimal";
+                        "class Person" + eol + "class FractionCalculator" + eol + "class FlyingAnimal";
         }
         return retval;
     }
