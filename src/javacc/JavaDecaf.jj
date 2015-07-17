@@ -1086,11 +1086,10 @@ void ForStatement() :
   "for" "(" {
             inForLoopCondition = true; //SK
             }
-            [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
-            {
-            inForLoopCondition = false; //SK
-            }
-            ")" Block() //Do not permit braceless statements - SK
+            [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ] ")" {
+             inForLoopCondition = false; //SK
+             }
+             Block() //Do not permit braceless statements - SK
 }
 
 void ForInit() :

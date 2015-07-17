@@ -2487,9 +2487,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_la1[103] = jj_gen;
       ;
     }
-            inForLoopCondition = false; //SK
-
     jj_consume_token(RPAREN);
+             inForLoopCondition = false; //SK
+
     Block();
   }
 
@@ -4361,30 +4361,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  static private boolean jj_3R_93() {
+    if (jj_3R_111()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_248() {
     if (jj_scan_token(CATCH)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_225()) return true;
     if (jj_scan_token(RPAREN)) return true;
     if (jj_3R_67()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_93() {
-    if (jj_3R_111()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_153() {
-    if (jj_scan_token(TRY)) return true;
-    if (jj_3R_67()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_248()) { jj_scanpos = xsp; break; }
-    }
-    xsp = jj_scanpos;
-    if (jj_3R_249()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4403,6 +4390,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(76)) return true;
     }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_153() {
+    if (jj_scan_token(TRY)) return true;
+    if (jj_3R_67()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_248()) { jj_scanpos = xsp; break; }
+    }
+    xsp = jj_scanpos;
+    if (jj_3R_249()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4509,13 +4509,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_180() {
-    if (jj_3R_184()) return true;
+  static private boolean jj_3R_165() {
+    if (jj_3R_174()) return true;
     return false;
   }
 
-  static private boolean jj_3R_165() {
-    if (jj_3R_174()) return true;
+  static private boolean jj_3R_180() {
+    if (jj_3R_184()) return true;
     return false;
   }
 
