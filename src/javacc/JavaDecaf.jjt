@@ -368,7 +368,7 @@ void ClassDeclaration() :
 void UnmodifiedClassDeclaration() :
 {}
 {
-  "class" <IDENTIFIER> [ "extends" Name() ] [ "implements" NameList() ]
+  "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
 }
 
@@ -467,7 +467,7 @@ void VariableDeclarator() :
 void VariableDeclaratorId() :
 {}
 {
-  <IDENTIFIER> ( "[" "]" )*
+  <IDENTIFIER> {isLegalVariableName(getToken(0));} ( "[" "]" )*
 }
 
 void VariableInitializer() :
