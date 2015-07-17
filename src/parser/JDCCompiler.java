@@ -21,10 +21,10 @@ public class JDCCompiler {
     @Parameter(description="Filename") //Final parameter - the name of the jdc file
     private List<String> filename = new ArrayList<>();
 
-    @Parameter(names = "-p", description = "Parse only mode - no compilation")
+    @Parameter(names = {"-p", "-parse"}, description = "Parse only mode - disable the Java compiler")
     private boolean parseOnly = false;
 
-    @Parameter(names = "-v", description = "Show version")
+    @Parameter(names = {"-v", "-version"}, description = "Show version")
     private boolean versionEnabled = false;
 
     @Parameter(names= "-help", description = "Show usage")
@@ -35,12 +35,11 @@ public class JDCCompiler {
     public static void main(String[] args) throws Exception {
         JDCCompiler jdcc = new JDCCompiler();
 
-        String inputFile;
         if (args.length > 0) {
-            JCommander paramParser = new JCommander(jdcc,args); //parse command line parameters using JCommander
+            new JCommander(jdcc,args); //parse command line parameters using JCommander
             jdcc.launch(args[args.length-1]);
         } else {
-            System.out.println("Usage: \"javadecaf filename\"");
+            System.out.println("Usage: \"javadecaf [-p|-parse] [-v] filename\"");
         }
     }
 
