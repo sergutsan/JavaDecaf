@@ -14,10 +14,32 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     * @param t - the token of the identifier in question
     */
     private static void isLegalMethodName(Token t) throws ParseException {
-        if (!Character.isLowerCase(t.image.charAt(0))){
+        if (Character.isUpperCase(t.image.charAt(0))){
             throw new ParseException(t, "method");
         }
     }
+    /**
+        *  Test whether a given identifier is a legal class name: must begin with upper case letter.
+        * Must be a noun - TODO.
+        * Throw ParseException if not legal.
+        * @param t - the token of the identifier in question
+        */
+    private static void isLegalClassName(Token t) throws ParseException {
+            if (Character.isLowerCase(t.image.charAt(0))){
+                throw new ParseException(t, "class");
+            }
+        }
+    /**
+        *  Test whether a given identifier is a legal variable name: must begin with lower case letter.
+        * Must be a noun - TODO.
+        * Throw ParseException if not legal.
+        * @param t - the token of the identifier in question
+        */
+    private static void isLegalVariableName(Token t) throws ParseException {
+            if (Character.isUpperCase(t.image.charAt(0))){
+                throw new ParseException(t, "variable");
+            }
+        }
 
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
@@ -249,6 +271,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   static final public void UnmodifiedClassDeclaration() throws ParseException {
     jj_consume_token(CLASS);
     jj_consume_token(IDENTIFIER);
+                         isLegalClassName(getToken(0));
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EXTENDS:
       jj_consume_token(EXTENDS);
@@ -683,6 +706,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static final public void VariableDeclaratorId() throws ParseException {
     jj_consume_token(IDENTIFIER);
+                isLegalVariableName(getToken(0));
     label_13:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2988,47 +3012,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  static private boolean jj_3R_255() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_239()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_250() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_254()) {
-    jj_scanpos = xsp;
-    if (jj_3R_255()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_254() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_228()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_19() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_49()) return true;
-    if (jj_scan_token(LBRACKET)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_173() {
-    if (jj_3R_55()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_178()) jj_scanpos = xsp;
-    return false;
-  }
-
   static private boolean jj_3R_78() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
@@ -3709,6 +3692,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  static private boolean jj_3R_160() {
+    if (jj_scan_token(LBRACKET)) return true;
+    if (jj_scan_token(RBRACKET)) return true;
+    return false;
+  }
+
   static private boolean jj_3R_219() {
     if (jj_3R_225()) return true;
     Token xsp;
@@ -3824,12 +3813,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   static private boolean jj_3R_215() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_115()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_160() {
-    if (jj_scan_token(LBRACKET)) return true;
-    if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
@@ -4003,6 +3986,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  static private boolean jj_3R_132() {
+    if (jj_scan_token(IMPLEMENTS)) return true;
+    if (jj_3R_220()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_232() {
     if (jj_3R_199()) return true;
     return false;
@@ -4076,6 +4065,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  static private boolean jj_3R_131() {
+    if (jj_scan_token(EXTENDS)) return true;
+    if (jj_3R_49()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_197() {
     Token xsp;
     while (true) {
@@ -4103,12 +4098,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       if (jj_3R_136()) { jj_scanpos = xsp; break; }
     }
     if (jj_3R_109()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_132() {
-    if (jj_scan_token(IMPLEMENTS)) return true;
-    if (jj_3R_220()) return true;
     return false;
   }
 
@@ -4260,12 +4249,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static private boolean jj_3R_190() {
     if (jj_3R_197()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_131() {
-    if (jj_scan_token(EXTENDS)) return true;
-    if (jj_3R_49()) return true;
     return false;
   }
 
@@ -5264,6 +5247,47 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3_22()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_255() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_239()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_250() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_254()) {
+    jj_scanpos = xsp;
+    if (jj_3R_255()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_254() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_228()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_19() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_49()) return true;
+    if (jj_scan_token(LBRACKET)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_173() {
+    if (jj_3R_55()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_178()) jj_scanpos = xsp;
     return false;
   }
 

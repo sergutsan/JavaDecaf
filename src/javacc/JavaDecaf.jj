@@ -56,11 +56,32 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     * @param t - the token of the identifier in question
     */
     private static void isLegalMethodName(Token t) throws ParseException {
-        if (!Character.isLowerCase(t.image.charAt(0))){
+        if (Character.isUpperCase(t.image.charAt(0))){
             throw new ParseException(t, "method");
         }
     }
-
+    /**
+        *  Test whether a given identifier is a legal class name: must begin with upper case letter.
+        * Must be a noun - TODO.
+        * Throw ParseException if not legal.
+        * @param t - the token of the identifier in question
+        */
+    private static void isLegalClassName(Token t) throws ParseException {
+            if (Character.isLowerCase(t.image.charAt(0))){
+                throw new ParseException(t, "class");
+            }
+        }
+    /**
+        *  Test whether a given identifier is a legal variable name: must begin with lower case letter.
+        * Must be a noun - TODO.
+        * Throw ParseException if not legal.
+        * @param t - the token of the identifier in question
+        */
+    private static void isLegalVariableName(Token t) throws ParseException {
+            if (Character.isUpperCase(t.image.charAt(0))){
+                throw new ParseException(t, "variable");
+            }
+        }
 }
 
 PARSER_END(JDCParser)
@@ -382,7 +403,7 @@ void ClassDeclaration() :
 void UnmodifiedClassDeclaration() :
 {}
 {
-  "class" <IDENTIFIER> [ "extends" Name() ] [ "implements" NameList() ]
+  "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
 }
 
@@ -481,7 +502,7 @@ void VariableDeclarator() :
 void VariableDeclaratorId() :
 {}
 {
-  <IDENTIFIER> ( "[" "]" )*
+  <IDENTIFIER> {isLegalVariableName(getToken(0));} ( "[" "]" )*
 }
 
 void VariableInitializer() :

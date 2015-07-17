@@ -212,7 +212,7 @@ public class ParseException extends Exception {
                 break;
             case "variable" :
                 retval += "Variable names should begin with a lower case letter. They should also be nouns. e.g.:" + eol +
-                        "int myNum" + eol + "String name" + eol + "Person person1";
+                        "int myNum" + eol + "String name" + eol + "Person person1" + eol + "int maxSize";
                 break;
             case "class" :
                 retval += "Class names should begin with a capital letter. They should also be nouns. e.g.:" + eol +
