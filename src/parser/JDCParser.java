@@ -2364,11 +2364,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     Expression();
     jj_consume_token(RPAREN);
                               inLoopCondition = false;
-    Statement();
+    Block();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ELSE:
       jj_consume_token(ELSE);
-      Statement();
+      Block();
       break;
     default:
       jj_la1[100] = jj_gen;
@@ -4535,7 +4535,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static private boolean jj_3R_245() {
     if (jj_scan_token(ELSE)) return true;
-    if (jj_3R_107()) return true;
+    if (jj_3R_67()) return true;
     return false;
   }
 
@@ -4581,7 +4581,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_107()) return true;
+    if (jj_3R_67()) return true;
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_245()) jj_scanpos = xsp;

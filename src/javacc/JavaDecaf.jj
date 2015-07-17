@@ -1050,7 +1050,7 @@ void IfStatement() :
   "if" "(" Expression() ")" {
                               inLoopCondition = false;
                               } //change back to false once condition complete - SK
-                              Statement() [ LOOKAHEAD(1) "else" Statement() ]
+                              Block() [ LOOKAHEAD(1) "else" Block() ] //Do not permit braceless statements
                               {
                               inIfLoop = false; //change back to false once loop ends - SK
                               }
