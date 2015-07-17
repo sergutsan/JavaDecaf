@@ -52,10 +52,21 @@ public class JDCParser {
     * @param t - the token of the identifier in question
     */
     private static void isLegalMethodName(Token t) throws ParseException {
-        if (!Character.isLowerCase(t.image.charAt(0))){
+        if (Character.isUpperCase(t.image.charAt(0))){
             throw new ParseException(t, "method");
         }
     }
+    /**
+        *  Test whether a given identifier is a legal class name: must begin with upper case letter.
+        * Must be a noun - TODO.
+        * Throw ParseException if not legal.
+        * @param t - the token of the identifier in question
+        */
+    private static void isLegalClassName(Token t) throws ParseException {
+            if (Character.isLowerCase(t.image.charAt(0))){
+                throw new ParseException(t, "class");
+            }
+        }
 
 }
 
