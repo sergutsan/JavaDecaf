@@ -42,7 +42,8 @@ public class JDCCompiler {
 
     /**
      * Call the JavaCC parser on the file from args[0] to convert the JavaDecaf code to true Java.
-     * @param inputFile the name of the file to be used as input
+     * Use the name of the JDC file for the name of the Java class, and check its validity as a Java classname.
+     * @param inputFile the name of the file to be used as input, to become Java class name
      * @return the filename of the converted java file, null if something goes wrong
      */
     public String precompile(String inputFile) {
@@ -50,8 +51,13 @@ public class JDCCompiler {
         ASTCompilationUnit node;
         String className = "";
             try {
-                if (Character.isDigit(inputFile.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. "+
-                        "Please rename the file.");}
+                if (Character.isDigit(inputFile.charAt(0))) { //Check that first char of file name is not digit
+                    throw new ParseException("Class names in Java cannot begin with a digit. "+
+                        "Please rename the file.");
+                } else if (Character.isLowerCase(inputFile.charAt(0))) { //Check that first char is uppercase
+                    throw new ParseException("Class names in Java must begin with a capital letter. " +
+                    "Please rename the file.");
+                }
                 parser = new JDCParser(new FileInputStream(inputFile));
                 int index = inputFile.indexOf("."); //get the index of the full stop for substring
                 className = inputFile.substring(0, index); //get the name of the class from the filename (before extension)
