@@ -51,11 +51,9 @@ public class JDCParser {
     * Throw ParseException if not legal.
     * @param t - the token of the identifier in question
     */
-    private static void isLegalMethodName(Token t) {
+    private static void isLegalMethodName(Token t) throws ParseException {
         if (!Character.isLowerCase(t.image.charAt(0))){
-            throw new ParseException("Encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn +
-            ": \n Method names should begin with lower case letters. They should also be verbs. e.g.:" +
-            "\ngetNumber() \nupdate() \nreverseString() \nincrement()");
+            throw new ParseException(t, "method");
         }
     }
 
@@ -349,12 +347,7 @@ void ClassDeclaration() :
 void UnmodifiedClassDeclaration() :
 {}
 {
-  "class" <IDENTIFIER> {
-  if (Character.isLowerCase(getToken(0).image.charAt(0))) { //Check to see whether first char of class name is lower case
-    throw new ParseException("Encountered \"" + getToken(0).image + "\" at line " + getToken(0).endLine + ", column " + getToken(0).endColumn +
-    ": \nClass names in Java must begin with a capital letter. Please rename your class.");
-  }
-   } [ "extends" Name() ] [ "implements" NameList() ]
+  "class" <IDENTIFIER> [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
 }
 

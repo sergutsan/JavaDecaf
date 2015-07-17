@@ -5,7 +5,19 @@ import java.io.*;
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
   protected static JJTJDCParserState jjtree = new JJTJDCParserState();static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
-    static boolean inIfLoop;
+    static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
+
+    /**
+    *  Test whether a given identifier is a legal method name: must begin with lower case letter.
+    * Must be a verb - TODO.
+    * Throw ParseException if not legal.
+    * @param t - the token of the identifier in question
+    */
+    private static void isLegalMethodName(Token t) throws ParseException {
+        if (!Character.isLowerCase(t.image.charAt(0))){
+            throw new ParseException(t, "method");
+        }
+    }
 
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
@@ -237,9 +249,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   static final public void UnmodifiedClassDeclaration() throws ParseException {
     jj_consume_token(CLASS);
     jj_consume_token(IDENTIFIER);
-  if (Character.isLowerCase(getToken(0).image.charAt(0))) {
-    {if (true) throw new ParseException("Encountered \u005c"" + getToken(0).image + "\u005c" at line " + getToken(0).endLine + ", column " + getToken(0).endColumn + ": \u005cnClass names in Java must begin with a capital letter. Please rename your class.");}
-  }
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EXTENDS:
       jj_consume_token(EXTENDS);
@@ -435,6 +444,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
     ResultType();
     jj_consume_token(IDENTIFIER);
+                              isLegalMethodName(getToken(0)); //test the method name
+
     jj_consume_token(LPAREN);
   }
 
@@ -844,6 +855,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static final public void MethodDeclarator() throws ParseException {
     jj_consume_token(IDENTIFIER);
+  isLegalMethodName(getToken(0)); //test the method name
+
     FormalParameters();
     label_16:
     while (true) {
@@ -2975,6 +2988,78 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
+  static private boolean jj_3R_255() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_239()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_250() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_254()) {
+    jj_scanpos = xsp;
+    if (jj_3R_255()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3R_254() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_64()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_228()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_19() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_49()) return true;
+    if (jj_scan_token(LBRACKET)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_173() {
+    if (jj_3R_55()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_178()) jj_scanpos = xsp;
+    return false;
+  }
+
+  static private boolean jj_3R_78() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_49()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(83)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(82)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(70)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(67)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(50)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(47)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(38)) {
+    jj_scanpos = xsp;
+    if (jj_3R_103()) return true;
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    return false;
+  }
+
   static private boolean jj_3R_77() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
@@ -3537,12 +3622,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_221() {
-    if (jj_scan_token(LBRACKET)) return true;
-    if (jj_scan_token(RBRACKET)) return true;
-    return false;
-  }
-
   static private boolean jj_3R_73() {
     Token xsp;
     xsp = jj_scanpos;
@@ -3586,9 +3665,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_212() {
-    if (jj_scan_token(THROWS)) return true;
-    if (jj_3R_220()) return true;
+  static private boolean jj_3R_221() {
+    if (jj_scan_token(LBRACKET)) return true;
+    if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
@@ -3602,6 +3681,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(41)) return true;
     }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_212() {
+    if (jj_scan_token(THROWS)) return true;
+    if (jj_3R_220()) return true;
     return false;
   }
 
@@ -3624,12 +3709,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_11() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_53()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_219() {
     if (jj_3R_225()) return true;
     Token xsp;
@@ -3646,6 +3725,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(25)) jj_scanpos = xsp;
     if (jj_3R_64()) return true;
     if (jj_3R_139()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_11() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_53()) return true;
     return false;
   }
 
@@ -4021,6 +4106,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  static private boolean jj_3R_132() {
+    if (jj_scan_token(IMPLEMENTS)) return true;
+    if (jj_3R_220()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_68() {
     Token xsp;
     xsp = jj_scanpos;
@@ -4167,14 +4258,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_132() {
-    if (jj_scan_token(IMPLEMENTS)) return true;
-    if (jj_3R_220()) return true;
+  static private boolean jj_3R_190() {
+    if (jj_3R_197()) return true;
     return false;
   }
 
-  static private boolean jj_3R_190() {
-    if (jj_3R_197()) return true;
+  static private boolean jj_3R_131() {
+    if (jj_scan_token(EXTENDS)) return true;
+    if (jj_3R_49()) return true;
     return false;
   }
 
@@ -4255,12 +4346,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       if (jj_3R_182()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RBRACE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_131() {
-    if (jj_scan_token(EXTENDS)) return true;
-    if (jj_3R_49()) return true;
     return false;
   }
 
@@ -5182,78 +5267,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_255() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_239()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_250() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_254()) {
-    jj_scanpos = xsp;
-    if (jj_3R_255()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_254() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_64()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_228()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_19() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_49()) return true;
-    if (jj_scan_token(LBRACKET)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_173() {
-    if (jj_3R_55()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_178()) jj_scanpos = xsp;
-    return false;
-  }
-
-  static private boolean jj_3R_78() {
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_49()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(83)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(82)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(70)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(67)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(50)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(47)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(38)) {
-    jj_scanpos = xsp;
-    if (jj_3R_103()) return true;
-    }
-    }
-    }
-    }
-    }
-    }
-    }
-    return false;
-  }
-
   static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
   static public JDCParserTokenManager token_source;
@@ -5611,43 +5624,5 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     int arg;
     JJCalls next;
   }
-
-                             //indicate whether or not the current expansion is anywhere in an if loop
-
-//  public static void main(String args[]) throws Exception {
-//    JDCParser parser;
-//    ASTCompilationUnit node;
-//    String className;
-//    if (args.length == 1) {
-//      System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-//      int index = args[0].indexOf("."); //get the index of the full stop for substring
-//      className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
-//      try {
-//        parser = new JDCParser(new FileInputStream(args[0]));
-//      } catch (FileNotFoundException e) {
-//        System.out.println("JavaDecaf Compiler:  File " + args[0] + " not found.");
-//        return;
-//      }
-//    } else {
-//      System.out.println("JavaDecaf Compiler:  Usage is java JDCParser inputfile");
-//      return;
-//    }
-//    try {
-//      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");} //SK
-//      node = parser.CompilationUnit();
-//      PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
-//      node.process(ostr, className);
-//      ostr.close();
-//      System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
-//    } catch (ParseException e) {
-//      System.out.println("JavaDecaf Compiler:  Encountered errors during parse.");
-//      System.out.println(e.getMessage());
-//    } catch (IOException e) {
-//      System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
-//    } catch (TokenMgrError e) {
-//        System.out.println(e.getMessage());
-//      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
-//      }
-//  }
 
 }
