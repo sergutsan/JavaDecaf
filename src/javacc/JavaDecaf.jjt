@@ -1015,7 +1015,7 @@ void IfStatement() :
   "if" "(" Expression() ")" {
                               inLoopCondition = false;
                               } //change back to false once condition complete - SK
-                              Block() [ LOOKAHEAD(1) "else" Block() ] //Do not permit braceless statements
+                              Block() [ LOOKAHEAD(1) "else" Block() ] //Do not permit braceless statements - SK
                               {
                               inIfLoop = false; //change back to false once loop ends - SK
                               }
@@ -1030,14 +1030,14 @@ void WhileStatement() :
   "while" "(" Expression() ")" {
                                  inLoopCondition = false; //SK
                                  }
-                                 Statement()
+                                 Block() //Do not permit braceless statements - SK
 
 }
 
 void DoStatement() :
 {}
 {
-  "do" Statement() "while" {
+  "do" Block() "while" { //Do not permit braceless statements - SK
                             inLoopCondition = true; //SK
                             } "(" Expression() ")" ";"
                             {
@@ -1055,7 +1055,7 @@ void ForStatement() :
             {
             inForLoopCondition = false; //SK
             }
-            ")" Statement()
+            ")" Block() //Do not permit braceless statements - SK
 }
 
 void ForInit() :
