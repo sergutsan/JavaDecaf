@@ -45,41 +45,19 @@ public class JDCParser {
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
 
-//  public static void main(String args[]) throws Exception {
-//    JDCParser parser;
-//    ASTCompilationUnit node;
-//    String className;
-//    if (args.length == 1) {
-//      System.out.println("JavaDecaf Compiler:  Reading from file " + args[0] + " . . .");
-//      int index = args[0].indexOf("."); //get the index of the full stop for substring
-//      className = args[0].substring(0,index); //get the name of the class from the filename (before extension)
-//      try {
-//        parser = new JDCParser(new FileInputStream(args[0]));
-//      } catch (FileNotFoundException e) {
-//        System.out.println("JavaDecaf Compiler:  File " + args[0] + " not found.");
-//        return;
-//      }
-//    } else {
-//      System.out.println("JavaDecaf Compiler:  Usage is java JDCParser inputfile");
-//      return;
-//    }
-//    try {
-//      if (Character.isDigit(className.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. Please rename the file.");} //SK
-//      node = parser.CompilationUnit();
-//      PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
-//      node.process(ostr, className);
-//      ostr.close();
-//      System.out.println("JavaDecaf Compiler:  Transformation completed successfully.");
-//    } catch (ParseException e) {
-//      System.out.println("JavaDecaf Compiler:  Encountered errors during parse.");
-//      System.out.println(e.getMessage());
-//    } catch (IOException e) {
-//      System.out.println("JavaDecaf Compiler:  Could not create file " + args[1]);
-//    } catch (TokenMgrError e) {
-//        System.out.println(e.getMessage());
-//      if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
-//      }
-//  }
+    /**
+    *  Test whether a given identifier is a legal method name: must begin with lower case letter.
+    * Must be a verb - TODO.
+    * Throw ParseException if not legal.
+    * @param t - the token of the identifier in question
+    */
+    private static void isLegalMethodName(Token t) {
+        if (!Character.isLowerCase(t.image.charAt(0))){
+            throw new ParseException("Encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn +
+            ": \n Method names should begin with lower case letters. They should also be verbs. e.g.:" +
+            "\ngetNumber() \nupdate() \nreverseString() \nincrement()");
+        }
+    }
 
 }
 
@@ -372,8 +350,9 @@ void UnmodifiedClassDeclaration() :
 {}
 {
   "class" <IDENTIFIER> {
-  if (Character.isLowerCase(getToken(0).image.charAt(0))) {
-    throw new ParseException("Encountered \"" + getToken(0).image + "\" at line " + getToken(0).endLine + ", column " + getToken(0).endColumn + ": \nClass names in Java must begin with a capital letter. Please rename your class.");
+  if (Character.isLowerCase(getToken(0).image.charAt(0))) { //Check to see whether first char of class name is lower case
+    throw new ParseException("Encountered \"" + getToken(0).image + "\" at line " + getToken(0).endLine + ", column " + getToken(0).endColumn +
+    ": \nClass names in Java must begin with a capital letter. Please rename your class.");
   }
    } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
@@ -418,7 +397,8 @@ void MethodDeclarationLookahead() :
 {}
 {
   ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
-  ResultType() <IDENTIFIER> "("
+  ResultType() <IDENTIFIER> { isLegalMethodName(getToken(0)); //test the method name
+   } "("
 }
 
 void InterfaceDeclaration() :
@@ -505,7 +485,10 @@ void MethodDeclaration() :
 void MethodDeclarator() :
 {}
 {
-  <IDENTIFIER> FormalParameters() ( "[" "]" )*
+  <IDENTIFIER> {
+  isLegalMethodName(getToken(0)); //test the method name
+                  }
+  FormalParameters() ( "[" "]" )*
 }
 
 void FormalParameters() :
