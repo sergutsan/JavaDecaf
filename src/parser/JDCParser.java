@@ -2386,13 +2386,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     jj_consume_token(RPAREN);
                                  inLoopCondition = false; //SK
 
-    Statement();
+    Block();
   }
 
   static final public void DoStatement() throws ParseException {
     jj_consume_token(DO);
-    Statement();
+    Block();
     jj_consume_token(WHILE);
+                         //Do not permit braceless statements - SK
                             inLoopCondition = true; //SK
 
     jj_consume_token(LPAREN);
@@ -2489,7 +2490,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
             inForLoopCondition = false; //SK
 
     jj_consume_token(RPAREN);
-    Statement();
+    Block();
   }
 
   static final public void ForInit() throws ParseException {
@@ -4552,13 +4553,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     xsp = jj_scanpos;
     if (jj_3R_247()) jj_scanpos = xsp;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_107()) return true;
+    if (jj_3R_67()) return true;
     return false;
   }
 
   static private boolean jj_3R_146() {
     if (jj_scan_token(DO)) return true;
-    if (jj_3R_107()) return true;
+    if (jj_3R_67()) return true;
     if (jj_scan_token(WHILE)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
@@ -4572,7 +4573,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_107()) return true;
+    if (jj_3R_67()) return true;
     return false;
   }
 
