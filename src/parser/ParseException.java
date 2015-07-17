@@ -178,6 +178,11 @@ public class ParseException extends Exception {
                   "\nfor (int i = 0; i < 10; i++) {" +
                   "\n    println(i);" +
                   "\n}";
+      } else if (JDCParser.inLoopCondition && currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE ) {
+          retval += "Loop statements must be contained in curly braces, e.g.: " +
+                  "if (x > y) {\n" +
+                  "    println(x);\n" +
+                  "}";
       }
 
    // retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
