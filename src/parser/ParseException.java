@@ -56,7 +56,15 @@ public class ParseException extends Exception {
     super(message);
   }
 
+    /** Constructor with token and reason code. Thrown by invalid
+     * variable, method or class names in JDCParser. SK
+     * @param t - the offending token
+     * @param reason - string value of reason for exception
+     */
+    public ParseException(Token t, String reason) {
+        super(initWithReason(t, reason));
 
+    }
   /**
    * This is the last token that has been consumed successfully.  If
    * this object has been created due to a parse error, the token
@@ -189,6 +197,29 @@ public class ParseException extends Exception {
     return retval;
   }
 
+    /**
+     * Initialise the exception with a reason code
+     * @return error message
+     */
+    private static String initWithReason(Token t, String reason){
+        String eol = System.getProperty("line.separator", "\n");
+
+        String retval = "Encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn + "." + eol;
+        switch (reason) {
+            case "method" :
+                retval += "Method names should begin with a lower case letter. They should also be verbs. e.g.:" + eol +
+                        "getNumber()" + eol + "update()"+ "reverseString()" + "increment()";
+                break;
+            case "variable" :
+                retval += "Variable names should begin with a lower case letter. They should also be nouns. e.g.:" + eol +
+                        "int myNum" + eol + "String name" + eol + "Person person1";
+                break;
+            case "class" :
+                retval += "Class names should begin with a capital letter. They should also be nouns. e.g.:" + eol +
+                        "class Person" + "class FractionCalculator" + "class FlyingAnimal";
+        }
+        return retval;
+    }
     /**
      * Check to see if a token is a reserved keyword
      * @return true if token is a reserved keyword
