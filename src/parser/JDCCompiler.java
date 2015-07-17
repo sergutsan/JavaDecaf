@@ -2,6 +2,7 @@ package parser;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
@@ -27,7 +28,7 @@ public class JDCCompiler {
     @Parameter(names = {"-v", "-version"}, description = "Show version")
     private boolean versionEnabled = false;
 
-    @Parameter(names= "-help", description = "Show usage")
+    @Parameter(names= {"-help", "-h"}, description = "Show usage")
     private boolean help;
 
     private static JCommander parameterParser;
@@ -38,7 +39,13 @@ public class JDCCompiler {
         JDCCompiler jdcc = new JDCCompiler();
 
         if (args.length > 0) {
-            parameterParser = new JCommander(jdcc,args); //parse command line parameters using JCommander
+            try {
+                parameterParser = new JCommander(jdcc,args); //parse command line parameters using JCommander
+
+            } catch (ParameterException ex) { //Unknown parameter entered
+                System.out.println(ex.getMessage()); //Print exception message
+                parameterParser.usage(); //Print usage
+            }
             jdcc.launch(args[args.length-1]);
         } else {
             System.out.println("Usage: \"javadecaf [-p|-parse] [-v] filename\"");
