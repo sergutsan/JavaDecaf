@@ -30,13 +30,15 @@ public class JDCCompiler {
     @Parameter(names= "-help", description = "Show usage")
     private boolean help;
 
+    private static JCommander parameterParser;
+
     private static final double VERSION = 1.0;
 
     public static void main(String[] args) throws Exception {
         JDCCompiler jdcc = new JDCCompiler();
 
         if (args.length > 0) {
-            new JCommander(jdcc,args); //parse command line parameters using JCommander
+            parameterParser = new JCommander(jdcc,args); //parse command line parameters using JCommander
             jdcc.launch(args[args.length-1]);
         } else {
             System.out.println("Usage: \"javadecaf [-p|-parse] [-v] filename\"");
@@ -54,7 +56,9 @@ public class JDCCompiler {
         if (parseOnly) {
             System.out.println("Parse only mode enabled");
         }
-
+        if (help) {
+            parameterParser.usage();
+        }
         long startTime = System.nanoTime();
         String precompiledClass = precompile(inputFile);
         if (precompiledClass != null && !parseOnly) {
