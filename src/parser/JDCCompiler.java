@@ -32,9 +32,12 @@ public class JDCCompiler {
     public void launch(String [] args){
         long startTime = System.nanoTime();
         String filename = precompile(args[0]);
-        if (filename != null) compileJava(filename);
-        long endTime = System.nanoTime();
-        System.out.println("JavaDecaf: Compilation finished in " + ((endTime - startTime)/1000000) + " ms");
+        if (filename != null) {
+            compileJava(filename);
+            long endTime = System.nanoTime();
+            System.out.println("JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms"); //only print if successfully compiled
+        }
+
     }
 
     /**
@@ -47,7 +50,7 @@ public class JDCCompiler {
         ASTCompilationUnit node;
         String className = "";
             try {
-                if (Character.isDigit(inputFile.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit."+
+                if (Character.isDigit(inputFile.charAt(0))) { throw new ParseException("Class names in Java cannot begin with a digit. "+
                         "Please rename the file.");}
                 parser = new JDCParser(new FileInputStream(inputFile));
                 int index = inputFile.indexOf("."); //get the index of the full stop for substring
