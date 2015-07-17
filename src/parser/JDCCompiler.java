@@ -1,10 +1,14 @@
 package parser;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,10 +20,22 @@ import java.util.List;
 public class JDCCompiler {
     private String filename = ""; //the filename of the java file
 
+    @Parameter
+    private List<String> parameters = new ArrayList<>();
+
+    @Parameter(names = {"-parse", "-p"}, description = "Parse only mode - no compilation")
+    private boolean parseOnly = false;
+
+    @Parameter(names = {"-version", "-v"}, description = "Version")
+    private static final double VERSION = 1.0;
+
     public static void main(String[] args) throws Exception {
         JDCCompiler jdcc = new JDCCompiler();
-        if (args.length == 1) {
-            jdcc.launch(args);
+
+        String inputFile;
+        if (args.length > 0) {
+            jdcc.launch(args[args.length-1]);
+            new JCommander(jdcc,args); //parse command line parameters
         } else {
             System.out.println("Usage: \"javadecaf filename\"");
         }
@@ -27,13 +43,13 @@ public class JDCCompiler {
 
     /**
      * Launcher class
-     * @param args - the arguments from the command line
+     * @param inputFile  - the filename from the command line
      */
-    public void launch(String [] args){
+    public void launch(String inputFile){
         long startTime = System.nanoTime();
-        String filename = precompile(args[0]);
-        if (filename != null) {
-            compileJava(filename);
+        String precompiledClass = precompile(inputFile);
+        if (precompiledClass != null && !parseOnly) {
+            compileJava(precompiledClass);
             long endTime = System.nanoTime();
             System.out.println("JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms"); //only print if successfully compiled
         }
