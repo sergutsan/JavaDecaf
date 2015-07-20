@@ -19,6 +19,7 @@ public class JDCCompiler {
     public static void main(String[] args) throws Exception {
         JDCCompiler jdcc = new JDCCompiler();
 
+        // Check that there are enough args
         if (args.length > 0) {
             jdcc.launch(args);
         } else {

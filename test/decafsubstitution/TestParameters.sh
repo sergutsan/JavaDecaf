@@ -13,3 +13,8 @@ printf " "
 printf "Show usage\n"
 java -cp ../../target/classes/ parser.JDCCompiler -help TestCodeThenMethod.jdc
 
+printf " "
+
+printf "Not enough parameters\n"
+
+java -cp ../../target/classes/ parser.JDCCompiler
