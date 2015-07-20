@@ -1,0 +1,6 @@
+int i = 10
+
+void increment(int i) {
+    if (i < 10) {
+    i++;
+}
