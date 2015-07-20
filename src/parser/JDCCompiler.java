@@ -22,7 +22,8 @@ public class JDCCompiler {
         if (args.length > 0) {
             jdcc.launch(args);
         } else {
-            System.out.println("Usage: \"javadecaf [-p|-parse] [-v] filename\"");
+            System.out.println("usage: \"javadecaf [options] filename\"" +
+            "\nType \"javadecaf -help\" to view options");
         }
     }
 
