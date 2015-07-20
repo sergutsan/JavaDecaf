@@ -90,6 +90,9 @@ public class ASTDecafBlock extends SimpleNode{
           t = t.next;   //assign t to next token
       }
     // t is final semicolon (for floating code) or closing brace (for method)
+      if (t.kind == JDCParserConstants.RBRACE) {
+          t.image = "    }";
+      }
       print(t, ostr); // print final t
   }
 
