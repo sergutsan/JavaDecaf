@@ -51,10 +51,14 @@ public class JDCCompiler {
         long startTime = System.nanoTime();
         String inputFile = args[args.length-1]; //last item in args is the filename
         String precompiledClass = precompile(inputFile);
-        if (precompiledClass != null && !parseOnly) {
-            compileJava(precompiledClass);
-            long endTime = System.nanoTime();
-            System.out.println("JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms"); //only print if successfully compiled
+        long endTime = System.nanoTime();
+        if (precompiledClass != null) {
+            if (parseOnly) { //print success message and finish
+                System.out.println("Parse completed successfully in " + ((endTime - startTime) / 1000000) + " ms");
+            } else {
+                compileJava(precompiledClass); //call the java compiler
+                System.out.println("JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms"); //only print if successfully compiled
+            }
         }
 
     }
