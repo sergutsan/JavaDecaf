@@ -120,11 +120,13 @@ public class JDCCompiler {
      * Print the command line usage
      */
     public void printUsage(){
-        System.out.println("usage: javadecaf [options] filename");
-        System.out.println("options:");
-        System.out.println("-p | -parse\tParse-only mode - disable Java compiler stage");
-        System.out.println("-v | -version\tDisplay version number");
-        System.out.println("-help\tShow help");
+        String usage = "usage: javadecaf [options] filename +" +
+                "\noptions:"+
+                "\n-p | -parse      Parse-only mode - disable Java compiler stage" +
+                "\n-v | -version    Display version number" +
+                "\n-help            Show help";
+
+        System.out.println(usage);
     }
 
 }
