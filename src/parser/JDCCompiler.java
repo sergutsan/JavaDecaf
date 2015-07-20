@@ -1,15 +1,10 @@
 package parser;
 
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.ParameterException;
-
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,40 +14,42 @@ import java.util.List;
  * @author Sophie Koonin
  */
 public class JDCCompiler {
-    private boolean parseOnly;
-
-    private boolean versionEnabled;
-
-    private boolean help;
-
-
     private static final double VERSION = 1.0;
 
     public static void main(String[] args) throws Exception {
         JDCCompiler jdcc = new JDCCompiler();
 
         if (args.length > 0) {
-            jdcc.launch(args[args.length-1]);
+            jdcc.launch(args);
         } else {
             System.out.println("Usage: \"javadecaf [-p|-parse] [-v] filename\"");
         }
     }
 
     /**
-     * Launcher class
-     * @param inputFile  - the filename from the command line
+     * Launcher class - checks command line parameters and calls parsing and
+     * compiling methods
+     * @param args  - the command line arguments
      */
-    public void launch(String inputFile){
-        if (versionEnabled) {
+    public void launch(String[] args){
+        Boolean parseOnly = false; //indicates Parse Only mode (no Java Compiler)
+
+        /* Command line parameters */
+        List<String> argsList = Arrays.asList(args);
+        if (argsList.contains("-v") || argsList.contains("-version")) {
             System.out.println("JavaDecaf Compiler version " + VERSION);
         }
-        if (parseOnly) {
+        if (argsList.contains("-p") || argsList.contains("-parse")) {
+            parseOnly = true;
             System.out.println("Parse only mode enabled");
         }
-        if (help) {
+        if (argsList.contains("-help")) {
             //print usage
+            return; //stop any further execution as there may not be a filename given
         }
+
         long startTime = System.nanoTime();
+        String inputFile = args[args.length-1]; //last item in args is the filename
         String precompiledClass = precompile(inputFile);
         if (precompiledClass != null && !parseOnly) {
             compileJava(precompiledClass);
