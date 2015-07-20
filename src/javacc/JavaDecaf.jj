@@ -1177,7 +1177,7 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
+    (LOOKAHEAD(3) BlockStatement())*/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn001, true);
       jjtc001 = false;
@@ -1224,7 +1224,8 @@ void DecafMethod() :
     try {
 /*@egen*/
     ({
-    t = getToken(1);
+    t = getToken(1); //first word of method declaraton - likely the return type
+    t.specialToken = " "; //remove the newline from the first token
     }
   ResultType() MethodDeclarator() [ "throws" NameList() ]
   "{" DecafBlock() "}"/*@bgen(jjtree)*/
