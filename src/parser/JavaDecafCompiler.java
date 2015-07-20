@@ -68,24 +68,26 @@ public class JavaDecafCompiler {
     /**
      * Call the JavaCC parser on the file from args[0] to convert the JavaDecaf code to true Java.
      * Use the name of the JDC file for the name of the Java class, and check its validity as a Java classname.
-     * @param inputFile the name of the file to be used as input, to become Java class name
+     * @param filePath the path of the file to be used as input, to become Java class name
      * @return the filename of the converted java file, null if something goes wrong
      */
-    public String precompile(String inputFile) {
+    public String precompile(String filePath) {
         JDCParser parser;
         ASTCompilationUnit node;
         String className = "";
+        File inputFile;
             try {
-                if (Character.isDigit(inputFile.charAt(0))) { //Check that first char of file name is not digit
+                inputFile = new File(filePath);
+                if (Character.isDigit(inputFile.getName().charAt(0))) { //Check that first char of file name is not digit
                     throw new ParseException("Class names in Java cannot begin with a digit. "+
-                        "Please rename the file.");
-                } else if (Character.isLowerCase(inputFile.charAt(0))) { //Check that first char is uppercase
+                            "Please rename the file.");
+                } else if (Character.isLowerCase(inputFile.getName().charAt(0))) { //Check that first char is uppercase
                     throw new ParseException("Class names in Java must begin with a capital letter. " +
-                    "Please rename the file.");
+                            "Please rename the file.");
                 }
+                int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
+                className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 parser = new JDCParser(new FileInputStream(inputFile));
-                int index = inputFile.indexOf("."); //get the index of the full stop for substring
-                className = inputFile.substring(0, index); //get the name of the class from the filename (before extension)
                 node = parser.CompilationUnit();
                 PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
                 node.process(ostr, className);
@@ -95,7 +97,7 @@ public class JavaDecafCompiler {
                 System.out.println("Errors during compilation: ");
                 System.out.println(e.getMessage());
             } catch (FileNotFoundException e) {
-                    System.out.println("File " + inputFile + " not found.");
+                    System.out.println("File " + filePath + " not found.");
             } catch (IOException e) {
                 System.out.println("Error creating file " + className + ".java");
             } catch (TokenMgrError e) {
