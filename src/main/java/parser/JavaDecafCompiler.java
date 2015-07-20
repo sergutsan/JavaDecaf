@@ -1,4 +1,4 @@
-package parser;
+package main.java.parser;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
