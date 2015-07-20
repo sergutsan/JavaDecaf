@@ -113,6 +113,9 @@ public class JavaDecafCompiler {
      */
     public void compileJava(String filename) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
+        if (compiler == null) {
+            System.setProperty("java.home",System.getenv("JAVA_HOME")); //this should work on BBK lab computers
+        }
         StandardJavaFileManager fileMgr = compiler.getStandardFileManager(null, null, null); //get file manager
         Iterable<? extends JavaFileObject> fileToCompile = fileMgr.getJavaFileObjects(filename); //init file to compile from filename
         List<String> argOptions = Arrays.asList("-cp", "."); //command line options - set classpath to current working directory
