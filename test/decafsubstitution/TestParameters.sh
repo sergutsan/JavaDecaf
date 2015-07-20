@@ -13,8 +13,3 @@ printf
 printf "Show usage"
 java -cp ../../target/classes/ parser.JDCCompiler -help TestCodeThenMethod.jdc
 
-
-printf
-
-printf "Bad parameter"
-java -cp ../../target/classes/ parser.JDCCompiler -foo TestCodeThenMethod.jdc
