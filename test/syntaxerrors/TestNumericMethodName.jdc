@@ -1,0 +1,5 @@
+println("Hello world!");
+
+void 8(){
+    //illegal method name
+}
