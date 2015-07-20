@@ -40,14 +40,11 @@ options {
 PARSER_BEGIN(JDCParser)
 package parser;
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*/ {/*@bgen(jjtree)*/
   protected static JJTJDCParserState jjtree = new JJTJDCParserState();
 
 /*@egen*/
-    private static List<Throwable> errorList = new ArrayList<Throwable>(); //list of errors
     static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
@@ -345,10 +342,6 @@ ASTCompilationUnit CompilationUnit()                  :
 /*@egen*/
 		{
 		  return jjtn000;
-		  /* print all errors */
-		  for (Throwable t: errorList) {
-		    System.out.println(t.getMessage());
-		   }
 		}/*@bgen(jjtree)*/
                 } catch (Throwable jjte000) {
                   if (jjtc000) {
@@ -1173,7 +1166,7 @@ void TryStatement() :
  */
 void DecafBlock() :
 {Token t;}
-{ try {/*@bgen(jjtree) DecafBlock */
+{/*@bgen(jjtree) DecafBlock */
     {
       ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
       boolean jjtc001 = true;
@@ -1214,10 +1207,6 @@ void DecafBlock() :
       }
     }
 /*@egen*/             
-    } catch (ParseException ex) {
-        error_skipto(SEMICOLON, ex);
-    }
-
 }
 
 /*
@@ -1274,17 +1263,4 @@ void DecafMethod() :
       }
     }
 /*@egen*/             
-}
-
-/**
-*  Used for error recovery. Skip tokens until the desired kind is reached and add the
-* exception to the internal error list.
-*/
-JAVACODE
-void error_skipto(int kind, ParseException ex){
-errorList.add(ex);
-Token t;
-do {
-t = getNextToken();
-} while (t.kind != kind);
 }

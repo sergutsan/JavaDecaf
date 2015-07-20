@@ -39,11 +39,8 @@ options {
 PARSER_BEGIN(JDCParser)
 package parser;
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
 
 public class JDCParser {
-    private static List<Throwable> errorList = new ArrayList<Throwable>(); //list of errors
     static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
@@ -330,10 +327,6 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   <EOF>
 		{
 		  return jjtThis;
-		  /* print all errors */
-		  for (Throwable t: errorList) {
-		    System.out.println(t.getMessage());
-		   }
 		}
 }
 
@@ -1138,7 +1131,7 @@ void TryStatement() :
  */
 void DecafBlock() :
 {Token t;}
-{ try {
+{
     ({
     t = getToken(1);
     }
@@ -1147,10 +1140,6 @@ void DecafBlock() :
     jjtThis.setFirstToken(t);
     jjtThis.setLastToken(getToken(0));
     })  #DecafBlock
-    } catch (ParseException ex) {
-        error_skipto(SEMICOLON, ex);
-    }
-
 }
 
 /*
@@ -1175,17 +1164,4 @@ void DecafMethod() :
       jjtThis.setFirstToken(t);
       jjtThis.setLastToken(getToken(0));
       })  #DecafBlock
-}
-
-/**
-*  Used for error recovery. Skip tokens until the desired kind is reached and add the
-* exception to the internal error list.
-*/
-JAVACODE
-void error_skipto(int kind, ParseException ex){
-errorList.add(ex);
-Token t;
-do {
-t = getNextToken();
-} while (t.kind != kind);
 }

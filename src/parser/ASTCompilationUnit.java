@@ -63,7 +63,7 @@ public class ASTCompilationUnit extends SimpleNode {
           child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
           t = child.end.next;
           if (i==0){    //first iteration (main clause) needs closing brace
-              printFinalClosingBrace(ostr, "    "); //closing brace of main
+              printFinalClosingBrace(ostr, "    "); //closing brace of ain
               encapsulation.image = "\n    private static";  //after first iteration, change encapsulation for methods.
           }
           if (i==(jjtGetNumChildren()-1)){
