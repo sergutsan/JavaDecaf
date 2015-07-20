@@ -2697,7 +2697,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jjtree.openNodeScope(jjtn001);
     try {
     t = getToken(1); //first word of method declaraton - likely the return type
-    t.specialToken = " "; //remove the newline from the first token
+    t.specialToken.image = " "; //remove the newline from the first token
 
       ResultType();
       MethodDeclarator();
