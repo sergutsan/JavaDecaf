@@ -44,8 +44,8 @@ public class JDCCompiler {
             System.out.println("Parse only mode enabled");
         }
         if (argsList.contains("-help")) {
-            //print usage
-            return; //stop any further execution as there may not be a filename given
+            printUsage();
+            System.exit(0); //stop any further execution as there may not be a filename given
         }
 
         long startTime = System.nanoTime();
@@ -112,6 +112,16 @@ public class JDCCompiler {
         compTask.call(); //compile the file
     }
 
+    /**
+     * Print the command line usage
+     */
+    public void printUsage(){
+        System.out.println("usage: javadecaf [options] filename");
+        System.out.println("options:");
+        System.out.println("-p | -parse\tParse-only mode - disable Java compiler stage");
+        System.out.println("-v | -version\tDisplay version number");
+        System.out.println("-help\tShow help");
+    }
 
 }
 
