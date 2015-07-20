@@ -13,15 +13,15 @@ import java.util.List;
  * Some code modified from JavaCC original parser code
  * @author Sophie Koonin
  */
-public class JDCCompiler {
+public class JavaDecaf {
     private static final double VERSION = 1.0;
 
     public static void main(String[] args) throws Exception {
-        JDCCompiler jdcc = new JDCCompiler();
+        JavaDecaf decaf = new JavaDecaf();
 
         // Check that there are enough args
         if (args.length > 0) {
-            jdcc.launch(args);
+            decaf.launch(args);
         } else {
             System.out.println("usage: \"javadecaf [options] filename\"" +
             "\nType \"javadecaf -help\" to view options");
