@@ -64,7 +64,7 @@ public class ASTCompilationUnit extends SimpleNode {
           t = child.end.next;
           if (i==0){    //first iteration (main clause) needs closing brace
               printFinalClosingBrace(ostr, "    "); //closing brace of main
-              encapsulation.image = "\nprivate static";  //after first iteration, change encapsulation for methods.
+              encapsulation.image = "\n    private static";  //after first iteration, change encapsulation for methods.
           }
           if (i==(jjtGetNumChildren()-1)){
             printFinalClosingBrace(ostr, "");   //final closing brace of class, no indentation
