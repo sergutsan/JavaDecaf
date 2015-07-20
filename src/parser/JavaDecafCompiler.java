@@ -13,11 +13,11 @@ import java.util.List;
  * Some code modified from JavaCC original parser code
  * @author Sophie Koonin
  */
-public class JavaDecaf {
+public class JavaDecafCompiler {
     private static final double VERSION = 1.0;
 
     public static void main(String[] args) throws Exception {
-        JavaDecaf decaf = new JavaDecaf();
+        JavaDecafCompiler decaf = new JavaDecafCompiler();
 
         // Check that there are enough args
         if (args.length > 0) {
