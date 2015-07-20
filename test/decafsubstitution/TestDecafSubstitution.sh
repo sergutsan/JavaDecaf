@@ -7,7 +7,7 @@ do
 	filejava="${file%.*}"
 	filejava="$filejava.java"
 	echo "Compiling $file"
-	java -cp ../../target/classes/ parser.JDCCompiler $file
+	java -cp ../../target/classes/ parser.JDCCompiler -p $file
 	echo "-----"
 	diff -b -s $filejava ../expected/$filejava
 	echo "-------------------"
