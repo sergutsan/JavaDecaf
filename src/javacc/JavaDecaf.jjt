@@ -37,7 +37,7 @@ options {
 }
 
 PARSER_BEGIN(JDCParser)
-package main.java.parser;
+package parser;
 import java.io.*;
 
 public class JDCParser {

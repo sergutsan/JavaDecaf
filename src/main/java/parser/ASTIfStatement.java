@@ -12,7 +12,7 @@ public class ASTIfStatement extends SimpleNode {
 //  }
 
     public void process(){
-
+        Token t
     }
 }
 /* JavaCC - OriginalChecksum=324204ebf08afeb3868ae5462afee3bf (do not edit this line) */
