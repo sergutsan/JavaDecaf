@@ -1,6 +1,4 @@
-package parser;
-
-/* Copyright (c) 2006, Sun Microsystems, Inc.
+package main.java.parser;/* Copyright (c) 2006, Sun Microsystems, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
