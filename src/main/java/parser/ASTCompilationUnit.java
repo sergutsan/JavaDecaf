@@ -1,4 +1,4 @@
-package main.java.parser;
+package parser;
 
 /* Modified from Transformer example provided in package for JavaCC
  *

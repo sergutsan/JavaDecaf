@@ -9,7 +9,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
-    * Must be a verb - TODO.
     * Throw ParseException if not legal.
     * @param t - the token of the identifier in question
     */
@@ -20,7 +19,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
     /**
         *  Test whether a given identifier is a legal class name: must begin with upper case letter.
-        * Must be a noun - TODO.
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
@@ -31,7 +29,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         }
     /**
         *  Test whether a given identifier is a legal variable name: must begin with lower case letter.
-        * Must be a noun - TODO.
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
