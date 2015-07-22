@@ -63,7 +63,7 @@ public class ASTCompilationUnit extends SimpleNode {
               "public static void main(String[] args){\n    ";
 
       for (int i = 0; i < jjtGetNumChildren(); i++) {   //check that there are children
-          child = (ASTDecafBlock) jjtGetChild(i);   //the "floating" code will always be first
+          child = (SimpleNode) jjtGetChild(i);   //the "floating" code will always be first
           child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
           t = child.end.next;
           if (i==0){    //first iteration (main clause) needs closing brace
