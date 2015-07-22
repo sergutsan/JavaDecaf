@@ -1066,8 +1066,6 @@ void IfStatement() :
  * is to tell JavaCC that we know what we are doing.
  */
 {
-    //inLoopCondition = true; //SK
-    //inIfLoop = true; //SK
     Token t;
     }
 {
@@ -1075,32 +1073,23 @@ void IfStatement() :
   {
     t = getToken(1);
   }
-  "if" "(" Expression() ")" {
-                              //inLoopCondition = false;
-                              } //change back to false once condition complete - SK
-                              Block() [ LOOKAHEAD(1) "else" Block() ]
+  "if" "(" Expression() ")" Block() [ LOOKAHEAD(1) "else" Block() ]
                               {
                                 jjtThis.setFirstToken(t);
                                 jjtThis.setLastToken(rbrace); //RBRACE
                                 })#IfStatement //Do not permit braceless statements - SK
-                              {
-                              //inIfLoop = false; //change back to false once loop ends - SK
-                              }
+
 
 }
 
 void WhileStatement() :
 {
     Token t;
-    //inLoopCondition = true; //SK
 }
 { ({
       t = getToken(1);
    }
-  "while" "(" Expression() ")" {
-                                 //inLoopCondition = false; //SK
-                                 }
-                                 Block() //Do not permit braceless statements - SK
+  "while" "(" Expression() ")" Block() //Do not permit braceless statements - SK
                                  {
                                     jjtThis.setFirstToken(t);
                                     jjtThis.setLastToken(rbrace); //RBRACE
