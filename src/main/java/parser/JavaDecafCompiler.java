@@ -89,7 +89,8 @@ public class JavaDecafCompiler {
                 className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 parser = new JDCParser(new FileInputStream(inputFile));
                 node = parser.CompilationUnit();
-                PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
+                //PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
+                PrintWriter ostr = new PrintWriter(System.out); //DEBUG
                 node.process(ostr, className);
                 ostr.close();
                 parser.printWarnings(); //print any warnings that arised
