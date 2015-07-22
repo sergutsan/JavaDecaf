@@ -118,7 +118,7 @@ public class SimpleNode implements Node {
    *  Version of process with two parameters, for Decaf encapsulation
    *  Default behaviour: just call process (ignore encapsulation)
    */
-  public void process (PrintWriter ostr, String encapsulation) {
+  public void process (PrintWriter ostr, Token encapsulation) {
     process(ostr);
   }
 
