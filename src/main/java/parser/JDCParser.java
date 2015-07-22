@@ -55,7 +55,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
      *
      */
      protected void printWarnings() {
-        for (String warning: warningList) {
+        for (String warning: warnings) {
             System.out.println(warning);
             }
 
