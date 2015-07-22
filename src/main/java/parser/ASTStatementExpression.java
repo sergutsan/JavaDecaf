@@ -23,6 +23,7 @@ class ASTStatementExpression extends SimpleNode {
     Token t = begin;
     while (t != end){
       print(t, ostr);
+      t = t.next;
     }
     print(end, ostr);
   }
