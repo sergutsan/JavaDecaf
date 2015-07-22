@@ -63,18 +63,21 @@ public class ASTDecafBlock extends SimpleNode{
       * Init Scanner for any readLine/readInt calls.
       */
       print(encapsulation, ostr);
-      String prevToken = ""; // value of previous token image
+//      String prevToken = ""; // value of previous token image
+//
+//     /*
+//     * Replace all JavaDecaf method calls with the Java equivalents.
+//      */
+//
+//      while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon
+//          t = ASTUtils.checkForSubstitutions(t, prevToken);
+//          print(t, ostr);   //print the token to output stream
+//          prevToken = t.image;  //assign value of prevToken to the current token's image
+//          t = t.next;   //assign t to next token
+//      }
 
-     /*
-     * Replace all JavaDecaf method calls with the Java equivalents.
-      */
+      super.process(ostr);
 
-      while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon
-          t = ASTUtils.checkForSubstitutions(t, prevToken);
-          print(t, ostr);   //print the token to output stream
-          prevToken = t.image;  //assign value of prevToken to the current token's image
-          t = t.next;   //assign t to next token
-      }
     // t is final semicolon (for floating code) or closing brace (for method)
       if (t.kind == JDCParserConstants.RBRACE) {
           t.image = "    }";
