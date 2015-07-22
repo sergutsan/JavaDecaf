@@ -1071,7 +1071,7 @@ void IfStatement() :
                               Block() [ LOOKAHEAD(1) "else" Block() ]
                               {
                                 jjtThis.setFirstToken(t);
-                                jjtThis.setLastToken(getToken(0));
+                                jjtThis.setLastToken(Token.newToken(73));
                                 })#IfStatement //Do not permit braceless statements - SK
                               {
                               //inIfLoop = false; //change back to false once loop ends - SK
