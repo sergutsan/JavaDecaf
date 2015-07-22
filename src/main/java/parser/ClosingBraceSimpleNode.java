@@ -16,7 +16,7 @@ public class ClosingBraceSimpleNode extends SimpleNode {
 
     public void process(PrintWriter ostr) {
         super.process(ostr);
-        print(Token.newToken(73),ostr);
+        print(Token.newToken(73, "}"),ostr);
 
     }
 
