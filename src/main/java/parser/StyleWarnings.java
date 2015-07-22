@@ -20,7 +20,7 @@ public class StyleWarnings {
         of spaces to indent, add this warning to the warning list */
 
         if (indentationCount != (indentationLevel * INDENTATION_SPACES)) {
-            String warning = "Warning - \":" + t.image + "\", line " + t.endLine + ", column " + t.endColumn +
+            String warning = "Warning - \"" + t.image + "\", line " + t.endLine + ", column " + t.endColumn +
                     ": methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
                     "\nvoid isLessThan(int number1, int number2) {"+
                     "\n    if (x < y) {" +
