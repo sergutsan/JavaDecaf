@@ -35,7 +35,6 @@ public class JavaDecafCompiler {
      */
     public void launch(String[] args){
         Boolean parseOnly = false; //indicates Parse Only mode (no Java Compiler)
-        Boolean toConsole = false; //whether or not to print to console rather than file
         /* Command line parameters */
         List<String> argsList = Arrays.asList(args);
         if (argsList.contains("-v") || argsList.contains("-version")) {
@@ -49,14 +48,23 @@ public class JavaDecafCompiler {
             printUsage();
             System.exit(0); //stop any further execution as there may not be a filename given
         }
-        if (argsList.contains("-c") || argsList.contains("-console")) {
-            toConsole = true;
-            parseOnly = true;
-        }
+
 
         long startTime = System.nanoTime();
-        String inputFile = args[args.length-1]; //last item in args is the filename
-        String precompiledClass = precompile(inputFile, toConsole);
+        String filename = args[args.length-1]; //last item in args is the filename
+        File inputFile = new File(filename);
+        PrintWriter ostr = null;
+        try {
+            ostr = new PrintWriter(new FileWriter(inputFile.getName() + ".java"));
+        } catch (IOException e) {
+            System.out.println("Error creating file " + inputFile.getName() + ".java");
+        }
+
+        if (argsList.contains("-c") || argsList.contains("-console")) {
+            parseOnly = true;
+            ostr = new PrintWriter(System.out);
+        }
+        String precompiledClass = precompile(inputFile, ostr);
         long endTime = System.nanoTime();
         if (precompiledClass != null) {
             if (parseOnly) { //print success message and finish
@@ -72,34 +80,26 @@ public class JavaDecafCompiler {
     /**
      * Call the JavaCC parser on the file from args[0] to convert the JavaDecaf code to true Java.
      * Use the name of the JDC file for the name of the Java class, and check its validity as a Java classname.
-     * @param filePath the path of the file to be used as input, to become Java class name
-     * @param toConsole whether or not printing to console is enabled
+     * @param inputFile the file to be used as input, to become Java class name
+     * @param ostr the PrintWriter to print to (file or console)
      * @return the filename of the converted java file, null if something goes wrong
      */
-    public String precompile(String filePath, boolean toConsole) {
+    public String precompile(File inputFile, PrintWriter ostr) {
         JDCParser parser;
         ASTCompilationUnit node;
         String className = "";
-        File inputFile;
-            try {
-                inputFile = new File(filePath);
+            try{
+                int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
+                className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 if (Character.isDigit(inputFile.getName().charAt(0))) { //Check that first char of file name is not digit
-                    throw new ParseException("Class names in Java cannot begin with a digit. "+
+                    throw new ParseException("Class names in Java cannot begin with a digit. " +
                             "Please rename the file.");
                 } else if (Character.isLowerCase(inputFile.getName().charAt(0))) { //Check that first char is uppercase
                     throw new ParseException("Class names in Java must begin with a capital letter. " +
                             "Please rename the file.");
                 }
-                int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
-                className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 parser = new JDCParser(new FileInputStream(inputFile));
                 node = parser.CompilationUnit();
-                PrintWriter ostr;
-                if (toConsole) {
-                    ostr = new PrintWriter(System.out); //print results to stdout, not file
-                } else {
-                    ostr = new PrintWriter(new FileWriter(className+".java"));
-                }
                 node.process(ostr, className);
                 ostr.close();
                 parser.printWarnings(); //print any warnings that arised
@@ -108,9 +108,7 @@ public class JavaDecafCompiler {
                 System.out.println("Errors during compilation: ");
                 System.out.println(e.getMessage());
             } catch (FileNotFoundException e) {
-                    System.out.println("File " + filePath + " not found.");
-            } catch (IOException e) {
-                System.out.println("Error creating file " + className + ".java");
+                    System.out.println("File " + inputFile + " not found.");
             } catch (TokenMgrError e) {
                 System.out.println(e.getMessage());
                 if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
