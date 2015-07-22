@@ -1,4 +1,4 @@
-public class TestBadIndentationFor {
+public class TestBadIndentationFOR {
 
 public static void main(String[] args) {
 for (int i = 0; i < 5; i++) {
