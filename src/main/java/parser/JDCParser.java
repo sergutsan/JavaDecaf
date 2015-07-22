@@ -8,7 +8,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   protected static JJTJDCParserState jjtree = new JJTJDCParserState();static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
-    private static List<String> warnings = new ArrayList<String>(); // list of warnings
+    private List<String> warnings = new ArrayList<String>(); // list of warnings
 
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
@@ -46,7 +46,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
      * Add a warning to the internal warning list to be printed at the end.
      * @param warning - the warning to add
      */
-     protected static void addWarning(String warning) {
+     protected void addWarning(String warning) {
         warnings.add(warning);
         }
 
