@@ -52,17 +52,17 @@ public class ASTCompilationUnit extends SimpleNode {
   public void process (PrintWriter ostr, String className) {
     Token t = begin;
     SimpleNode child;
-      while (t.kind != JDCParserConstants.LBRACE){
-          print(t, ostr); //Normal code printing
-          t = t.next;
-      }
+//      while (t.kind != JDCParserConstants.LBRACE){
+//          print(t, ostr); //Normal code printing
+//          t = t.next;
+//      }
 
 
       Token encapsulation = new Token(); //this is for the class and main method declarations
       encapsulation.image = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
               "public class " + className + " { \n    " +
               "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
-              "public static void main(String[] args){\n    ";
+              "    public static void main(String[] args){\n    ";
 
       for (int i = 0; i < jjtGetNumChildren(); i++) {   //check that there are children
           child = (SimpleNode) jjtGetChild(i);   //the "floating" code will always be first
