@@ -5,7 +5,7 @@ public interface JDCParserTreeConstants
 {
   public int JJTCOMPILATIONUNIT = 0;
   public int JJTVOID = 1;
-  public int JJTBLOCK = 2;
+  public int JJTSTATEMENTEXPRESSION = 2;
   public int JJTIFSTATEMENT = 3;
   public int JJTDECAFBLOCK = 4;
 
@@ -13,9 +13,9 @@ public interface JDCParserTreeConstants
   public String[] jjtNodeName = {
     "CompilationUnit",
     "void",
-    "Block",
+    "StatementExpression",
     "IfStatement",
     "DecafBlock",
   };
 }
-/* JavaCC - OriginalChecksum=9b6a945d4a32402c442bd628e502f2af (do not edit this line) */
+/* JavaCC - OriginalChecksum=9102245f11ce432e48966c5dc69e2a22 (do not edit this line) */

@@ -31,8 +31,9 @@
 options {
                
                            
-  ERROR_REPORTING = true;
   JAVA_UNICODE_ESCAPE = true;
+  ERROR_REPORTING = true;
+                           //pass parser object into node constructors
   DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../main/java/parser";
 }
@@ -338,7 +339,7 @@ TOKEN : /* OPERATORS */
  */
 ASTCompilationUnit CompilationUnit()                  :
 {/*@bgen(jjtree) CompilationUnit */
-  ASTCompilationUnit jjtn000 = new ASTCompilationUnit(JJTCOMPILATIONUNIT);
+  ASTCompilationUnit jjtn000 = new ASTCompilationUnit(null, JJTCOMPILATIONUNIT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/}
@@ -989,52 +990,11 @@ void LabeledStatement() :
 }
 
 void Block() :
+{}
 {
-    Token t;
-    }
-{
-  "{"/*@bgen(jjtree) Block */
-         {
-           ASTBlock jjtn001 = new ASTBlock(JJTBLOCK);
-           boolean jjtc001 = true;
-           jjtree.openNodeScope(jjtn001);
-         }
-         try {
-/*@egen*/
-         ({
-            t = getToken(1); //first word of block
-          } ( BlockStatement() )*/*@bgen(jjtree)*/
-          {
-            jjtree.closeNodeScope(jjtn001, true);
-            jjtc001 = false;
-          }
-/*@egen*/
-          {
-            jjtn001.setFirstToken(t);
-            jjtn001.setLastToken(getToken(0));
-            } )/*@bgen(jjtree)*/
-         } catch (Throwable jjte001) {
-           if (jjtc001) {
-             jjtree.clearNodeScope(jjtn001);
-             jjtc001 = false;
-           } else {
-             jjtree.popNode();
-           }
-           if (jjte001 instanceof RuntimeException) {
-             throw (RuntimeException)jjte001;
-           }
-           if (jjte001 instanceof ParseException) {
-             throw (ParseException)jjte001;
-           }
-           throw (Error)jjte001;
-         } finally {
-           if (jjtc001) {
-             jjtree.closeNodeScope(jjtn001, true);
-           }
-         }
-/*@egen*/      
-
-    "}"
+  "{"
+   ( BlockStatement() )*
+   "}"
 }
 
 void BlockStatement() :
@@ -1056,7 +1016,7 @@ void LocalVariableDeclaration() :
   [ "final" ] Type() VariableDeclarator() ( "," VariableDeclarator() )*
 }
 
-void EmptyStatement() :
+void EmptyStatement() : //TODO
 {}
 {
   ";"
@@ -1073,16 +1033,56 @@ void StatementExpression() :
  * The last expansion of this production accepts more than the legal
  * Java expansions for StatementExpression. TODO
  */
-{}
-{
-  PreIncrementExpression()
+{ Token t; }
+{/*@bgen(jjtree) StatementExpression */
+ {
+   ASTStatementExpression jjtn001 = new ASTStatementExpression(null, JJTSTATEMENTEXPRESSION);
+   boolean jjtc001 = true;
+   jjtree.openNodeScope(jjtn001);
+ }
+ try {
+/*@egen*/
+ ( {
+     t = getToken(1);
+   }
+
+ (PreIncrementExpression()
 |
   PreDecrementExpression()
 |
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   Assignment()
 |
-  PostfixExpression()
+  PostfixExpression())/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  {
+    jjtn001.setFirstToken(t);
+    jjtn001.setLastToken(getToken(0));
+  })/*@bgen(jjtree)*/
+ } catch (Throwable jjte001) {
+   if (jjtc001) {
+     jjtree.clearNodeScope(jjtn001);
+     jjtc001 = false;
+   } else {
+     jjtree.popNode();
+   }
+   if (jjte001 instanceof RuntimeException) {
+     throw (RuntimeException)jjte001;
+   }
+   if (jjte001 instanceof ParseException) {
+     throw (ParseException)jjte001;
+   }
+   throw (Error)jjte001;
+ } finally {
+   if (jjtc001) {
+     jjtree.closeNodeScope(jjtn001, true);
+   }
+ }
+/*@egen*/                      //Create node
 }
 
 void SwitchStatement() :
@@ -1113,7 +1113,7 @@ void IfStatement() :
     }
 {/*@bgen(jjtree) IfStatement */
   {
-    ASTIfStatement jjtn001 = new ASTIfStatement(JJTIFSTATEMENT);
+    ASTIfStatement jjtn001 = new ASTIfStatement(null, JJTIFSTATEMENT);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
@@ -1259,7 +1259,7 @@ void DecafBlock() :
 {Token t;}
 {/*@bgen(jjtree) DecafBlock */
     {
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(null, JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }
@@ -1308,7 +1308,7 @@ void DecafMethod() :
 {Token t;}
 {/*@bgen(jjtree) DecafBlock */
     {
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(JJTDECAFBLOCK);
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(null, JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }
