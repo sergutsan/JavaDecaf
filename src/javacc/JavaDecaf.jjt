@@ -98,8 +98,16 @@ public class JDCParser {
         for (String warning: warnings) {
             System.out.println(warning);
             }
-
      }
+
+     /**
+     * Get the number of warnings in the internal list.
+     * @return the number of warnings
+     */
+     protected int getWarningCount(){
+        return warnings.size();
+        }
+
 
 }
 
