@@ -54,6 +54,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
     private Token rbrace = Token.newToken(73, "}");
+
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
     * Throw ParseException if not legal.
@@ -96,14 +97,23 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
 
      /**
      * Print the contents of the warning list, if there are any
+     * Include an escape sequence to print each warning in yellow
      *
      */
      protected void printWarnings() {
         for (String warning: warnings) {
             System.out.println(warning);
             }
-
      }
+
+     /**
+     * Get the number of warnings in the internal list.
+     * @return the number of warnings
+     */
+     protected int getWarningCount(){
+        return warnings.size();
+        }
+
 
 }
 

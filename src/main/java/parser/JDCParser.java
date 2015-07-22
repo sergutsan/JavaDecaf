@@ -10,6 +10,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
     private Token rbrace = Token.newToken(73, "}");
+
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
     * Throw ParseException if not legal.
@@ -52,14 +53,22 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
      /**
      * Print the contents of the warning list, if there are any
+     * Include an escape sequence to print each warning in yellow
      *
      */
      protected void printWarnings() {
         for (String warning: warnings) {
             System.out.println(warning);
             }
-
      }
+
+     /**
+     * Get the number of warnings in the internal list.
+     * @return the number of warnings
+     */
+     protected int getWarningCount(){
+        return warnings.size();
+        }
 
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
@@ -3187,62 +3196,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  private boolean jj_3R_237() {
-    if (jj_3R_239()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_229() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(102)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(103)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(104)) return true;
-    }
-    }
-    if (jj_3R_216()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_236() {
-    if (jj_3R_172()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_235() {
-    if (jj_3R_171()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_228() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_234()) {
-    jj_scanpos = xsp;
-    if (jj_3R_235()) {
-    jj_scanpos = xsp;
-    if (jj_3R_236()) {
-    jj_scanpos = xsp;
-    if (jj_3R_237()) return true;
-    }
-    }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_234() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(94)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(95)) return true;
-    }
-    if (jj_3R_228()) return true;
-    return false;
-  }
-
   private boolean jj_3R_223() {
     Token xsp;
     xsp = jj_scanpos;
@@ -5463,6 +5416,62 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   private boolean jj_3R_171() {
     if (jj_scan_token(INCR)) return true;
     if (jj_3R_55()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_237() {
+    if (jj_3R_239()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_229() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(102)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(103)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(104)) return true;
+    }
+    }
+    if (jj_3R_216()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_236() {
+    if (jj_3R_172()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_235() {
+    if (jj_3R_171()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_228() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_234()) {
+    jj_scanpos = xsp;
+    if (jj_3R_235()) {
+    jj_scanpos = xsp;
+    if (jj_3R_236()) {
+    jj_scanpos = xsp;
+    if (jj_3R_237()) return true;
+    }
+    }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_234() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(94)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(95)) return true;
+    }
+    if (jj_3R_228()) return true;
     return false;
   }
 
