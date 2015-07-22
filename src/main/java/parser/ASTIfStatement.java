@@ -5,7 +5,7 @@ package main.java.parser;
 import java.io.PrintWriter;
 
 public
-class ASTIfStatement extends SimpleNode {
+class ASTIfStatement extends ClosingBraceSimpleNode {
   public ASTIfStatement(int id) {
     super(id);
   }

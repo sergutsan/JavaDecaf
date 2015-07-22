@@ -3,7 +3,7 @@
 package main.java.parser;
 
 public
-class ASTMethodDeclaration extends SimpleNode {
+class ASTMethodDeclaration extends ClosingBraceSimpleNode {
   public ASTMethodDeclaration(int id) {
     super(id);
   }
