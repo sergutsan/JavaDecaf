@@ -50,7 +50,7 @@ public class ASTDecafBlock extends SimpleNode {
     super(id);
   }
 
-    ASTDecafBlock(JDCParser p, int id) {
+    public ASTDecafBlock(JDCParser p, int id) {
         super(p, id);
     }
     /**

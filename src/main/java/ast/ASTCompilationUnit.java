@@ -45,7 +45,7 @@ public class ASTCompilationUnit extends SimpleNode {
         super(id);
     }
 
-    ASTCompilationUnit(JDCParser p, int id) {
+    public ASTCompilationUnit(JDCParser p, int id) {
         super(p, id);
     }
 
