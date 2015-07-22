@@ -18,7 +18,7 @@ public class ClosingBraceSimpleNode extends SimpleNode {
 
     public void process(PrintWriter ostr) {
         super.process(ostr);
-        int indentationLevel = 0;
+        int indentationLevel = -1;
         Node node = this;
         while(node.jjtGetParent() != null) {
             indentationLevel++;
