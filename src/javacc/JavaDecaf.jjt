@@ -393,17 +393,29 @@ void TypeDeclaration() :
  */
 
 void ClassDeclaration() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+  }
   ( "abstract" | "final" | "public" )*
   UnmodifiedClassDeclaration()
+  {
+    setFirstLastToken(t, getToken(0));
+  })#ClassDeclaration
 }
 
 void UnmodifiedClassDeclaration() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+    }
   "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
+  {
+    setFirstLastToken(t, getToken(0));
+    })#UnmodifiedClassDeclaration
 }
 
 void ClassBody() :
