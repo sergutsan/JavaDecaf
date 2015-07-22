@@ -8,8 +8,13 @@ class ASTBlock extends SimpleNode {
     super(id);
   }
 
-  public ASTBlock(JDCParser p, int id) {
-    super(p, id);
+  void process(){
+    if (jjtGetParent().toString().equals("IfStatement")) {
+      StyleWarnings.checkIndentation(begin, 1);
+
+    }
+
+
   }
 
 }
