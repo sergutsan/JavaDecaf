@@ -48,6 +48,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         warnings.add(warning);
         }
 
+     /**
+     * Print the contents of the warning list, if there are any
+     *
+     */
+     protected static void printWarnings() {
+        for (String warning: warningList) {
+            System.out.println(warning);
+            }
+
+     }
+
 /*****************************************
  * THE JAVA LANGUAGE GRAMMAR STARTS HERE *
  *****************************************/
@@ -3465,16 +3476,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  static private boolean jj_3R_243() {
-    if (jj_3R_173()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_242() {
-    if (jj_3R_250()) return true;
-    return false;
-  }
-
   static private boolean jj_3R_239() {
     Token xsp;
     xsp = jj_scanpos;
@@ -5741,6 +5742,16 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   static private boolean jj_3_17() {
     if (jj_3R_58()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_243() {
+    if (jj_3R_173()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_242() {
+    if (jj_3R_250()) return true;
     return false;
   }
 

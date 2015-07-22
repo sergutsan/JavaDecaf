@@ -86,6 +86,17 @@ public class JDCParser {
         warnings.add(warning);
         }
 
+     /**
+     * Print the contents of the warning list, if there are any
+     *
+     */
+     protected static void printWarnings() {
+        for (String warning: warningList) {
+            System.out.println(warning);
+            }
+
+     }
+
 }
 
 PARSER_END(JDCParser)
