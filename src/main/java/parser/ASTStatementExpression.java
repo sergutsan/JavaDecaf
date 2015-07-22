@@ -26,6 +26,8 @@ class ASTStatementExpression extends SimpleNode {
       t = t.next;
     }
     print(end, ostr);
+    t.image=";";
+    print(t, ostr); //print last semicolon
   }
 }
 /* JavaCC - OriginalChecksum=e873b876e7f466c17fe124d220aedcae (do not edit this line) */
