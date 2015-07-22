@@ -29,7 +29,7 @@
 
 options {
   MULTI = true;
-  NODE_DEFAULT_VOID = true;
+  //NODE_DEFAULT_VOID = true;
   JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
   NODE_USES_PARSER = true; //pass parser object into node constructors
@@ -686,12 +686,7 @@ void Assignment() :
 void AssignmentOperator() :
 {}
 {
-  "=" { if (inLoopCondition) {
-              Token t = getToken(0);
-              System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-              ": Assignment operator \'=\' used in loop condition. \nTo check for equality, use double equals \'==\'.");
-                  }
-              }  | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :
@@ -716,8 +711,9 @@ void InclusiveOrExpression() :
 {}
 {
   ExclusiveOrExpression() ( "|" { Token t = getToken(0);
-                                  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-                                  ": You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'."); //SK
+                                  String warning = "Warning - line " + t.endLine + ", column " + t.endColumn +
+                                  ": You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'.";
+                                   warnings.add(warning); //SK
                                   } ExclusiveOrExpression() )*
 }
 
@@ -731,8 +727,9 @@ void AndExpression() :
 {}
 {
   EqualityExpression() ( "&" { Token t = getToken(0);
-  System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-  ": You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'."); //SK
+  String warning = "Warning - line " + t.endLine + ", column " + t.endColumn +
+  ": You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.";
+   warnings.add(warning); //SK
   } EqualityExpression() )*
 }
 
