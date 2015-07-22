@@ -49,7 +49,7 @@ public class JDCParser {
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
-
+    private Token rbrace = Token.newToken(73, "}");
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
     * Throw ParseException if not legal.
@@ -1071,7 +1071,7 @@ void IfStatement() :
                               Block() [ LOOKAHEAD(1) "else" Block() ]
                               {
                                 jjtThis.setFirstToken(t);
-                                jjtThis.setLastToken(Token.newToken(73)); //RBRACE
+                                jjtThis.setLastToken(rbrace); //RBRACE
                                 })#IfStatement //Do not permit braceless statements - SK
                               {
                               //inIfLoop = false; //change back to false once loop ends - SK
@@ -1093,7 +1093,7 @@ void WhileStatement() :
                                  Block() //Do not permit braceless statements - SK
                                  {
                                     jjtThis.setFirstToken(t);
-                                    jjtThis.setLastToken(Token.newToken(73)); //RBRACE
+                                    jjtThis.setLastToken(rbrace); //RBRACE
                                  })#WhileStatement
 
 }
@@ -1107,23 +1107,33 @@ void DoStatement() :
     }
   "do" Block() {
                 jjtThis.setFirstToken(t);
-                jjtThis.setLastToken(Token.newToken(73)); //RBRACE
+                jjtThis.setLastToken(rbrace); //RBRACE
                 })#DoStatement
                 "while" "(" Expression() ")" ";"
 
 }
 
 void ForStatement() :
-{}
 {
-  "for" "(" {
-            inForLoopCondition = true; //SK
-            }
+    Token t;
+}
+{
+  ({
+    t = getToken(1);
+    }
+    "for" "("
+//    {
+//            inForLoopCondition = true; //SK
+//            }
             [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
-            {
-            inForLoopCondition = false; //SK
-            }
-            ")" Block() //Do not permit braceless statements - SK
+//            {
+//            inForLoopCondition = false; //SK
+//            }
+            ")" Block()
+             {
+                jjtThis.setFirstToken(t);
+                jjtThis.setLastToken(rbrace);
+             })#ForStatement //Do not permit braceless statements - SK
 }
 
 void ForInit() :
