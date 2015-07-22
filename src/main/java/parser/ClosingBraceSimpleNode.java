@@ -7,6 +7,9 @@ import java.io.PrintWriter;
  * @author Sophie Koonin
  */
 public class ClosingBraceSimpleNode extends SimpleNode {
+    public ClosingBraceSimpleNode(int i) {
+        super(i);
+    }
     public ClosingBraceSimpleNode(JDCParser p, int i) {
         super(p, i);
     }
