@@ -595,16 +595,21 @@ void MethodDeclaration() :
   ({
     t = getToken(1);
     }( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
-  ResultType() MethodDeclarator() [ "throws" NameList() ]/*@bgen(jjtree)*/
-  {
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-  }
-/*@egen*/
-  { jjtn001.setFirstToken(t);
-    jjtn001.setLastToken(getToken(0));
-    }
-    )/*@bgen(jjtree)*/
+  ResultType() MethodDeclarator() [ "throws" NameList() ]
+
+  (
+    Block()
+  |
+   ";"
+  )/*@bgen(jjtree)*/
+   {
+     jjtree.closeNodeScope(jjtn001, true);
+     jjtc001 = false;
+   }
+/*@egen*/{ jjtn001.setFirstToken(t);
+       jjtn001.setLastToken(getToken(0));
+       }
+       )/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -625,11 +630,6 @@ void MethodDeclaration() :
     }
   }
 /*@egen*/                  )
-  (
-    Block()
-  |
-   ";"
-  )
 }
 
 void MethodDeclarator() :
@@ -1214,7 +1214,7 @@ void IfStatement() :
 /*@egen*/
                               {
                                 jjtn001.setFirstToken(t);
-                                jjtn001.setLastToken(getToken(0));
+                                jjtn001.setLastToken(Token.newToken(73));
                                 })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {

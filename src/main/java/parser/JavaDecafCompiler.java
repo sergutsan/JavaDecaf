@@ -66,6 +66,7 @@ public class JavaDecafCompiler {
         }
         String precompiledClass = precompile(inputFile, ostr);
         long endTime = System.nanoTime();
+
         if (precompiledClass != null) {
             if (parseOnly) { //print success message and finish
                 System.out.println("Parse completed successfully in " + ((endTime - startTime) / 1000000) + " ms");
@@ -102,7 +103,7 @@ public class JavaDecafCompiler {
                 node = parser.CompilationUnit();
                 node.process(ostr, className);
                 ostr.close();
-                parser.printWarnings(); //print any warnings that arised
+                parser.printWarnings(); //print any warnings that arise
                 return className + ".java"; //return the finished filename to signal successful compilation
             } catch (ParseException e) {
                 System.out.println("Errors during compilation: ");

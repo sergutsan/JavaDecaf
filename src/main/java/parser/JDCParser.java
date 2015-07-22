@@ -873,10 +873,22 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         jj_la1[33] = jj_gen;
         ;
       }
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-    jjtn001.setFirstToken(t);
-    jjtn001.setLastToken(getToken(0));
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LBRACE:
+        Block();
+        break;
+      case SEMICOLON:
+        jj_consume_token(SEMICOLON);
+        break;
+      default:
+        jj_la1[34] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+     jjtree.closeNodeScope(jjtn001, true);
+     jjtc001 = false;
+     jjtn001.setFirstToken(t);
+       jjtn001.setLastToken(getToken(0));
     } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -895,18 +907,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jjtc001) {
       jjtree.closeNodeScope(jjtn001, true);
     }
-    }
-    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case LBRACE:
-      Block();
-      break;
-    case SEMICOLON:
-      jj_consume_token(SEMICOLON);
-      break;
-    default:
-      jj_la1[34] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
     }
   }
 
@@ -2485,7 +2485,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
                                 jjtree.closeNodeScope(jjtn001, true);
                                 jjtc001 = false;
                                 jjtn001.setFirstToken(t);
-                                jjtn001.setLastToken(getToken(0));
+                                jjtn001.setLastToken(Token.newToken(73));
     } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
