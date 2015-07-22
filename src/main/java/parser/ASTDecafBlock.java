@@ -46,6 +46,9 @@ public class ASTDecafBlock extends SimpleNode{
     super(id);
   }
 
+    ASTDecafBlock(JDCParser p, int id) {
+        super(p, id);
+    }
     /**
      * Encapsulate a "loose" block of Decaf code and perform any requisite substitutions.
      * @param ostr - output stream writer defined in JDCParser
@@ -67,7 +70,7 @@ public class ASTDecafBlock extends SimpleNode{
       */
 
       while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon
-          t = ASTUtils.checkForSubstitutions(t,prevToken);
+          t = ASTUtils.checkForSubstitutions(t, prevToken);
           print(t, ostr);   //print the token to output stream
           prevToken = t.image;  //assign value of prevToken to the current token's image
           t = t.next;   //assign t to next token
