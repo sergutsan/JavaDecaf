@@ -39,6 +39,8 @@ options {
 PARSER_BEGIN(JDCParser)
 package main.java.parser;
 import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class JDCParser {
     static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)

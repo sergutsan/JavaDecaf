@@ -40,6 +40,8 @@ options {
 PARSER_BEGIN(JDCParser)
 package main.java.parser;
 import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*/ {/*@bgen(jjtree)*/
   protected static JJTJDCParserState jjtree = new JJTJDCParserState();
