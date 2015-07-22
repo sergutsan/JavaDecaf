@@ -930,9 +930,20 @@ void LabeledStatement() :
 }
 
 void Block() :
-{}
 {
-  "{" ( BlockStatement() )* "}"
+    Token t;
+    }
+{
+  "{"
+         ({
+            t = getToken(1); //first word of block
+          } ( BlockStatement() )*
+          {
+            jjtThis.setFirstToken(t);
+            jjtThis.setLastToken(getToken(0));
+            } )#Block
+
+    "}"
 }
 
 void BlockStatement() :
