@@ -1,5 +1,8 @@
 package main.java.parser;
 
+import main.java.ast.ASTUtils;
+import main.java.ast.SimpleNode;
+
 import java.io.PrintWriter;
 
 /**

@@ -1,4 +1,4 @@
-package main.java.parser;
+package main.java.ast;
 
 /* Modified from Transformer example provided in package for JavaCC
  *
@@ -34,6 +34,9 @@ package main.java.parser;
 
 
 /* JJT: 0.2.2 */
+
+import main.java.parser.JDCParser;
+import main.java.parser.Token;
 
 import java.io.*;
 

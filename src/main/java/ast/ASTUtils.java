@@ -1,4 +1,6 @@
-package main.java.parser;
+package main.java.ast;
+
+import main.java.parser.Token;
 
 /**
  * Utilities class for AST nodes.

@@ -35,7 +35,7 @@ options {
   NODE_USES_PARSER = true; //pass parser object into node constructors
   //DEBUG_PARSER = true;
   STATIC = false;
-  OUTPUT_DIRECTORY = "../main/java/parser";
+  OUTPUT_DIRECTORY = "../main/java/ast";
 }
 
 PARSER_BEGIN(JDCParser)
