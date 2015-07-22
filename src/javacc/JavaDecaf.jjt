@@ -30,6 +30,7 @@
 options {
   MULTI = true;
   NODE_DEFAULT_VOID = true;
+  JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
   NODE_USES_PARSER = true; //pass parser object into node constructors
   DEBUG_PARSER = true;
@@ -980,7 +981,7 @@ void LocalVariableDeclaration() :
   [ "final" ] Type() VariableDeclarator() ( "," VariableDeclarator() )*
 }
 
-void EmptyStatement() :
+void EmptyStatement() : //TODO
 {}
 {
   ";"
@@ -997,16 +998,24 @@ void StatementExpression() :
  * The last expansion of this production accepts more than the legal
  * Java expansions for StatementExpression. TODO
  */
-{}
+{ Token t; }
 {
-  PreIncrementExpression()
+ ( {
+     t = getToken(1);
+   }
+
+ (PreIncrementExpression()
 |
   PreDecrementExpression()
 |
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   Assignment()
 |
-  PostfixExpression()
+  PostfixExpression())
+  {
+    jjtThis.setFirstToken(t);
+    jjtThis.setLastToken(getToken(0));
+  }) #StatementExpression //Create node
 }
 
 void SwitchStatement() :
