@@ -14,13 +14,5 @@ class ASTIfStatement extends SimpleNode {
     super(p, id);
   }
 
-  public void process(PrintWriter ostr){
-    SimpleNode child;
-    for (int i = 0; i<jjtGetNumChildren(); i++) {
-      child = (SimpleNode) jjtGetChild(i);
-      child.process(ostr);
-    }
-
-  }
 }
 /* JavaCC - OriginalChecksum=e4047c468b223627eae64966f96c3139 (do not edit this line) */
