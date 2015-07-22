@@ -45,9 +45,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class JDCParser {
-    static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
-    static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
-    static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
     private Token rbrace = Token.newToken(73, "}");
 
@@ -376,14 +373,19 @@ void ImportDeclaration() :
 }
 
 void TypeDeclaration() :
-{}
+{ Token t; }
 {
+  ( { t = getToken(1); }
   LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )
   ClassDeclaration()
 |
   InterfaceDeclaration()
 |
   ";"
+  {
+    jjtThis.setFirstToken(t);
+    jjtThis.setLastToken(getToken(0));
+    })#TypeDeclaration
 }
 
 
