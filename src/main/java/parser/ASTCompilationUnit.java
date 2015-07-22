@@ -51,7 +51,7 @@ public class ASTCompilationUnit extends SimpleNode {
 
   public void process (PrintWriter ostr, String className) {
     Token t = begin;
-    ASTDecafBlock child;
+    SimpleNode child;
       /*
        * Children will be null (therefore 0) if the code is straight Java.
        * Otherwise there should be one child for each change to make
