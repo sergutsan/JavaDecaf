@@ -35,6 +35,7 @@ options {
   ERROR_REPORTING = true;
                            //pass parser object into node constructors
   DEBUG_PARSER = true;
+  STATIC = false;
   OUTPUT_DIRECTORY = "../main/java/parser";
 }
 
@@ -45,7 +46,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*/ {/*@bgen(jjtree)*/
-  protected static JJTJDCParserState jjtree = new JJTJDCParserState();
+  protected JJTJDCParserState jjtree = new JJTJDCParserState();
 
 /*@egen*/
     static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
@@ -339,7 +340,7 @@ TOKEN : /* OPERATORS */
  */
 ASTCompilationUnit CompilationUnit()                  :
 {/*@bgen(jjtree) CompilationUnit */
-  ASTCompilationUnit jjtn000 = new ASTCompilationUnit(null, JJTCOMPILATIONUNIT);
+  ASTCompilationUnit jjtn000 = new ASTCompilationUnit(this, JJTCOMPILATIONUNIT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/}
@@ -1036,7 +1037,7 @@ void StatementExpression() :
 { Token t; }
 {/*@bgen(jjtree) StatementExpression */
  {
-   ASTStatementExpression jjtn001 = new ASTStatementExpression(null, JJTSTATEMENTEXPRESSION);
+   ASTStatementExpression jjtn001 = new ASTStatementExpression(this, JJTSTATEMENTEXPRESSION);
    boolean jjtc001 = true;
    jjtree.openNodeScope(jjtn001);
  }
@@ -1113,7 +1114,7 @@ void IfStatement() :
     }
 {/*@bgen(jjtree) IfStatement */
   {
-    ASTIfStatement jjtn001 = new ASTIfStatement(null, JJTIFSTATEMENT);
+    ASTIfStatement jjtn001 = new ASTIfStatement(this, JJTIFSTATEMENT);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
@@ -1259,7 +1260,7 @@ void DecafBlock() :
 {Token t;}
 {/*@bgen(jjtree) DecafBlock */
     {
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(null, JJTDECAFBLOCK);
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }
@@ -1308,7 +1309,7 @@ void DecafMethod() :
 {Token t;}
 {/*@bgen(jjtree) DecafBlock */
     {
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(null, JJTDECAFBLOCK);
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }

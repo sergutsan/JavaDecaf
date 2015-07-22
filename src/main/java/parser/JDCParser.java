@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
-  protected static JJTJDCParserState jjtree = new JJTJDCParserState();static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
+  protected JJTJDCParserState jjtree = new JJTJDCParserState();static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
@@ -71,11 +71,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Edited by Sophie Koonin
  */
-  static final public ASTCompilationUnit CompilationUnit() throws ParseException {
+  final public ASTCompilationUnit CompilationUnit() throws ParseException {
     trace_call("CompilationUnit");
     try {
  /*@bgen(jjtree) CompilationUnit */
-  ASTCompilationUnit jjtn000 = new ASTCompilationUnit(null, JJTCOMPILATIONUNIT);
+  ASTCompilationUnit jjtn000 = new ASTCompilationUnit(this, JJTCOMPILATIONUNIT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
       try {
@@ -171,7 +171,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PackageDeclaration() throws ParseException {
+  final public void PackageDeclaration() throws ParseException {
     trace_call("PackageDeclaration");
     try {
       jj_consume_token(PACKAGE);
@@ -182,7 +182,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ImportDeclaration() throws ParseException {
+  final public void ImportDeclaration() throws ParseException {
     trace_call("ImportDeclaration");
     try {
       jj_consume_token(IMPORT);
@@ -202,7 +202,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void TypeDeclaration() throws ParseException {
+  final public void TypeDeclaration() throws ParseException {
     trace_call("TypeDeclaration");
     try {
       if (jj_2_2(2147483647)) {
@@ -231,7 +231,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Declaration syntax follows.
  */
-  static final public void ClassDeclaration() throws ParseException {
+  final public void ClassDeclaration() throws ParseException {
     trace_call("ClassDeclaration");
     try {
       label_4:
@@ -268,7 +268,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void UnmodifiedClassDeclaration() throws ParseException {
+  final public void UnmodifiedClassDeclaration() throws ParseException {
     trace_call("UnmodifiedClassDeclaration");
     try {
       jj_consume_token(CLASS);
@@ -298,7 +298,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ClassBody() throws ParseException {
+  final public void ClassBody() throws ParseException {
     trace_call("ClassBody");
     try {
       jj_consume_token(LBRACE);
@@ -342,7 +342,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void NestedClassDeclaration() throws ParseException {
+  final public void NestedClassDeclaration() throws ParseException {
     trace_call("NestedClassDeclaration");
     try {
       label_6:
@@ -391,7 +391,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ClassBodyDeclaration() throws ParseException {
+  final public void ClassBodyDeclaration() throws ParseException {
     trace_call("ClassBodyDeclaration");
     try {
       if (jj_2_3(2)) {
@@ -436,7 +436,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
 // This production is to determine lookahead only.
-  static final public void MethodDeclarationLookahead() throws ParseException {
+  final public void MethodDeclarationLookahead() throws ParseException {
     trace_call("MethodDeclarationLookahead");
     try {
       label_7:
@@ -497,7 +497,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void InterfaceDeclaration() throws ParseException {
+  final public void InterfaceDeclaration() throws ParseException {
     trace_call("InterfaceDeclaration");
     try {
       label_8:
@@ -530,7 +530,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void NestedInterfaceDeclaration() throws ParseException {
+  final public void NestedInterfaceDeclaration() throws ParseException {
     trace_call("NestedInterfaceDeclaration");
     try {
       label_9:
@@ -579,7 +579,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void UnmodifiedInterfaceDeclaration() throws ParseException {
+  final public void UnmodifiedInterfaceDeclaration() throws ParseException {
     trace_call("UnmodifiedInterfaceDeclaration");
     try {
       jj_consume_token(INTERFACE);
@@ -633,7 +633,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void InterfaceMemberDeclaration() throws ParseException {
+  final public void InterfaceMemberDeclaration() throws ParseException {
     trace_call("InterfaceMemberDeclaration");
     try {
       if (jj_2_8(2147483647)) {
@@ -673,7 +673,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void FieldDeclaration() throws ParseException {
+  final public void FieldDeclaration() throws ParseException {
     trace_call("FieldDeclaration");
     try {
       label_11:
@@ -741,7 +741,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void VariableDeclarator() throws ParseException {
+  final public void VariableDeclarator() throws ParseException {
     trace_call("VariableDeclarator");
     try {
       VariableDeclaratorId();
@@ -759,7 +759,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void VariableDeclaratorId() throws ParseException {
+  final public void VariableDeclaratorId() throws ParseException {
     trace_call("VariableDeclaratorId");
     try {
       jj_consume_token(IDENTIFIER);
@@ -782,7 +782,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void VariableInitializer() throws ParseException {
+  final public void VariableInitializer() throws ParseException {
     trace_call("VariableInitializer");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -819,7 +819,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ArrayInitializer() throws ParseException {
+  final public void ArrayInitializer() throws ParseException {
     trace_call("ArrayInitializer");
     try {
       jj_consume_token(LBRACE);
@@ -873,7 +873,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void MethodDeclaration() throws ParseException {
+  final public void MethodDeclaration() throws ParseException {
     trace_call("MethodDeclaration");
     try {
       label_15:
@@ -952,7 +952,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void MethodDeclarator() throws ParseException {
+  final public void MethodDeclarator() throws ParseException {
     trace_call("MethodDeclarator");
     try {
       jj_consume_token(IDENTIFIER);
@@ -977,7 +977,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void FormalParameters() throws ParseException {
+  final public void FormalParameters() throws ParseException {
     trace_call("FormalParameters");
     try {
       jj_consume_token(LPAREN);
@@ -1017,7 +1017,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void FormalParameter() throws ParseException {
+  final public void FormalParameter() throws ParseException {
     trace_call("FormalParameter");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1035,7 +1035,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ConstructorDeclaration() throws ParseException {
+  final public void ConstructorDeclaration() throws ParseException {
     trace_call("ConstructorDeclaration");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1134,7 +1134,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ExplicitConstructorInvocation() throws ParseException {
+  final public void ExplicitConstructorInvocation() throws ParseException {
     trace_call("ExplicitConstructorInvocation");
     try {
       if (jj_2_14(2147483647)) {
@@ -1176,7 +1176,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void Initializer() throws ParseException {
+  final public void Initializer() throws ParseException {
     trace_call("Initializer");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1196,7 +1196,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Type, name and expression syntax follows.
  */
-  static final public void Type() throws ParseException {
+  final public void Type() throws ParseException {
     trace_call("Type");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1236,7 +1236,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PrimitiveType() throws ParseException {
+  final public void PrimitiveType() throws ParseException {
     trace_call("PrimitiveType");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1274,7 +1274,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ResultType() throws ParseException {
+  final public void ResultType() throws ParseException {
     trace_call("ResultType");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1302,7 +1302,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void Name() throws ParseException {
+  final public void Name() throws ParseException {
     trace_call("Name");
     try {
       jj_consume_token(IDENTIFIER);
@@ -1321,7 +1321,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void NameList() throws ParseException {
+  final public void NameList() throws ParseException {
     trace_call("NameList");
     try {
       Name();
@@ -1346,7 +1346,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Expression syntax follows.
  */
-  static final public void Expression() throws ParseException {
+  final public void Expression() throws ParseException {
     trace_call("Expression");
     try {
       if (jj_2_16(2147483647)) {
@@ -1384,7 +1384,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void Assignment() throws ParseException {
+  final public void Assignment() throws ParseException {
     trace_call("Assignment");
     try {
       PrimaryExpression();
@@ -1395,7 +1395,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void AssignmentOperator() throws ParseException {
+  final public void AssignmentOperator() throws ParseException {
     trace_call("AssignmentOperator");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1450,7 +1450,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ConditionalExpression() throws ParseException {
+  final public void ConditionalExpression() throws ParseException {
     trace_call("ConditionalExpression");
     try {
       ConditionalOrExpression();
@@ -1470,7 +1470,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ConditionalOrExpression() throws ParseException {
+  final public void ConditionalOrExpression() throws ParseException {
     trace_call("ConditionalOrExpression");
     try {
       ConditionalAndExpression();
@@ -1492,7 +1492,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ConditionalAndExpression() throws ParseException {
+  final public void ConditionalAndExpression() throws ParseException {
     trace_call("ConditionalAndExpression");
     try {
       InclusiveOrExpression();
@@ -1514,7 +1514,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void InclusiveOrExpression() throws ParseException {
+  final public void InclusiveOrExpression() throws ParseException {
     trace_call("InclusiveOrExpression");
     try {
       ExclusiveOrExpression();
@@ -1540,7 +1540,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ExclusiveOrExpression() throws ParseException {
+  final public void ExclusiveOrExpression() throws ParseException {
     trace_call("ExclusiveOrExpression");
     try {
       AndExpression();
@@ -1562,7 +1562,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void AndExpression() throws ParseException {
+  final public void AndExpression() throws ParseException {
     trace_call("AndExpression");
     try {
       EqualityExpression();
@@ -1588,7 +1588,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void EqualityExpression() throws ParseException {
+  final public void EqualityExpression() throws ParseException {
     trace_call("EqualityExpression");
     try {
       InstanceOfExpression();
@@ -1622,7 +1622,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void InstanceOfExpression() throws ParseException {
+  final public void InstanceOfExpression() throws ParseException {
     trace_call("InstanceOfExpression");
     try {
       RelationalExpression();
@@ -1640,7 +1640,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void RelationalExpression() throws ParseException {
+  final public void RelationalExpression() throws ParseException {
     trace_call("RelationalExpression");
     try {
       ShiftExpression();
@@ -1682,7 +1682,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ShiftExpression() throws ParseException {
+  final public void ShiftExpression() throws ParseException {
     trace_call("ShiftExpression");
     try {
       AdditiveExpression();
@@ -1720,7 +1720,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void AdditiveExpression() throws ParseException {
+  final public void AdditiveExpression() throws ParseException {
     trace_call("AdditiveExpression");
     try {
       MultiplicativeExpression();
@@ -1754,7 +1754,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void MultiplicativeExpression() throws ParseException {
+  final public void MultiplicativeExpression() throws ParseException {
     trace_call("MultiplicativeExpression");
     try {
       UnaryExpression();
@@ -1792,7 +1792,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void UnaryExpression() throws ParseException {
+  final public void UnaryExpression() throws ParseException {
     trace_call("UnaryExpression");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1844,7 +1844,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PreIncrementExpression() throws ParseException {
+  final public void PreIncrementExpression() throws ParseException {
     trace_call("PreIncrementExpression");
     try {
       jj_consume_token(INCR);
@@ -1854,7 +1854,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PreDecrementExpression() throws ParseException {
+  final public void PreDecrementExpression() throws ParseException {
     trace_call("PreDecrementExpression");
     try {
       jj_consume_token(DECR);
@@ -1864,7 +1864,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void UnaryExpressionNotPlusMinus() throws ParseException {
+  final public void UnaryExpressionNotPlusMinus() throws ParseException {
     trace_call("UnaryExpressionNotPlusMinus");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1919,7 +1919,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 // This production is to determine lookahead only.  The LOOKAHEAD specifications
 // below are not used, but they are there just to indicate that we know about
 // this.
-  static final public void CastLookahead() throws ParseException {
+  final public void CastLookahead() throws ParseException {
     trace_call("CastLookahead");
     try {
       if (jj_2_18(2)) {
@@ -1984,7 +1984,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PostfixExpression() throws ParseException {
+  final public void PostfixExpression() throws ParseException {
     trace_call("PostfixExpression");
     try {
       PrimaryExpression();
@@ -2013,7 +2013,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void CastExpression() throws ParseException {
+  final public void CastExpression() throws ParseException {
     trace_call("CastExpression");
     try {
       if (jj_2_20(2147483647)) {
@@ -2035,7 +2035,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PrimaryExpression() throws ParseException {
+  final public void PrimaryExpression() throws ParseException {
     trace_call("PrimaryExpression");
     try {
       PrimaryPrefix();
@@ -2053,7 +2053,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PrimaryPrefix() throws ParseException {
+  final public void PrimaryPrefix() throws ParseException {
     trace_call("PrimaryPrefix");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2095,7 +2095,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void PrimarySuffix() throws ParseException {
+  final public void PrimarySuffix() throws ParseException {
     trace_call("PrimarySuffix");
     try {
       if (jj_2_23(2)) {
@@ -2132,7 +2132,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void Literal() throws ParseException {
+  final public void Literal() throws ParseException {
     trace_call("Literal");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2165,7 +2165,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void BooleanLiteral() throws ParseException {
+  final public void BooleanLiteral() throws ParseException {
     trace_call("BooleanLiteral");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2185,7 +2185,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void NullLiteral() throws ParseException {
+  final public void NullLiteral() throws ParseException {
     trace_call("NullLiteral");
     try {
       jj_consume_token(NULL);
@@ -2194,7 +2194,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void Arguments() throws ParseException {
+  final public void Arguments() throws ParseException {
     trace_call("Arguments");
     try {
       jj_consume_token(LPAREN);
@@ -2229,7 +2229,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ArgumentList() throws ParseException {
+  final public void ArgumentList() throws ParseException {
     trace_call("ArgumentList");
     try {
       Expression();
@@ -2251,7 +2251,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void AllocationExpression() throws ParseException {
+  final public void AllocationExpression() throws ParseException {
     trace_call("AllocationExpression");
     try {
       if (jj_2_26(2)) {
@@ -2315,7 +2315,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
  * The second LOOKAHEAD specification below is to parse to PrimarySuffix
  * if there is an expression between the "[...]".
  */
-  static final public void ArrayDimensions() throws ParseException {
+  final public void ArrayDimensions() throws ParseException {
     trace_call("ArrayDimensions");
     try {
       label_34:
@@ -2347,7 +2347,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Statement syntax follows.
  */
-  static final public void Statement() throws ParseException {
+  final public void Statement() throws ParseException {
     trace_call("Statement");
     try {
       if (jj_2_29(2)) {
@@ -2421,7 +2421,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void LabeledStatement() throws ParseException {
+  final public void LabeledStatement() throws ParseException {
     trace_call("LabeledStatement");
     try {
       jj_consume_token(IDENTIFIER);
@@ -2432,7 +2432,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void Block() throws ParseException {
+  final public void Block() throws ParseException {
     trace_call("Block");
     try {
       jj_consume_token(LBRACE);
@@ -2491,7 +2491,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void BlockStatement() throws ParseException {
+  final public void BlockStatement() throws ParseException {
     trace_call("BlockStatement");
     try {
       if (jj_2_30(2147483647)) {
@@ -2545,7 +2545,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void LocalVariableDeclaration() throws ParseException {
+  final public void LocalVariableDeclaration() throws ParseException {
     trace_call("LocalVariableDeclaration");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2576,7 +2576,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void EmptyStatement() throws ParseException {
+  final public void EmptyStatement() throws ParseException {
     trace_call("EmptyStatement");
     try {
       jj_consume_token(SEMICOLON);
@@ -2590,11 +2590,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void StatementExpression() throws ParseException {
+  final public void StatementExpression() throws ParseException {
     trace_call("StatementExpression");
     try {
   Token t;
-   ASTStatementExpression jjtn001 = new ASTStatementExpression(null, JJTSTATEMENTEXPRESSION);
+   ASTStatementExpression jjtn001 = new ASTStatementExpression(this, JJTSTATEMENTEXPRESSION);
    boolean jjtc001 = true;
    jjtree.openNodeScope(jjtn001);
       try {
@@ -2661,7 +2661,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void SwitchStatement() throws ParseException {
+  final public void SwitchStatement() throws ParseException {
     trace_call("SwitchStatement");
     try {
       jj_consume_token(SWITCH);
@@ -2737,7 +2737,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void SwitchLabel() throws ParseException {
+  final public void SwitchLabel() throws ParseException {
     trace_call("SwitchLabel");
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2760,10 +2760,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void IfStatement() throws ParseException {
+  final public void IfStatement() throws ParseException {
     trace_call("IfStatement");
     try {
-    ASTIfStatement jjtn001 = new ASTIfStatement(null, JJTIFSTATEMENT);
+    ASTIfStatement jjtn001 = new ASTIfStatement(this, JJTIFSTATEMENT);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
       try {
@@ -2807,7 +2807,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void WhileStatement() throws ParseException {
+  final public void WhileStatement() throws ParseException {
     trace_call("WhileStatement");
     try {
     inLoopCondition = true;
@@ -2823,7 +2823,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void DoStatement() throws ParseException {
+  final public void DoStatement() throws ParseException {
     trace_call("DoStatement");
     try {
       jj_consume_token(DO);
@@ -2843,7 +2843,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ForStatement() throws ParseException {
+  final public void ForStatement() throws ParseException {
     trace_call("ForStatement");
     try {
       jj_consume_token(FOR);
@@ -2937,7 +2937,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ForInit() throws ParseException {
+  final public void ForInit() throws ParseException {
     trace_call("ForInit");
     try {
       if (jj_2_32(2147483647)) {
@@ -2971,7 +2971,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void StatementExpressionList() throws ParseException {
+  final public void StatementExpressionList() throws ParseException {
     trace_call("StatementExpressionList");
     try {
       StatementExpression();
@@ -2993,7 +2993,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ForUpdate() throws ParseException {
+  final public void ForUpdate() throws ParseException {
     trace_call("ForUpdate");
     try {
       StatementExpressionList();
@@ -3002,7 +3002,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void BreakStatement() throws ParseException {
+  final public void BreakStatement() throws ParseException {
     trace_call("BreakStatement");
     try {
       jj_consume_token(BREAK);
@@ -3020,7 +3020,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ContinueStatement() throws ParseException {
+  final public void ContinueStatement() throws ParseException {
     trace_call("ContinueStatement");
     try {
       jj_consume_token(CONTINUE);
@@ -3038,7 +3038,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ReturnStatement() throws ParseException {
+  final public void ReturnStatement() throws ParseException {
     trace_call("ReturnStatement");
     try {
       jj_consume_token(RETURN);
@@ -3073,7 +3073,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void ThrowStatement() throws ParseException {
+  final public void ThrowStatement() throws ParseException {
     trace_call("ThrowStatement");
     try {
       jj_consume_token(THROW);
@@ -3084,7 +3084,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void SynchronizedStatement() throws ParseException {
+  final public void SynchronizedStatement() throws ParseException {
     trace_call("SynchronizedStatement");
     try {
       jj_consume_token(SYNCHRONIZED);
@@ -3097,7 +3097,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static final public void TryStatement() throws ParseException {
+  final public void TryStatement() throws ParseException {
     trace_call("TryStatement");
     try {
       jj_consume_token(TRY);
@@ -3139,11 +3139,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Unencapsulated Decaf floating code or methods
  */
-  static final public void DecafBlock() throws ParseException {
+  final public void DecafBlock() throws ParseException {
     trace_call("DecafBlock");
     try {
  Token t;
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(null, JJTDECAFBLOCK);
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
       try {
@@ -3189,11 +3189,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 * Method that comes after the "floating" code in a Decaf file.
 * Prevents being confused for Block() and Decaf method calls not being substituted
 */
-  static final public void DecafMethod() throws ParseException {
+  final public void DecafMethod() throws ParseException {
     trace_call("DecafMethod");
     try {
  Token t;
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(null, JJTDECAFBLOCK);
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
       try {
@@ -3246,244 +3246,244 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static private boolean jj_2_1(int xla) {
+  private boolean jj_2_1(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_1(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(0, xla); }
   }
 
-  static private boolean jj_2_2(int xla) {
+  private boolean jj_2_2(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_2(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(1, xla); }
   }
 
-  static private boolean jj_2_3(int xla) {
+  private boolean jj_2_3(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_3(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(2, xla); }
   }
 
-  static private boolean jj_2_4(int xla) {
+  private boolean jj_2_4(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_4(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(3, xla); }
   }
 
-  static private boolean jj_2_5(int xla) {
+  private boolean jj_2_5(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_5(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(4, xla); }
   }
 
-  static private boolean jj_2_6(int xla) {
+  private boolean jj_2_6(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_6(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(5, xla); }
   }
 
-  static private boolean jj_2_7(int xla) {
+  private boolean jj_2_7(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_7(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(6, xla); }
   }
 
-  static private boolean jj_2_8(int xla) {
+  private boolean jj_2_8(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_8(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(7, xla); }
   }
 
-  static private boolean jj_2_9(int xla) {
+  private boolean jj_2_9(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_9(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(8, xla); }
   }
 
-  static private boolean jj_2_10(int xla) {
+  private boolean jj_2_10(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_10(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(9, xla); }
   }
 
-  static private boolean jj_2_11(int xla) {
+  private boolean jj_2_11(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_11(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(10, xla); }
   }
 
-  static private boolean jj_2_12(int xla) {
+  private boolean jj_2_12(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_12(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(11, xla); }
   }
 
-  static private boolean jj_2_13(int xla) {
+  private boolean jj_2_13(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_13(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(12, xla); }
   }
 
-  static private boolean jj_2_14(int xla) {
+  private boolean jj_2_14(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_14(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(13, xla); }
   }
 
-  static private boolean jj_2_15(int xla) {
+  private boolean jj_2_15(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_15(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(14, xla); }
   }
 
-  static private boolean jj_2_16(int xla) {
+  private boolean jj_2_16(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_16(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(15, xla); }
   }
 
-  static private boolean jj_2_17(int xla) {
+  private boolean jj_2_17(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_17(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(16, xla); }
   }
 
-  static private boolean jj_2_18(int xla) {
+  private boolean jj_2_18(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_18(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(17, xla); }
   }
 
-  static private boolean jj_2_19(int xla) {
+  private boolean jj_2_19(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_19(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(18, xla); }
   }
 
-  static private boolean jj_2_20(int xla) {
+  private boolean jj_2_20(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_20(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(19, xla); }
   }
 
-  static private boolean jj_2_21(int xla) {
+  private boolean jj_2_21(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_21(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(20, xla); }
   }
 
-  static private boolean jj_2_22(int xla) {
+  private boolean jj_2_22(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_22(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(21, xla); }
   }
 
-  static private boolean jj_2_23(int xla) {
+  private boolean jj_2_23(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_23(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(22, xla); }
   }
 
-  static private boolean jj_2_24(int xla) {
+  private boolean jj_2_24(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_24(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(23, xla); }
   }
 
-  static private boolean jj_2_25(int xla) {
+  private boolean jj_2_25(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_25(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(24, xla); }
   }
 
-  static private boolean jj_2_26(int xla) {
+  private boolean jj_2_26(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_26(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(25, xla); }
   }
 
-  static private boolean jj_2_27(int xla) {
+  private boolean jj_2_27(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_27(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(26, xla); }
   }
 
-  static private boolean jj_2_28(int xla) {
+  private boolean jj_2_28(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_28(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(27, xla); }
   }
 
-  static private boolean jj_2_29(int xla) {
+  private boolean jj_2_29(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_29(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(28, xla); }
   }
 
-  static private boolean jj_2_30(int xla) {
+  private boolean jj_2_30(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_30(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(29, xla); }
   }
 
-  static private boolean jj_2_31(int xla) {
+  private boolean jj_2_31(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_31(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(30, xla); }
   }
 
-  static private boolean jj_2_32(int xla) {
+  private boolean jj_2_32(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_32(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(31, xla); }
   }
 
-  static private boolean jj_2_33(int xla) {
+  private boolean jj_2_33(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_33(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(32, xla); }
   }
 
-  static private boolean jj_3R_172() {
+  private boolean jj_3R_172() {
     if (jj_scan_token(DECR)) return true;
     if (jj_3R_55()) return true;
     return false;
   }
 
-  static private boolean jj_3R_238() {
+  private boolean jj_3R_238() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(94)) {
@@ -3494,7 +3494,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_240() {
+  private boolean jj_3R_240() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(96)) {
@@ -3508,18 +3508,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_171() {
+  private boolean jj_3R_171() {
     if (jj_scan_token(INCR)) return true;
     if (jj_3R_55()) return true;
     return false;
   }
 
-  static private boolean jj_3R_237() {
+  private boolean jj_3R_237() {
     if (jj_3R_239()) return true;
     return false;
   }
 
-  static private boolean jj_3R_229() {
+  private boolean jj_3R_229() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(102)) {
@@ -3533,17 +3533,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_236() {
+  private boolean jj_3R_236() {
     if (jj_3R_172()) return true;
     return false;
   }
 
-  static private boolean jj_3R_235() {
+  private boolean jj_3R_235() {
     if (jj_3R_171()) return true;
     return false;
   }
 
-  static private boolean jj_3R_228() {
+  private boolean jj_3R_228() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_234()) {
@@ -3559,7 +3559,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_234() {
+  private boolean jj_3R_234() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(94)) {
@@ -3570,7 +3570,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_223() {
+  private boolean jj_3R_223() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(81)) {
@@ -3587,13 +3587,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_217() {
+  private boolean jj_3R_217() {
     if (jj_scan_token(INSTANCEOF)) return true;
     if (jj_3R_64()) return true;
     return false;
   }
 
-  static private boolean jj_3R_222() {
+  private boolean jj_3R_222() {
     if (jj_3R_228()) return true;
     Token xsp;
     while (true) {
@@ -3603,7 +3603,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_202() {
+  private boolean jj_3R_202() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(86)) {
@@ -3614,7 +3614,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_216() {
+  private boolean jj_3R_216() {
     if (jj_3R_222()) return true;
     Token xsp;
     while (true) {
@@ -3624,7 +3624,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_201() {
+  private boolean jj_3R_201() {
     if (jj_3R_216()) return true;
     Token xsp;
     while (true) {
@@ -3634,13 +3634,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_195() {
+  private boolean jj_3R_195() {
     if (jj_scan_token(BIT_AND)) return true;
     if (jj_3R_183()) return true;
     return false;
   }
 
-  static private boolean jj_3R_194() {
+  private boolean jj_3R_194() {
     if (jj_3R_201()) return true;
     Token xsp;
     while (true) {
@@ -3650,7 +3650,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_187() {
+  private boolean jj_3R_187() {
     if (jj_3R_194()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -3658,19 +3658,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_188() {
+  private boolean jj_3R_188() {
     if (jj_scan_token(XOR)) return true;
     if (jj_3R_177()) return true;
     return false;
   }
 
-  static private boolean jj_3R_185() {
+  private boolean jj_3R_185() {
     if (jj_scan_token(BIT_OR)) return true;
     if (jj_3R_170()) return true;
     return false;
   }
 
-  static private boolean jj_3R_183() {
+  private boolean jj_3R_183() {
     if (jj_3R_187()) return true;
     Token xsp;
     while (true) {
@@ -3680,19 +3680,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_181() {
+  private boolean jj_3R_181() {
     if (jj_scan_token(SC_AND)) return true;
     if (jj_3R_159()) return true;
     return false;
   }
 
-  static private boolean jj_3R_175() {
+  private boolean jj_3R_175() {
     if (jj_scan_token(SC_OR)) return true;
     if (jj_3R_138()) return true;
     return false;
   }
 
-  static private boolean jj_3R_177() {
+  private boolean jj_3R_177() {
     if (jj_3R_183()) return true;
     Token xsp;
     while (true) {
@@ -3702,7 +3702,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_167() {
+  private boolean jj_3R_167() {
     if (jj_scan_token(HOOK)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(COLON)) return true;
@@ -3710,7 +3710,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_170() {
+  private boolean jj_3R_170() {
     if (jj_3R_177()) return true;
     Token xsp;
     while (true) {
@@ -3720,7 +3720,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_159() {
+  private boolean jj_3R_159() {
     if (jj_3R_170()) return true;
     Token xsp;
     while (true) {
@@ -3730,7 +3730,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_138() {
+  private boolean jj_3R_138() {
     if (jj_3R_159()) return true;
     Token xsp;
     while (true) {
@@ -3740,7 +3740,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_114() {
+  private boolean jj_3R_114() {
     if (jj_3R_138()) return true;
     Token xsp;
     while (true) {
@@ -3750,7 +3750,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_105() {
+  private boolean jj_3R_105() {
     if (jj_3R_114()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -3758,7 +3758,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_57() {
+  private boolean jj_3R_57() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_76()) {
@@ -3798,35 +3798,35 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_76() {
+  private boolean jj_3R_76() {
     if (jj_scan_token(ASSIGN)) return true;
     return false;
   }
 
-  static private boolean jj_3_16() {
+  private boolean jj_3_16() {
     if (jj_3R_55()) return true;
     if (jj_3R_57()) return true;
     return false;
   }
 
-  static private boolean jj_3R_104() {
+  private boolean jj_3R_104() {
     if (jj_3R_55()) return true;
     if (jj_3R_57()) return true;
     if (jj_3R_62()) return true;
     return false;
   }
 
-  static private boolean jj_3R_84() {
+  private boolean jj_3R_84() {
     if (jj_3R_105()) return true;
     return false;
   }
 
-  static private boolean jj_3R_83() {
+  private boolean jj_3R_83() {
     if (jj_3R_104()) return true;
     return false;
   }
 
-  static private boolean jj_3R_62() {
+  private boolean jj_3R_62() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_83()) {
@@ -3836,13 +3836,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_227() {
+  private boolean jj_3R_227() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_49()) return true;
     return false;
   }
 
-  static private boolean jj_3R_220() {
+  private boolean jj_3R_220() {
     if (jj_3R_49()) return true;
     Token xsp;
     while (true) {
@@ -3852,13 +3852,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_15() {
+  private boolean jj_3_15() {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  static private boolean jj_3R_49() {
+  private boolean jj_3R_49() {
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
     while (true) {
@@ -3868,18 +3868,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_87() {
+  private boolean jj_3R_87() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3R_95() {
+  private boolean jj_3R_95() {
     if (jj_3R_64()) return true;
     return false;
   }
 
-  static private boolean jj_3R_69() {
+  private boolean jj_3R_69() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(56)) {
@@ -3889,12 +3889,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_86() {
+  private boolean jj_3R_86() {
     if (jj_3R_49()) return true;
     return false;
   }
 
-  static private boolean jj_3R_59() {
+  private boolean jj_3R_59() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(10)) {
@@ -3922,18 +3922,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_207() {
+  private boolean jj_3R_207() {
     if (jj_scan_token(THROWS)) return true;
     if (jj_3R_220()) return true;
     return false;
   }
 
-  static private boolean jj_3R_85() {
+  private boolean jj_3R_85() {
     if (jj_3R_59()) return true;
     return false;
   }
 
-  static private boolean jj_3R_64() {
+  private boolean jj_3R_64() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_85()) {
@@ -3947,14 +3947,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_14() {
+  private boolean jj_3_14() {
     if (jj_scan_token(THIS)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_45() {
+  private boolean jj_3R_45() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) jj_scanpos = xsp;
@@ -3962,18 +3962,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_12() {
+  private boolean jj_3_12() {
     if (jj_3R_54()) return true;
     return false;
   }
 
-  static private boolean jj_3_13() {
+  private boolean jj_3_13() {
     if (jj_3R_55()) return true;
     if (jj_scan_token(DOT)) return true;
     return false;
   }
 
-  static private boolean jj_3R_73() {
+  private boolean jj_3R_73() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_13()) jj_scanpos = xsp;
@@ -3983,13 +3983,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_226() {
+  private boolean jj_3R_226() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_225()) return true;
     return false;
   }
 
-  static private boolean jj_3R_54() {
+  private boolean jj_3R_54() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_72()) {
@@ -3999,30 +3999,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_72() {
+  private boolean jj_3R_72() {
     if (jj_scan_token(THIS)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_209() {
+  private boolean jj_3R_209() {
     if (jj_3R_65()) return true;
     return false;
   }
 
-  static private boolean jj_3R_208() {
+  private boolean jj_3R_208() {
     if (jj_3R_54()) return true;
     return false;
   }
 
-  static private boolean jj_3R_221() {
+  private boolean jj_3R_221() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3R_205() {
+  private boolean jj_3R_205() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(43)) {
@@ -4035,13 +4035,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_212() {
+  private boolean jj_3R_212() {
     if (jj_scan_token(THROWS)) return true;
     if (jj_3R_220()) return true;
     return false;
   }
 
-  static private boolean jj_3R_198() {
+  private boolean jj_3R_198() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_205()) jj_scanpos = xsp;
@@ -4060,13 +4060,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_160() {
+  private boolean jj_3R_160() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3R_219() {
+  private boolean jj_3R_219() {
     if (jj_3R_225()) return true;
     Token xsp;
     while (true) {
@@ -4076,7 +4076,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_225() {
+  private boolean jj_3R_225() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(25)) jj_scanpos = xsp;
@@ -4085,13 +4085,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_11() {
+  private boolean jj_3_11() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_53()) return true;
     return false;
   }
 
-  static private boolean jj_3R_206() {
+  private boolean jj_3R_206() {
     if (jj_scan_token(LPAREN)) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4100,7 +4100,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_211() {
+  private boolean jj_3R_211() {
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_3R_206()) return true;
     Token xsp;
@@ -4111,12 +4111,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_213() {
+  private boolean jj_3R_213() {
     if (jj_3R_67()) return true;
     return false;
   }
 
-  static private boolean jj_3R_210() {
+  private boolean jj_3R_210() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(43)) {
@@ -4144,7 +4144,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_176() {
+  private boolean jj_3R_176() {
     if (jj_3R_53()) return true;
     Token xsp;
     while (true) {
@@ -4154,7 +4154,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_199() {
+  private boolean jj_3R_199() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4172,19 +4172,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_140() {
+  private boolean jj_3R_140() {
     if (jj_scan_token(ASSIGN)) return true;
     if (jj_3R_53()) return true;
     return false;
   }
 
-  static private boolean jj_3R_215() {
+  private boolean jj_3R_215() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_115()) return true;
     return false;
   }
 
-  static private boolean jj_3R_96() {
+  private boolean jj_3R_96() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4195,12 +4195,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_71() {
+  private boolean jj_3R_71() {
     if (jj_3R_62()) return true;
     return false;
   }
 
-  static private boolean jj_3R_53() {
+  private boolean jj_3R_53() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_70()) {
@@ -4210,12 +4210,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_70() {
+  private boolean jj_3R_70() {
     if (jj_3R_96()) return true;
     return false;
   }
 
-  static private boolean jj_3R_139() {
+  private boolean jj_3R_139() {
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
     while (true) {
@@ -4225,7 +4225,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_115() {
+  private boolean jj_3R_115() {
     if (jj_3R_139()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4233,18 +4233,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_134() {
+  private boolean jj_3R_134() {
     if (jj_scan_token(EXTENDS)) return true;
     if (jj_3R_220()) return true;
     return false;
   }
 
-  static private boolean jj_3_10() {
+  private boolean jj_3_10() {
     if (jj_3R_50()) return true;
     return false;
   }
 
-  static private boolean jj_3R_214() {
+  private boolean jj_3R_214() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(43)) {
@@ -4269,7 +4269,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_52() {
+  private boolean jj_3R_52() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) {
@@ -4291,7 +4291,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_200() {
+  private boolean jj_3R_200() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4307,7 +4307,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_9() {
+  private boolean jj_3_9() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4317,7 +4317,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_51() {
+  private boolean jj_3R_51() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) {
@@ -4339,7 +4339,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_8() {
+  private boolean jj_3_8() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4349,33 +4349,33 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_233() {
+  private boolean jj_3R_233() {
     if (jj_3R_200()) return true;
     return false;
   }
 
-  static private boolean jj_3R_132() {
+  private boolean jj_3R_132() {
     if (jj_scan_token(IMPLEMENTS)) return true;
     if (jj_3R_220()) return true;
     return false;
   }
 
-  static private boolean jj_3R_232() {
+  private boolean jj_3R_232() {
     if (jj_3R_199()) return true;
     return false;
   }
 
-  static private boolean jj_3R_231() {
+  private boolean jj_3R_231() {
     if (jj_3R_197()) return true;
     return false;
   }
 
-  static private boolean jj_3R_218() {
+  private boolean jj_3R_218() {
     if (jj_3R_224()) return true;
     return false;
   }
 
-  static private boolean jj_3R_224() {
+  private boolean jj_3R_224() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_230()) {
@@ -4391,12 +4391,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_230() {
+  private boolean jj_3R_230() {
     if (jj_3R_196()) return true;
     return false;
   }
 
-  static private boolean jj_3R_109() {
+  private boolean jj_3R_109() {
     if (jj_scan_token(INTERFACE)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
@@ -4411,7 +4411,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_204() {
+  private boolean jj_3R_204() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) {
@@ -4433,13 +4433,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_131() {
+  private boolean jj_3R_131() {
     if (jj_scan_token(EXTENDS)) return true;
     if (jj_3R_49()) return true;
     return false;
   }
 
-  static private boolean jj_3R_197() {
+  private boolean jj_3R_197() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4449,7 +4449,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_136() {
+  private boolean jj_3R_136() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(9)) {
@@ -4459,7 +4459,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_111() {
+  private boolean jj_3R_111() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4469,7 +4469,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_68() {
+  private boolean jj_3R_68() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(43)) {
@@ -4497,12 +4497,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_7() {
+  private boolean jj_3_7() {
     if (jj_3R_50()) return true;
     return false;
   }
 
-  static private boolean jj_3R_48() {
+  private boolean jj_3R_48() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(43)) {
@@ -4515,7 +4515,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_50() {
+  private boolean jj_3R_50() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4527,7 +4527,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_6() {
+  private boolean jj_3_6() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_48()) jj_scanpos = xsp;
@@ -4536,7 +4536,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_47() {
+  private boolean jj_3R_47() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) {
@@ -4558,7 +4558,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_5() {
+  private boolean jj_3_5() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4568,7 +4568,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_46() {
+  private boolean jj_3R_46() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) {
@@ -4590,12 +4590,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_193() {
+  private boolean jj_3R_193() {
     if (jj_3R_200()) return true;
     return false;
   }
 
-  static private boolean jj_3_4() {
+  private boolean jj_3_4() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4605,32 +4605,32 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_192() {
+  private boolean jj_3R_192() {
     if (jj_3R_199()) return true;
     return false;
   }
 
-  static private boolean jj_3R_191() {
+  private boolean jj_3R_191() {
     if (jj_3R_198()) return true;
     return false;
   }
 
-  static private boolean jj_3R_190() {
+  private boolean jj_3R_190() {
     if (jj_3R_197()) return true;
     return false;
   }
 
-  static private boolean jj_3R_189() {
+  private boolean jj_3R_189() {
     if (jj_3R_196()) return true;
     return false;
   }
 
-  static private boolean jj_3_3() {
+  private boolean jj_3_3() {
     if (jj_3R_45()) return true;
     return false;
   }
 
-  static private boolean jj_3R_186() {
+  private boolean jj_3R_186() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_3()) {
@@ -4652,7 +4652,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_203() {
+  private boolean jj_3R_203() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(46)) {
@@ -4674,12 +4674,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_182() {
+  private boolean jj_3R_182() {
     if (jj_3R_186()) return true;
     return false;
   }
 
-  static private boolean jj_3R_196() {
+  private boolean jj_3R_196() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4689,12 +4689,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_33() {
+  private boolean jj_3_33() {
     if (jj_3R_65()) return true;
     return false;
   }
 
-  static private boolean jj_3R_133() {
+  private boolean jj_3R_133() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     while (true) {
@@ -4705,7 +4705,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_108() {
+  private boolean jj_3R_108() {
     if (jj_scan_token(CLASS)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
@@ -4717,13 +4717,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_249() {
+  private boolean jj_3R_249() {
     if (jj_scan_token(FINALLY)) return true;
     if (jj_3R_67()) return true;
     return false;
   }
 
-  static private boolean jj_3R_135() {
+  private boolean jj_3R_135() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(9)) {
@@ -4736,7 +4736,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_248() {
+  private boolean jj_3R_248() {
     if (jj_scan_token(CATCH)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_225()) return true;
@@ -4745,7 +4745,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_110() {
+  private boolean jj_3R_110() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4755,7 +4755,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_153() {
+  private boolean jj_3R_153() {
     if (jj_scan_token(TRY)) return true;
     if (jj_3R_67()) return true;
     Token xsp;
@@ -4768,7 +4768,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_44() {
+  private boolean jj_3R_44() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(9)) {
@@ -4781,7 +4781,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_2() {
+  private boolean jj_3_2() {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -4791,7 +4791,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_152() {
+  private boolean jj_3R_152() {
     if (jj_scan_token(SYNCHRONIZED)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
@@ -4800,27 +4800,27 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_166() {
+  private boolean jj_3R_166() {
     if (jj_3R_62()) return true;
     return false;
   }
 
-  static private boolean jj_3R_93() {
+  private boolean jj_3R_93() {
     if (jj_3R_111()) return true;
     return false;
   }
 
-  static private boolean jj_3R_247() {
+  private boolean jj_3R_247() {
     if (jj_3R_253()) return true;
     return false;
   }
 
-  static private boolean jj_3R_92() {
+  private boolean jj_3R_92() {
     if (jj_3R_110()) return true;
     return false;
   }
 
-  static private boolean jj_3R_66() {
+  private boolean jj_3R_66() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_92()) {
@@ -4833,20 +4833,20 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_151() {
+  private boolean jj_3R_151() {
     if (jj_scan_token(THROW)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_258() {
+  private boolean jj_3R_258() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_142()) return true;
     return false;
   }
 
-  static private boolean jj_3R_150() {
+  private boolean jj_3R_150() {
     if (jj_scan_token(RETURN)) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4855,7 +4855,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_149() {
+  private boolean jj_3R_149() {
     if (jj_scan_token(CONTINUE)) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4864,7 +4864,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_148() {
+  private boolean jj_3R_148() {
     if (jj_scan_token(BREAK)) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4873,17 +4873,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_246() {
+  private boolean jj_3R_246() {
     if (jj_3R_62()) return true;
     return false;
   }
 
-  static private boolean jj_3R_43() {
+  private boolean jj_3R_43() {
     if (jj_3R_66()) return true;
     return false;
   }
 
-  static private boolean jj_3_1() {
+  private boolean jj_3_1() {
     Token xsp;
     if (jj_3R_43()) return true;
     while (true) {
@@ -4893,12 +4893,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_253() {
+  private boolean jj_3R_253() {
     if (jj_3R_184()) return true;
     return false;
   }
 
-  static private boolean jj_3_32() {
+  private boolean jj_3_32() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(25)) jj_scanpos = xsp;
@@ -4907,7 +4907,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_184() {
+  private boolean jj_3R_184() {
     if (jj_3R_142()) return true;
     Token xsp;
     while (true) {
@@ -4917,17 +4917,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_180() {
+  private boolean jj_3R_180() {
     if (jj_3R_184()) return true;
     return false;
   }
 
-  static private boolean jj_3R_165() {
+  private boolean jj_3R_165() {
     if (jj_3R_174()) return true;
     return false;
   }
 
-  static private boolean jj_3R_174() {
+  private boolean jj_3R_174() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_179()) {
@@ -4937,18 +4937,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_179() {
+  private boolean jj_3R_179() {
     if (jj_3R_106()) return true;
     return false;
   }
 
-  static private boolean jj_3R_245() {
+  private boolean jj_3R_245() {
     if (jj_scan_token(ELSE)) return true;
     if (jj_3R_67()) return true;
     return false;
   }
 
-  static private boolean jj_3R_147() {
+  private boolean jj_3R_147() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
     Token xsp;
@@ -4965,7 +4965,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_146() {
+  private boolean jj_3R_146() {
     if (jj_scan_token(DO)) return true;
     if (jj_3R_67()) return true;
     if (jj_scan_token(WHILE)) return true;
@@ -4976,7 +4976,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_145() {
+  private boolean jj_3R_145() {
     if (jj_scan_token(WHILE)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
@@ -4985,7 +4985,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_144() {
+  private boolean jj_3R_144() {
     if (jj_scan_token(IF)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
@@ -4997,18 +4997,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_252() {
+  private boolean jj_3R_252() {
     if (jj_3R_65()) return true;
     return false;
   }
 
-  static private boolean jj_3R_257() {
+  private boolean jj_3R_257() {
     if (jj_scan_token(_DEFAULT)) return true;
     if (jj_scan_token(COLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_251() {
+  private boolean jj_3R_251() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_256()) {
@@ -5018,14 +5018,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_256() {
+  private boolean jj_3R_256() {
     if (jj_scan_token(CASE)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(COLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_244() {
+  private boolean jj_3R_244() {
     if (jj_3R_251()) return true;
     Token xsp;
     while (true) {
@@ -5035,7 +5035,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_143() {
+  private boolean jj_3R_143() {
     if (jj_scan_token(SWITCH)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
@@ -5050,39 +5050,39 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_116() {
+  private boolean jj_3R_116() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_115()) return true;
     return false;
   }
 
-  static private boolean jj_3_31() {
+  private boolean jj_3_31() {
     if (jj_3R_55()) return true;
     if (jj_3R_57()) return true;
     return false;
   }
 
-  static private boolean jj_3R_164() {
+  private boolean jj_3R_164() {
     if (jj_3R_173()) return true;
     return false;
   }
 
-  static private boolean jj_3R_163() {
+  private boolean jj_3R_163() {
     if (jj_3R_104()) return true;
     return false;
   }
 
-  static private boolean jj_3R_162() {
+  private boolean jj_3R_162() {
     if (jj_3R_172()) return true;
     return false;
   }
 
-  static private boolean jj_3R_161() {
+  private boolean jj_3R_161() {
     if (jj_3R_171()) return true;
     return false;
   }
 
-  static private boolean jj_3R_142() {
+  private boolean jj_3R_142() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_161()) {
@@ -5098,12 +5098,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_141() {
+  private boolean jj_3R_141() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_106() {
+  private boolean jj_3R_106() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(25)) jj_scanpos = xsp;
@@ -5116,7 +5116,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_30() {
+  private boolean jj_3_30() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(25)) jj_scanpos = xsp;
@@ -5125,28 +5125,28 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_91() {
+  private boolean jj_3R_91() {
     if (jj_3R_109()) return true;
     return false;
   }
 
-  static private boolean jj_3R_90() {
+  private boolean jj_3R_90() {
     if (jj_3R_108()) return true;
     return false;
   }
 
-  static private boolean jj_3R_89() {
+  private boolean jj_3R_89() {
     if (jj_3R_107()) return true;
     return false;
   }
 
-  static private boolean jj_3R_88() {
+  private boolean jj_3R_88() {
     if (jj_3R_106()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_65() {
+  private boolean jj_3R_65() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_88()) {
@@ -5162,12 +5162,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_94() {
+  private boolean jj_3R_94() {
     if (jj_3R_65()) return true;
     return false;
   }
 
-  static private boolean jj_3R_67() {
+  private boolean jj_3R_67() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     while (true) {
@@ -5178,96 +5178,96 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_63() {
+  private boolean jj_3R_63() {
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_scan_token(COLON)) return true;
     if (jj_3R_107()) return true;
     return false;
   }
 
-  static private boolean jj_3_28() {
+  private boolean jj_3_28() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3R_130() {
+  private boolean jj_3R_130() {
     if (jj_3R_153()) return true;
     return false;
   }
 
-  static private boolean jj_3R_129() {
+  private boolean jj_3R_129() {
     if (jj_3R_152()) return true;
     return false;
   }
 
-  static private boolean jj_3R_128() {
+  private boolean jj_3R_128() {
     if (jj_3R_151()) return true;
     return false;
   }
 
-  static private boolean jj_3R_127() {
+  private boolean jj_3R_127() {
     if (jj_3R_150()) return true;
     return false;
   }
 
-  static private boolean jj_3R_126() {
+  private boolean jj_3R_126() {
     if (jj_3R_149()) return true;
     return false;
   }
 
-  static private boolean jj_3R_125() {
+  private boolean jj_3R_125() {
     if (jj_3R_148()) return true;
     return false;
   }
 
-  static private boolean jj_3R_124() {
+  private boolean jj_3R_124() {
     if (jj_3R_147()) return true;
     return false;
   }
 
-  static private boolean jj_3R_123() {
+  private boolean jj_3R_123() {
     if (jj_3R_146()) return true;
     return false;
   }
 
-  static private boolean jj_3R_156() {
+  private boolean jj_3R_156() {
     if (jj_3R_96()) return true;
     return false;
   }
 
-  static private boolean jj_3R_122() {
+  private boolean jj_3R_122() {
     if (jj_3R_145()) return true;
     return false;
   }
 
-  static private boolean jj_3R_121() {
+  private boolean jj_3R_121() {
     if (jj_3R_144()) return true;
     return false;
   }
 
-  static private boolean jj_3R_120() {
+  private boolean jj_3R_120() {
     if (jj_3R_143()) return true;
     return false;
   }
 
-  static private boolean jj_3R_119() {
+  private boolean jj_3R_119() {
     if (jj_3R_142()) return true;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  static private boolean jj_3R_118() {
+  private boolean jj_3R_118() {
     if (jj_3R_141()) return true;
     return false;
   }
 
-  static private boolean jj_3R_117() {
+  private boolean jj_3R_117() {
     if (jj_3R_67()) return true;
     return false;
   }
 
-  static private boolean jj_3R_107() {
+  private boolean jj_3R_107() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_29()) {
@@ -5316,29 +5316,29 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_29() {
+  private boolean jj_3_29() {
     if (jj_3R_63()) return true;
     return false;
   }
 
-  static private boolean jj_3R_168() {
+  private boolean jj_3R_168() {
     if (jj_3R_96()) return true;
     return false;
   }
 
-  static private boolean jj_3R_169() {
+  private boolean jj_3R_169() {
     if (jj_3R_133()) return true;
     return false;
   }
 
-  static private boolean jj_3_27() {
+  private boolean jj_3_27() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3R_155() {
+  private boolean jj_3R_155() {
     Token xsp;
     if (jj_3_27()) return true;
     while (true) {
@@ -5352,7 +5352,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_158() {
+  private boolean jj_3R_158() {
     if (jj_3R_56()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -5360,13 +5360,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_113() {
+  private boolean jj_3R_113() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_62()) return true;
     return false;
   }
 
-  static private boolean jj_3R_157() {
+  private boolean jj_3R_157() {
     if (jj_3R_155()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -5374,7 +5374,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_82() {
+  private boolean jj_3R_82() {
     if (jj_scan_token(NEW)) return true;
     if (jj_3R_49()) return true;
     Token xsp;
@@ -5386,7 +5386,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_26() {
+  private boolean jj_3_26() {
     if (jj_scan_token(NEW)) return true;
     if (jj_3R_59()) return true;
     if (jj_3R_155()) return true;
@@ -5396,7 +5396,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_61() {
+  private boolean jj_3R_61() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_26()) {
@@ -5406,7 +5406,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_102() {
+  private boolean jj_3R_102() {
     if (jj_3R_62()) return true;
     Token xsp;
     while (true) {
@@ -5416,12 +5416,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_75() {
+  private boolean jj_3R_75() {
     if (jj_3R_102()) return true;
     return false;
   }
 
-  static private boolean jj_3R_56() {
+  private boolean jj_3R_56() {
     if (jj_scan_token(LPAREN)) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -5430,7 +5430,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_154() {
+  private boolean jj_3R_154() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(54)) {
@@ -5440,17 +5440,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_103() {
+  private boolean jj_3R_103() {
     if (jj_3R_112()) return true;
     return false;
   }
 
-  static private boolean jj_3R_137() {
+  private boolean jj_3R_137() {
     if (jj_3R_154()) return true;
     return false;
   }
 
-  static private boolean jj_3R_112() {
+  private boolean jj_3R_112() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(59)) {
@@ -5472,43 +5472,43 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_81() {
+  private boolean jj_3R_81() {
     if (jj_3R_56()) return true;
     return false;
   }
 
-  static private boolean jj_3R_80() {
+  private boolean jj_3R_80() {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  static private boolean jj_3R_79() {
+  private boolean jj_3R_79() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(RBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3_25() {
+  private boolean jj_3_25() {
     if (jj_scan_token(DOT)) return true;
     if (jj_3R_61()) return true;
     return false;
   }
 
-  static private boolean jj_3_24() {
+  private boolean jj_3_24() {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(CLASS)) return true;
     return false;
   }
 
-  static private boolean jj_3_23() {
+  private boolean jj_3_23() {
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(THIS)) return true;
     return false;
   }
 
-  static private boolean jj_3R_60() {
+  private boolean jj_3R_60() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_23()) {
@@ -5530,41 +5530,41 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_22() {
+  private boolean jj_3_22() {
     if (jj_3R_60()) return true;
     return false;
   }
 
-  static private boolean jj_3R_101() {
+  private boolean jj_3R_101() {
     if (jj_3R_61()) return true;
     return false;
   }
 
-  static private boolean jj_3R_100() {
+  private boolean jj_3R_100() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_62()) return true;
     if (jj_scan_token(RPAREN)) return true;
     return false;
   }
 
-  static private boolean jj_3R_99() {
+  private boolean jj_3R_99() {
     if (jj_scan_token(SUPER)) return true;
     if (jj_scan_token(DOT)) return true;
     if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
-  static private boolean jj_3R_98() {
+  private boolean jj_3R_98() {
     if (jj_3R_49()) return true;
     return false;
   }
 
-  static private boolean jj_3R_97() {
+  private boolean jj_3R_97() {
     if (jj_3R_112()) return true;
     return false;
   }
 
-  static private boolean jj_3R_74() {
+  private boolean jj_3R_74() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_97()) {
@@ -5586,7 +5586,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_178() {
+  private boolean jj_3R_178() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(92)) {
@@ -5596,19 +5596,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_21() {
+  private boolean jj_3_21() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
     return false;
   }
 
-  static private boolean jj_3_20() {
+  private boolean jj_3_20() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_59()) return true;
     return false;
   }
 
-  static private boolean jj_3R_55() {
+  private boolean jj_3R_55() {
     if (jj_3R_74()) return true;
     Token xsp;
     while (true) {
@@ -5618,7 +5618,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_255() {
+  private boolean jj_3R_255() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_64()) return true;
     if (jj_scan_token(RPAREN)) return true;
@@ -5626,7 +5626,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_250() {
+  private boolean jj_3R_250() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_254()) {
@@ -5636,7 +5636,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_254() {
+  private boolean jj_3R_254() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_64()) return true;
     if (jj_scan_token(RPAREN)) return true;
@@ -5644,14 +5644,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_19() {
+  private boolean jj_3_19() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
     if (jj_scan_token(LBRACKET)) return true;
     return false;
   }
 
-  static private boolean jj_3R_173() {
+  private boolean jj_3R_173() {
     if (jj_3R_55()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -5659,7 +5659,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_78() {
+  private boolean jj_3R_78() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
     if (jj_scan_token(RPAREN)) return true;
@@ -5690,7 +5690,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_77() {
+  private boolean jj_3R_77() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_49()) return true;
     if (jj_scan_token(LBRACKET)) return true;
@@ -5698,13 +5698,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_18() {
+  private boolean jj_3_18() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_59()) return true;
     return false;
   }
 
-  static private boolean jj_3R_58() {
+  private boolean jj_3R_58() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_18()) {
@@ -5717,22 +5717,22 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3_17() {
+  private boolean jj_3_17() {
     if (jj_3R_58()) return true;
     return false;
   }
 
-  static private boolean jj_3R_243() {
+  private boolean jj_3R_243() {
     if (jj_3R_173()) return true;
     return false;
   }
 
-  static private boolean jj_3R_242() {
+  private boolean jj_3R_242() {
     if (jj_3R_250()) return true;
     return false;
   }
 
-  static private boolean jj_3R_239() {
+  private boolean jj_3R_239() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_241()) {
@@ -5745,7 +5745,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_3R_241() {
+  private boolean jj_3R_241() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(83)) {
@@ -5756,19 +5756,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
-  static public JDCParserTokenManager token_source;
-  static JavaCharStream jj_input_stream;
+  public JDCParserTokenManager token_source;
+  JavaCharStream jj_input_stream;
   /** Current token. */
-  static public Token token;
+  public Token token;
   /** Next token. */
-  static public Token jj_nt;
-  static private int jj_ntk;
-  static private Token jj_scanpos, jj_lastpos;
-  static private int jj_la;
-  static private int jj_gen;
-  static final private int[] jj_la1 = new int[111];
+  public Token jj_nt;
+  private int jj_ntk;
+  private Token jj_scanpos, jj_lastpos;
+  private int jj_la;
+  private int jj_gen;
+  final private int[] jj_la1 = new int[111];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -5791,9 +5790,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
    private static void jj_la1_init_3() {
       jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xffe00,0x0,0x0,0x0,0x8,0x10,0x4,0x0,0x0,0x0,0x0,0x0,0x1c0,0x1c0,0x0,0x0,0x23,0x23,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[33];
-  static private boolean jj_rescan = false;
-  static private int jj_gc = 0;
+  final private JJCalls[] jj_2_rtns = new JJCalls[33];
+  private boolean jj_rescan = false;
+  private int jj_gc = 0;
 
   /** Constructor with InputStream. */
   public JDCParser(java.io.InputStream stream) {
@@ -5801,13 +5800,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
   /** Constructor with InputStream and supplied encoding */
   public JDCParser(java.io.InputStream stream, String encoding) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser.  ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     try { jj_input_stream = new JavaCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source = new JDCParserTokenManager(jj_input_stream);
     token = new Token();
@@ -5818,11 +5810,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream) {
+  public void ReInit(java.io.InputStream stream) {
      ReInit(stream, null);
   }
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream, String encoding) {
+  public void ReInit(java.io.InputStream stream, String encoding) {
     try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -5835,13 +5827,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   /** Constructor. */
   public JDCParser(java.io.Reader stream) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     jj_input_stream = new JavaCharStream(stream, 1, 1);
     token_source = new JDCParserTokenManager(jj_input_stream);
     token = new Token();
@@ -5852,7 +5837,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.Reader stream) {
+  public void ReInit(java.io.Reader stream) {
     jj_input_stream.ReInit(stream, 1, 1);
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -5865,13 +5850,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   /** Constructor with generated Token Manager. */
   public JDCParser(JDCParserTokenManager tm) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
@@ -5891,7 +5869,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  static private Token jj_consume_token(int kind) throws ParseException {
+  private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -5917,8 +5895,8 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   static private final class LookaheadSuccess extends java.lang.Error { }
-  static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
-  static private boolean jj_scan_token(int kind) {
+  final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
       if (jj_scanpos.next == null) {
@@ -5941,7 +5919,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
 
 /** Get the next Token. */
-  static final public Token getNextToken() {
+  final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
@@ -5951,7 +5929,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
 /** Get the specific Token. */
-  static final public Token getToken(int index) {
+  final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
@@ -5960,20 +5938,20 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return t;
   }
 
-  static private int jj_ntk() {
+  private int jj_ntk() {
     if ((jj_nt=token.next) == null)
       return (jj_ntk = (token.next=token_source.getNextToken()).kind);
     else
       return (jj_ntk = jj_nt.kind);
   }
 
-  static private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
-  static private int[] jj_expentry;
-  static private int jj_kind = -1;
-  static private int[] jj_lasttokens = new int[100];
-  static private int jj_endpos;
+  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private int[] jj_expentry;
+  private int jj_kind = -1;
+  private int[] jj_lasttokens = new int[100];
+  private int jj_endpos;
 
-  static private void jj_add_error_token(int kind, int pos) {
+  private void jj_add_error_token(int kind, int pos) {
     if (pos >= 100) return;
     if (pos == jj_endpos + 1) {
       jj_lasttokens[jj_endpos++] = kind;
@@ -5999,7 +5977,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   /** Generate ParseException. */
-  static public ParseException generateParseException() {
+  public ParseException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[116];
     if (jj_kind >= 0) {
@@ -6041,20 +6019,20 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return new ParseException(token, exptokseq, tokenImage);
   }
 
-  static private int trace_indent = 0;
-  static private boolean trace_enabled = true;
+  private int trace_indent = 0;
+  private boolean trace_enabled = true;
 
 /** Enable tracing. */
-  static final public void enable_tracing() {
+  final public void enable_tracing() {
     trace_enabled = true;
   }
 
 /** Disable tracing. */
-  static final public void disable_tracing() {
+  final public void disable_tracing() {
     trace_enabled = false;
   }
 
-  static private void trace_call(String s) {
+  private void trace_call(String s) {
     if (trace_enabled) {
       for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
       System.out.println("Call:   " + s);
@@ -6062,7 +6040,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     trace_indent = trace_indent + 2;
   }
 
-  static private void trace_return(String s) {
+  private void trace_return(String s) {
     trace_indent = trace_indent - 2;
     if (trace_enabled) {
       for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
@@ -6070,7 +6048,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static private void trace_token(Token t, String where) {
+  private void trace_token(Token t, String where) {
     if (trace_enabled) {
       for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
       System.out.print("Consumed token: <" + tokenImage[t.kind]);
@@ -6081,7 +6059,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static private void trace_scan(Token t1, int t2) {
+  private void trace_scan(Token t1, int t2) {
     if (trace_enabled) {
       for (int i = 0; i < trace_indent; i++) { System.out.print(" "); }
       System.out.print("Visited token: <" + tokenImage[t1.kind]);
@@ -6092,7 +6070,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  static private void jj_rescan_token() {
+  private void jj_rescan_token() {
     jj_rescan = true;
     for (int i = 0; i < 33; i++) {
     try {
@@ -6143,7 +6121,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     jj_rescan = false;
   }
 
-  static private void jj_save(int index, int xla) {
+  private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
     while (p.gen > jj_gen) {
       if (p.next == null) { p = p.next = new JJCalls(); break; }
