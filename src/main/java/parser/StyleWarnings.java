@@ -11,7 +11,7 @@ public class StyleWarnings {
         int indentationCount = 0;
         Token countToken = t;
         while (countToken != null) {
-            if (countToken.specialToken.image.equals(" ")) {
+            if (countToken.specialToken != null && countToken.specialToken.image.equals(" ")) {
                 indentationCount++;
             }
             countToken = countToken.specialToken;
