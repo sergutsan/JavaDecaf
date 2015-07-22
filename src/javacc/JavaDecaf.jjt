@@ -1008,16 +1008,10 @@ void LocalVariableDeclaration() :
   [ "final" ] Type() VariableDeclarator() ( "," VariableDeclarator() )*
 }
 
-void EmptyStatement() : //TODO
+void EmptyStatement() :
 {}
 {
   ";"
-  {if (inIfLoop) {
-      Token t = getToken(0);
-      System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-      ": Semicolon after loop condition. Any statements in braces immediately following loop condition will not execute.");
-        }
-    }
 }
 
 void StatementExpression() :
