@@ -43,7 +43,7 @@ public class SimpleNode implements Node {
   }
 
   /* Constructor with parser. SK */
-  public SimpleNode(int i, JDCParser p) {
+  public SimpleNode(JDCParser p, int i) {
     id = i;
     parser = p;
   }
