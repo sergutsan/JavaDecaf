@@ -1111,6 +1111,7 @@ void IfStatement() :
 {
     //inLoopCondition = true; //SK
     //inIfLoop = true; //SK
+    Token t;
     }
 {/*@bgen(jjtree) IfStatement */
   {
@@ -1120,10 +1121,23 @@ void IfStatement() :
   }
   try {
 /*@egen*/
-  ("if" "(" Expression() ")" {
+  (
+  {
+    t = getToken(1);
+  }
+  "if" "(" Expression() ")" {
                               //inLoopCondition = false;
                               } //change back to false once condition complete - SK
-                              Block() [ LOOKAHEAD(1) "else" Block() ] )/*@bgen(jjtree)*/
+                              Block() [ LOOKAHEAD(1) "else" Block() ]/*@bgen(jjtree)*/
+                              {
+                                jjtree.closeNodeScope(jjtn001, true);
+                                jjtc001 = false;
+                              }
+/*@egen*/
+                              {
+                                jjtn001.setFirstToken(t);
+                                jjtn001.setLastToken(getToken(0));
+                                })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
