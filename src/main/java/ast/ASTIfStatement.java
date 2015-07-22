@@ -2,10 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=true,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package main.java.ast;
 
-import main.java.parser.ClosingBraceSimpleNode;
 import main.java.parser.JDCParser;
-
-import java.io.PrintWriter;
 
 public
 class ASTIfStatement extends ClosingBraceSimpleNode {
