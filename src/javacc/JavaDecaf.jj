@@ -412,23 +412,83 @@ void ImportDeclaration() :
 }
 
 void TypeDeclaration() :
-{ Token t; }
+{ }
 {
 
-  LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )/*@bgen(jjtree) TypeDeclaration */
+  LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )
+  ClassDeclaration()
+|
+  InterfaceDeclaration()
+|
+  ";"
+}
+
+
+
+/*
+ * Declaration syntax follows.
+ */
+
+void ClassDeclaration() :
+{Token t;}
+{/*@bgen(jjtree) ClassDeclaration */
   {
-    ASTTypeDeclaration jjtn001 = new ASTTypeDeclaration(this, JJTTYPEDECLARATION);
+    ASTClassDeclaration jjtn001 = new ASTClassDeclaration(this, JJTCLASSDECLARATION);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
   try {
 /*@egen*/
-  ( { t = getToken(1); } 
-  ClassDeclaration()
-|
-  InterfaceDeclaration()
-|
-  ";"/*@bgen(jjtree)*/
+  ({
+    t = getToken(1);
+  }
+  ( "abstract" | "final" | "public" )*
+  UnmodifiedClassDeclaration()/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  {
+    setFirstLastToken(t, getToken(0));
+  })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                 
+}
+
+void UnmodifiedClassDeclaration() :
+{Token t;}
+{/*@bgen(jjtree) UnmodifiedClassDeclaration */
+  {
+    ASTUnmodifiedClassDeclaration jjtn001 = new ASTUnmodifiedClassDeclaration(this, JJTUNMODIFIEDCLASSDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(1);
+    }
+  "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
+  ClassBody()/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
@@ -456,26 +516,7 @@ void TypeDeclaration() :
       jjtree.closeNodeScope(jjtn001, true);
     }
   }
-/*@egen*/                
-}
-
-
-/*
- * Declaration syntax follows.
- */
-
-void ClassDeclaration() :
-{}
-{
-  ( "abstract" | "final" | "public" )*
-  UnmodifiedClassDeclaration()
-}
-
-void UnmodifiedClassDeclaration() :
-{}
-{
-  "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
-  ClassBody()
+/*@egen*/                           
 }
 
 void ClassBody() :
