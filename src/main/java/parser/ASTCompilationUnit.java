@@ -38,9 +38,13 @@ package main.java.parser;
 import java.io.*;
 
 public class ASTCompilationUnit extends SimpleNode {
-  ASTCompilationUnit(int id) {
-    super(id);
-  }
+    ASTCompilationUnit(int id) {
+        super(id);
+    }
+
+    ASTCompilationUnit(JDCParser p, int id) {
+        super(p, id);
+    }
 
 
 // Manually inserted code begins here - edited by Sophie Koonin
