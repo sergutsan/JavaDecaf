@@ -119,7 +119,7 @@ public class SimpleNode implements Node {
       child = (SimpleNode) jjtGetChild(i);
       child.process(ostr);
     }
-    print(end, ostr);
+   // print(end, ostr);
   }
 
   /**
