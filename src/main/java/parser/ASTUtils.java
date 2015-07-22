@@ -36,4 +36,19 @@ public class ASTUtils {
         return currentToken;
     }
 
+    /**
+     * Fid the indentation level of the current node.
+     * @param currentNode the node to count from
+     * @return the number of levels to indent
+     */
+    protected static int getIndentationLevel(Node currentNode) {
+        int indentationLevel = 0;
+        Node counterNode = currentNode;
+        while(!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
+            indentationLevel++;
+            counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
+        }
+        return indentationLevel;
+    }
+
 }
