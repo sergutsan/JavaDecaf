@@ -52,10 +52,12 @@ public class ASTCompilationUnit extends SimpleNode {
   public void process (PrintWriter ostr, String className) {
     Token t = begin;
     SimpleNode child;
-      /*
-       * Children will be null (therefore 0) if the code is straight Java.
-       * Otherwise there should be one child for each change to make
-       */
+      while (t.kind != JDCParserConstants.LBRACE){
+          print(t, ostr); //Normal code printing
+          t = t.next;
+      }
+
+
       Token encapsulation = new Token(); //this is for the class and main method declarations
       encapsulation.image = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
               "public class " + className + " { \n    " +
@@ -74,10 +76,7 @@ public class ASTCompilationUnit extends SimpleNode {
             printFinalClosingBrace(ostr, "");   //final closing brace of class, no indentation
           }
       }
-    while (t != null) {
-      print(t, ostr); //Normal code printing
-      t = t.next;
-    }
+
   }
 
     public void printFinalClosingBrace(PrintWriter ostr, String indentation){
