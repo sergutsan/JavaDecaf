@@ -92,6 +92,7 @@ public class JavaDecafCompiler {
                 PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
                 node.process(ostr, className);
                 ostr.close();
+                parser.printWarnings(); //print any warnings that arised
                 return className + ".java"; //return the finished filename to signal successful compilation
             } catch (ParseException e) {
                 System.out.println("Errors during compilation: ");
