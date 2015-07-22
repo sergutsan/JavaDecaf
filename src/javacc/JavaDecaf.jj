@@ -413,7 +413,9 @@ void ImportDeclaration() :
 
 void TypeDeclaration() :
 { Token t; }
-{/*@bgen(jjtree) TypeDeclaration */
+{
+
+  LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )/*@bgen(jjtree) TypeDeclaration */
   {
     ASTTypeDeclaration jjtn001 = new ASTTypeDeclaration(this, JJTTYPEDECLARATION);
     boolean jjtc001 = true;
@@ -421,8 +423,7 @@ void TypeDeclaration() :
   }
   try {
 /*@egen*/
-  ( { t = getToken(1); }
-  LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )
+  ( { t = getToken(1); } 
   ClassDeclaration()
 |
   InterfaceDeclaration()
@@ -1141,16 +1142,10 @@ void LocalVariableDeclaration() :
   [ "final" ] Type() VariableDeclarator() ( "," VariableDeclarator() )*
 }
 
-void EmptyStatement() : //TODO
+void EmptyStatement() :
 {}
 {
   ";"
-  {if (inIfLoop) {
-      Token t = getToken(0);
-      System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-      ": Semicolon after loop condition. Any statements in braces immediately following loop condition will not execute.");
-        }
-    }
 }
 
 void StatementExpression() :

@@ -375,19 +375,17 @@ void ImportDeclaration() :
 }
 
 void TypeDeclaration() :
-{ Token t; }
+{ }
 {
-  ( { t = getToken(1); }
+
   LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )
   ClassDeclaration()
 |
   InterfaceDeclaration()
 |
   ";"
-  {
-    setFirstLastToken(t, getToken(0));
-    })#TypeDeclaration
 }
+
 
 
 /*
