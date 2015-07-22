@@ -2962,7 +2962,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(RBRACE);
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
-      setFirstLastTokens(t);
+      setFirstLastToken(t, getToken(0));
     } catch (Throwable jjte001) {
       if (jjtc001) {
         jjtree.clearNodeScope(jjtn001);
@@ -2984,7 +2984,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
   }
 
-  void setFirstLastTokens(Token t1, Token t2) throws ParseException {
+  void setFirstLastToken(Token t1, Token t2) throws ParseException {
     jjtThis.setFirstToken(t1);
     jjtThis.setLastToken(t2);
   }

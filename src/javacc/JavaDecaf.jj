@@ -1570,7 +1570,7 @@ void DecafMethod() :
   }
 /*@egen*/
   {
-      setFirstLastTokens(t);
+      setFirstLastToken(t, getToken(0));
       })/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
@@ -1595,7 +1595,7 @@ void DecafMethod() :
 }
 
 JAVACODE
-void setFirstLastTokens(Token t1, Token t2) {
+void setFirstLastToken(Token t1, Token t2) {
     jjtThis.setFirstToken(t1);
     jjtThis.setLastToken(t2);
 }
