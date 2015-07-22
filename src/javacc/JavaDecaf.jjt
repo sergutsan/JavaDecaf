@@ -1044,12 +1044,21 @@ void IfStatement() :
 {
     //inLoopCondition = true; //SK
     //inIfLoop = true; //SK
+    Token t;
     }
 {
-  ("if" "(" Expression() ")" {
+  (
+  {
+    t = getToken(1);
+  }
+  "if" "(" Expression() ")" {
                               //inLoopCondition = false;
                               } //change back to false once condition complete - SK
-                              Block() [ LOOKAHEAD(1) "else" Block() ] )#IfStatement //Do not permit braceless statements - SK
+                              Block() [ LOOKAHEAD(1) "else" Block() ]
+                              {
+                                jjtThis.setFirstToken(t);
+                                jjtThis.setLastToken(getToken(0));
+                                })#IfStatement //Do not permit braceless statements - SK
                               {
                               //inIfLoop = false; //change back to false once loop ends - SK
                               }
