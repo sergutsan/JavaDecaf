@@ -9,7 +9,10 @@ public interface JDCParserTreeConstants
   public int JJTMETHODDECLARATION = 3;
   public int JJTSTATEMENTEXPRESSION = 4;
   public int JJTIFSTATEMENT = 5;
-  public int JJTDECAFBLOCK = 6;
+  public int JJTWHILESTATEMENT = 6;
+  public int JJTDOSTATEMENT = 7;
+  public int JJTFORSTATEMENT = 8;
+  public int JJTDECAFBLOCK = 9;
 
 
   public String[] jjtNodeName = {
@@ -19,7 +22,10 @@ public interface JDCParserTreeConstants
     "MethodDeclaration",
     "StatementExpression",
     "IfStatement",
+    "WhileStatement",
+    "DoStatement",
+    "ForStatement",
     "DecafBlock",
   };
 }
-/* JavaCC - OriginalChecksum=883342d8df4d7278af4f9aa9003b87da (do not edit this line) */
+/* JavaCC - OriginalChecksum=a673589d3464b6ab080ebc1626c8d8ee (do not edit this line) */

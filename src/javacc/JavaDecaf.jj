@@ -53,7 +53,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
     static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
-
+    private Token rbrace = Token.newToken(73, "}");
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
     * Throw ParseException if not legal.
@@ -1214,7 +1214,7 @@ void IfStatement() :
 /*@egen*/
                               {
                                 jjtn001.setFirstToken(t);
-                                jjtn001.setLastToken(Token.newToken(73));
+                                jjtn001.setLastToken(rbrace); //RBRACE
                                 })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1244,38 +1244,155 @@ void IfStatement() :
 
 void WhileStatement() :
 {
-    inLoopCondition = true; //SK
+    Token t;
+    //inLoopCondition = true; //SK
 }
-{
+{/*@bgen(jjtree) WhileStatement */
+  {
+    ASTWhileStatement jjtn001 = new ASTWhileStatement(this, JJTWHILESTATEMENT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/ ({
+      t = getToken(1);
+   }
   "while" "(" Expression() ")" {
-                                 inLoopCondition = false; //SK
+                                 //inLoopCondition = false; //SK
                                  }
-                                 Block() //Do not permit braceless statements - SK
+                                 Block()/*@bgen(jjtree)*/
+                                 {
+                                   jjtree.closeNodeScope(jjtn001, true);
+                                   jjtc001 = false;
+                                 }
+/*@egen*/ //Do not permit braceless statements - SK
+                                 {
+                                    jjtn001.setFirstToken(t);
+                                    jjtn001.setLastToken(rbrace); //RBRACE
+                                 })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/               
 
 }
 
 void DoStatement() :
-{}
 {
-  "do" Block() "while" { //Do not permit braceless statements - SK
-                            inLoopCondition = true; //SK
-                            } "(" Expression() ")" ";"
-                            {
-                              inLoopCondition = false; //SK
-                              }
+    Token t;
+}
+{/*@bgen(jjtree) DoStatement */
+  {
+    ASTDoStatement jjtn001 = new ASTDoStatement(this, JJTDOSTATEMENT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/ ({
+    t = getToken(1);
+    }
+  "do" Block()/*@bgen(jjtree)*/
+               {
+                 jjtree.closeNodeScope(jjtn001, true);
+                 jjtc001 = false;
+               }
+/*@egen*/ {
+                jjtn001.setFirstToken(t);
+                jjtn001.setLastToken(rbrace); //RBRACE
+                })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/            
+                "while" "(" Expression() ")" ";"
+
 }
 
 void ForStatement() :
-{}
 {
-  "for" "(" {
-            inForLoopCondition = true; //SK
-            }
+    Token t;
+}
+{/*@bgen(jjtree) ForStatement */
+  {
+    ASTForStatement jjtn001 = new ASTForStatement(this, JJTFORSTATEMENT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(1);
+    }
+    "for" "("
+//    {
+//            inForLoopCondition = true; //SK
+//            }
             [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
-            {
-            inForLoopCondition = false; //SK
-            }
-            ")" Block() //Do not permit braceless statements - SK
+//            {
+//            inForLoopCondition = false; //SK
+//            }
+            ")" Block()/*@bgen(jjtree)*/
+             {
+               jjtree.closeNodeScope(jjtn001, true);
+               jjtc001 = false;
+             }
+/*@egen*/
+             {
+                jjtn001.setFirstToken(t);
+                jjtn001.setLastToken(rbrace);
+             })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/              //Do not permit braceless statements - SK
 }
 
 void ForInit() :
