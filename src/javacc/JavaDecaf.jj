@@ -36,11 +36,15 @@ options {
                            //pass parser object into node constructors
   //DEBUG_PARSER = true;
   STATIC = false;
+                                 
   OUTPUT_DIRECTORY = "../main/java/parser";
+                                               
 }
 
 PARSER_BEGIN(JDCParser)
 package main.java.parser;
+import main.java.ast.*;
+
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -49,9 +53,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
   protected JJTJDCParserState jjtree = new JJTJDCParserState();
 
 /*@egen*/
-    static boolean inLoopCondition; //indicates whether or not the current expansion is within an if loop condition e.g. if (...)
-    static boolean inForLoopCondition; //indicate whether or not in a foor loop condition
-    static boolean inIfLoop; //indicate whether or not the current expansion is anywhere in an if loop
     private List<String> warnings = new ArrayList<String>(); // list of warnings
     private Token rbrace = Token.newToken(73, "}");
 
@@ -411,14 +412,50 @@ void ImportDeclaration() :
 }
 
 void TypeDeclaration() :
-{}
-{
+{ Token t; }
+{/*@bgen(jjtree) TypeDeclaration */
+  {
+    ASTTypeDeclaration jjtn001 = new ASTTypeDeclaration(this, JJTTYPEDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ( { t = getToken(1); }
   LOOKAHEAD( ( "abstract" | "final" | "public" )* "class" )
   ClassDeclaration()
 |
   InterfaceDeclaration()
 |
-  ";"
+  ";"/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  {
+    setFirstLastToken(t, getToken(0));
+    })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                
 }
 
 
@@ -460,8 +497,7 @@ void ClassBody() :
     }
 /*@egen*/
     {
-      jjtn001.setFirstToken(t);
-      jjtn001.setLastToken(getToken(0));
+      setFirstLastToken(t, getToken(0));
     })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1149,8 +1185,7 @@ void StatementExpression() :
   }
 /*@egen*/
   {
-    jjtn001.setFirstToken(t);
-    jjtn001.setLastToken(getToken(0));
+    setFirstLastToken(t, getToken(0));
   })/*@bgen(jjtree)*/
  } catch (Throwable jjte001) {
    if (jjtc001) {
@@ -1197,8 +1232,6 @@ void IfStatement() :
  * is to tell JavaCC that we know what we are doing.
  */
 {
-    //inLoopCondition = true; //SK
-    //inIfLoop = true; //SK
     Token t;
     }
 {/*@bgen(jjtree) IfStatement */
@@ -1213,19 +1246,15 @@ void IfStatement() :
   {
     t = getToken(1);
   }
-  "if" "(" Expression() ")" {
-                              //inLoopCondition = false;
-                              } //change back to false once condition complete - SK
-                              Block() [ LOOKAHEAD(1) "else" Block() ]/*@bgen(jjtree)*/
-                              {
-                                jjtree.closeNodeScope(jjtn001, true);
-                                jjtc001 = false;
-                              }
+  "if" "(" Expression() ")" Block() [ LOOKAHEAD(1) "else" Block() ]/*@bgen(jjtree)*/
+      {
+        jjtree.closeNodeScope(jjtn001, true);
+        jjtc001 = false;
+      }
 /*@egen*/
-                              {
-                                jjtn001.setFirstToken(t);
-                                jjtn001.setLastToken(rbrace); //RBRACE
-                                })/*@bgen(jjtree)*/
+      {
+        setFirstLastToken(t, rbrace);
+        })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -1246,16 +1275,13 @@ void IfStatement() :
     }
   }
 /*@egen*/             //Do not permit braceless statements - SK
-                              {
-                              //inIfLoop = false; //change back to false once loop ends - SK
-                              }
+
 
 }
 
 void WhileStatement() :
 {
     Token t;
-    //inLoopCondition = true; //SK
 }
 {/*@bgen(jjtree) WhileStatement */
   {
@@ -1267,19 +1293,15 @@ void WhileStatement() :
 /*@egen*/ ({
       t = getToken(1);
    }
-  "while" "(" Expression() ")" {
-                                 //inLoopCondition = false; //SK
-                                 }
-                                 Block()/*@bgen(jjtree)*/
-                                 {
-                                   jjtree.closeNodeScope(jjtn001, true);
-                                   jjtc001 = false;
-                                 }
+  "while" "(" Expression() ")" Block()/*@bgen(jjtree)*/
+     {
+       jjtree.closeNodeScope(jjtn001, true);
+       jjtc001 = false;
+     }
 /*@egen*/ //Do not permit braceless statements - SK
-                                 {
-                                    jjtn001.setFirstToken(t);
-                                    jjtn001.setLastToken(rbrace); //RBRACE
-                                 })/*@bgen(jjtree)*/
+     {
+        setFirstLastToken(t, rbrace); //RBRACE
+     })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -1323,8 +1345,7 @@ void DoStatement() :
                  jjtc001 = false;
                }
 /*@egen*/ {
-                jjtn001.setFirstToken(t);
-                jjtn001.setLastToken(rbrace); //RBRACE
+    setFirstLastToken(t, rbrace); //RBRACE
                 })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1380,8 +1401,7 @@ void ForStatement() :
              }
 /*@egen*/
              {
-                jjtn001.setFirstToken(t);
-                jjtn001.setLastToken(rbrace);
+    setFirstLastToken(t, rbrace);
              })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1495,8 +1515,7 @@ void DecafBlock() :
     }
 /*@egen*/
     {
-    jjtn001.setFirstToken(t);
-    jjtn001.setLastToken(getToken(0));
+    setFirstLastToken(t, getToken(0));
     })/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
@@ -1551,8 +1570,7 @@ void DecafMethod() :
   }
 /*@egen*/
   {
-      jjtn001.setFirstToken(t);
-      jjtn001.setLastToken(getToken(0));
+      setFirstLastTokens(t);
       })/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
@@ -1574,4 +1592,10 @@ void DecafMethod() :
       }
     }
 /*@egen*/             
+}
+
+JAVACODE
+void setFirstLastTokens(Token t1, Token t2) {
+    jjtThis.setFirstToken(t1);
+    jjtThis.setLastToken(t2);
 }

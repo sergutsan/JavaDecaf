@@ -2,6 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=true,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package main.java.ast;
 
+import main.java.parser.*;
+
 /* All AST nodes must implement this interface.  It provides basic
    machinery for constructing the parent and child relationships
    between nodes. */
@@ -33,4 +35,4 @@ interface Node {
   /** Return the number of children the node has. */
   public int jjtGetNumChildren();
 }
-/* JavaCC - OriginalChecksum=555088a6f639222cfb22c732b513589a (do not edit this line) */
+/* JavaCC - OriginalChecksum=6ee45a6bb6816e3a755614832edf352d (do not edit this line) */
