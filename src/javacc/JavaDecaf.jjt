@@ -1071,7 +1071,7 @@ void IfStatement() :
                               Block() [ LOOKAHEAD(1) "else" Block() ]
                               {
                                 jjtThis.setFirstToken(t);
-                                jjtThis.setLastToken(Token.newToken(73));
+                                jjtThis.setLastToken(Token.newToken(73)); //RBRACE
                                 })#IfStatement //Do not permit braceless statements - SK
                               {
                               //inIfLoop = false; //change back to false once loop ends - SK
@@ -1081,25 +1081,36 @@ void IfStatement() :
 
 void WhileStatement() :
 {
-    inLoopCondition = true; //SK
+    Token t;
+    //inLoopCondition = true; //SK
 }
-{
+{ ({
+      t = getToken(1);
+   }
   "while" "(" Expression() ")" {
-                                 inLoopCondition = false; //SK
+                                 //inLoopCondition = false; //SK
                                  }
                                  Block() //Do not permit braceless statements - SK
+                                 {
+                                    jjtThis.setFirstToken(t);
+                                    jjtThis.setLastToken(Token.newToken(73)); //RBRACE
+                                 })#WhileStatement
 
 }
 
 void DoStatement() :
-{}
 {
-  "do" Block() "while" { //Do not permit braceless statements - SK
-                            inLoopCondition = true; //SK
-                            } "(" Expression() ")" ";"
-                            {
-                              inLoopCondition = false; //SK
-                              }
+    Token t;
+}
+{ ({
+    t = getToken(1);
+    }
+  "do" Block() {
+                jjtThis.setFirstToken(t);
+                jjtThis.setLastToken(Token.newToken(73)); //RBRACE
+                })#DoStatement
+                "while" "(" Expression() ")" ";"
+
 }
 
 void ForStatement() :
