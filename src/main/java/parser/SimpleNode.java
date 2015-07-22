@@ -107,11 +107,17 @@ public class SimpleNode implements Node {
   public void setLastToken(Token t) { end = t; }
 
   public void process (PrintWriter ostr) {
+    Token t = begin;
+    while (t.kind != JDCParserConstants.LBRACE){
+      print(t, ostr);
+      t = t.next;
+    }
     SimpleNode child;
     for (int i = 0; i<jjtGetNumChildren(); i++) {
       child = (SimpleNode) jjtGetChild(i);
       child.process(ostr);
     }
+    //print(end, ostr);
   }
 
   /**
