@@ -16,21 +16,25 @@ class ASTStatementExpression extends SimpleNode {
 
   public void process(PrintWriter ostr) {
     /* if the parent node is a loop, check indentation of first token */
-
-    switch(jjtGetParent().toString()){
-      case "IfStatement":
-      case "ForStatement":
-      case "WhileStatement":
-      case "DoStatement":
-        StyleWarnings.checkIndentation(parser, begin, 1);
-        break;
-      default:
-        break;
-    }
-
     Token t = begin;
-    while (t != end){
+    String prevToken = "";
+    while (!t.equals(end)) {
+      if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
+        switch (jjtGetParent().toString()) {
+          case "IfStatement":
+          case "ForStatement":
+          case "WhileStatement":
+          case "DoStatement":
+            StyleWarnings.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
+            break;
+          default:
+            break;
+        }
+      }
+
+      t = ASTUtils.checkForSubstitutions(t, prevToken);
       print(t, ostr);
+      prevToken = t.image;
       t = t.next;
     }
     print(end, ostr);
