@@ -108,6 +108,14 @@ public class SimpleNode implements Node {
 
   public void process (PrintWriter ostr) {
     Token t = begin;
+    switch (jjtGetParent().toString()) {
+      case "MethodDeclaration":
+      case "ClassDeclaration":
+        StyleWarnings.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
+        break;
+      default:
+        break;
+    }
     while (t.kind != JDCParserConstants.LBRACE){
       print(t, ostr);
       t = t.next;
