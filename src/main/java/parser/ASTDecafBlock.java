@@ -69,22 +69,7 @@ public class ASTDecafBlock extends SimpleNode{
       */
 
       while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon
-          if (!prevToken.equals(".")) {
-              switch (t.image) {
-                  case "println":
-                      t.image = "System.out.println";
-                      break;
-                  case "print":
-                      t.image = "System.out.print";
-                      break;
-                  case "readLine":
-                      t.image = "input.readLine"; //input is Scanner
-                      break;
-                  case "readInt":
-                      t.image = "input.readInt";
-                      break;
-              }
-          }
+          t = ASTUtils.checkForSubstitutions(t,prevToken);
           print(t, ostr);   //print the token to output stream
           prevToken = t.image;  //assign value of prevToken to the current token's image
           t = t.next;   //assign t to next token
