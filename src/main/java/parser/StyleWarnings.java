@@ -7,7 +7,7 @@ package main.java.parser;
 public class StyleWarnings {
     private static final int INDENTATION_SPACES = 4;
 
-    public static void checkIndentation(Token t, int indentationLevel) {
+    public static void checkIndentation(JDCParser p, Token t, int indentationLevel) {
         int indentationCount = 0;
         Token countToken = t;
         while (countToken != null) {
@@ -25,7 +25,7 @@ public class StyleWarnings {
                     "\nif (x == y) {" +
                     "\n    println(x);"+
                     "\n}";
-            JDCParser.addWarning(warning);
+            p.addWarning(warning);
         }
 
 
