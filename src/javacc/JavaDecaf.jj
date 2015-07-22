@@ -34,7 +34,7 @@ options {
   JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
                            //pass parser object into node constructors
-  DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
   STATIC = false;
   OUTPUT_DIRECTORY = "../main/java/parser";
 }
@@ -431,9 +431,48 @@ void UnmodifiedClassDeclaration() :
 }
 
 void ClassBody() :
-{}
-{
-  "{" ( ClassBodyDeclaration() )* "}"
+{Token t;}
+{/*@bgen(jjtree) ClassBodyDeclaration */
+  {
+    ASTClassBodyDeclaration jjtn001 = new ASTClassBodyDeclaration(this, JJTCLASSBODYDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(1);
+    }
+    "{" ( ClassBodyDeclaration() )* "}"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    }
+/*@egen*/
+    {
+      jjtn001.setFirstToken(t);
+      jjtn001.setLastToken(getToken(0));
+    })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                     
 }
 
 void NestedClassDeclaration() :
@@ -543,10 +582,49 @@ void ArrayInitializer() :
 }
 
 void MethodDeclaration() :
-{}
+{Token t;}
 {
-  ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
-  ResultType() MethodDeclarator() [ "throws" NameList() ]
+  (/*@bgen(jjtree) MethodDeclaration */
+  {
+    ASTMethodDeclaration jjtn001 = new ASTMethodDeclaration(this, JJTMETHODDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(1);
+    }( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
+  ResultType() MethodDeclarator() [ "throws" NameList() ]/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  { jjtn001.setFirstToken(t);
+    jjtn001.setLastToken(getToken(0));
+    }
+    )/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                  )
   (
     Block()
   |
