@@ -20,10 +20,12 @@ public class StyleWarnings {
         of spaces to indent, add this warning to the warning list */
 
         if (indentationCount != (indentationLevel * INDENTATION_SPACES)) {
-            String warning = "Warning - line " + t.endLine + ", column " + t.endColumn +
-                    ": contents of loop should be indented by four spaces. e.g.:" +
-                    "\nif (x == y) {" +
-                    "\n    println(x);"+
+            String warning = "Warning - \":" + t.image + "\", line " + t.endLine + ", column " + t.endColumn +
+                    ": methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
+                    "\nvoid isLessThan(int number1, int number2) {"+
+                    "\n    if (x < y) {" +
+                    "\n        println(x + \"is less than\" + y);" +
+                    "\n    }" +
                     "\n}";
             p.addWarning(warning);
         }
