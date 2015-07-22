@@ -17,7 +17,7 @@ class ASTStatementExpression extends SimpleNode {
   public void process(PrintWriter ostr) {
     /* if the parent node is a loop, check indentation of first token */
     if (jjtGetParent().toString().equals("IfStatement")) {
-      StyleWarnings.checkIndentation(p, begin, 1);
+      StyleWarnings.checkIndentation(parser, begin, 1);
 
     }
   }
