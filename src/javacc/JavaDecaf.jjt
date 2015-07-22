@@ -38,6 +38,7 @@ options {
   NODE_PACKAGE = "main.java.ast";
   OUTPUT_DIRECTORY = "../main/java/parser";
   JJTREE_OUTPUT_DIRECTORY = "../main/java/ast";
+  TRACK_TOKENS = true;
 }
 
 PARSER_BEGIN(JDCParser)
