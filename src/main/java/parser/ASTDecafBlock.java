@@ -61,11 +61,9 @@ public class ASTDecafBlock extends SimpleNode{
       */
       print(encapsulation, ostr);
       String prevToken = ""; // value of previous token image
+
      /*
      * Replace all JavaDecaf method calls with the Java equivalents.
-     * To avoid nesting when used with Java method calls, e.g.
-     * System.out.System.out.println, check value of previous token
-     * If it's a full stop, it's likely a Java method call, so no replacement.
       */
 
       while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon

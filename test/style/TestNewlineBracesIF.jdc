@@ -1,0 +1,6 @@
+int i = 10;
+
+if (i % 5 == 0)
+{
+println("Hello world!");
+}
