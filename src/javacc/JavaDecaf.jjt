@@ -32,7 +32,7 @@ options {
   NODE_DEFAULT_VOID = true;
   ERROR_REPORTING = true;
   JAVA_UNICODE_ESCAPE = true;
-  //DEBUG_PARSER = true;
+  §DEBUG_PARSER = true;
   OUTPUT_DIRECTORY = "../main/java/parser";
 }
 
