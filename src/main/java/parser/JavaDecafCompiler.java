@@ -35,7 +35,7 @@ public class JavaDecafCompiler {
      */
     public void launch(String[] args){
         Boolean parseOnly = false; //indicates Parse Only mode (no Java Compiler)
-
+        Boolean toConsole = false; //whether or not to print to console rather than file
         /* Command line parameters */
         List<String> argsList = Arrays.asList(args);
         if (argsList.contains("-v") || argsList.contains("-version")) {
@@ -49,10 +49,14 @@ public class JavaDecafCompiler {
             printUsage();
             System.exit(0); //stop any further execution as there may not be a filename given
         }
+        if (argsList.contains("-c") || argsList.contains("-console")) {
+            toConsole = true;
+            parseOnly = true;
+        }
 
         long startTime = System.nanoTime();
         String inputFile = args[args.length-1]; //last item in args is the filename
-        String precompiledClass = precompile(inputFile);
+        String precompiledClass = precompile(inputFile, toConsole);
         long endTime = System.nanoTime();
         if (precompiledClass != null) {
             if (parseOnly) { //print success message and finish
@@ -69,9 +73,10 @@ public class JavaDecafCompiler {
      * Call the JavaCC parser on the file from args[0] to convert the JavaDecaf code to true Java.
      * Use the name of the JDC file for the name of the Java class, and check its validity as a Java classname.
      * @param filePath the path of the file to be used as input, to become Java class name
+     * @param toConsole whether or not printing to console is enabled
      * @return the filename of the converted java file, null if something goes wrong
      */
-    public String precompile(String filePath) {
+    public String precompile(String filePath, boolean toConsole) {
         JDCParser parser;
         ASTCompilationUnit node;
         String className = "";
@@ -89,8 +94,12 @@ public class JavaDecafCompiler {
                 className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 parser = new JDCParser(new FileInputStream(inputFile));
                 node = parser.CompilationUnit();
-                //PrintWriter ostr = new PrintWriter(new FileWriter(className+".java"));
-                PrintWriter ostr = new PrintWriter(System.out); //DEBUG
+                PrintWriter ostr;
+                if (toConsole) {
+                    ostr = new PrintWriter(System.out); //print results to stdout, not file
+                } else {
+                    ostr = new PrintWriter(new FileWriter(className+".java"));
+                }
                 node.process(ostr, className);
                 ostr.close();
                 parser.printWarnings(); //print any warnings that arised
@@ -132,9 +141,10 @@ public class JavaDecafCompiler {
     public void printUsage(){
         String usage = "usage: javadecaf [options] filename" +
                 "\noptions:"+
-                "\n-p | -parse      Parse-only mode - disable Java compiler stage" +
-                "\n-v | -version    Display version number" +
-                "\n-help            Show help";
+                "\n-p, -parse      Parse-only mode - disable Java compiler stage" +
+                "\n-v, -version    Display version number" +
+                "\n -c, -console   Print parser results to console (enables parse-only mode)" +
+                "\n-help           Show help";
 
         System.out.println(usage);
     }
