@@ -36,9 +36,16 @@ public class SimpleNode implements Node {
   protected Node parent;
   protected Node[] children;
   protected int id;
+  protected JDCParser parser;
 
   public SimpleNode(int i) {
     id = i;
+  }
+
+  /* Constructor with parser. SK */
+  public SimpleNode(int i, JDCParser p) {
+    id = i;
+    parser = p;
   }
 
   public void jjtOpen() {
