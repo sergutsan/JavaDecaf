@@ -522,15 +522,15 @@ void MethodDeclaration() :
     t = getToken(1);
     }( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
   ResultType() MethodDeclarator() [ "throws" NameList() ]
-  { jjtThis.setFirstToken(t);
-    jjtThis.setLastToken(getToken(0));
-    }
-    )#MethodDeclaration)
+
   (
     Block()
   |
    ";"
-  )
+  ){ jjtThis.setFirstToken(t);
+       jjtThis.setLastToken(getToken(0));
+       }
+       )#MethodDeclaration)
 }
 
 void MethodDeclarator() :
