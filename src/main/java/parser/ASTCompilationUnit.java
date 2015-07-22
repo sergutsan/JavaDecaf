@@ -68,7 +68,7 @@ public class ASTCompilationUnit extends SimpleNode {
           child = (SimpleNode) jjtGetChild(i);   //the "floating" code will always be first
           child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
           t = child.end.next;
-          if (i==0){    //first iteration (main clause) needs closing brace
+          if (child.toString().equals("DecafBlock")){    //first iteration (main clause) needs closing brace
               printFinalClosingBrace(ostr, "    "); //closing brace of ain
               encapsulation.image = "\n    private static";  //after first iteration, change encapsulation for methods.
           }
