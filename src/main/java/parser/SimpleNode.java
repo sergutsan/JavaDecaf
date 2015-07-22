@@ -107,9 +107,13 @@ public class SimpleNode implements Node {
   public void setLastToken(Token t) { end = t; }
 
   public void process (PrintWriter ostr) {
-    System.out.println("Error - this should not be called");
-    throw new Error();
+    SimpleNode child;
+    for (int i = 0; i<jjtGetNumChildren(); i++) {
+      child = (SimpleNode) jjtGetChild(i);
+      child.process(ostr);
+    }
   }
+
 
   // The following method prints token t, as well as all preceding
   // special tokens (essentially, white space and comments).
