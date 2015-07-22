@@ -54,11 +54,6 @@ public class JavaDecafCompiler {
         String filename = args[args.length-1]; //last item in args is the filename
         File inputFile = new File(filename);
         PrintWriter ostr = null;
-        try {
-            ostr = new PrintWriter(new FileWriter(inputFile.getName() + ".java"));
-        } catch (IOException e) {
-            System.out.println("Error creating file " + inputFile.getName() + ".java");
-        }
 
         if (argsList.contains("-c") || argsList.contains("-console")) {
             parseOnly = true;
@@ -99,6 +94,9 @@ public class JavaDecafCompiler {
                     throw new ParseException("Class names in Java must begin with a capital letter. " +
                             "Please rename the file.");
                 }
+                if (ostr == null) {
+                    ostr = new PrintWriter(new FileWriter(className + ".java"));
+                }
                 parser = new JDCParser(new FileInputStream(inputFile));
                 node = parser.CompilationUnit();
                 node.process(ostr, className);
@@ -110,7 +108,9 @@ public class JavaDecafCompiler {
                 System.out.println(e.getMessage());
             } catch (FileNotFoundException e) {
                     System.out.println("File " + inputFile + " not found.");
-            } catch (TokenMgrError e) {
+            } catch (IOException e) {
+                System.out.println("Error creating file " + inputFile.getName() + ".java");
+            }catch (TokenMgrError e) {
                 System.out.println(e.getMessage());
                 if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
             }
