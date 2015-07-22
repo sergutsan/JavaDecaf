@@ -18,12 +18,9 @@ public class ClosingBraceSimpleNode extends SimpleNode {
 
     public void process(PrintWriter ostr) {
         super.process(ostr);
-        int indentationLevel = 0;
-        Node node = this;
-        while(!node.jjtGetParent().toString().equals("CompilationUnit")) {
-            indentationLevel++;
-            node = node.jjtGetParent(); //iterate through parents to find out how indented this should be
-        }
+
+        int indentationLevel = ASTUtils.getIndentationLevel(this);
+
         String indentation = "";
         for (int i = 0; i<indentationLevel; i++){
             indentation += INDENTATION_SPACES;
