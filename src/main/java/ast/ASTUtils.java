@@ -7,7 +7,6 @@ import main.java.parser.Token;
  * @author Sophie Koonin
  * */
 public class ASTUtils {
-
     /**
      * Replace all JavaDecaf method calls with the Java equivalents.
      * To avoid nesting when used with Java method calls, e.g.
@@ -39,7 +38,7 @@ public class ASTUtils {
     }
 
     /**
-     * Fid the indentation level of the current node.
+     * Find the indentation level of the current node.
      * @param currentNode the node to count from
      * @return the number of levels to indent
      */
@@ -51,6 +50,17 @@ public class ASTUtils {
             counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
         }
         return indentationLevel;
+    }
+
+    /**
+     * Whether or not the parent is a conditional loop.
+     * @param parent the parent node in question
+     * @return true if it is a conditional loop
+     */
+    protected static boolean isConditionalLoop(Node parent) {
+        return (parent.toString().equals("IfStatement")
+                || parent.toString().equals("WhileStatement")
+                || parent.toString().equals("ForStatement"));
     }
 
 }
