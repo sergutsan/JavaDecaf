@@ -65,6 +65,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     }
 
     /**
+    * Get the name of the class
+    */
+    public void getClassName() {
+        return className;
+        }
+
+
+    /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
     * Throw ParseException if not legal.
     * @param t - the token of the identifier in question

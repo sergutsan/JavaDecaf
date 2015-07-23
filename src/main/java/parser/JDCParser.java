@@ -19,6 +19,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
 
     /**
+    * Get the name of the class
+    */
+    public void getClassName() {
+        return className;
+        }
+
+
+    /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
     * Throw ParseException if not legal.
     * @param t - the token of the identifier in question
@@ -3270,16 +3278,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  private boolean jj_3R_199() {
-    if (jj_3R_214()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_227()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
   private boolean jj_3R_193() {
     if (jj_scan_token(BIT_AND)) return true;
     if (jj_3R_181()) return true;
@@ -5535,6 +5533,16 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     while (true) {
       xsp = jj_scanpos;
       if (jj_3R_236()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_199() {
+    if (jj_3R_214()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_227()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
