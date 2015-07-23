@@ -44,7 +44,7 @@ import main.java.parser.Token;
 
 import java.io.*;
 
-public class ASTDecafBlock extends SimpleNode {
+public class ASTDecafBlock extends ClosingBraceSimpleNode {
 
   ASTDecafBlock(int id) {
     super(id);
