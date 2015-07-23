@@ -113,7 +113,7 @@ public class SimpleNode implements Node {
     switch (jjtGetParent().toString()) {
       case "MethodDeclaration":
       case "ClassDeclaration":
-        StyleWarnings.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
+        ASTUtils.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
         break;
       default:
         break;

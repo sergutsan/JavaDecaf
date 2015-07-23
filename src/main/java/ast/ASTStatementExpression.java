@@ -3,7 +3,6 @@
 package main.java.ast;
 
 import main.java.parser.JDCParser;
-import main.java.parser.StyleWarnings;
 import main.java.parser.Token;
 
 import java.io.PrintWriter;
@@ -25,7 +24,7 @@ class ASTStatementExpression extends SimpleNode {
     while (!t.equals(end)) {
       if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
         if (ASTUtils.isConditionalLoop(jjtGetParent())) {
-            StyleWarnings.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
+            ASTUtils.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
         }
       }
 
