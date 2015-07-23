@@ -28,7 +28,7 @@ public class ClosingBraceSimpleNode extends SimpleNode {
 
         String indentation = "";
         for (int i = 0; i<indentationLevel; i++){
-            indentation += INDENTATION_SPACES;
+           indentation += INDENTATION_SPACES;
         }
         Token closingBrace = Token.newToken(73, indentation + "}");
         closingBrace.specialToken = new Token(0, "\n");
