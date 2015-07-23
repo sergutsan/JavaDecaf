@@ -82,7 +82,7 @@ public class ASTUtils {
                 sT = Token.newToken(0, " ");
                 sT = sT.specialToken;
             }
-            sT.specialToken = new Token(0, "\n");
+            sT = new Token(0, "\n");
 
 
 
