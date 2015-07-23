@@ -17,6 +17,7 @@ public interface JDCParserTreeConstants
   public int JJTDOSTATEMENT = 9;
   public int JJTFORSTATEMENT = 10;
   public int JJTDECAFBLOCK = 11;
+  public int JJTDECAFMETHOD = 12;
 
 
   public String[] jjtNodeName = {
@@ -32,6 +33,7 @@ public interface JDCParserTreeConstants
     "DoStatement",
     "ForStatement",
     "DecafBlock",
+    "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=7a3b344ecae41a661e528ce3e31dc1c9 (do not edit this line) */
+/* JavaCC - OriginalChecksum=a98fe7ade5aa88e6e73a58e3d5ef81d7 (do not edit this line) */

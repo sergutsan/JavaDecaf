@@ -1571,9 +1571,9 @@ void DecafBlock() :
 */
 void DecafMethod() :
 {Token t;}
-{/*@bgen(jjtree) DecafBlock */
+{/*@bgen(jjtree) DecafMethod */
     {
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
+      ASTDecafMethod jjtn001 = new ASTDecafMethod(this, JJTDECAFMETHOD);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }
@@ -1617,7 +1617,7 @@ void DecafMethod() :
         jjtree.closeNodeScope(jjtn001, true);
       }
     }
-/*@egen*/             
+/*@egen*/              
 }
 
 JAVACODE

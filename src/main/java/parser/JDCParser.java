@@ -2993,7 +2993,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 */
   final public void DecafMethod() throws ParseException {
  Token t;
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
+      ASTDecafMethod jjtn001 = new ASTDecafMethod(this, JJTDECAFMETHOD);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     try {
