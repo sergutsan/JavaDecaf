@@ -3,6 +3,10 @@
 package main.java.ast;
 
 import main.java.parser.JDCParser;
+import main.java.parser.JDCParserConstants;
+import main.java.parser.Token;
+
+import java.io.PrintWriter;
 
 public
 class ASTForStatement extends ClosingBraceSimpleNode {
@@ -12,6 +16,13 @@ class ASTForStatement extends ClosingBraceSimpleNode {
 
   public ASTForStatement(JDCParser p, int id) {
     super(p, id);
+  }
+
+  public void process(PrintWriter ostr){
+      super.process(ostr);
+      /* For loops have last parenthesis and brace missing so manually add these. */
+      print(Token.newToken(JDCParserConstants.RPAREN, ")"), ostr);
+      print(Token.newToken(JDCParserConstants.LBRACE, "{"), ostr);
   }
 
 }
