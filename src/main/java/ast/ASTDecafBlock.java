@@ -56,7 +56,6 @@ public class ASTDecafBlock extends ClosingBraceSimpleNode {
     /**
      * Encapsulate a "loose" block of Decaf code and perform any requisite substitutions.
      * @param ostr - output stream writer defined in JDCParser
-     * @see ASTCompilationUnit
      */
   public void process (PrintWriter ostr) {
       String classDec = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
