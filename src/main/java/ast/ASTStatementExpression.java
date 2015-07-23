@@ -22,6 +22,7 @@ class ASTStatementExpression extends SimpleNode {
     Token t = begin;
     String prevToken = "";
     while (t.next != null) {
+      t = ASTUtils.indent(t, this);
       if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
         if (ASTUtils.isConditionalLoop(jjtGetParent())) {
             ASTUtils.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
