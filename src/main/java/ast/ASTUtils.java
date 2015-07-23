@@ -10,6 +10,7 @@ import main.java.parser.Token;
  * */
 public class ASTUtils {
     private static final int INDENTATION_SPACES = 4;
+    public static final String INDENTATION = "    ";
 
     /**
      * Replace all JavaDecaf method calls with the Java equivalents.
@@ -67,7 +68,7 @@ public class ASTUtils {
                 || parent.toString().equals("ForStatement"));
     }
 
-    protected static void indent(Token t, SimpleNode node) {
+    protected static Token indent(Token t, SimpleNode node) {
         if (node instanceof ClosingBraceSimpleNode
                 || node instanceof ASTDecafBlock) {
             int indentationLevel = getIndentationLevel(node);
@@ -81,6 +82,7 @@ public class ASTUtils {
             }
             t.specialToken = indentation;
         }
+        return t;
     }
 
     /**
