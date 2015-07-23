@@ -12,7 +12,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     private String className;
 
 /* Constructor with className calls normal constructor. */
-    public void JDCParser(FileInputStream fis, String className){
+    public JDCParser(FileInputStream fis, String className){
         this(fis);
         this.className = className;
 

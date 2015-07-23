@@ -52,7 +52,7 @@ public class JDCParser {
     private String className;
 
 /* Constructor with className calls normal constructor. */
-    public void JDCParser(FileInputStream fis, String className){
+    public JDCParser(FileInputStream fis, String className){
         this(fis);
         this.className = className;
 
