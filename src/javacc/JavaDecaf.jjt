@@ -968,7 +968,7 @@ void Statement() :
 |
   EmptyStatement()
 |
-  StatementExpression()
+  StatementExpression() ";"
 |
   SwitchStatement()
 |
@@ -1050,7 +1050,7 @@ void StatementExpression() :
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   Assignment()
 |
-  PostfixExpression()) ";"
+  PostfixExpression())
   {
     setFirstLastToken(jjtThis, t, getToken(1));
   }) #StatementExpression //Create node

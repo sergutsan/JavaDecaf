@@ -1087,7 +1087,7 @@ void Statement() :
 |
   EmptyStatement()
 |
-  StatementExpression() 
+  StatementExpression() ";"
 |
   SwitchStatement()
 |
@@ -1176,7 +1176,7 @@ void StatementExpression() :
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   Assignment()
 |
-  PostfixExpression()) ";"/*@bgen(jjtree)*/
+  PostfixExpression())/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
