@@ -8,23 +8,21 @@ public interface JDCParserTreeConstants
   public int JJTCOMPILATIONUNIT = 0;
   public int JJTVOID = 1;
   public int JJTCLASSDECLARATION = 2;
-  public int JJTCLASSBODYDECLARATION = 3;
-  public int JJTMETHODDECLARATION = 4;
-  public int JJTSINGLEEQUALS = 5;
-  public int JJTSTATEMENTEXPRESSION = 6;
-  public int JJTIFSTATEMENT = 7;
-  public int JJTWHILESTATEMENT = 8;
-  public int JJTDOSTATEMENT = 9;
-  public int JJTFORSTATEMENT = 10;
-  public int JJTDECAFBLOCK = 11;
-  public int JJTDECAFMETHOD = 12;
+  public int JJTMETHODDECLARATION = 3;
+  public int JJTSINGLEEQUALS = 4;
+  public int JJTSTATEMENTEXPRESSION = 5;
+  public int JJTIFSTATEMENT = 6;
+  public int JJTWHILESTATEMENT = 7;
+  public int JJTDOSTATEMENT = 8;
+  public int JJTFORSTATEMENT = 9;
+  public int JJTDECAFBLOCK = 10;
+  public int JJTDECAFMETHOD = 11;
 
 
   public String[] jjtNodeName = {
     "CompilationUnit",
     "void",
     "ClassDeclaration",
-    "ClassBodyDeclaration",
     "MethodDeclaration",
     "SingleEquals",
     "StatementExpression",
@@ -36,4 +34,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=a98fe7ade5aa88e6e73a58e3d5ef81d7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=4a8c36966843ca7195b3ce3cd2f97622 (do not edit this line) */
