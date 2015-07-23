@@ -56,37 +56,16 @@ public class ASTDecafBlock extends SimpleNode {
     /**
      * Encapsulate a "loose" block of Decaf code and perform any requisite substitutions.
      * @param ostr - output stream writer defined in JDCParser
-     * @param encapsulation - token containing encapsulation code needed
      * @see ASTCompilationUnit
      */
-  public void process (PrintWriter ostr, Token encapsulation) {
-     Token t = begin;  // t is first token in class.
-      /*
-      *This is where the class and main method declarations are defined.
-      * Spaces are for indentation to make the output code resemble what good practice Java should look like.
-      * Init Scanner for any readLine/readInt calls.
-      */
-      print(encapsulation, ostr);
-//      String prevToken = ""; // value of previous token image
+  public void process (PrintWriter ostr) {
+      String classDec = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
+              "public class " + parser.getClassName() + " { \n    " +
+              "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
+              "    public static void main(String[] args){\n    ";
+      ostr.print(classDec);
 //
-//     /*
-//     * Replace all JavaDecaf method calls with the Java equivalents.
-//      */
-//
-//      while (!t.equals(end)) {    //stop when t is equal to the end token, final semicolon
-//          t = ASTUtils.checkForSubstitutions(t, prevToken);
-//          print(t, ostr);   //print the token to output stream
-//          prevToken = t.image;  //assign value of prevToken to the current token's image
-//          t = t.next;   //assign t to next token
-//      }
-
       super.process(ostr);
-
-    // t is final semicolon (for floating code) or closing brace (for method)
-      if (t.kind == JDCParserConstants.RBRACE) {
-          t.image = "    }";
-      }
-      //print(t, ostr); // print final t
   }
 
 }

@@ -143,7 +143,6 @@ public class SimpleNode implements Node {
     process(ostr);
   }
 
-
   // The following method prints token t, as well as all preceding
   // special tokens (essentially, white space and comments).
   // These methods were already provided.
