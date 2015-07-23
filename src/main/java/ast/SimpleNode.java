@@ -135,13 +135,6 @@ public class SimpleNode implements Node {
    // print(end, ostr);
   }
 
-  /**
-   *  Version of process with two parameters, for Decaf encapsulation
-   *  Default behaviour: just call process (ignore encapsulation)
-   */
-  public void process (PrintWriter ostr, Token encapsulation) {
-    process(ostr);
-  }
 
   // The following method prints token t, as well as all preceding
   // special tokens (essentially, white space and comments).
