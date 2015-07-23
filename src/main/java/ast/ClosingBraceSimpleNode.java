@@ -12,7 +12,6 @@ import java.io.PrintWriter;
  * @author Sophie Koonin
  */
 public class ClosingBraceSimpleNode extends SimpleNode {
-    private static final String INDENTATION_SPACES = "    ";
 
     public ClosingBraceSimpleNode(int i) {
         super(i);
@@ -27,8 +26,13 @@ public class ClosingBraceSimpleNode extends SimpleNode {
         int indentationLevel = ASTUtils.getIndentationLevel(this);
 
         String indentation = "";
-        for (int i = 0; i<indentationLevel; i++){
-           indentation += INDENTATION_SPACES;
+
+        if (this instanceof ASTDecafBlock) {
+            indentation = ASTUtils.INDENTATION;
+        } else {
+            for (int i = 0; i<indentationLevel; i++) {
+                indentation += ASTUtils.INDENTATION;
+            }
         }
         Token closingBrace = Token.newToken(73, indentation + "}");
         closingBrace.specialToken = new Token(0, "\n");
