@@ -53,38 +53,12 @@ public class ASTCompilationUnit extends SimpleNode {
 // Manually inserted code begins here - edited by Sophie Koonin
 
   public void process (PrintWriter ostr, String className) {
-    Token t = begin;
     SimpleNode child;
-//      while (t.kind != JDCParserConstants.LBRACE){
-//          print(t, ostr); //Normal code printing
-//          t = t.next;
-//      }
-
-
-      Token encapsulation = new Token(); //this is for the class and main method declarations
-      encapsulation.image = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
-              "public class " + className + " { \n    " +
-              "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
-              "    public static void main(String[] args){\n    ";
-
-      for (int i = 0; i < jjtGetNumChildren(); i++) {   //check that there are children
-          child = (SimpleNode) jjtGetChild(i);   //the "floating" code will always be first
-          child.process(ostr, encapsulation);   //pass Token encapsulation through so it will be printed first
-          t = child.end.next;
-          if (child.toString().equals("DecafBlock")){    //first iteration (main clause) needs closing brace
-              printFinalClosingBrace(ostr, "    "); //closing brace of ain
-              encapsulation.image = "\n    private static";  //after first iteration, change encapsulation for methods.
-          }
-          if (i==(jjtGetNumChildren()-1)){
-            printFinalClosingBrace(ostr, "");   //final closing brace of class, no indentation
-          }
+      for (int i = 0; i < jjtGetNumChildren(); i++) {
+          child = (SimpleNode) jjtGetChild(i);
+          child.process(ostr);
       }
 
   }
 
-    public void printFinalClosingBrace(PrintWriter ostr, String indentation){
-        Token close = new Token();
-        close.image = "\n" + indentation + "}\n";
-        print(close, ostr);
-    }
 }
