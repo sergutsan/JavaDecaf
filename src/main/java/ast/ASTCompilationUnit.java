@@ -52,7 +52,7 @@ public class ASTCompilationUnit extends SimpleNode {
 
 // Manually inserted code begins here - edited by Sophie Koonin
 
-  public void process (PrintWriter ostr, String className) {
+  public void process (PrintWriter ostr) {
     SimpleNode child;
       for (int i = 0; i < jjtGetNumChildren(); i++) {
           child = (SimpleNode) jjtGetChild(i);
