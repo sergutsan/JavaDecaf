@@ -3127,7 +3127,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         Block();
                jjtree.closeNodeScope(jjtn001, true);
                jjtc001 = false;
-    setFirstLastToken(jjtn001, t, rbrace);
+    setFirstLastToken(jjtn001, t, getToken(0));
       } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);

@@ -1399,7 +1399,7 @@ void ForStatement() :
              }
 /*@egen*/
              {
-    setFirstLastToken(jjtn001, t, rbrace);
+    setFirstLastToken(jjtn001, t, getToken(0));
              })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {

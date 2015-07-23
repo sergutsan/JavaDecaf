@@ -1140,7 +1140,7 @@ void ForStatement() :
 //            }
             ")" Block()
              {
-    setFirstLastToken(jjtThis, t, rbrace);
+    setFirstLastToken(jjtThis, t, getToken(0));
              })#ForStatement //Do not permit braceless statements - SK
 }
 
