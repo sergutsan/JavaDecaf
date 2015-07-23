@@ -1000,11 +1000,13 @@ void LabeledStatement() :
 }
 
 void Block() :
-{}
+{Token t;}
 {
+  ({t = getToken(1);}
   "{"
    ( BlockStatement() )*
    "}"
+   {setFirstLastToken(jjtThis, t, getToken(0));})#Block
 }
 
 void BlockStatement() :
