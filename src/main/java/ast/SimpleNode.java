@@ -94,10 +94,10 @@ public class SimpleNode implements Node {
     System.out.println(toString(prefix));
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
-	SimpleNode n = (SimpleNode)children[i];
-	if (n != null) {
-	  n.dump(prefix + " ");
-	}
+    SimpleNode n = (SimpleNode)children[i];
+    if (n != null) {
+      n.dump(prefix + " ");
+    }
       }
     }
   }
@@ -166,8 +166,8 @@ public class SimpleNode implements Node {
     for (int i = 0; i < str.length(); i++) {
       ch = str.charAt(i);
       if ((ch < 0x20 || ch > 0x7e) && ch != '\t' && ch != '\n' && ch != '\r' && ch != '\f') {
-  	String s = "0000" + Integer.toString(ch, 16);
-  	retval += "\\u" + s.substring(s.length() - 4, s.length());
+    String s = "0000" + Integer.toString(ch, 16);
+    retval += "\\u" + s.substring(s.length() - 4, s.length());
       } else {
         retval += ch;
       }
