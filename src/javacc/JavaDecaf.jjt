@@ -1200,7 +1200,7 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (LOOKAHEAD(3) BlockStatement())*
+    (LOOKAHEAD(3) BlockStatement())+
     {
     setFirstLastToken(jjtThis, t, getToken(0));
     })  #DecafBlock
