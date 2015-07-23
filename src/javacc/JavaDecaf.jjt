@@ -49,6 +49,14 @@ import java.util.ArrayList;
 public class JDCParser {
     private List<String> warnings = new ArrayList<String>(); // list of warnings
     private Token rbrace = Token.newToken(73, "}");
+    private String className;
+
+/* Constructor with className calls normal constructor. */
+    public void JDCParser(FileInputStream fis, String className){
+        this(fis);
+        this.className = className;
+
+    }
 
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
