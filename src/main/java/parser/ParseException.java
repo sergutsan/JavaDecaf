@@ -135,103 +135,108 @@ public class ParseException extends Exception {
 
       /* check reason for error - SK */
 
-      /* current token is IDENTIFIER and next is any literal - likely missing parenthesis of argument */
-      if (isIdentifier(currentToken.kind) && isLiteral(nextToken.kind)) {
-          retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
-
-      /* current token is SEMICOLON or RBRACE and next is EOF - missing RBRACE */
-      } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && nextToken.kind == JDCParserConstants.EOF) {
-          retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
-
-      /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
-      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
-              (nextToken.kind == JDCParserConstants.EOF ||
-                      ((nextToken.specialToken!=null && nextToken.specialToken.image.equals(eol))))) {
-          retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
-
-          /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
-      } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) {
-          retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash, e.g.: \nprintln(\"say \\\"hello\\\"!\") ." +
-                  "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(\"hello\" + name + \"!\")\"; .";
-
-        /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases
-         * missing quotation mark, not separating method arguments with a comma, or bad concatenation
-         */
-      } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
-          retval += "You may be missing a quotation mark." +
-                  "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(greeting + name + \"!\")\"; ." +
-                  "\nIf these variables are separate method arguments, they should be separated by commas, e.g.: \nmethod(arg1, arg 2);";
-
-      /*  Current token is ASSIGN and next token is GT or LT - <= or >= in incorrect order */
-      } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {
-          retval += "Did you mean: " + nextToken.image + currentToken.image;
-
-          /* Current token is RPAREN, literal or IDENTIFIER and next token is LBRACE or SEMICOLON, and expected token is RPAREN
-           * Missing right parenthesis */
-      } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
-              && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
-              && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN)) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
-          retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
-
-          /* Current token is RPAREN and next is SEMICOLON, and first expected token is 'throws' - method declaration with semicolon */
-      } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
-          retval += "You do not need a semicolon in the first line of a method declaration, e.g.: \nvoid greet(String name) { \n    println(\"Hello\" + name); \n}";
-
-      /* Current token is identifier, primitive or "void" followed by a reserved keyword - reserved keyword used as variable or method name */
-      } else if ((isIdentifier(currentToken.kind)|| currentToken.image.equals("void") || isPrimitive(currentToken.kind)) && //identifier or "void" followed by reserved keyword
-              isReservedKeyword(nextToken.kind)) {
-          retval += "You cannot use \"" + nextToken.image + "\" as a method or variable name in Java because it is a reserved keyword.";
-
-      /* Next token is if, for or while and the following token is NOT a RPAREN - missing parentheses around loop condition.
-      * Lookahead will spot this error, hence currentToken will be the one before the loop keyword. */
-      } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE)
-              && nextToken.next.kind != JDCParserConstants.RPAREN) {
-        retval += "You may have forgotten parentheses around the loop condition."+
-                "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
-                "if (x > y) {\n" +
-                "    println(x);\n" +
-                "}";
-
-          /* Current token is IF, FOR or WHILE, and next token is NOT RPAREN - this is the same as previous error but without lookahead */
-      } else if ((currentToken.kind == JDCParserConstants.IF || currentToken.kind == JDCParserConstants.FOR || currentToken.kind == JDCParserConstants.WHILE)
-              && nextToken.kind != JDCParserConstants.RPAREN) { //error with loop, no lookahead - currentToken is loop keyword
-          retval += "You may have forgotten parentheses around the loop condition."+
-                  "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
-                  "if (x > y) {\n" +
-                  "    println(x);\n" +
-                  "}";
-
-          /* Current token is IDENTIFIER or primitive and next token is ASSIGN - no variable name declared */
-      } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind)) && nextToken.kind == JDCParserConstants.ASSIGN) {
-          retval += "You may have forgotten to define a name for a variable, e.g.: int myNum = 5; ";
-
-          /* Next token is RBRACKET or RBRACE, when RPAREN expected - wrong kind of bracket used*/
-      } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && (expectedTokenSequences[1][0] == JDCParserConstants.RPAREN || expectedTokenSequences[0][0] == JDCParserConstants.RPAREN)) {
-          retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
-
-      /* Current token is RPAREN and next is SEMICOLON, and LBRACE expected - semicolon inserted after loop condition */
-      } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
-          retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
-
-//      /* Parser is within a for loop condition and it expects a semicolon - wrong statement separator used */
-//      } else if (JDCParser.inForLoopCondition && expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON) {
-//          retval += "For loop elements must be separated by semicolons, e.g.:" +
-//                  "\nfor (int i = 0; i < 10; i++) {" +
-//                  "\n    println(i);" +
-//                  "\n}";
-
-          /* Current token is RPAREN and next is NOT a LBRACE when one is expected - loop/branch statement without curly braces */
-      } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
-          retval += "Loop statements must be contained in curly braces, e.g.:\n " +
-                  "if (x > y) {\n" +
-                  "    println(x);\n" +
-                  "}";
-      }
+      retval += getReasonForError(currentToken, nextToken, expectedTokenSequences);
 
    // retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
     return retval;
   }
 
+    /**
+     * Check the reason for the error - SK
+     * @param currentToken the current token
+     * @param nextToken the (offending) next token
+     * @param expectedTokenSequences the list of expected tokens
+     * @return the warning message as a String
+     */
+    private static String getReasonForError(Token currentToken, Token nextToken, int[][] expectedTokenSequences){
+        String retval = "";
+            /* current token is IDENTIFIER and next is any literal - likely missing parenthesis of argument */
+        if (isIdentifier(currentToken.kind) && isLiteral(nextToken.kind)) {
+            retval += "You may have forgotten to include parentheses around an argument- \"" + currentToken.image + "(" + currentToken.next.image + ")\"";
+
+      /* current token is SEMICOLON or RBRACE and next is EOF - missing RBRACE */
+        } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && nextToken.kind == JDCParserConstants.EOF) {
+            retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
+
+      /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
+        } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
+                (nextToken.kind == JDCParserConstants.EOF ||
+                        ((nextToken.specialToken!=null && nextToken.specialToken.image.equals(EOL))))) {
+            retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
+
+          /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
+        } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) {
+            retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash, e.g.: \nprintln(\"say \\\"hello\\\"!\") ." +
+                    "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(\"hello\" + name + \"!\")\"; .";
+
+        /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases
+         * missing quotation mark, not separating method arguments with a comma, or bad concatenation
+         */
+        } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
+            retval += "You may be missing a quotation mark." +
+                    "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(greeting + name + \"!\")\"; ." +
+                    "\nIf these variables are separate method arguments, they should be separated by commas, e.g.: \nmethod(arg1, arg 2);";
+
+      /*  Current token is ASSIGN and next token is GT or LT - <= or >= in incorrect order */
+        } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {
+            retval += "Did you mean: " + nextToken.image + currentToken.image;
+
+          /* Current token is RPAREN, literal or IDENTIFIER and next token is LBRACE or SEMICOLON, and expected token is RPAREN
+           * Missing right parenthesis */
+        } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
+                && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
+                && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN)) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
+            retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
+
+          /* Current token is RPAREN and next is SEMICOLON, and first expected token is 'throws' - method declaration with semicolon */
+        } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'
+            retval += "You do not need a semicolon in the first line of a method declaration, e.g.: \nvoid greet(String name) { \n    println(\"Hello\" + name); \n}";
+
+      /* Current token is identifier, primitive or "void" followed by a reserved keyword - reserved keyword used as variable or method name */
+        } else if ((isIdentifier(currentToken.kind)|| currentToken.image.equals("void") || isPrimitive(currentToken.kind)) && //identifier or "void" followed by reserved keyword
+                isReservedKeyword(nextToken.kind)) {
+            retval += "You cannot use \"" + nextToken.image + "\" as a method or variable name in Java because it is a reserved keyword.";
+
+      /* Next token is if, for or while and the following token is NOT a RPAREN - missing parentheses around loop condition.
+      * Lookahead will spot this error, hence currentToken will be the one before the loop keyword. */
+        } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE)
+                && nextToken.next.kind != JDCParserConstants.RPAREN) {
+            retval += "You may have forgotten parentheses around the loop condition."+
+                    "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
+                    "if (x > y) {\n" +
+                    "    println(x);\n" +
+                    "}";
+
+          /* Current token is IF, FOR or WHILE, and next token is NOT RPAREN - this is the same as previous error but without lookahead */
+        } else if ((currentToken.kind == JDCParserConstants.IF || currentToken.kind == JDCParserConstants.FOR || currentToken.kind == JDCParserConstants.WHILE)
+                && nextToken.kind != JDCParserConstants.RPAREN) { //error with loop, no lookahead - currentToken is loop keyword
+            retval += "You may have forgotten parentheses around the loop condition."+
+                    "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
+                    "if (x > y) {\n" +
+                    "    println(x);\n" +
+                    "}";
+
+          /* Current token is IDENTIFIER or primitive and next token is ASSIGN - no variable name declared */
+        } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind)) && nextToken.kind == JDCParserConstants.ASSIGN) {
+            retval += "You may have forgotten to define a name for a variable, e.g.: int myNum = 5; ";
+
+          /* Next token is RBRACKET or RBRACE, when RPAREN expected - wrong kind of bracket used*/
+        } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && (expectedTokenSequences[1][0] == JDCParserConstants.RPAREN || expectedTokenSequences[0][0] == JDCParserConstants.RPAREN)) {
+            retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
+
+      /* Current token is RPAREN and next is SEMICOLON, and LBRACE expected - semicolon inserted after loop condition */
+        } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
+            retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
+
+          /* Current token is RPAREN and next is NOT a LBRACE when one is expected - loop/branch statement without curly braces */
+        } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
+            retval += "Loop statements must be contained in curly braces, e.g.:\n " +
+                    "if (x > y) {\n" +
+                    "    println(x);\n" +
+                    "}";
+        }
+        return retval;
+    }
     /**
      * Initialise the exception with a reason code
      * @param t - the offending token
@@ -240,21 +245,19 @@ public class ParseException extends Exception {
      * SK
      */
     private static String initWithReason(Token t, String reason){
-        String eol = System.getProperty("line.separator", "\n");
-
-        String retval = "Encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn + "." + eol;
+        String retval = "Encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn + "." + EOL;
         switch (reason) {
             case "method" : /* Bad method name */
-                retval += "Method names should begin with a lower case letter. They should also be verbs. e.g.:" + eol +
-                        "getNumber()" + eol + "update()"+ eol + "reverseString()" + eol + "increment()";
+                retval += "Method names should begin with a lower case letter. They should also be verbs. e.g.:" + EOL +
+                        "getNumber()" + EOL + "update()"+ EOL + "reverseString()" + EOL + "increment()";
                 break;
             case "variable" : /* Bad variable name */
-                retval += "Variable names should begin with a lower case letter. They should also be nouns. e.g.:" + eol +
-                        "int myNum" + eol + "String name" + eol + "Person person1" + eol + "int maxSize";
+                retval += "Variable names should begin with a lower case letter. They should also be nouns. e.g.:" + EOL +
+                        "int myNum" + EOL + "String name" + EOL + "Person person1" + EOL + "int maxSize";
                 break;
             case "class" : /* Bad class name */
-                retval += "Class names should begin with a capital letter. They should also be nouns. e.g.:" + eol +
-                        "class Person" + eol + "class FractionCalculator" + eol + "class FlyingAnimal";
+                retval += "Class names should begin with a capital letter. They should also be nouns. e.g.:" + EOL +
+                        "class Person" + EOL + "class FractionCalculator" + EOL + "class FlyingAnimal";
         }
         return retval;
     }
@@ -302,7 +305,7 @@ public class ParseException extends Exception {
   /**
    * The end of line string for this machine.
    */
-  protected String eol = System.getProperty("line.separator", "\n");
+  protected static final String EOL = System.getProperty("line.separator", "\n");
 
   /**
    * Used to convert raw characters to their escaped version
