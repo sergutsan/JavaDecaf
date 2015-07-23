@@ -677,9 +677,9 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{}
+{Token t;}
 {
-  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+  ({t = getToken(0);}"="{setFirstLastToken(jjtThis, t, t);})#SingleEquals | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :

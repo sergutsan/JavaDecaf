@@ -475,17 +475,10 @@ void ClassDeclaration() :
 }
 
 void UnmodifiedClassDeclaration() :
-{//Token t;
-}
+{}
 {
-  ({
-    //t = getToken(1);
-    }
   "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
-  {
-    //setFirstLastToken(jjtThis, t, getToken(0));
-    })//#UnmodifiedClassDeclaration
 }
 
 void ClassBody() :
@@ -817,9 +810,27 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{}
-{
-  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+{Token t;}
+{/*@bgen(jjtree) SingleEquals */
+  {
+    ASTSingleEquals jjtn001 = new ASTSingleEquals(this, JJTSINGLEEQUALS);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({t = getToken(0);}"="/*@bgen(jjtree)*/
+                        {
+                          jjtree.closeNodeScope(jjtn001, true);
+                          jjtc001 = false;
+                        }
+/*@egen*/{setFirstLastToken(jjtn001, t, t);})/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/              | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :
