@@ -21,10 +21,10 @@ class ASTStatementExpression extends SimpleNode {
     /* if the parent node is a loop, check indentation of first token */
     Token t = begin;
     String prevToken = "";
-    while (t.next != null) {
+    while (t != end) {
       t = ASTUtils.indent(t, this);
       if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
-        if (ASTUtils.isConditionalLoop(jjtGetParent())) {
+        if (jjtGetParent() instanceof ClosingBraceSimpleNode) {
             ASTUtils.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
         }
       }
@@ -35,7 +35,7 @@ class ASTStatementExpression extends SimpleNode {
       t = t.next;
     }
     //manually print last token
-//    print(end, ostr);
+    print(end, ostr);
 //    t.image=";";
 //    print(t, ostr); //print last semicolon
   }
