@@ -1,5 +1,7 @@
 package main.java.ast;
 
+import main.java.parser.JDCParser;
+import main.java.parser.StyleWarnings;
 import main.java.parser.Token;
 
 /**
@@ -7,6 +9,8 @@ import main.java.parser.Token;
  * @author Sophie Koonin
  * */
 public class ASTUtils {
+    private static final int INDENTATION_SPACES = 4;
+
     /**
      * Replace all JavaDecaf method calls with the Java equivalents.
      * To avoid nesting when used with Java method calls, e.g.
@@ -63,4 +67,50 @@ public class ASTUtils {
                 || parent.toString().equals("ForStatement"));
     }
 
+    protected static void indent(Token t, SimpleNode node) {
+        if (node instanceof ClosingBraceSimpleNode
+                || node instanceof ASTDecafBlock) {
+            int indentationLevel = getIndentationLevel(node);
+            String indentationString = "";
+            for (int i = 0; i<indentationLevel; i++){
+                indentationString += "    ";
+            }
+            Token indentation = new Token(0, indentationString);
+            if (t.specialToken != null) { //preserve existing specialTokens
+                t.specialToken.specialToken = t.specialToken;
+            }
+            t.specialToken = indentation;
+        }
+    }
+
+    /**
+     * Check the indentation level and generate a warning if not correctly indented.
+     * @param parser the parser in use
+     * @param t the indented token
+     * @param indentationLevel the expected indentation level
+     */
+    public static void checkIndentation(JDCParser parser, Token t, int indentationLevel) {
+        int indentationCount = 0;
+        Token countToken = t;
+        while (countToken != null) {
+            if (countToken.specialToken != null && countToken.specialToken.image.equals(" ")) {
+                indentationCount++;
+            }
+            countToken = countToken.specialToken;
+        }
+        /* if the actual number of indented spaces doesn't match the indentation level multiplied by the number
+        of spaces to indent, add this warning to the warning list */
+
+        if (indentationCount != (indentationLevel * INDENTATION_SPACES)) {
+            String warning = "methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
+                    "\nvoid isLessThan(int number1, int number2) {"+
+                    "\n    if (x < y) {" +
+                    "\n        println(x + \"is less than\" + y);" +
+                    "\n    }" +
+                    "\n}";
+            StyleWarnings.generateWarning(t, parser, warning);
+        }
+
+
+    }
 }
