@@ -86,7 +86,7 @@ public class ASTDecafBlock extends SimpleNode {
       if (t.kind == JDCParserConstants.RBRACE) {
           t.image = "    }";
       }
-      print(t, ostr); // print final t
+      //print(t, ostr); // print final t
   }
 
 }
