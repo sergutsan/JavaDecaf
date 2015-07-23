@@ -7,6 +7,19 @@ package main.java.parser;
 public class StyleWarnings {
     private static final int INDENTATION_SPACES = 4;
 
+    /**
+     * Create a warning message with the token image, line and column of the token, and add it to the parser's
+     * warning list.
+     * @param t - the offending token
+     * @param parser - the parser in use
+     * @param message - the warning message
+     */
+    public static void generateWarning(Token t, JDCParser parser, String message) {
+        String warning = "Warning: encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn +
+                ":" + message;
+        parser.addWarning(warning);
+    }
+
     public static void checkIndentation(JDCParser p, Token t, int indentationLevel) {
         int indentationCount = 0;
         Token countToken = t;
