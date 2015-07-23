@@ -4,6 +4,8 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
 class ASTSingleEquals extends SimpleNode {
   public ASTSingleEquals(int id) {
@@ -14,5 +16,12 @@ class ASTSingleEquals extends SimpleNode {
     super(p, id);
   }
 
+  public void process(PrintWriter ostr) {
+      super.process(ostr);
+      if (ASTUtils.isConditionalLoop(jjtGetParent())) {
+          String warning = "You have used assignment operator \'=\' in a loop condition. \nTo check for equality, use double equals \'==\'.";
+          StyleWarnings.generateWarning(begin, parser, warning);
+      }
+  }
 }
 /* JavaCC - OriginalChecksum=39c72f4e7a703d676eec12fe152654d9 (do not edit this line) */

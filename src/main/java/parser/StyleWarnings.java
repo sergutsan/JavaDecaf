@@ -20,7 +20,13 @@ public class StyleWarnings {
         parser.addWarning(warning);
     }
 
-    public static void checkIndentation(JDCParser p, Token t, int indentationLevel) {
+    /**
+     * Check the indentation level and generate a warning if not correctly indented.
+     * @param parser the parser in use
+     * @param t the indented token
+     * @param indentationLevel the expected indentation level
+     */
+    public static void checkIndentation(JDCParser parser, Token t, int indentationLevel) {
         int indentationCount = 0;
         Token countToken = t;
         while (countToken != null) {
@@ -33,14 +39,13 @@ public class StyleWarnings {
         of spaces to indent, add this warning to the warning list */
 
         if (indentationCount != (indentationLevel * INDENTATION_SPACES)) {
-            String warning = "Warning: \"" + t.image + "\", line " + t.endLine + ", column " + t.endColumn +
-                    ": methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
+            String warning = "methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
                     "\nvoid isLessThan(int number1, int number2) {"+
                     "\n    if (x < y) {" +
                     "\n        println(x + \"is less than\" + y);" +
                     "\n    }" +
                     "\n}";
-            p.addWarning(warning);
+            generateWarning(t, parser, warning);
         }
 
 
