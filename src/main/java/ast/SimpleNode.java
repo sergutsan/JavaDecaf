@@ -118,7 +118,10 @@ public class SimpleNode implements Node {
       default:
         break;
     }
-    while (t != null && t != ((SimpleNode)jjtGetChild(0)).begin){
+    if (jjtGetNumChildren() > 0) {
+      end = ((SimpleNode)jjtGetChild(0)).begin;
+    }
+    while (t != null && t != end){
       print(t, ostr);
       t = t.next;
     }
