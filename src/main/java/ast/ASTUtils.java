@@ -78,14 +78,14 @@ public class ASTUtils {
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
             Token sT = Token.newToken(0, " ");
             t.specialToken = sT;
-            for (int i = 0; i<timesToIndent; i++){
-                sT = Token.newToken(0, " ");
+            for (int i = 0; i<timesToIndent; i++) {
+                sT.specialToken = Token.newToken(0, " ");
+                sT.specialToken.next = sT;
                 sT = sT.specialToken;
-            }
-            sT = new Token(0, "\n");
-
-
-
+                if (i == timesToIndent - 1) {
+                    sT.specialToken = new Token(0, "\n");
+                    }
+                }
             }
         return t;
 
