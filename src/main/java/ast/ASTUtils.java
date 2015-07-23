@@ -55,6 +55,7 @@ public class ASTUtils {
         } else {
             while (!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
                 indentationLevel++;
+
                 counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
             }
         }
@@ -73,17 +74,19 @@ public class ASTUtils {
     }
 
     protected static Token indent(Token t, SimpleNode node) {
-        if ( isNewline(t, node) && node.jjtGetParent() instanceof ClosingBraceSimpleNode) {
+        if ( isNewline(t, node) && node.jjtGetParent() instanceof ASTDecafBlock) {
             int indentationLevel = getIndentationLevel(node);
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
             Token sT = Token.newToken(0, " ");
             t.specialToken = sT;
+            sT.next = t;
             for (int i = 0; i<timesToIndent; i++) {
                 sT.specialToken = Token.newToken(0, " ");
                 sT.specialToken.next = sT;
                 sT = sT.specialToken;
                 if (i == timesToIndent - 1) {
                     sT.specialToken = new Token(0, "\n");
+                    sT.specialToken.next = sT;
                     }
                 }
             }
