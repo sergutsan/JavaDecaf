@@ -1087,7 +1087,7 @@ void Statement() :
 |
   EmptyStatement()
 |
-  StatementExpression() ";"
+  StatementExpression() 
 |
   SwitchStatement()
 |
@@ -1176,14 +1176,14 @@ void StatementExpression() :
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   Assignment()
 |
-  PostfixExpression())/*@bgen(jjtree)*/
+  PostfixExpression()) ";"/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
   }
 /*@egen*/
   {
-    setFirstLastToken(jjtn001, t, getToken(0));
+    setFirstLastToken(jjtn001, t, getToken(1));
   })/*@bgen(jjtree)*/
  } catch (Throwable jjte001) {
    if (jjtc001) {
