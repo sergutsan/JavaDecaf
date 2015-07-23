@@ -24,15 +24,8 @@ class ASTStatementExpression extends SimpleNode {
     String prevToken = "";
     while (!t.equals(end)) {
       if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
-        switch (jjtGetParent().toString()) {
-          case "IfStatement":
-          case "ForStatement":
-          case "WhileStatement":
-          case "DoStatement":
+        if (ASTUtils.isConditionalLoop(jjtGetParent())) {
             StyleWarnings.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
-            break;
-          default:
-            break;
         }
       }
 
@@ -41,6 +34,7 @@ class ASTStatementExpression extends SimpleNode {
       prevToken = t.image;
       t = t.next;
     }
+    //manually print last token
     print(end, ostr);
     t.image=";";
     print(t, ostr); //print last semicolon
