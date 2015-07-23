@@ -53,8 +53,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * @param t - the token of the identifier in question
         */
     private static void isLegalVariableName(Token t) throws ParseException {
-            if (Character.isUpperCase(t.image.charAt(0))){
-                throw new ParseException(t, "variable");
+            if (Character.isUpperCase(t.image.charAt(0))) {
+                int lowerCount = 0;
+                for (char c: t.image.toCharArray()) {
+                    if (Character.isLowerCase(c)) {
+                        lowerCount++;
+                    }
+                }
+                if (lowerCount != 0) {
+                     throw new ParseException(t, "variable");
+                }
+
+
             }
         }
 
@@ -3278,30 +3288,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  private boolean jj_3R_193() {
-    if (jj_scan_token(BIT_AND)) return true;
-    if (jj_3R_181()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_192() {
-    if (jj_3R_199()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_221()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_185() {
-    if (jj_3R_192()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_215()) jj_scanpos = xsp;
-    return false;
-  }
-
   private boolean jj_3R_186() {
     if (jj_scan_token(XOR)) return true;
     if (jj_3R_175()) return true;
@@ -5544,6 +5530,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3R_227()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  private boolean jj_3R_193() {
+    if (jj_scan_token(BIT_AND)) return true;
+    if (jj_3R_181()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_192() {
+    if (jj_3R_199()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_221()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_185() {
+    if (jj_3R_192()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_215()) jj_scanpos = xsp;
     return false;
   }
 

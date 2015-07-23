@@ -93,8 +93,18 @@ public class JDCParser {
         * @param t - the token of the identifier in question
         */
     private static void isLegalVariableName(Token t) throws ParseException {
-            if (Character.isUpperCase(t.image.charAt(0))){
-                throw new ParseException(t, "variable");
+            if (Character.isUpperCase(t.image.charAt(0))) {
+                int lowerCount = 0;
+                for (char c: t.image.toCharArray()) {
+                    if (Character.isLowerCase(c)) {
+                        lowerCount++;
+                    }
+                }
+                if (lowerCount != 0) {
+                     throw new ParseException(t, "variable");
+                }
+
+
             }
         }
 
