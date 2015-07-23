@@ -99,27 +99,13 @@ public class ParseException extends Exception {
                            int[][] expectedTokenSequences,
                            String[] tokenImage) {
     String eol = System.getProperty("line.separator", "\n");
-    StringBuffer expected = new StringBuffer();
-    int maxSize = 0;
-    for (int i = 0; i < expectedTokenSequences.length; i++) {
-      if (maxSize < expectedTokenSequences[i].length) {
-        maxSize = expectedTokenSequences[i].length;
-      }
-      for (int j = 0; j < expectedTokenSequences[i].length; j++) {
-        expected.append(tokenImage[expectedTokenSequences[i][j]]).append(' ');
-      }
-      if (expectedTokenSequences[i][expectedTokenSequences[i].length - 1] != 0) {
-        expected.append("...");
-      }
-      expected.append(eol).append("    ");
-    } //TODO could delete this?
 
     String retval = "\nEncountered \"";
       if (currentToken.image == null) {   //if current token is null, probably caused by lookahead, move to next token (avoid NullPointerException) - SK
           currentToken = currentToken.next;
       }
     Token nextToken = currentToken.next;
-    for (int i = 0; i < maxSize; i++) {
+    for (int i = 0; i < expectedTokenSequences[0].length; i++) {
       if (i != 0) retval += " ";
 
       retval += currentToken.image; //print the token appearing before the error
@@ -137,7 +123,6 @@ public class ParseException extends Exception {
 
       retval += getReasonForError(currentToken, nextToken, expectedTokenSequences);
 
-   // retval += eol + expected.toString();    //DEBUG - print list of tokens expected afterwards
     return retval;
   }
 
