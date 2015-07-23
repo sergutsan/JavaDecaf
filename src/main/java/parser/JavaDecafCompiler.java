@@ -101,9 +101,9 @@ public class JavaDecafCompiler {
                 if (ostr == null) {
                     ostr = new PrintWriter(new FileWriter(className + ".java"));
                 }
-                parser = new JDCParser(new FileInputStream(inputFile));
+                parser = new JDCParser(new FileInputStream(inputFile), className);
                 node = parser.CompilationUnit();
-                node.process(ostr, className);
+                node.process(ostr);
                 ostr.close();
                 parser.printWarnings(); //print any warnings that arise
                 return className + ".java"; //return the finished filename to signal successful compilation
