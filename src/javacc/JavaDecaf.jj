@@ -475,48 +475,17 @@ void ClassDeclaration() :
 }
 
 void UnmodifiedClassDeclaration() :
-{Token t;}
-{/*@bgen(jjtree) UnmodifiedClassDeclaration */
-  {
-    ASTUnmodifiedClassDeclaration jjtn001 = new ASTUnmodifiedClassDeclaration(this, JJTUNMODIFIEDCLASSDECLARATION);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-  }
-  try {
-/*@egen*/
+{//Token t;
+}
+{
   ({
-    t = getToken(1);
+    //t = getToken(1);
     }
   "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
-  ClassBody()/*@bgen(jjtree)*/
+  ClassBody()
   {
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-  }
-/*@egen*/
-  {
-    setFirstLastToken(jjtn001, t, getToken(0));
-    })/*@bgen(jjtree)*/
-  } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
-    } else {
-      jjtree.popNode();
-    }
-    if (jjte001 instanceof RuntimeException) {
-      throw (RuntimeException)jjte001;
-    }
-    if (jjte001 instanceof ParseException) {
-      throw (ParseException)jjte001;
-    }
-    throw (Error)jjte001;
-  } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-  }
-/*@egen*/                           
+    //setFirstLastToken(jjtThis, t, getToken(0));
+    })//#UnmodifiedClassDeclaration
 }
 
 void ClassBody() :

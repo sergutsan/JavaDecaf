@@ -143,6 +143,7 @@ public class SimpleNode implements Node {
 
   // The following method prints token t, as well as all preceding
   // special tokens (essentially, white space and comments).
+  // These methods were already provided.
 
   protected void print(Token t, PrintWriter ostr) {
     Token tt = t.specialToken;

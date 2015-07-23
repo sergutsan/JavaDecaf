@@ -406,16 +406,10 @@ void ClassDeclaration() :
 }
 
 void UnmodifiedClassDeclaration() :
-{Token t;}
+{}
 {
-  ({
-    t = getToken(1);
-    }
   "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
-  {
-    setFirstLastToken(jjtThis, t, getToken(0));
-    })#UnmodifiedClassDeclaration
 }
 
 void ClassBody() :

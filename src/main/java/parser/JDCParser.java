@@ -280,56 +280,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   final public void UnmodifiedClassDeclaration() throws ParseException {
- Token t;
-    ASTUnmodifiedClassDeclaration jjtn001 = new ASTUnmodifiedClassDeclaration(this, JJTUNMODIFIEDCLASSDECLARATION);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-    try {
-    t = getToken(1);
-      jj_consume_token(CLASS);
-      jj_consume_token(IDENTIFIER);
+
+    jj_consume_token(CLASS);
+    jj_consume_token(IDENTIFIER);
                          isLegalClassName(getToken(0));
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case EXTENDS:
-        jj_consume_token(EXTENDS);
-        Name();
-        break;
-      default:
-        jj_la1[8] = jj_gen;
-        ;
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IMPLEMENTS:
-        jj_consume_token(IMPLEMENTS);
-        NameList();
-        break;
-      default:
-        jj_la1[9] = jj_gen;
-        ;
-      }
-      ClassBody();
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-    setFirstLastToken(jjtn001, t, getToken(0));
-    } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
-    } else {
-      jjtree.popNode();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case EXTENDS:
+      jj_consume_token(EXTENDS);
+      Name();
+      break;
+    default:
+      jj_la1[8] = jj_gen;
+      ;
     }
-    if (jjte001 instanceof RuntimeException) {
-      {if (true) throw (RuntimeException)jjte001;}
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IMPLEMENTS:
+      jj_consume_token(IMPLEMENTS);
+      NameList();
+      break;
+    default:
+      jj_la1[9] = jj_gen;
+      ;
     }
-    if (jjte001 instanceof ParseException) {
-      {if (true) throw (ParseException)jjte001;}
-    }
-    {if (true) throw (Error)jjte001;}
-    } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-    }
+    ClassBody();
+
   }
 
   final public void ClassBody() throws ParseException {
@@ -3231,17 +3205,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(32, xla); }
   }
 
-  private boolean jj_3R_199() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(86)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(89)) return true;
-    }
-    if (jj_3R_184()) return true;
-    return false;
-  }
-
   private boolean jj_3R_213() {
     if (jj_3R_219()) return true;
     Token xsp;
@@ -4394,6 +4357,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3R_255() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_139()) return true;
+    return false;
+  }
+
   private boolean jj_3R_133() {
     Token xsp;
     xsp = jj_scanpos;
@@ -4404,12 +4373,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(43)) return true;
     }
     }
-    return false;
-  }
-
-  private boolean jj_3R_255() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_139()) return true;
     return false;
   }
 
@@ -4478,13 +4441,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_92() {
-    if (jj_3R_110()) return true;
+  private boolean jj_3R_250() {
+    if (jj_3R_181()) return true;
     return false;
   }
 
-  private boolean jj_3R_250() {
-    if (jj_3R_181()) return true;
+  private boolean jj_3R_92() {
+    if (jj_3R_110()) return true;
     return false;
   }
 
@@ -5492,6 +5455,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3R_237()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  private boolean jj_3R_199() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(86)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(89)) return true;
+    }
+    if (jj_3R_184()) return true;
     return false;
   }
 
