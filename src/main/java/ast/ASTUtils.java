@@ -69,20 +69,21 @@ public class ASTUtils {
     }
 
     protected static Token indent(Token t, SimpleNode node) {
-        if (node instanceof ClosingBraceSimpleNode
-                || node instanceof ASTDecafBlock) {
+        if ( isNewline(t, node) && node.jjtGetParent() instanceof ClosingBraceSimpleNode) {
             int indentationLevel = getIndentationLevel(node);
             String indentationString = "";
             for (int i = 0; i<indentationLevel; i++){
                 indentationString += "    ";
             }
             Token indentation = new Token(0, indentationString);
-            if (t.specialToken != null) { //preserve existing specialTokens
-                t.specialToken.specialToken = t.specialToken;
+            Token newline = new Token(0, "\n");
+
+                 t.specialToken = indentation;
+                t.specialToken.specialToken = newline;
+
             }
-            t.specialToken = indentation;
-        }
         return t;
+
     }
 
     /**
@@ -114,5 +115,21 @@ public class ASTUtils {
         }
 
 
+    }
+
+    /**
+     * Iterate through specialTokens to see if there is a newline at the end.
+     * Will return true if specialToken is null (this should only happen at the beginning of a class or DecafBlock)
+     * @param t the token in question
+     * @param n the containing node
+     * @return true if the token contains a newline specialToken or a null specialToken
+     */
+    public static boolean isNewline(Token t, SimpleNode n){
+        if (t == n.begin) return true;
+        Token sT = t;
+        while (sT.specialToken != null){
+            sT = sT.specialToken;
+        }
+        return (sT.image.equals("\n"));
     }
 }
