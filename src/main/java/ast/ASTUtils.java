@@ -50,9 +50,13 @@ public class ASTUtils {
     protected static int getIndentationLevel(Node currentNode) {
         int indentationLevel = 0;
         Node counterNode = currentNode;
-        while(!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
-            indentationLevel++;
-            counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
+        if (counterNode.jjtGetParent() instanceof ASTDecafBlock) {
+            indentationLevel = 2; //manually assign because it doesn't know there's a main method
+        } else {
+            while (!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
+                indentationLevel++;
+                counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
+            }
         }
         return indentationLevel;
     }
