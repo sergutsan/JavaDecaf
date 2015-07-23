@@ -213,12 +213,12 @@ public class ParseException extends Exception {
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
           retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
 
-//      /* Parser is within a for loop condition and it expects a semicolon - wrong statement separator used */
-//      } else if (JDCParser.inForLoopCondition && expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON) {
-//          retval += "For loop elements must be separated by semicolons, e.g.:" +
-//                  "\nfor (int i = 0; i < 10; i++) {" +
-//                  "\n    println(i);" +
-//                  "\n}";
+      /* Parser is within a for loop condition and it expects a semicolon - wrong statement separator used */
+      } else if (JDCParser.inForLoopCondition && expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON) {
+          retval += "For loop elements must be separated by semicolons, e.g.:" +
+                  "\nfor (int i = 0; i < 10; i++) {" +
+                  "\n    println(i);" +
+                  "\n}";
 
           /* Current token is RPAREN and next is NOT a LBRACE when one is expected - loop/branch statement without curly braces */
       } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {

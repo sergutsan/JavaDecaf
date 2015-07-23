@@ -108,12 +108,6 @@ public class SimpleNode implements Node {
   public void setFirstToken(Token t) { begin = t; }
   public void setLastToken(Token t) { end = t; }
 
-  public void jjtSetFirstToken(Token t) {
-      setFirstToken(t);
-  }
-  public void jjtSetLastToken(Token t) {
-      setLastToken(t);
-  }
   public void process (PrintWriter ostr) {
     Token t = begin;
     switch (jjtGetParent().toString()) {
@@ -124,7 +118,7 @@ public class SimpleNode implements Node {
       default:
         break;
     }
-    while (!t.equals(end)){
+    while (t.kind != JDCParserConstants.LBRACE & t.next != null){
       print(t, ostr);
       t = t.next;
     }
