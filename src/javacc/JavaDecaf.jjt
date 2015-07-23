@@ -61,7 +61,7 @@ public class JDCParser {
     /**
     * Get the name of the class
     */
-    public void getClassName() {
+    public String getClassName() {
         return className;
         }
 

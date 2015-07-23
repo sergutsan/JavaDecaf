@@ -21,7 +21,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     /**
     * Get the name of the class
     */
-    public void getClassName() {
+    public String getClassName() {
         return className;
         }
 
