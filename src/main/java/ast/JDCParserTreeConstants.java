@@ -7,19 +7,23 @@ public interface JDCParserTreeConstants
 {
   public int JJTCOMPILATIONUNIT = 0;
   public int JJTVOID = 1;
-  public int JJTCLASSBODYDECLARATION = 2;
-  public int JJTMETHODDECLARATION = 3;
-  public int JJTSTATEMENTEXPRESSION = 4;
-  public int JJTIFSTATEMENT = 5;
-  public int JJTWHILESTATEMENT = 6;
-  public int JJTDOSTATEMENT = 7;
-  public int JJTFORSTATEMENT = 8;
-  public int JJTDECAFBLOCK = 9;
+  public int JJTCLASSDECLARATION = 2;
+  public int JJTUNMODIFIEDCLASSDECLARATION = 3;
+  public int JJTCLASSBODYDECLARATION = 4;
+  public int JJTMETHODDECLARATION = 5;
+  public int JJTSTATEMENTEXPRESSION = 6;
+  public int JJTIFSTATEMENT = 7;
+  public int JJTWHILESTATEMENT = 8;
+  public int JJTDOSTATEMENT = 9;
+  public int JJTFORSTATEMENT = 10;
+  public int JJTDECAFBLOCK = 11;
 
 
   public String[] jjtNodeName = {
     "CompilationUnit",
     "void",
+    "ClassDeclaration",
+    "UnmodifiedClassDeclaration",
     "ClassBodyDeclaration",
     "MethodDeclaration",
     "StatementExpression",
@@ -30,4 +34,4 @@ public interface JDCParserTreeConstants
     "DecafBlock",
   };
 }
-/* JavaCC - OriginalChecksum=2e77051876adaf5e79a7dcd27f24033f (do not edit this line) */
+/* JavaCC - OriginalChecksum=346be549383dc3b93a6fbba462c15a31 (do not edit this line) */

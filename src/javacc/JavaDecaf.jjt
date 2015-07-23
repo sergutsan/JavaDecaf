@@ -401,7 +401,7 @@ void ClassDeclaration() :
   ( "abstract" | "final" | "public" )*
   UnmodifiedClassDeclaration()
   {
-    setFirstLastToken(t, getToken(0));
+    setFirstLastToken(jjtThis, t, getToken(0));
   })#ClassDeclaration
 }
 
@@ -414,7 +414,7 @@ void UnmodifiedClassDeclaration() :
   "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
   {
-    setFirstLastToken(t, getToken(0));
+    setFirstLastToken(jjtThis, t, getToken(0));
     })#UnmodifiedClassDeclaration
 }
 
@@ -426,7 +426,7 @@ void ClassBody() :
     }
     "{" ( ClassBodyDeclaration() )* "}"
     {
-      setFirstLastToken(t, getToken(0));
+      setFirstLastToken(jjtThis, t, getToken(0));
     })#ClassBodyDeclaration
 }
 
@@ -549,8 +549,7 @@ void MethodDeclaration() :
     Block()
   |
    ";"
-  ){ jjtThis.setFirstToken(t);
-       jjtThis.setLastToken(getToken(0));
+  ){ setFirstLastToken(jjtThis, t, getToken(0));
        }
        )#MethodDeclaration)
 }
@@ -1039,7 +1038,7 @@ void StatementExpression() :
 |
   PostfixExpression())
   {
-    setFirstLastToken(t, getToken(0));
+    setFirstLastToken(jjtThis, t, getToken(0));
   }) #StatementExpression //Create node
 }
 
@@ -1075,7 +1074,7 @@ void IfStatement() :
   }
   "if" "(" Expression() ")" Block() [ LOOKAHEAD(1) "else" Block() ]
       {
-        setFirstLastToken(t, rbrace);
+        setFirstLastToken(jjtThis, t, rbrace);
         })#IfStatement //Do not permit braceless statements - SK
 
 
@@ -1090,7 +1089,7 @@ void WhileStatement() :
    }
   "while" "(" Expression() ")" Block() //Do not permit braceless statements - SK
      {
-        setFirstLastToken(t, rbrace); //RBRACE
+        setFirstLastToken(jjtThis, t, rbrace); //RBRACE
      })#WhileStatement
 
 }
@@ -1103,7 +1102,7 @@ void DoStatement() :
     t = getToken(1);
     }
   "do" Block() {
-    setFirstLastToken(t, rbrace); //RBRACE
+    setFirstLastToken(jjtThis, t, rbrace); //RBRACE
                 })#DoStatement
                 "while" "(" Expression() ")" ";"
 
@@ -1127,7 +1126,7 @@ void ForStatement() :
 //            }
             ")" Block()
              {
-    setFirstLastToken(t, rbrace);
+    setFirstLastToken(jjtThis, t, rbrace);
              })#ForStatement //Do not permit braceless statements - SK
 }
 
@@ -1209,7 +1208,7 @@ void DecafBlock() :
     }
     (LOOKAHEAD(3) BlockStatement())*
     {
-    setFirstLastToken(t, getToken(0));
+    setFirstLastToken(jjtThis, t, getToken(0));
     })  #DecafBlock
 }
 
@@ -1232,12 +1231,12 @@ void DecafMethod() :
   ResultType() MethodDeclarator() [ "throws" NameList() ]
   "{" DecafBlock() "}"
   {
-      setFirstLastToken(t, getToken(0));
+      setFirstLastToken(jjtThis, t, getToken(0));
       })  #DecafBlock
 }
 
 JAVACODE
-void setFirstLastToken(Token t1, Token t2) {
+void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
     jjtThis.setFirstToken(t1);
     jjtThis.setLastToken(t2);
 }

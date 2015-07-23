@@ -430,17 +430,93 @@ void TypeDeclaration() :
  */
 
 void ClassDeclaration() :
-{}
-{
+{Token t;}
+{/*@bgen(jjtree) ClassDeclaration */
+  {
+    ASTClassDeclaration jjtn001 = new ASTClassDeclaration(this, JJTCLASSDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(1);
+  }
   ( "abstract" | "final" | "public" )*
-  UnmodifiedClassDeclaration()
+  UnmodifiedClassDeclaration()/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  {
+    setFirstLastToken(jjtn001, t, getToken(0));
+  })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                 
 }
 
 void UnmodifiedClassDeclaration() :
-{}
-{
+{Token t;}
+{/*@bgen(jjtree) UnmodifiedClassDeclaration */
+  {
+    ASTUnmodifiedClassDeclaration jjtn001 = new ASTUnmodifiedClassDeclaration(this, JJTUNMODIFIEDCLASSDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(1);
+    }
   "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
-  ClassBody()
+  ClassBody()/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  {
+    setFirstLastToken(jjtn001, t, getToken(0));
+    })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                           
 }
 
 void ClassBody() :
@@ -463,7 +539,7 @@ void ClassBody() :
     }
 /*@egen*/
     {
-      setFirstLastToken(t, getToken(0));
+      setFirstLastToken(jjtn001, t, getToken(0));
     })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -618,8 +694,7 @@ void MethodDeclaration() :
      jjtree.closeNodeScope(jjtn001, true);
      jjtc001 = false;
    }
-/*@egen*/{ jjtn001.setFirstToken(t);
-       jjtn001.setLastToken(getToken(0));
+/*@egen*/{ setFirstLastToken(jjtn001, t, getToken(0));
        }
        )/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
@@ -775,12 +850,7 @@ void Assignment() :
 void AssignmentOperator() :
 {}
 {
-  "=" { if (inLoopCondition) {
-              Token t = getToken(0);
-              System.out.println("Warning - line " + t.endLine + ", column " + t.endColumn +
-              ": Assignment operator \'=\' used in loop condition. \nTo check for equality, use double equals \'==\'.");
-                  }
-              }  | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :
@@ -1145,7 +1215,7 @@ void StatementExpression() :
   }
 /*@egen*/
   {
-    setFirstLastToken(t, getToken(0));
+    setFirstLastToken(jjtn001, t, getToken(0));
   })/*@bgen(jjtree)*/
  } catch (Throwable jjte001) {
    if (jjtc001) {
@@ -1213,7 +1283,7 @@ void IfStatement() :
       }
 /*@egen*/
       {
-        setFirstLastToken(t, rbrace);
+        setFirstLastToken(jjtn001, t, rbrace);
         })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1260,7 +1330,7 @@ void WhileStatement() :
      }
 /*@egen*/ //Do not permit braceless statements - SK
      {
-        setFirstLastToken(t, rbrace); //RBRACE
+        setFirstLastToken(jjtn001, t, rbrace); //RBRACE
      })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1305,7 +1375,7 @@ void DoStatement() :
                  jjtc001 = false;
                }
 /*@egen*/ {
-    setFirstLastToken(t, rbrace); //RBRACE
+    setFirstLastToken(jjtn001, t, rbrace); //RBRACE
                 })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1361,7 +1431,7 @@ void ForStatement() :
              }
 /*@egen*/
              {
-    setFirstLastToken(t, rbrace);
+    setFirstLastToken(jjtn001, t, rbrace);
              })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1475,7 +1545,7 @@ void DecafBlock() :
     }
 /*@egen*/
     {
-    setFirstLastToken(t, getToken(0));
+    setFirstLastToken(jjtn001, t, getToken(0));
     })/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
@@ -1530,7 +1600,7 @@ void DecafMethod() :
   }
 /*@egen*/
   {
-      setFirstLastToken(t, getToken(0));
+      setFirstLastToken(jjtn001, t, getToken(0));
       })/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
@@ -1555,7 +1625,7 @@ void DecafMethod() :
 }
 
 JAVACODE
-void setFirstLastToken(Token t1, Token t2) {
+void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
     jjtThis.setFirstToken(t1);
     jjtThis.setLastToken(t2);
 }
