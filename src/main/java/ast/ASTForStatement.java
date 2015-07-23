@@ -18,12 +18,6 @@ class ASTForStatement extends ClosingBraceSimpleNode {
     super(p, id);
   }
 
-  public void process(PrintWriter ostr){
-      super.process(ostr);
-      /* For loops have last parenthesis and brace missing so manually add these. */
-      print(Token.newToken(JDCParserConstants.RPAREN, ")"), ostr);
-      print(Token.newToken(JDCParserConstants.LBRACE, "{"), ostr);
-  }
 
 }
 /* JavaCC - OriginalChecksum=df789b60d21ef1f59f924b174a3b0d59 (do not edit this line) */
