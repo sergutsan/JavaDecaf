@@ -75,15 +75,16 @@ public class ASTUtils {
     protected static Token indent(Token t, SimpleNode node) {
         if ( isNewline(t, node) && node.jjtGetParent() instanceof ClosingBraceSimpleNode) {
             int indentationLevel = getIndentationLevel(node);
-            String indentationString = "";
-            for (int i = 0; i<indentationLevel; i++){
-                indentationString += "    ";
+            int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
+            Token sT = Token.newToken(0, " ");
+            t.specialToken = sT;
+            for (int i = 0; i<timesToIndent; i++){
+                sT = Token.newToken(0, " ");
+                sT = sT.specialToken;
             }
-            Token indentation = new Token(0, indentationString);
-            Token newline = new Token(0, "\n");
+            sT.specialToken = new Token(0, "\n");
 
-                 t.specialToken = indentation;
-                t.specialToken.specialToken = newline;
+
 
             }
         return t;

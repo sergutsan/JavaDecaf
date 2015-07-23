@@ -63,8 +63,9 @@ public class ASTDecafBlock extends ClosingBraceSimpleNode {
               "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
               "    public static void main(String[] args){\n    ";
       ostr.print(classDec);
-//
+
       super.process(ostr);
+      ostr.print("\n}"); //print final closing brace of class
   }
 
 }
