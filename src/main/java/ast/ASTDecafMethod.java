@@ -4,8 +4,10 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
-class ASTDecafMethod extends SimpleNode {
+class ASTDecafMethod extends ClosingBraceSimpleNode {
   public ASTDecafMethod(int id) {
     super(id);
   }
@@ -14,5 +16,11 @@ class ASTDecafMethod extends SimpleNode {
     super(p, id);
   }
 
+  public void process(PrintWriter ostr){
+      String methodDec = ASTUtils.INDENTATION + "private static ";
+      ostr.print(methodDec);
+
+      super.process(ostr);
+  }
 }
 /* JavaCC - OriginalChecksum=3b999602ca9d0709cb617b7e927cfe6f (do not edit this line) */
