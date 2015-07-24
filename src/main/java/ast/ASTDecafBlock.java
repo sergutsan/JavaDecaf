@@ -23,7 +23,7 @@ public class ASTDecafBlock extends ClosingBraceSimpleNode {
      * @param ostr - output stream writer defined in JDCParser
      */
   public void process (PrintWriter ostr) {
-      String mainDec = ASTUtils.INDENTATION + "public static void main(String[] args) {";
+      String mainDec = "public static void main(String[] args) {";
       ostr.print(mainDec);
 
       super.process(ostr);
