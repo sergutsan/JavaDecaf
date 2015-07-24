@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTConditionalExpression extends StatementVariableSimpleNode {
+class ASTConditionalExpression extends SimpleNode {
   public ASTConditionalExpression(int id) {
     super(id);
   }

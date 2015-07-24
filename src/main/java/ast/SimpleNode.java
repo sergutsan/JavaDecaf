@@ -36,6 +36,7 @@ package main.java.ast;
 /* JJT: 0.3pre1 */
 
 import main.java.parser.*;
+import sun.tools.tree.ForStatement;
 
 import java.io.PrintWriter;
 
@@ -124,9 +125,9 @@ public class SimpleNode implements Node {
             or is the child of a ClosingBraceSimpleNode subclass which is NOT a ForStatement.
             This prevents the for-loop conditions from being indentation checked.
          */
-        if (jjtGetParent() instanceof BlockSimpleNode
-                || (jjtGetParent() instanceof ClosingBraceSimpleNode
-                    && (!(jjtGetParent() instanceof ASTForStatement)))) {
+        if ((jjtGetParent() instanceof BlockSimpleNode
+                || (this instanceof ASTConditionalExpression))
+                && (!(jjtGetParent() instanceof ForStatement))) {
             ASTUtils.checkIndentation(parser, begin, this);
         }
         if (jjtGetNumChildren() > 0) {
