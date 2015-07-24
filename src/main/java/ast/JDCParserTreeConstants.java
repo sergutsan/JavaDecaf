@@ -9,16 +9,17 @@ public interface JDCParserTreeConstants
   public int JJTVOID = 1;
   public int JJTCLASSDECLARATION = 2;
   public int JJTMETHODDECLARATION = 3;
-  public int JJTSINGLEEQUALS = 4;
-  public int JJTBLOCK = 5;
-  public int JJTLOCALVARIABLEDECLARATION = 6;
-  public int JJTSTATEMENTEXPRESSION = 7;
-  public int JJTIFSTATEMENT = 8;
-  public int JJTWHILESTATEMENT = 9;
-  public int JJTDOSTATEMENT = 10;
-  public int JJTFORSTATEMENT = 11;
-  public int JJTDECAFBLOCK = 12;
-  public int JJTDECAFMETHOD = 13;
+  public int JJTCONDITIONALEXPRESSION = 4;
+  public int JJTSINGLEEQUALS = 5;
+  public int JJTBLOCK = 6;
+  public int JJTLOCALVARIABLEDECLARATION = 7;
+  public int JJTSTATEMENTEXPRESSION = 8;
+  public int JJTIFSTATEMENT = 9;
+  public int JJTWHILESTATEMENT = 10;
+  public int JJTDOSTATEMENT = 11;
+  public int JJTFORSTATEMENT = 12;
+  public int JJTDECAFBLOCK = 13;
+  public int JJTDECAFMETHOD = 14;
 
 
   public String[] jjtNodeName = {
@@ -26,6 +27,7 @@ public interface JDCParserTreeConstants
     "void",
     "ClassDeclaration",
     "MethodDeclaration",
+    "ConditionalExpression",
     "SingleEquals",
     "Block",
     "LocalVariableDeclaration",
@@ -38,4 +40,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=4dd0c9efac682e10d530a382c0e068c4 (do not edit this line) */
+/* JavaCC - OriginalChecksum=e16ef78b2213ffb9fc6cc23ae26684db (do not edit this line) */

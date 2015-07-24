@@ -682,12 +682,18 @@ void NameList() :
  */
 
 void Expression() :
-{}
+{Token t;}
 {
   LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
   Assignment()
 |
+  ( {
+  t = getToken(1);
+  }
   ConditionalExpression()
+  {
+  setFirstLastToken(jjtThis, t, getToken(2));
+  })#ConditionalExpression
 }
 
 void Assignment() :
