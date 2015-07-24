@@ -82,8 +82,8 @@ public class ASTUtils {
             sT.next = t;
             for (int i = 0; i<timesToIndent; i++) {
                 sT.specialToken = Token.newToken(0, " ");
-                /*  Only assign next to sT if i is not the first specialToken -
-                * this is so that the parser knows when to stop printing special tokens */
+                /*  Only assign next to sT if i is not the first spe -
+                * this is so that the printer knows when to stop printing special tokens */
                 if (i > 0) {
                     sT.specialToken.next = sT;
                 }

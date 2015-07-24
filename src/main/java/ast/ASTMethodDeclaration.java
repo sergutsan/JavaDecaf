@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.JDCParser;
 
 public
-class ASTMethodDeclaration extends SimpleNode {
+class ASTMethodDeclaration extends ClosingBraceSimpleNode {
   public ASTMethodDeclaration(int id) {
     super(id);
   }
