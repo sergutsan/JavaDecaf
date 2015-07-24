@@ -12,6 +12,7 @@ class ASTClassDeclaration extends ClosingBraceSimpleNode {
 
   public ASTClassDeclaration(JDCParser p, int id) {
     super(p, id);
+    indentationLevel = 0;
   }
 
 }

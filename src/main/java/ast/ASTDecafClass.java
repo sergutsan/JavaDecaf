@@ -8,13 +8,14 @@ import java.io.PrintWriter;
 
 public
 class ASTDecafClass extends ClosingBraceSimpleNode {
-  public ASTDecafClass(int id) {
-    super(id);
-  }
+    public ASTDecafClass(int id) {
+        super(id);
+    }
 
-  public ASTDecafClass(JDCParser p, int id) {
-    super(p, id);
-  }
+    public ASTDecafClass(JDCParser p, int id) {
+        super(p, id);
+        indentationLevel = 0;
+    }
 
     public void process(PrintWriter ostr) {
         String classDec = "import java.util.Scanner;\n\n" +  //Assign the class/main method encapsulation code
