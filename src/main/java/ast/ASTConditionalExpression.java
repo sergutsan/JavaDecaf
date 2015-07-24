@@ -12,6 +12,7 @@ class ASTConditionalExpression extends SimpleNode {
 
   public ASTConditionalExpression(JDCParser p, int id) {
     super(p, id);
+    indent = false;
   }
 
 }
