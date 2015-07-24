@@ -1,0 +1,8 @@
+String name = readLine();
+sayHi();
+
+void sayHi() {
+    println("Hi");
+    println("How are you?");
+
+}
