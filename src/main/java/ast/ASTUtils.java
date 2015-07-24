@@ -31,11 +31,14 @@ public class ASTUtils {
                     currentToken.image = "System.out.print";
                     break;
                 case "readLine":
-                    currentToken.image = "input.readLine"; //input is Scanner
+                    currentToken.image = "input.next"; //input is Scanner
                     break;
                 case "readInt":
-                    currentToken.image = "input.readInt";
+                    currentToken.image = "input.nextInt";
                     break;
+                case "readDouble":
+                    currentToken.image = "input.nextDouble";
+                            break;
             }
         }
 
