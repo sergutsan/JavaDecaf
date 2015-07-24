@@ -147,14 +147,10 @@ public class SimpleNode implements Node {
         return indentationLevel;
     }
 
-    public boolean shouldBeIndented() {
-        return indent;
-    }
-
     public void setIndentationLevel(){
         if (jjtGetParent() != null ) {
             indentationLevel = ((SimpleNode) jjtGetParent()).getIndentationLevel();
-            if (shouldBeIndented()) { //only increase indentation if not block or base
+            if (indent) { //only increase indentation if not block or base
                 indentationLevel += 1;
             }
         }

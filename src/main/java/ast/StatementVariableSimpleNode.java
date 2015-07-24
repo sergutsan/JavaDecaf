@@ -20,6 +20,8 @@ public class StatementVariableSimpleNode extends SimpleNode {
     }
 
     public void process(PrintWriter ostr) {
+        setIndentationLevel();
+
     /* if the parent node is a loop, check indentation of first token */
         Token t = begin;
         String prevToken = "";
