@@ -64,10 +64,7 @@ public class ASTUtils {
 
 
     protected static Token indent(Token t, SimpleNode node) {
-        if ( isNewline(t, node)
-                && (node.jjtGetParent() instanceof ASTDecafBlock
-                /* If node parent is ASTBlock and grandparent is ASTDecafMethod then contents need to be indented */
-                || (node.jjtGetParent() instanceof ASTBlock && (node.jjtGetParent().jjtGetParent() instanceof ASTDecafMethod)))) {
+        if (isNewline(t, node) && node.isDecafClass()) {
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
             Token sT = Token.newToken(0, " ");

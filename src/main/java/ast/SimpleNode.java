@@ -46,6 +46,7 @@ public class SimpleNode implements Node {
     protected JDCParser parser;
     protected int indentationLevel;
     protected boolean indent = true;
+    protected static boolean decafClass;
 
     public SimpleNode(int i) {
         id = i;
@@ -157,7 +158,9 @@ public class SimpleNode implements Node {
 
     }
 
-
+    public static boolean isDecafClass(){
+        return decafClass;
+    }
 
     // The following method prints token t, as well as all preceding
     // special tokens (essentially, white space and comments).

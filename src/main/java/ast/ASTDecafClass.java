@@ -15,6 +15,7 @@ class ASTDecafClass extends ClosingBraceSimpleNode {
     public ASTDecafClass(JDCParser p, int id) {
         super(p, id);
         indent = false;
+        decafClass = true;
     }
 
     public void process(PrintWriter ostr) {
