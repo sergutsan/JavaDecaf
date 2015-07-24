@@ -27,7 +27,7 @@ class ASTStatementExpression extends SimpleNode {
             ASTUtils.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
         }
       }
-      t = ASTUtils.indent(t, this);
+     // t = ASTUtils.indent(t, this);
 
       t = ASTUtils.checkForSubstitutions(t, prevToken);
       print(t, ostr);
