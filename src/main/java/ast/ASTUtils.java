@@ -62,19 +62,12 @@ public class ASTUtils {
 //        return indentationLevel;
 //    }
 
-    /**
-     * Whether or not the parent is a conditional loop.
-     * @param parent the parent node in question
-     * @return true if it is a conditional loop
-     */
-    protected static boolean isConditionalLoop(Node parent) {
-        return (parent.toString().equals("IfStatement")
-                || parent.toString().equals("WhileStatement")
-                || parent.toString().equals("ForStatement"));
-    }
 
     protected static Token indent(Token t, SimpleNode node) {
-        if ( isNewline(t, node) && node.jjtGetParent() instanceof ASTDecafBlock) {
+        if ( isNewline(t, node)
+                && (node.jjtGetParent() instanceof ASTDecafBlock
+                /* If node parent is ASTBlock and grandparent is ASTDecafMethod then contents need to be indented */
+                || (node.jjtGetParent() instanceof ASTBlock && (node.jjtGetParent().jjtGetParent() instanceof ASTDecafMethod)))) {
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
             Token sT = Token.newToken(0, " ");

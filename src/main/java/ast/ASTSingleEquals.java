@@ -19,7 +19,7 @@ class ASTSingleEquals extends SimpleNode {
 
   public void process(PrintWriter ostr) {
       super.process(ostr);
-      if (ASTUtils.isConditionalLoop(jjtGetParent())) {
+      if (jjtGetParent() instanceof ConditionalClosingBraceSimpleNode) {
           String warning = "You have used assignment operator \'=\' in a loop condition. \nTo check for equality, use double equals \'==\'.";
           StyleWarnings.generateWarning(begin, parser, warning);
       }
