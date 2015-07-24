@@ -4,6 +4,8 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
 class ASTForCondition extends SimpleNode {
   public ASTForCondition(int id) {
@@ -14,5 +16,8 @@ class ASTForCondition extends SimpleNode {
     super(p, id);
   }
 
+  public void process(PrintWriter ostr) {
+    end=begin;
+  }
 }
 /* JavaCC - OriginalChecksum=897725b7843bd0efaf6c0adb333d4d76 (do not edit this line) */
