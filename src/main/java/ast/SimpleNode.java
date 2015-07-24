@@ -122,11 +122,12 @@ public class SimpleNode implements Node {
         Token t = begin;
         /*
             Indentation checking should only happen if the node is child of a BlockSimpleNode subclass
-            or is the child of a ClosingBraceSimpleNode subclass which is NOT a ForStatement.
-            This prevents the for-loop conditions from being indentation checked.
+            or is the child of a ClosingBraceSimpleNode subclass which is NOT a ForStatement or an ASTBlock
+            This prevents the for-loop conditions from being indentation checked, as well as the opening brace of an ASTBlock
          */
         if ((jjtGetParent() instanceof BlockSimpleNode
                 || (this instanceof ASTConditionalExpression))
+                && (!(this instanceof ASTBlock))
                 && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode))) {
             ASTUtils.checkIndentation(parser, begin, this);
         }
