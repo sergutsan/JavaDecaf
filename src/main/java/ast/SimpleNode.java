@@ -1,4 +1,9 @@
-package main.java.ast;/* Copyright (c) 2006, Sun Microsystems, Inc.
+package main.java.ast;
+/*
+ * Original code from JavaCC (see copyright notice).
+ * Modified by Sophie Koonin 2015.
+ *
+ * Copyright (c) 2006, Sun Microsystems, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
