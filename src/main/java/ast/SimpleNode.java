@@ -119,13 +119,10 @@ public class SimpleNode implements Node {
     public void process (PrintWriter ostr) {
         setIndentationLevel();
         Token t = begin;
-        switch (jjtGetParent().toString()) {
-            case "MethodDeclaration":
-            case "ClassDeclaration":
-                ASTUtils.checkIndentation(parser, begin, indentationLevel);
-                break;
-            default:
-                break;
+
+        if (jjtGetParent() instanceof BlockSimpleNode
+                || jjtGetParent() instanceof ASTDecafMain){
+            ASTUtils.checkIndentation(parser, begin, indentationLevel);
         }
         if (jjtGetNumChildren() > 0) {
             end = ((SimpleNode)jjtGetChild(0)).begin;
