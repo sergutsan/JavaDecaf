@@ -4,8 +4,10 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
-class ASTConditionalExpression extends SimpleNode {
+class ASTConditionalExpression extends StatementVariableSimpleNode {
   public ASTConditionalExpression(int id) {
     super(id);
   }
@@ -14,6 +16,5 @@ class ASTConditionalExpression extends SimpleNode {
     super(p, id);
     indent = false;
   }
-
 }
 /* JavaCC - OriginalChecksum=38ffaa9dd63c3f3e866095e4532ecd91 (do not edit this line) */
