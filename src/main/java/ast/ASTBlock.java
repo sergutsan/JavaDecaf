@@ -5,14 +5,13 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTBlock extends SimpleNode {
+class ASTBlock extends BlockSimpleNode {
   public ASTBlock(int id) {
     super(id);
   }
 
   public ASTBlock(JDCParser p, int id) {
     super(p, id);
-    indent = false;
   }
 
 }
