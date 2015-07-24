@@ -41,26 +41,26 @@ public class ASTUtils {
 
         return currentToken;
     }
-
-    /**
-     * Find the indentation level of the current node.
-     * @param currentNode the node to count from
-     * @return the number of levels to indent
-     */
-    protected static int getIndentationLevel(Node currentNode) {
-        int indentationLevel = 0;
-        Node counterNode = currentNode;
-        if (counterNode.jjtGetParent() instanceof ASTDecafBlock) {
-            indentationLevel = 2; //manually assign because it doesn't know there's a main method
-        } else {
-            while (!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
-                indentationLevel++;
-
-                counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
-            }
-        }
-        return indentationLevel;
-    }
+//
+//    /**
+//     * Find the indentation level of the current node.
+//     * @param currentNode the node to count from
+//     * @return the number of levels to indent
+//     */
+//    protected static int getIndentationLevel(Node currentNode) {
+//        int indentationLevel = 0;
+//        Node counterNode = currentNode;
+//        if (counterNode.jjtGetParent() instanceof ASTDecafBlock) {
+//            indentationLevel = 2; //manually assign because it doesn't know there's a main method
+//        } else {
+//            while (!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
+//                indentationLevel++;
+//
+//                counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
+//            }
+//        }
+//        return indentationLevel;
+//    }
 
     /**
      * Whether or not the parent is a conditional loop.
