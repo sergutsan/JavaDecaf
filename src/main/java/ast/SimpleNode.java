@@ -127,7 +127,7 @@ public class SimpleNode implements Node {
          */
         if ((jjtGetParent() instanceof BlockSimpleNode
                 || (this instanceof ASTConditionalExpression))
-                && (!(jjtGetParent() instanceof ForStatement))) {
+                && (!(jjtGetParent() instanceof ASTForStatement))) {
             ASTUtils.checkIndentation(parser, begin, this);
         }
         if (jjtGetNumChildren() > 0) {
