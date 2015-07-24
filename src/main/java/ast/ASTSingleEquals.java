@@ -14,6 +14,7 @@ class ASTSingleEquals extends SimpleNode {
 
   public ASTSingleEquals(JDCParser p, int id) {
     super(p, id);
+      indent = false;
   }
 
   public void process(PrintWriter ostr) {
