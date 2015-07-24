@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTLocalVariableDeclaration extends ASTStatementExpression {
+class ASTLocalVariableDeclaration extends StatementVariableSimpleNode {
   public ASTLocalVariableDeclaration(int id) {
     super(id);
   }
