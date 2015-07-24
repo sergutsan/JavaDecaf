@@ -9,7 +9,7 @@ import main.java.parser.Token;
 import java.io.PrintWriter;
 
 public
-class ASTForStatement extends ClosingBraceSimpleNode {
+class ASTForStatement extends ConditionalClosingBraceSimpleNode {
   public ASTForStatement(int id) {
     super(id);
   }
