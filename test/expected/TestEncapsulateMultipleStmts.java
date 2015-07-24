@@ -1,11 +1,13 @@
 import java.util.Scanner;
+
 public class TestEncapsulateMultipleStmts {
-	private Scanner input = new Scanner(System.in);
-	public static void main(String[] args){
-	System.out.println("Hello world!");
+    private Scanner input = new Scanner(System.in);
 
-int i = 0;
+    public static void main(String[] args){
+        System.out.println("Hello world!");
 
-int j = i + 5;
-	}
+        int i = 0;
+
+        int j = i + 5;
+    }
 }
