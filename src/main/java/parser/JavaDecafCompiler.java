@@ -88,7 +88,7 @@ public class JavaDecafCompiler {
         JDCParser parser;
         ASTCompilationUnit node;
         String className = "";
-            try{
+            try {
                 int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
                 className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 if (Character.isDigit(inputFile.getName().charAt(0))) { //Check that first char of file name is not digit
@@ -107,11 +107,13 @@ public class JavaDecafCompiler {
                 ostr.close();
                 parser.printWarnings(); //print any warnings that arise
                 return className + ".java"; //return the finished filename to signal successful compilation
+            }catch  (StringIndexOutOfBoundsException e) {
+                System.out.println("Error: Please make sure your file has the extension .jdc");
             } catch (ParseException e) {
                 System.out.println("Errors during compilation: ");
                 System.out.println(e.getMessage());
             } catch (FileNotFoundException e) {
-                    System.out.println("File " + inputFile + " not found.");
+                    System.out.println("Error: File " + inputFile + " not found.");
             } catch (IOException e) {
                 System.out.println("Error creating file " + inputFile.getName() + ".java");
             }catch (TokenMgrError e) {
