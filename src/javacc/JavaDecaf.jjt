@@ -1256,7 +1256,7 @@ void DecafMethod() :
         }
     }
   ResultType() MethodDeclarator() [ "throws" NameList() ]
-  "{" DecafBlock() "}"
+  Block()
   {
       setFirstLastToken(jjtThis, t, getToken(0));
       })  #DecafMethod

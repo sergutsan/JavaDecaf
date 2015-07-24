@@ -1670,7 +1670,7 @@ void DecafMethod() :
         }
     }
   ResultType() MethodDeclarator() [ "throws" NameList() ]
-  "{" DecafBlock() "}"/*@bgen(jjtree)*/
+  Block()/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;

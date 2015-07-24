@@ -3513,9 +3513,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           jj_la1[111] = jj_gen;
           ;
         }
-        jj_consume_token(LBRACE);
-        DecafBlock();
-        jj_consume_token(RBRACE);
+        Block();
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
       setFirstLastToken(jjtn001, t, getToken(0));
