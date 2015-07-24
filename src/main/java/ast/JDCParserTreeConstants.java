@@ -20,7 +20,7 @@ public interface JDCParserTreeConstants
   public int JJTFORBLOCK = 12;
   public int JJTFORSTATEMENT = 13;
   public int JJTDECAFCLASS = 14;
-  public int JJTDECAFBLOCK = 15;
+  public int JJTDECAFMAIN = 15;
   public int JJTDECAFMETHOD = 16;
 
 
@@ -40,8 +40,8 @@ public interface JDCParserTreeConstants
     "ForBlock",
     "ForStatement",
     "DecafClass",
-    "DecafBlock",
+    "DecafMain",
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=8c979368f6e9b0940f97ded81289e0e7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=e275619cb112fc801650dacbd56ce09f (do not edit this line) */

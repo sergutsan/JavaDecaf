@@ -2987,7 +2987,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
     try {
-      DecafBlock();
+      DecafMain();
       label_41:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -3033,9 +3033,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /*
  * Unencapsulated Decaf floating code or methods
  */
-  final public void DecafBlock() throws ParseException {
+  final public void DecafMain() throws ParseException {
  Token t;
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
+      ASTDecafMain jjtn001 = new ASTDecafMain(this, JJTDECAFMAIN);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     try {

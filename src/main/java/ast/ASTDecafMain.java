@@ -2,20 +2,18 @@ package main.java.ast;
 
 
 /* JJT: 0.2.2 */
-
 import main.java.parser.JDCParser;
-import main.java.parser.JDCParserConstants;
-import main.java.parser.Token;
+
 
 import java.io.*;
 
-public class ASTDecafBlock extends ClosingBraceSimpleNode {
+public class ASTDecafMain extends ClosingBraceSimpleNode {
 
-  ASTDecafBlock(int id) {
+  ASTDecafMain(int id) {
     super(id);
   }
 
-    public ASTDecafBlock(JDCParser p, int id) {
+    public ASTDecafMain(JDCParser p, int id) {
         super(p, id);
     }
     /**

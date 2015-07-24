@@ -1635,7 +1635,7 @@ void DecafClass() :
     jjtree.openNodeScope(jjtn001);
   }
   try {
-/*@egen*/ (DecafBlock()
+/*@egen*/ (DecafMain()
    (DecafMethod())*)/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -1663,11 +1663,11 @@ void DecafClass() :
 /*
  * Unencapsulated Decaf floating code or methods
  */
-void DecafBlock() :
+void DecafMain() :
 {Token t;}
-{/*@bgen(jjtree) DecafBlock */
+{/*@bgen(jjtree) DecafMain */
     {
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
+      ASTDecafMain jjtn001 = new ASTDecafMain(this, JJTDECAFMAIN);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }
@@ -1704,7 +1704,7 @@ void DecafBlock() :
         jjtree.closeNodeScope(jjtn001, true);
       }
     }
-/*@egen*/             
+/*@egen*/            
 }
 
 /*

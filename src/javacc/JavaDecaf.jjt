@@ -1226,7 +1226,7 @@ void TryStatement() :
 
 void DecafClass() :
 {}
-{ (DecafBlock()
+{ (DecafMain()
    (DecafMethod())*)#DecafClass
 }
 
@@ -1234,7 +1234,7 @@ void DecafClass() :
 /*
  * Unencapsulated Decaf floating code or methods
  */
-void DecafBlock() :
+void DecafMain() :
 {Token t;}
 {
     ({
@@ -1243,7 +1243,7 @@ void DecafBlock() :
     (LOOKAHEAD(3) BlockStatement())+
     {
     setFirstLastToken(jjtThis, t, getToken(0));
-    })  #DecafBlock
+    })  #DecafMain
 }
 
 /*
