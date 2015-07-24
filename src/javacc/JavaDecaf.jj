@@ -1484,9 +1484,9 @@ void ForStatement() :
 }
 {/*@bgen(jjtree) ForStatement */
   {
-    ASTForStatement jjtn001 = new ASTForStatement(this, JJTFORSTATEMENT);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
+    ASTForStatement jjtn002 = new ASTForStatement(this, JJTFORSTATEMENT);
+    boolean jjtc002 = true;
+    jjtree.openNodeScope(jjtn002);
   }
   try {
 /*@egen*/
@@ -1497,36 +1497,63 @@ void ForStatement() :
 //    {
 //            inForLoopCondition = true; //SK
 //            }
-            [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
+            ForInit() ";" [ Expression() ] ";" [ ForUpdate() ]
 //            {
 //            inForLoopCondition = false; //SK
 //            }
-            ")" Block()/*@bgen(jjtree)*/
+            ")"/*@bgen(jjtree) ForBlock */
+                {
+                  ASTForBlock jjtn001 = new ASTForBlock(this, JJTFORBLOCK);
+                  boolean jjtc001 = true;
+                  jjtree.openNodeScope(jjtn001);
+                }
+                try {
+/*@egen*/ (Block())/*@bgen(jjtree)*/
+                } catch (Throwable jjte001) {
+                  if (jjtc001) {
+                    jjtree.clearNodeScope(jjtn001);
+                    jjtc001 = false;
+                  } else {
+                    jjtree.popNode();
+                  }
+                  if (jjte001 instanceof RuntimeException) {
+                    throw (RuntimeException)jjte001;
+                  }
+                  if (jjte001 instanceof ParseException) {
+                    throw (ParseException)jjte001;
+                  }
+                  throw (Error)jjte001;
+                } finally {
+                  if (jjtc001) {
+                    jjtree.closeNodeScope(jjtn001, true);
+                  }
+                }
+/*@egen*/         /*@bgen(jjtree)*/
              {
-               jjtree.closeNodeScope(jjtn001, true);
-               jjtc001 = false;
+               jjtree.closeNodeScope(jjtn002, true);
+               jjtc002 = false;
              }
 /*@egen*/
              {
-    setFirstLastToken(jjtn001, t, getToken(0));
+    setFirstLastToken(jjtn002, t, getToken(0));
              })/*@bgen(jjtree)*/
-  } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
+  } catch (Throwable jjte002) {
+    if (jjtc002) {
+      jjtree.clearNodeScope(jjtn002);
+      jjtc002 = false;
     } else {
       jjtree.popNode();
     }
-    if (jjte001 instanceof RuntimeException) {
-      throw (RuntimeException)jjte001;
+    if (jjte002 instanceof RuntimeException) {
+      throw (RuntimeException)jjte002;
     }
-    if (jjte001 instanceof ParseException) {
-      throw (ParseException)jjte001;
+    if (jjte002 instanceof ParseException) {
+      throw (ParseException)jjte002;
     }
-    throw (Error)jjte001;
+    throw (Error)jjte002;
   } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
+    if (jjtc002) {
+      jjtree.closeNodeScope(jjtn002, true);
     }
   }
 /*@egen*/              //Do not permit braceless statements - SK

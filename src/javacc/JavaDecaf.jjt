@@ -1147,11 +1147,11 @@ void ForStatement() :
 //    {
 //            inForLoopCondition = true; //SK
 //            }
-            [ ForInit() ] ";" [ Expression() ] ";" [ ForUpdate() ]
+            ForInit() ";" [ Expression() ] ";" [ ForUpdate() ]
 //            {
 //            inForLoopCondition = false; //SK
 //            }
-            ")" Block()
+            ")" (Block())#ForBlock
              {
     setFirstLastToken(jjtThis, t, getToken(0));
              })#ForStatement //Do not permit braceless statements - SK

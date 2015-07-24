@@ -127,7 +127,8 @@ public class ASTUtils {
      * @return true if the token contains a newline specialToken or a null specialToken
      */
     public static boolean isNewline(Token t, SimpleNode n){
-        if (t == n.begin) return true;
+        if (t == n.begin
+                && (!(n.jjtGetParent() instanceof ASTForStatement))) return true;
         Token sT = t;
         while (sT.specialToken != null){
             sT = sT.specialToken;
