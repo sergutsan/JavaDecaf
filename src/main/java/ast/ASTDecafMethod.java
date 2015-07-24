@@ -8,19 +8,20 @@ import java.io.PrintWriter;
 
 public
 class ASTDecafMethod extends ClosingBraceSimpleNode {
-  public ASTDecafMethod(int id) {
-    super(id);
-  }
+    public ASTDecafMethod(int id) {
+        super(id);
+    }
 
-  public ASTDecafMethod(JDCParser p, int id) {
-    super(p, id);
-  }
+    public ASTDecafMethod(JDCParser p, int id) {
+        super(p, id);
+        indentationLevel = 1;
+    }
 
-  public void process(PrintWriter ostr){
-      String methodDec = "\n\n" + ASTUtils.INDENTATION + "private static";
-      ostr.print(methodDec);
+    public void process(PrintWriter ostr){
+        String methodDec = "\n\n" + ASTUtils.INDENTATION + "private static";
+        ostr.print(methodDec);
 
-      super.process(ostr);
-  }
+        super.process(ostr);
+    }
 }
 /* JavaCC - OriginalChecksum=3b999602ca9d0709cb617b7e927cfe6f (do not edit this line) */
