@@ -1161,9 +1161,9 @@ void ForInit() :
 {}
 {
   LOOKAHEAD( [ "final" ] Type() <IDENTIFIER> )
-  LocalVariableDeclaration()
+  (LocalVariableDeclaration())#ForInit
 |
-  StatementExpressionList()
+  (StatementExpressionList())#ForInit
 }
 
 void StatementExpressionList() :

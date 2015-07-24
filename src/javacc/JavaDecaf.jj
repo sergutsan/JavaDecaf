@@ -1535,10 +1535,64 @@ void ForStatement() :
 void ForInit() :
 {}
 {
-  LOOKAHEAD( [ "final" ] Type() <IDENTIFIER> )
-  LocalVariableDeclaration()
-|
-  StatementExpressionList()
+  LOOKAHEAD( [ "final" ] Type() <IDENTIFIER> )/*@bgen(jjtree) ForInit */
+  {
+    ASTForInit jjtn001 = new ASTForInit(this, JJTFORINIT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  (LocalVariableDeclaration())/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/        
+|/*@bgen(jjtree) ForInit */
+  {
+    ASTForInit jjtn002 = new ASTForInit(this, JJTFORINIT);
+    boolean jjtc002 = true;
+    jjtree.openNodeScope(jjtn002);
+  }
+  try {
+/*@egen*/
+  (StatementExpressionList())/*@bgen(jjtree)*/
+  } catch (Throwable jjte002) {
+    if (jjtc002) {
+      jjtree.clearNodeScope(jjtn002);
+      jjtc002 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte002 instanceof RuntimeException) {
+      throw (RuntimeException)jjte002;
+    }
+    if (jjte002 instanceof ParseException) {
+      throw (ParseException)jjte002;
+    }
+    throw (Error)jjte002;
+  } finally {
+    if (jjtc002) {
+      jjtree.closeNodeScope(jjtn002, true);
+    }
+  }
+/*@egen*/        
 }
 
 void StatementExpressionList() :

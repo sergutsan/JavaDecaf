@@ -2837,7 +2837,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   final public void ForInit() throws ParseException {
     if (jj_2_32(2147483647)) {
-      LocalVariableDeclaration();
+    ASTForInit jjtn001 = new ASTForInit(this, JJTFORINIT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+      try {
+        LocalVariableDeclaration();
+      } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte001;}
+    }
+    if (jjte001 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte001;}
+    }
+    {if (true) throw (Error)jjte001;}
+      } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+      }
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case FALSE:
@@ -2854,7 +2877,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       case LPAREN:
       case INCR:
       case DECR:
-        StatementExpressionList();
+    ASTForInit jjtn002 = new ASTForInit(this, JJTFORINIT);
+    boolean jjtc002 = true;
+    jjtree.openNodeScope(jjtn002);
+        try {
+          StatementExpressionList();
+        } catch (Throwable jjte002) {
+    if (jjtc002) {
+      jjtree.clearNodeScope(jjtn002);
+      jjtc002 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte002 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte002;}
+    }
+    if (jjte002 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte002;}
+    }
+    {if (true) throw (Error)jjte002;}
+        } finally {
+    if (jjtc002) {
+      jjtree.closeNodeScope(jjtn002, true);
+    }
+        }
         break;
       default:
         jj_la1[103] = jj_gen;
