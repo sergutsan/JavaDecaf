@@ -134,14 +134,12 @@ public class SimpleNode implements Node {
             print(t, ostr);
             t = t.next;
         }
-        //print(t, ostr); //print LBRACE
 
         SimpleNode child;
         for (int i = 0; i<jjtGetNumChildren(); i++) {
             child = (SimpleNode) jjtGetChild(i);
             child.process(ostr);
         }
-        // print(end, ostr);
     }
 
     public int getIndentationLevel() {
