@@ -1144,13 +1144,7 @@ void ForStatement() :
     t = getToken(1);
     }
     "for" "("
-//    {
-//            inForLoopCondition = true; //SK
-//            }
-            ForInit() ";" [ Expression() ] ";" [ ForUpdate() ]
-//            {
-//            inForLoopCondition = false; //SK
-//            }
+            (ForInit() ";" [ Expression() ] ";" [ ForUpdate() ])#ForCondition
             ")" (Block())#ForBlock
              {
     setFirstLastToken(jjtThis, t, getToken(0));
