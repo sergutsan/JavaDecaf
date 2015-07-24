@@ -92,9 +92,10 @@ public class ASTUtils {
      * Check the indentation level and generate a warning if not correctly indented.
      * @param parser the parser in use
      * @param t the indented token
-     * @param indentationLevel the expected indentation level
+     * @param node the current node
      */
-    public static void checkIndentation(JDCParser parser, Token t, int indentationLevel) {
+    public static void checkIndentation(JDCParser parser, Token t, SimpleNode node) {
+        int expectedIndentation = node.getIndentationLevel();
         int indentationCount = 0;
         Token countToken = t;
         while (countToken != null) {
@@ -103,10 +104,17 @@ public class ASTUtils {
             }
             countToken = countToken.specialToken;
         }
+        /*
+        If this is JavaDecaf code, everything will be indented 1 less than normal Java - need to account for this
+        to prevent unnecessary warnings
+         */
+        if (node.isDecafClass()) {
+            expectedIndentation -= 1;
+        }
         /* if the actual number of indented spaces doesn't match the indentation level multiplied by the number
         of spaces to indent, add this warning to the warning list */
 
-        if (indentationCount != (indentationLevel * INDENTATION_SPACES)) {
+        if (indentationCount != (expectedIndentation * INDENTATION_SPACES)) {
             String warning = "methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
                     "\nvoid isLessThan(int number1, int number2) {"+
                     "\n    if (x < y) {" +

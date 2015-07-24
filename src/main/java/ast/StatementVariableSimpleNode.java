@@ -30,7 +30,7 @@ public class StatementVariableSimpleNode extends SimpleNode {
                 if (jjtGetParent() instanceof ClosingBraceSimpleNode
                         && (!(jjtGetParent() instanceof ASTForStatement))
                         && (!(jjtGetParent() instanceof ASTDecafMain))) {
-                    ASTUtils.checkIndentation(parser, begin, indentationLevel);
+                    ASTUtils.checkIndentation(parser, begin, this);
                 }
             }
             t = ASTUtils.indent(t, this);

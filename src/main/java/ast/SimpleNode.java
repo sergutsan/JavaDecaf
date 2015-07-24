@@ -127,7 +127,7 @@ public class SimpleNode implements Node {
         if (jjtGetParent() instanceof BlockSimpleNode
                 || (jjtGetParent() instanceof ClosingBraceSimpleNode
                     && (!(jjtGetParent() instanceof ASTForStatement)))) {
-            ASTUtils.checkIndentation(parser, begin, indentationLevel);
+            ASTUtils.checkIndentation(parser, begin, this);
         }
         if (jjtGetNumChildren() > 0) {
             end = ((SimpleNode)jjtGetChild(0)).begin;
