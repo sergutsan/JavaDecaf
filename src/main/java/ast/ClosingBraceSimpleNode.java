@@ -23,17 +23,20 @@ public class ClosingBraceSimpleNode extends SimpleNode {
     public void process(PrintWriter ostr) {
         super.process(ostr);
 
-        int indentationLevel = ASTUtils.getIndentationLevel(this);
-
         String indentation = "";
-
+        int indentationLevel;
         if (this instanceof ASTDecafBlock) {
-            indentation = ASTUtils.INDENTATION;
+            indentationLevel = 1;
         } else {
-            for (int i = 0; i<indentationLevel; i++) {
-                indentation += ASTUtils.INDENTATION;
+            indentationLevel = ASTUtils.getIndentationLevel(this);
+            if (this instanceof ConditionalClosingBraceSimpleNode) {
+                indentationLevel-=1; //prevent for loop closing brace being too indented
             }
         }
+        for (int i = 0; i<indentationLevel; i++) {
+            indentation += ASTUtils.INDENTATION;
+        }
+
         Token closingBrace = Token.newToken(73, indentation + "}");
         closingBrace.specialToken = new Token(0, "\n");
         print(closingBrace,ostr);
