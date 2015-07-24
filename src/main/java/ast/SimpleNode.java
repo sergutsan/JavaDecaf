@@ -45,6 +45,7 @@ public class SimpleNode implements Node {
     protected int id;
     protected JDCParser parser;
     protected int indentationLevel;
+    protected boolean indent;
 
     public SimpleNode(int i) {
         id = i;
@@ -145,8 +146,15 @@ public class SimpleNode implements Node {
         return indentationLevel;
     }
 
-    public void setIndentationLevel(int level){
-        indentationLevel = level;
+    public boolean shouldBeIndented() {
+        return indent;
+    }
+
+    public void setIndentationLevel(){
+        indentationLevel = ((SimpleNode) jjtGetParent()).getIndentationLevel();
+        if (shouldBeIndented()) { //only increase indentation if not block or base
+            indentationLevel += 1;
+        }
     }
 
 
