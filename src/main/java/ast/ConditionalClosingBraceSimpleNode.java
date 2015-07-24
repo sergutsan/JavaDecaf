@@ -19,8 +19,8 @@ public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode {
     public void process(PrintWriter ostr){
         if (jjtGetParent() instanceof ClosingBraceSimpleNode){
             begin = ASTUtils.indent(begin, this);
-
-            process(ostr);
         }
+        super.process(ostr);
+
     }
 }
