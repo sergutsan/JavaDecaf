@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTBlock extends SimpleNode {
+class ASTBlock extends ClosingBraceSimpleNode {
   public ASTBlock(int id) {
     super(id);
   }
