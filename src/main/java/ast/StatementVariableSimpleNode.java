@@ -27,7 +27,8 @@ public class StatementVariableSimpleNode extends SimpleNode {
         String prevToken = "";
         while (t != end) {
             if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
-                if (jjtGetParent() instanceof ClosingBraceSimpleNode) {
+                if (jjtGetParent() instanceof ClosingBraceSimpleNode
+                        && (!(jjtGetParent() instanceof ASTForStatement))) {
                     ASTUtils.checkIndentation(parser, begin, indentationLevel);
                 }
             }
