@@ -119,9 +119,14 @@ public class SimpleNode implements Node {
     public void process (PrintWriter ostr) {
         setIndentationLevel();
         Token t = begin;
-
+        /*
+            Indentation checking should only happen if the node is child of a BlockSimpleNode subclass
+            or is the child of a ClosingBraceSimpleNode subclass which is NOT a ForStatement.
+            This prevents the for-loop conditions from being indentation checked.
+         */
         if (jjtGetParent() instanceof BlockSimpleNode
-                || jjtGetParent() instanceof ASTDecafMain){
+                || (jjtGetParent() instanceof ClosingBraceSimpleNode
+                    && (!(jjtGetParent() instanceof ASTForStatement)))) {
             ASTUtils.checkIndentation(parser, begin, indentationLevel);
         }
         if (jjtGetNumChildren() > 0) {
