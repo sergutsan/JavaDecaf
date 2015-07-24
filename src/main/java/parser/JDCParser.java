@@ -192,7 +192,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           case SEMICOLON:
           case INCR:
           case DECR:
-            DecafBlock();
+            DecafClass();
             break;
           default:
             jj_la1[3] = jj_gen;
@@ -3413,29 +3413,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 /**
  * Decaf Grammar starts here - SK
  */
-
-/*
- * Unencapsulated Decaf floating code or methods
- */
-  final public void DecafBlock() throws ParseException {
-    trace_call("DecafBlock");
+  final public void DecafClass() throws ParseException {
+    trace_call("DecafClass");
     try {
- Token t;
-      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
-      boolean jjtc001 = true;
-      jjtree.openNodeScope(jjtn001);
+    ASTDecafClass jjtn001 = new ASTDecafClass(this, JJTDECAFCLASS);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
       try {
-    t = getToken(1);
+        DecafBlock();
         label_41:
-        while (true) {
-          BlockStatement();
-          if (jj_2_33(3)) {
-            ;
-          } else {
-            break label_41;
-          }
-        }
-        label_42:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case BOOLEAN:
@@ -3452,9 +3438,54 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
             break;
           default:
             jj_la1[110] = jj_gen;
-            break label_42;
+            break label_41;
           }
           DecafMethod();
+        }
+      } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte001;}
+    }
+    if (jjte001 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte001;}
+    }
+    {if (true) throw (Error)jjte001;}
+      } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+      }
+    } finally {
+      trace_return("DecafClass");
+    }
+  }
+
+/*
+ * Unencapsulated Decaf floating code or methods
+ */
+  final public void DecafBlock() throws ParseException {
+    trace_call("DecafBlock");
+    try {
+ Token t;
+      ASTDecafBlock jjtn001 = new ASTDecafBlock(this, JJTDECAFBLOCK);
+      boolean jjtc001 = true;
+      jjtree.openNodeScope(jjtn001);
+      try {
+    t = getToken(1);
+        label_42:
+        while (true) {
+          BlockStatement();
+          if (jj_2_33(3)) {
+            ;
+          } else {
+            break label_42;
+          }
         }
       jjtree.closeNodeScope(jjtn001, true);
       jjtc001 = false;
@@ -4651,6 +4682,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3_33() {
+    if (jj_3R_65()) return true;
+    return false;
+  }
+
   private boolean jj_3_6() {
     Token xsp;
     xsp = jj_scanpos;
@@ -4716,11 +4752,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   private boolean jj_3R_191() {
     if (jj_3R_198()) return true;
-    return false;
-  }
-
-  private boolean jj_3_33() {
-    if (jj_3R_65()) return true;
     return false;
   }
 

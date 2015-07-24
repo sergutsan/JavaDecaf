@@ -18,8 +18,9 @@ public interface JDCParserTreeConstants
   public int JJTWHILESTATEMENT = 10;
   public int JJTDOSTATEMENT = 11;
   public int JJTFORSTATEMENT = 12;
-  public int JJTDECAFBLOCK = 13;
-  public int JJTDECAFMETHOD = 14;
+  public int JJTDECAFCLASS = 13;
+  public int JJTDECAFBLOCK = 14;
+  public int JJTDECAFMETHOD = 15;
 
 
   public String[] jjtNodeName = {
@@ -36,8 +37,9 @@ public interface JDCParserTreeConstants
     "WhileStatement",
     "DoStatement",
     "ForStatement",
+    "DecafClass",
     "DecafBlock",
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=e16ef78b2213ffb9fc6cc23ae26684db (do not edit this line) */
+/* JavaCC - OriginalChecksum=bd7aebac490dae5d5520dd63a10f03d8 (do not edit this line) */

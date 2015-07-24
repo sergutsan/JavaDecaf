@@ -392,7 +392,7 @@ ASTCompilationUnit CompilationUnit()                  :
   ( LOOKAHEAD(3) //avoid choice conflict - SK
   ( TypeDeclaration() )+
   |
-  DecafBlock()	//SK
+  DecafClass()	//SK
   )
   <EOF>/*@bgen(jjtree)*/
                 {
@@ -1599,6 +1599,40 @@ void TryStatement() :
  * Decaf Grammar starts here - SK
  */
 
+void DecafClass() :
+{}
+{/*@bgen(jjtree) DecafClass */
+  {
+    ASTDecafClass jjtn001 = new ASTDecafClass(this, JJTDECAFCLASS);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/ (DecafBlock()
+   (DecafMethod())*)/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/           
+}
+
+
 /*
  * Unencapsulated Decaf floating code or methods
  */
@@ -1615,8 +1649,7 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (LOOKAHEAD(3) BlockStatement())+
-    (DecafMethod())*/*@bgen(jjtree)*/
+    (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn001, true);
       jjtc001 = false;
