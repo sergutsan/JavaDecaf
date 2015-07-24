@@ -10,6 +10,7 @@ public class TestCodeThenMultipleMethods {
     private static int increment(int i) {
         return i++;
     }
+
     private static int decrement(int i) {
         return i--;
     }

@@ -7,7 +7,7 @@ public class TestCodeThenMethod2 {
         sayHi();
     }
 
-    private static void sayHi(){
+    private static void sayHi() {
         System.out.println("Hi");
     }
 
