@@ -55,6 +55,7 @@ public class SimpleNode implements Node {
     public SimpleNode(JDCParser p, int i) {
         id = i;
         parser = p;
+        setIndentationLevel();
     }
 
     public void jjtOpen() {
@@ -151,10 +152,13 @@ public class SimpleNode implements Node {
     }
 
     public void setIndentationLevel(){
-        indentationLevel = ((SimpleNode) jjtGetParent()).getIndentationLevel();
-        if (shouldBeIndented()) { //only increase indentation if not block or base
-            indentationLevel += 1;
+        if (jjtGetParent() != null ) {
+            indentationLevel = ((SimpleNode) jjtGetParent()).getIndentationLevel();
+            if (shouldBeIndented()) { //only increase indentation if not block or base
+                indentationLevel += 1;
+            }
         }
+
     }
 
 
