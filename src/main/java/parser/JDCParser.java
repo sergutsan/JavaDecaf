@@ -2720,28 +2720,56 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   final public void LocalVariableDeclaration() throws ParseException {
     trace_call("LocalVariableDeclaration");
     try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case FINAL:
-        jj_consume_token(FINAL);
-        break;
-      default:
-        jj_la1[93] = jj_gen;
-        ;
-      }
-      Type();
-      VariableDeclarator();
-      label_37:
-      while (true) {
+ Token t;
+    ASTLocalVariableDeclaration jjtn001 = new ASTLocalVariableDeclaration(this, JJTLOCALVARIABLEDECLARATION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+      try {
+    t = getToken(1);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case COMMA:
-          ;
+        case FINAL:
+          jj_consume_token(FINAL);
           break;
         default:
-          jj_la1[94] = jj_gen;
-          break label_37;
+          jj_la1[93] = jj_gen;
+          ;
         }
-        jj_consume_token(COMMA);
+        Type();
         VariableDeclarator();
+        label_37:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COMMA:
+            ;
+            break;
+          default:
+            jj_la1[94] = jj_gen;
+            break label_37;
+          }
+          jj_consume_token(COMMA);
+          VariableDeclarator();
+        }
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+    setFirstLastToken(jjtn001, t, getToken(1));
+      } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte001;}
+    }
+    if (jjte001 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte001;}
+    }
+    {if (true) throw (Error)jjte001;}
+      } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
       }
     } finally {
       trace_return("LocalVariableDeclaration");
@@ -4693,13 +4721,13 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_188() {
-    if (jj_3R_195()) return true;
+  private boolean jj_3_33() {
+    if (jj_3R_65()) return true;
     return false;
   }
 
-  private boolean jj_3_33() {
-    if (jj_3R_65()) return true;
+  private boolean jj_3R_188() {
+    if (jj_3R_195()) return true;
     return false;
   }
 
@@ -4778,17 +4806,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_132() {
-    if (jj_scan_token(LBRACE)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_180()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_scan_token(RBRACE)) return true;
-    return false;
-  }
-
   private boolean jj_3R_246() {
     if (jj_scan_token(CATCH)) return true;
     if (jj_scan_token(LPAREN)) return true;
@@ -4808,6 +4825,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
     xsp = jj_scanpos;
     if (jj_3R_247()) jj_scanpos = xsp;
+    return false;
+  }
+
+  private boolean jj_3R_132() {
+    if (jj_scan_token(LBRACE)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_180()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(RBRACE)) return true;
     return false;
   }
 
@@ -4832,6 +4860,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3R_164() {
+    if (jj_3R_62()) return true;
+    return false;
+  }
+
   private boolean jj_3R_134() {
     Token xsp;
     xsp = jj_scanpos;
@@ -4845,8 +4878,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_164() {
+  private boolean jj_3R_149() {
+    if (jj_scan_token(THROW)) return true;
     if (jj_3R_62()) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_245() {
+    if (jj_3R_251()) return true;
     return false;
   }
 
@@ -4860,15 +4900,18 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_149() {
-    if (jj_scan_token(THROW)) return true;
-    if (jj_3R_62()) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
+  private boolean jj_3R_256() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_140()) return true;
     return false;
   }
 
-  private boolean jj_3R_245() {
-    if (jj_3R_251()) return true;
+  private boolean jj_3R_148() {
+    if (jj_scan_token(RETURN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_164()) jj_scanpos = xsp;
+    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
@@ -4885,12 +4928,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_256() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_140()) return true;
-    return false;
-  }
-
   private boolean jj_3_2() {
     Token xsp;
     while (true) {
@@ -4901,17 +4938,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_148() {
-    if (jj_scan_token(RETURN)) return true;
+  private boolean jj_3R_147() {
+    if (jj_scan_token(CONTINUE)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_164()) jj_scanpos = xsp;
+    if (jj_scan_token(67)) jj_scanpos = xsp;
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  private boolean jj_3R_147() {
-    if (jj_scan_token(CONTINUE)) return true;
+  private boolean jj_3R_146() {
+    if (jj_scan_token(BREAK)) return true;
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(67)) jj_scanpos = xsp;
@@ -4939,15 +4976,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(76)) return true;
     }
     }
-    return false;
-  }
-
-  private boolean jj_3R_146() {
-    if (jj_scan_token(BREAK)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(67)) jj_scanpos = xsp;
-    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 

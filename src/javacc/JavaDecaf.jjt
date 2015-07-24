@@ -1023,9 +1023,14 @@ void BlockStatement() :
 }
 
 void LocalVariableDeclaration() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+    }
+
   [ "final" ] Type() VariableDeclarator() ( "," VariableDeclarator() )*
+  { setFirstLastToken(jjtThis, t, getToken(1));})#LocalVariableDeclaration
 }
 
 void EmptyStatement() :
