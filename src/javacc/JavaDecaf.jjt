@@ -1185,9 +1185,14 @@ void ContinueStatement() :
 }
 
 void ReturnStatement() :
-{}
+{Token t;}
 {
-  "return" [ Expression() ] ";"
+  ({
+   t = getToken(1);
+  } "return" [ Expression() ] ";"
+  {
+  setFirstLastToken(jjtThis, t, getToken(0));
+  })#ReturnStatement
 }
 
 void ThrowStatement() :
