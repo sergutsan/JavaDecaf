@@ -118,7 +118,7 @@ public class ASTUtils {
         of spaces to indent, add this warning to the warning list */
 
         if (indentationCount != (expectedIndentation * INDENTATION_SPACES)) {
-            String warning = "methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
+            String warning = " methods, loops and their contents should be indented by multiples of four spaces, e.g.:" +
                     "\nvoid isLessThan(int number1, int number2) {"+
                     "\n    if (x < y) {" +
                     "\n        println(x + \"is less than\" + y);" +
