@@ -41,8 +41,7 @@ public class StatementVariableSimpleNode extends SimpleNode {
         }
         //manually print last token
         print(end, ostr);
-//    t.image=";";
-//    print(t, ostr); //print last semicolon
+
     }
 
 
