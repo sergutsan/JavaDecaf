@@ -55,7 +55,6 @@ public class SimpleNode implements Node {
     public SimpleNode(JDCParser p, int i) {
         id = i;
         parser = p;
-        setIndentationLevel();
     }
 
     public void jjtOpen() {
@@ -117,6 +116,7 @@ public class SimpleNode implements Node {
     public void setLastToken(Token t) { end = t; }
 
     public void process (PrintWriter ostr) {
+        setIndentationLevel();
         Token t = begin;
         switch (jjtGetParent().toString()) {
             case "MethodDeclaration":
