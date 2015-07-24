@@ -24,15 +24,15 @@ public class ClosingBraceSimpleNode extends SimpleNode {
         super.process(ostr);
 
         String indentation = "";
-        int indentationLevel;
-        if (this instanceof ASTDecafBlock) {
-            indentationLevel = 1;
-        } else {
-            indentationLevel = ASTUtils.getIndentationLevel(this);
-            if (this instanceof ConditionalClosingBraceSimpleNode) {
-                indentationLevel-=1; //prevent for loop closing brace being too indented
-            }
-        }
+//        int indentationLevel = this;
+//        if (this instanceof ASTDecafBlock) {
+//            indentationLevel = 1;
+//        } else {
+//            indentationLevel = ;
+//            if (this instanceof ConditionalClosingBraceSimpleNode) {
+//                indentationLevel-=1; //prevent for loop closing brace being too indented
+//            }
+//        }
         for (int i = 0; i<indentationLevel; i++) {
             indentation += ASTUtils.INDENTATION;
         }
