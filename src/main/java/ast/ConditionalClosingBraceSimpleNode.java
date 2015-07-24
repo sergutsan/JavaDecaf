@@ -18,7 +18,7 @@ public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode {
 
     public void process(PrintWriter ostr){
         setIndentationLevel();
-        if (jjtGetParent() instanceof ClosingBraceSimpleNode){
+        if (jjtGetParent() instanceof ClosingBraceSimpleNode || jjtGetParent() instanceof BlockSimpleNode){
             begin = ASTUtils.indent(begin, this);
         }
         super.process(ostr);
