@@ -27,10 +27,10 @@ public class StatementVariableSimpleNode extends SimpleNode {
         String prevToken = "";
         while (t != end) {
             if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
-                if ((jjtGetParent() instanceof ClosingBraceSimpleNode
-                        || jjtGetParent() instanceof BlockSimpleNode)
-                        && (!(jjtGetParent() instanceof ASTDecafMain))
-                        && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode))) {
+                if (((jjtGetParent() instanceof ClosingBraceSimpleNode
+                        && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode)))
+                        && (!(jjtGetParent() instanceof ASTDecafMain)))
+                        || jjtGetParent() instanceof BlockSimpleNode) {
                     ASTUtils.checkIndentation(parser, begin, this);
                 }
             }
