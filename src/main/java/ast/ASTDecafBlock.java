@@ -59,9 +59,9 @@ public class ASTDecafBlock extends ClosingBraceSimpleNode {
      */
   public void process (PrintWriter ostr) {
       String classDec = "import java.util.Scanner;\n" +  //Assign the class/main method encapsulation code
-              "public class " + parser.getClassName() + " { \n    " +
-              "private Scanner input = new Scanner(System.in);\n    " + //init Scanner for reading from stdin
-              "    public static void main(String[] args){\n    ";
+              "public class " + parser.getClassName() + " { \n" + ASTUtils.INDENTATION +
+              "private Scanner input = new Scanner(System.in);\n"  + ASTUtils.INDENTATION +//init Scanner for reading from stdin
+              "public static void main(String[] args){\n";
       ostr.print(classDec);
 
       super.process(ostr);
