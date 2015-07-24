@@ -45,7 +45,7 @@ public class SimpleNode implements Node {
     protected int id;
     protected JDCParser parser;
     protected int indentationLevel;
-    protected boolean indent;
+    protected boolean indent = true;
 
     public SimpleNode(int i) {
         id = i;
