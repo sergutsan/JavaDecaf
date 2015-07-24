@@ -44,6 +44,7 @@ public class SimpleNode implements Node {
     protected Node[] children;
     protected int id;
     protected JDCParser parser;
+    protected int indentationLevel;
 
     public SimpleNode(int i) {
         id = i;
@@ -139,6 +140,15 @@ public class SimpleNode implements Node {
         }
         // print(end, ostr);
     }
+
+    public int getIndentationLevel() {
+        return indentationLevel;
+    }
+
+    public void setIndentationLevel(int level){
+        indentationLevel = level;
+    }
+
 
 
     // The following method prints token t, as well as all preceding
