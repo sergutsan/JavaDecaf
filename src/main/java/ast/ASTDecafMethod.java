@@ -17,7 +17,7 @@ class ASTDecafMethod extends ClosingBraceSimpleNode {
   }
 
   public void process(PrintWriter ostr){
-      String methodDec = "\n" + ASTUtils.INDENTATION + "private static";
+      String methodDec = "\n\n" + ASTUtils.INDENTATION + "private static";
       ostr.print(methodDec);
 
       super.process(ostr);
