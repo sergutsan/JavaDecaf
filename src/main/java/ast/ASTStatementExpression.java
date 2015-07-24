@@ -22,12 +22,12 @@ class ASTStatementExpression extends SimpleNode {
     Token t = begin;
     String prevToken = "";
     while (t != end) {
-      t = ASTUtils.indent(t, this);
       if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
         if (jjtGetParent() instanceof ClosingBraceSimpleNode) {
             ASTUtils.checkIndentation(parser, begin, ASTUtils.getIndentationLevel(this));
         }
       }
+      t = ASTUtils.indent(t, this);
 
       t = ASTUtils.checkForSubstitutions(t, prevToken);
       print(t, ostr);
