@@ -14,7 +14,7 @@ class ASTDecafClass extends ClosingBraceSimpleNode {
 
     public ASTDecafClass(JDCParser p, int id) {
         super(p, id);
-        indentationLevel = 0;
+        indent = false;
     }
 
     public void process(PrintWriter ostr) {

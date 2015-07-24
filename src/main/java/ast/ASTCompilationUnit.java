@@ -47,6 +47,7 @@ public class ASTCompilationUnit extends SimpleNode {
 
     public ASTCompilationUnit(JDCParser p, int id) {
         super(p, id);
+        indent = false;
     }
 
 
