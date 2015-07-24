@@ -392,7 +392,7 @@ ASTCompilationUnit CompilationUnit()                  :
   ( LOOKAHEAD(3) //avoid choice conflict - SK
   ( TypeDeclaration() )+
   |
-  (DecafBlock()  (DecafMethod())* )	//SK
+  DecafBlock()	//SK
   )
   <EOF>/*@bgen(jjtree)*/
                 {
@@ -1615,7 +1615,8 @@ void DecafBlock() :
     ({
     t = getToken(1);
     }
-    (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
+    (LOOKAHEAD(3) BlockStatement())+
+    (DecafMethod())*/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn001, true);
       jjtc001 = false;

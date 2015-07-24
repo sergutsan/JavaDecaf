@@ -380,7 +380,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   ( LOOKAHEAD(3) //avoid choice conflict - SK
   ( TypeDeclaration() )+
   |
-  (DecafBlock()  (DecafMethod())* )	//SK
+  DecafBlock()	//SK
   )
   <EOF>
 		{
@@ -1234,6 +1234,7 @@ void DecafBlock() :
     t = getToken(1);
     }
     (LOOKAHEAD(3) BlockStatement())+
+    (DecafMethod())*
     {
     setFirstLastToken(jjtThis, t, getToken(0));
     })  #DecafBlock
