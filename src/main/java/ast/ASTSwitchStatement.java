@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTSwitchStatement extends ConditionalClosingBraceSimpleNode {
+class ASTSwitchStatement extends ConditionalClosingBraceSimpleNode implements IndentationContainer{
     public ASTSwitchStatement(int id) {
         super(id);
     }

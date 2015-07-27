@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 /**
  * Superclass of conditional loops.
  */
-public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode {
+public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode implements IndentationContainer {
     public ConditionalClosingBraceSimpleNode(int id) {
         super(id);
     }
@@ -18,7 +18,7 @@ public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode {
 
     public void process(PrintWriter ostr){
         setIndentationLevel();
-        if (jjtGetParent() instanceof ClosingBraceSimpleNode || jjtGetParent() instanceof BlockSimpleNode){
+        if (jjtGetParent() instanceof IndentationContainer){
             begin = ASTUtils.indent(begin, this);
         }
         super.process(ostr);
