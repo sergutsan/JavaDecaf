@@ -1330,7 +1330,7 @@ void SwitchStatement() :
     jjtc001 = false;
   }
 /*@egen*/
-  { setFirstLastToken(jjtn001, t, getToken(0));})/*@bgen(jjtree)*/
+  { setFirstLastToken(jjtn001, t, getToken(1));})/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -1644,9 +1644,32 @@ void ForUpdate() :
 }
 
 void BreakStatement() :
-{}
-{
-  "break" [ <IDENTIFIER> ] ";"
+{ Token t; }
+{/*@bgen(jjtree) BreakStatement */
+  {
+    ASTBreakStatement jjtn001 = new ASTBreakStatement(this, JJTBREAKSTATEMENT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+    t = getToken(0);
+    } "break" [ <IDENTIFIER> ] ";"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    }
+/*@egen*/
+    {
+    setFirstLastToken(jjtn001, t, getToken(0));
+    })/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/               
 }
 
 void ContinueStatement() :

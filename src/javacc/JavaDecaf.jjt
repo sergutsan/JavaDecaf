@@ -1071,7 +1071,7 @@ void SwitchStatement() :
   "switch" "(" Expression() ")" "{"
     ( SwitchLabel() ( BlockStatement() )* )*
   "}"
-  { setFirstLastToken(jjtThis, t, getToken(0));})#SwitchStatement
+  { setFirstLastToken(jjtThis, t, getToken(1));})#SwitchStatement
 }
 
 void SwitchLabel() :
@@ -1178,9 +1178,14 @@ void ForUpdate() :
 }
 
 void BreakStatement() :
-{}
+{ Token t; }
 {
-  "break" [ <IDENTIFIER> ] ";"
+  ({
+    t = getToken(0);
+    } "break" [ <IDENTIFIER> ] ";"
+    {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })#BreakStatement
 }
 
 void ContinueStatement() :
