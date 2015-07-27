@@ -48,6 +48,7 @@ public class SimpleNode implements Node {
     protected int indentationLevel;
     protected boolean indent = true;
     protected static boolean decafClass;
+    protected static boolean decafMethod;
 
     public SimpleNode(int i) {
         id = i;
@@ -163,6 +164,7 @@ public class SimpleNode implements Node {
     public static boolean isDecafClass(){
         return decafClass;
     }
+    public static boolean isDecafMethod() { return decafMethod; }
 
     // The following method prints token t, as well as all preceding
     // special tokens (essentially, white space and comments).
