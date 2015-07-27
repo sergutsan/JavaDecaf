@@ -33,7 +33,7 @@ class ASTExpression extends SimpleNode {
         super.process(ostr);
 
         if (jjtGetParent() instanceof ASTSwitchStatement) {
-            ostr.print(" {"); //print the missing lbrace if this is the child of a switch statementg
+            ostr.print(" {"); //print the missing lbrace if this is the child of a switch statement
         }
     }
 
