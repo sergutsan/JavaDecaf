@@ -25,8 +25,7 @@ public class ClosingBraceSimpleNode extends SimpleNode {
 
         String indentation = "";
 
-        /* Start the loop at 1 to prevent closing braces being too indented */
-        for (int i = 1; i<indentationLevel; i++) {
+        for (int i = 0; i<indentationLevel; i++) {
             indentation += ASTUtils.INDENTATION;
         }
 
