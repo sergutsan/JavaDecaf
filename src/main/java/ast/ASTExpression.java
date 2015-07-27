@@ -21,11 +21,11 @@ class ASTExpression extends SimpleNode {
         Token t = begin;
         while (t!= end) {
             if (t.image.equals("&")) {
-                String warning = "\"You have used single \\'&\\' instead of double \\'&&\\'. Logical AND in Java is represented using \\'&&\\'.\"";
+                String warning = "\"You have used single \'&\\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.\"";
                 StyleWarnings.generateWarning(t, parser, warning);
             }
             if (t.image.equals("|")) {
-                String warning = "You have used single \\'|\\' instead of double \\'||\\'. Logical OR in Java is represented using \\'||\\'.\"";
+                String warning = "You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'.\"";
                 StyleWarnings.generateWarning(t, parser, warning);
             }
             t = t.next;
