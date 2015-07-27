@@ -1330,7 +1330,7 @@ void SwitchStatement() :
     jjtc001 = false;
   }
 /*@egen*/
-  { setFirstLastToken(jjtn001, t, getToken(1));})/*@bgen(jjtree)*/
+  { setFirstLastToken(jjtn001, t, getToken(0));})/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);

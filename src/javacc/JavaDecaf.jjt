@@ -1071,7 +1071,7 @@ void SwitchStatement() :
   "switch" "(" Expression() ")" "{"
     ( SwitchLabel() ( BlockStatement() )* )*
   "}"
-  { setFirstLastToken(jjtThis, t, getToken(1));})#SwitchStatement
+  { setFirstLastToken(jjtThis, t, getToken(0));})#SwitchStatement
 }
 
 void SwitchLabel() :
