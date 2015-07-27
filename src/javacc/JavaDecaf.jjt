@@ -1146,9 +1146,20 @@ void DoStatement() :
     }
   "do" Block() {
     setFirstLastToken(jjtThis, t, rbrace); //RBRACE
-                }
-                ("while" "(" Expression() ")" ";")#WhileAfterDoStatement )#DoStatement
+                })#DoStatement
 
+     WhileAfterDo()
+
+}
+
+void WhileAfterDo() :
+{Token t;}
+{
+({ t = getToken(1); }
+"while" "(" Expression() ")" ";"
+{
+    setFirstLastToken(jjtThis, t, getToken(0));
+})#WhileAfterDo
 }
 
 void ForStatement() :

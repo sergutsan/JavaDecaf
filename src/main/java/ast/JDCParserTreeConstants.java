@@ -20,8 +20,8 @@ public interface JDCParserTreeConstants
   public int JJTIFSTATEMENT = 12;
   public int JJTELSESTATEMENT = 13;
   public int JJTWHILESTATEMENT = 14;
-  public int JJTWHILEAFTERDOSTATEMENT = 15;
-  public int JJTDOSTATEMENT = 16;
+  public int JJTDOSTATEMENT = 15;
+  public int JJTWHILEAFTERDO = 16;
   public int JJTFORBLOCK = 17;
   public int JJTFORSTATEMENT = 18;
   public int JJTBREAKSTATEMENT = 19;
@@ -47,8 +47,8 @@ public interface JDCParserTreeConstants
     "IfStatement",
     "ElseStatement",
     "WhileStatement",
-    "WhileAfterDoStatement",
     "DoStatement",
+    "WhileAfterDo",
     "ForBlock",
     "ForStatement",
     "BreakStatement",
@@ -58,4 +58,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=409e0625f07bb707007c3e4cb738770b (do not edit this line) */
+/* JavaCC - OriginalChecksum=3d7f26d74eca200a166ab22f2d1c56fb (do not edit this line) */
