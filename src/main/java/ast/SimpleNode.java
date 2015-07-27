@@ -130,6 +130,10 @@ public class SimpleNode implements Node {
             ASTUtils.checkIndentation(parser, begin, this);
         }
 
+        if (this instanceof Indentable) {
+            ASTUtils.indent(t, this);
+        }
+
         if (jjtGetNumChildren() > 0) {
             end = ((SimpleNode)jjtGetChild(0)).begin;
         }
@@ -154,7 +158,11 @@ public class SimpleNode implements Node {
             indentationLevel = ((SimpleNode) jjtGetParent()).getIndentationLevel();
             if (indent) { //only increase indentation if not block or base
                 indentationLevel += 1;
+                if (this instanceof ASTBreakStatement) {
+                    indentationLevel += 1;
+                }
             }
+
         }
 
     }
