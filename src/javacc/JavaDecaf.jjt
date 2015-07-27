@@ -1099,10 +1099,18 @@ void IfStatement() :
   {
     t = getToken(1);
   }
-  "if" "(" Expression() ")" Block() [ LOOKAHEAD(1) "else" Block() ]
-      {
-        setFirstLastToken(jjtThis, t, rbrace);
-        })#IfStatement //Do not permit braceless statements - SK
+  "if" "(" Expression() ")" Block()   {
+                                       setFirstLastToken(jjtThis, t, rbrace);
+                                       })#IfStatement
+                                       [ LOOKAHEAD(1) (
+                                       {
+                                       t = getToken(1);
+                                       }
+                                       "else" Block()
+                                       {
+                                        setFirstLastToken(jjtThis, t, rbrace);
+                                        })#ElseStatement ]
+     //Do not permit braceless statements - SK
 
 
 }
