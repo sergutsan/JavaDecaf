@@ -1064,11 +1064,14 @@ void StatementExpression() :
 }
 
 void SwitchStatement() :
-{}
-{
+{Token t;}
+{ ({
+    t = getToken(1);
+    }
   "switch" "(" Expression() ")" "{"
     ( SwitchLabel() ( BlockStatement() )* )*
   "}"
+  { setFirstLastToken(jjtThis, t, getToken(0));})#SwitchStatement
 }
 
 void SwitchLabel() :

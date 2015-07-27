@@ -14,16 +14,17 @@ public interface JDCParserTreeConstants
   public int JJTBLOCK = 6;
   public int JJTLOCALVARIABLEDECLARATION = 7;
   public int JJTSTATEMENTEXPRESSION = 8;
-  public int JJTIFSTATEMENT = 9;
-  public int JJTELSESTATEMENT = 10;
-  public int JJTWHILESTATEMENT = 11;
-  public int JJTDOSTATEMENT = 12;
-  public int JJTFORBLOCK = 13;
-  public int JJTFORSTATEMENT = 14;
-  public int JJTRETURNSTATEMENT = 15;
-  public int JJTDECAFCLASS = 16;
-  public int JJTDECAFMAIN = 17;
-  public int JJTDECAFMETHOD = 18;
+  public int JJTSWITCHSTATEMENT = 9;
+  public int JJTIFSTATEMENT = 10;
+  public int JJTELSESTATEMENT = 11;
+  public int JJTWHILESTATEMENT = 12;
+  public int JJTDOSTATEMENT = 13;
+  public int JJTFORBLOCK = 14;
+  public int JJTFORSTATEMENT = 15;
+  public int JJTRETURNSTATEMENT = 16;
+  public int JJTDECAFCLASS = 17;
+  public int JJTDECAFMAIN = 18;
+  public int JJTDECAFMETHOD = 19;
 
 
   public String[] jjtNodeName = {
@@ -36,6 +37,7 @@ public interface JDCParserTreeConstants
     "Block",
     "LocalVariableDeclaration",
     "StatementExpression",
+    "SwitchStatement",
     "IfStatement",
     "ElseStatement",
     "WhileStatement",
@@ -48,4 +50,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=15b199408033532991fd6a73fc282390 (do not edit this line) */
+/* JavaCC - OriginalChecksum=ba4ebef321cf43fd9d9a6e1e3eb4dd08 (do not edit this line) */
