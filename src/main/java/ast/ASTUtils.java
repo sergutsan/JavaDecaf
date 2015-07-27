@@ -112,8 +112,10 @@ public class ASTUtils {
          - need to account for this to prevent unnecessary warnings
          */
         if (node.isDecafClass()) {
-            //if ()
-            expectedIndentation -= 2;
+            if (!node.isDecafMethod()){
+                expectedIndentation-=1;
+            }
+            expectedIndentation -= 1;
         }
         /* if the actual number of indented spaces doesn't match the indentation level multiplied by the number
         of spaces to indent, add this warning to the warning list */
