@@ -28,6 +28,8 @@ class ASTAssignment extends SimpleNode {
       t = t.next;
     }
 
+    super.process(ostr);
+
   }
 }
 /* JavaCC - OriginalChecksum=0255dc49f2e135d783b37e044b2be3f3 (do not edit this line) */
