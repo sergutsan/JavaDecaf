@@ -219,6 +219,11 @@ public class ParseException extends Exception {
                     "if (x > y) {\n" +
                     "    println(x);\n" +
                     "}";
+
+        } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind))  && nextToken.kind == JDCParserConstants.DIGIT){
+            retval += "Method and variable names should not begin with a number or be entirely numeric, e.g.:\n" +
+                    "Acceptable: void method1(), int num1\n" +
+                    "Not acceptable: void 1(), int 1st";
         }
         return retval;
     }
