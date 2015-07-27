@@ -1355,9 +1355,9 @@ void SwitchStatement() :
 
 void SwitchLabel() :
 {Token t;}
-{/*@bgen(jjtree) SwitchLabel */
+{/*@bgen(jjtree) CaseSwitchLabel */
   {
-    ASTSwitchLabel jjtn001 = new ASTSwitchLabel(this, JJTSWITCHLABEL);
+    ASTCaseSwitchLabel jjtn001 = new ASTCaseSwitchLabel(this, JJTCASESWITCHLABEL);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
@@ -1365,15 +1365,12 @@ void SwitchLabel() :
 /*@egen*/ ({
     t = getToken(1);
     }
-  "case" Expression() ":"
-|
-  "default" ":"/*@bgen(jjtree)*/
-  {
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-  }
-/*@egen*/
-  { setFirstLastToken(jjtn001, t, getToken(0)); })/*@bgen(jjtree)*/
+  "case" Expression() ":"/*@bgen(jjtree)*/
+                          {
+                            jjtree.closeNodeScope(jjtn001, true);
+                            jjtc001 = false;
+                          }
+/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(0)); })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -1393,13 +1390,48 @@ void SwitchLabel() :
       jjtree.closeNodeScope(jjtn001, true);
     }
   }
-/*@egen*/            
+/*@egen*/                
+|/*@bgen(jjtree) DefaultSwitchLabel */
+  {
+    ASTDefaultSwitchLabel jjtn002 = new ASTDefaultSwitchLabel(this, JJTDEFAULTSWITCHLABEL);
+    boolean jjtc002 = true;
+    jjtree.openNodeScope(jjtn002);
+  }
+  try {
+/*@egen*/
+  ({
+      t = getToken(1);
+      }
+      "default" ":"/*@bgen(jjtree)*/
+                    {
+                      jjtree.closeNodeScope(jjtn002, true);
+                      jjtc002 = false;
+                    }
+/*@egen*/ { setFirstLastToken(jjtn002, t, getToken(0)); })/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc002) {
+      jjtree.closeNodeScope(jjtn002, true);
+    }
+  }
+/*@egen*/                   
+
 }
 
 void IfStatement() :
 /*
  * The disambiguating algorithm of JavaCC automatically binds dangling
- * else's to the innermost if statement.  The LOOKAHEAD specification
+ * else's to the innermost if statement.  int num = readInt();
+
+switch (num) {
+    case 1:
+        println("one");
+        break;
+    case 2:
+        println("two");
+        break;
+    default:
+        break;
+}The LOOKAHEAD specification
  * is to tell JavaCC that we know what we are doing.
  */
 {

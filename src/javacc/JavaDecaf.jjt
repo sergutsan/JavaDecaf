@@ -1079,16 +1079,30 @@ void SwitchLabel() :
 { ({
     t = getToken(1);
     }
-  "case" Expression() ":"
+  "case" Expression() ":" { setFirstLastToken(jjtThis, t, getToken(0)); })#CaseSwitchLabel
 |
-  "default" ":"
-  { setFirstLastToken(jjtThis, t, getToken(0)); })#SwitchLabel
+  ({
+      t = getToken(1);
+      }
+      "default" ":" { setFirstLastToken(jjtThis, t, getToken(0)); })#DefaultSwitchLabel
+
 }
 
 void IfStatement() :
 /*
  * The disambiguating algorithm of JavaCC automatically binds dangling
- * else's to the innermost if statement.  The LOOKAHEAD specification
+ * else's to the innermost if statement.  int num = readInt();
+
+switch (num) {
+    case 1:
+        println("one");
+        break;
+    case 2:
+        println("two");
+        break;
+    default:
+        break;
+}The LOOKAHEAD specification
  * is to tell JavaCC that we know what we are doing.
  */
 {
