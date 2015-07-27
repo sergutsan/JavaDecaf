@@ -2986,7 +2986,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(SEMICOLON);
       jjtree.closeNodeScope(jjtn001, true);
       jjtc001 = false;
-    setFirstLastToken(jjtn001, t, getToken(0));
+    setFirstLastToken(jjtn001, t, getToken(1));
     } finally {
     if (jjtc001) {
       jjtree.closeNodeScope(jjtn001, true);

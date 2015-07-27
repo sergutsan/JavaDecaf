@@ -1201,7 +1201,7 @@ void BreakStatement() :
     t = getToken(0);
     } "break" [ <IDENTIFIER> ] ";"
     {
-    setFirstLastToken(jjtThis, t, getToken(0));
+    setFirstLastToken(jjtThis, t, getToken(1));
     })#BreakStatement
 }
 

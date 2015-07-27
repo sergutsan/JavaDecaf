@@ -797,7 +797,7 @@ void Expression() :
 |
 {
    t = getToken(1);
-   } 
+   }
   ConditionalExpression()/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
@@ -1729,7 +1729,7 @@ void BreakStatement() :
     }
 /*@egen*/
     {
-    setFirstLastToken(jjtn001, t, getToken(0));
+    setFirstLastToken(jjtn001, t, getToken(1));
     })/*@bgen(jjtree)*/
   } finally {
     if (jjtc001) {
