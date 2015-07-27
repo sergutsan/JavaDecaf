@@ -30,6 +30,7 @@ class ASTConditionalExpression extends SimpleNode {
             }
             t = t.next;
         }
+        super.process(ostr);
     }
 
 }
