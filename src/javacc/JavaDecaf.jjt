@@ -705,7 +705,7 @@ void Assignment() :
 void AssignmentOperator() :
 {Token t;}
 {
-  ({t = getToken(0);}"="{setFirstLastToken(jjtThis, t, t);})#SingleEquals | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+  ({t = getToken(1);}"="{setFirstLastToken(jjtThis, t, t);})#SingleEquals | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :
@@ -1138,7 +1138,7 @@ void WhileStatement() :
    }
   "while" "(" Expression() ")" Block() //Do not permit braceless statements - SK
      {
-        setFirstLastToken(jjtThis, t, rbrace); //RBRACE
+        setFirstLastToken(jjtThis, t, getToken(0)); //RBRACE
      })#WhileStatement
 
 }

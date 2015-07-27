@@ -845,7 +845,7 @@ void AssignmentOperator() :
   }
   try {
 /*@egen*/
-  ({t = getToken(0);}"="/*@bgen(jjtree)*/
+  ({t = getToken(1);}"="/*@bgen(jjtree)*/
                         {
                           jjtree.closeNodeScope(jjtn001, true);
                           jjtc001 = false;
@@ -1543,7 +1543,7 @@ void WhileStatement() :
      }
 /*@egen*/ //Do not permit braceless statements - SK
      {
-        setFirstLastToken(jjtn001, t, rbrace); //RBRACE
+        setFirstLastToken(jjtn001, t, getToken(0)); //RBRACE
      })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
