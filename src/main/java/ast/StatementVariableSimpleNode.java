@@ -26,7 +26,7 @@ public class StatementVariableSimpleNode extends SimpleNode {
         Token t = begin;
         String prevToken = "";
         while (t != end) {
-            if (t.specialToken != null && !t.specialToken.image.equals(" ")) {
+            if (t.specialToken != null && ASTUtils.isNewline(t, this)) {
                 if ((jjtGetParent() instanceof ClosingBraceSimpleNode
                         && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode))
                         && (!(jjtGetParent() instanceof ASTDecafMain)))
