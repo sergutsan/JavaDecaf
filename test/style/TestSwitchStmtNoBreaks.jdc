@@ -1,0 +1,8 @@
+String s  = "hi";
+
+switch(s) {
+    case "hi":
+        println("Hello!");
+    default:
+        break;
+}
