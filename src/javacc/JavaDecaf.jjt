@@ -1075,11 +1075,14 @@ void SwitchStatement() :
 }
 
 void SwitchLabel() :
-{}
-{
+{Token t;}
+{ ({
+    t = getToken(1);
+    }
   "case" Expression() ":"
 |
   "default" ":"
+  { setFirstLastToken(jjtThis, t, getToken(0)); })#SwitchLabel
 }
 
 void IfStatement() :
