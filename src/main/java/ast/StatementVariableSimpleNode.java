@@ -27,10 +27,7 @@ public class StatementVariableSimpleNode extends SimpleNode {
         String prevToken = "";
         while (t != end) {
             if (t.specialToken != null && ASTUtils.isNewline(t, this)) {
-                if ((jjtGetParent() instanceof ClosingBraceSimpleNode
-                        && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode))
-                        && (!(jjtGetParent() instanceof ASTDecafMain)))
-                        || jjtGetParent() instanceof BlockSimpleNode) {
+                if (jjtGetParent() instanceof IndentationContainer) {
                     ASTUtils.checkIndentation(parser, begin, this);
                 }
             }
