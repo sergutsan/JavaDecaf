@@ -1,0 +1,12 @@
+int num = readInt();
+
+switch (num) {
+    case 1:
+        println("one");
+        break;
+    case 2:
+        println("two");
+        break;
+    default:
+        break;
+}
