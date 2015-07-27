@@ -684,8 +684,14 @@ void NameList() :
 void Expression() :
 {Token t;}
 {
- ( LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
+ ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
+  ({
+    t = getToken(1);
+  }
   Assignment()
+  {
+  setFirstLastToken(jjtThis, t, getToken(0));
+  })#Expression
 |
 {
    t = getToken(1);
@@ -703,9 +709,9 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{Token t;}
+{}
 {
-  ({t = getToken(1);}"="{setFirstLastToken(jjtThis, t, t);})#SingleEquals | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
 }
 
 void ConditionalExpression() :
