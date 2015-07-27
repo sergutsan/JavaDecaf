@@ -158,7 +158,10 @@ public class SimpleNode implements Node {
             indentationLevel = ((SimpleNode) jjtGetParent()).getIndentationLevel();
             if (indent) { //only increase indentation if not block or base
                 indentationLevel += 1;
-                if (this instanceof ASTBreakStatement) {
+
+                if (jjtGetParent() instanceof ASTSwitchStatement
+                        && (!(this instanceof ASTCaseSwitchLabel))
+                        && (!(this instanceof ASTDefaultSwitchLabel))){
                     indentationLevel += 1;
                 }
             }
