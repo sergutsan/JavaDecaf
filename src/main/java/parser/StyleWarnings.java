@@ -15,7 +15,7 @@ public class StyleWarnings {
      */
     public static void generateWarning(Token t, JDCParser parser, String message) {
         String warning = "Warning: encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn +
-                ":" + message;
+                ": " + message;
         parser.addWarning(warning);
     }
 
