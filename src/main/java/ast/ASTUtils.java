@@ -108,10 +108,11 @@ public class ASTUtils {
             countToken = countToken.specialToken;
         }
         /*
-        If this is JavaDecaf code, everything will be indented 1 less than normal Java - need to account for this
-        to prevent unnecessary warnings
+        If this is JavaDecaf code, everything will be indented 1 less than normal Java in methods, or 2 less in main method
+         - need to account for this to prevent unnecessary warnings
          */
         if (node.isDecafClass()) {
+            //if ()
             expectedIndentation -= 2;
         }
         /* if the actual number of indented spaces doesn't match the indentation level multiplied by the number
