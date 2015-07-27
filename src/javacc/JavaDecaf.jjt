@@ -1140,16 +1140,14 @@ void WhileStatement() :
 }
 
 void DoStatement() :
-{
-    Token t;
-}
+{}
 { ({
-    t = getToken(1);
+    Token t = getToken(1);
     }
   "do" Block() {
     setFirstLastToken(jjtThis, t, rbrace); //RBRACE
-                })#DoStatement
-                "while" "(" Expression() ")" ";"
+                }
+                "while" "(" Expression() ")" ";")#DoStatement
 
 }
 

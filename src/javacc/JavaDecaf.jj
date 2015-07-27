@@ -1579,9 +1579,7 @@ void WhileStatement() :
 }
 
 void DoStatement() :
-{
-    Token t;
-}
+{}
 {/*@bgen(jjtree) DoStatement */
   {
     ASTDoStatement jjtn001 = new ASTDoStatement(this, JJTDOSTATEMENT);
@@ -1590,16 +1588,12 @@ void DoStatement() :
   }
   try {
 /*@egen*/ ({
-    t = getToken(1);
+    Token t = getToken(1);
     }
-  "do" Block()/*@bgen(jjtree)*/
-               {
-                 jjtree.closeNodeScope(jjtn001, true);
-                 jjtc001 = false;
-               }
-/*@egen*/ {
+  "do" Block() {
     setFirstLastToken(jjtn001, t, rbrace); //RBRACE
-                })/*@bgen(jjtree)*/
+                }
+                "while" "(" Expression() ")" ";")/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -1620,7 +1614,6 @@ void DoStatement() :
     }
   }
 /*@egen*/            
-                "while" "(" Expression() ")" ";"
 
 }
 
