@@ -16,5 +16,32 @@ class ASTSwitchStatement extends ConditionalClosingBraceSimpleNode implements In
         super(p, id);
     }
 
+    public void process(PrintWriter ostr) {
+        int breakCount = 0;
+        int statementCount = 0;
+        for (int i = 0; i < jjtGetNumChildren(); i++){
+            if (jjtGetChild(i) instanceof ASTBreakStatement) {
+                breakCount++;
+            } else if (jjtGetChild(i) instanceof ASTStatementExpression) {
+                statementCount++;
+            }
+        }
+        if (breakCount != statementCount) {
+            String warning = "Each case in a switch statement should be terminated with \"break;\", e.g.:"+
+                    "\nswitch(number) {"+
+                    "\n    case 0: "+
+                    "\n        println(\"zero\");" +
+                    "\n        break;" +
+                    "\n    case 1: "+
+                    "\n        println(\"one\");"+
+                    "\n        break;"+
+                    "\n    default:"+
+                    "\n        break;" +
+                    "\n}";
+            StyleWarnings.generateWarning(begin, parser, warning);
+        }
+        super.process(ostr);
+    }
+
 }
 /* JavaCC - OriginalChecksum=f62d7acfc97a58848fa4c171458d37dd (do not edit this line) */
