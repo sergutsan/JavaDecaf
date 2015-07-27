@@ -7,12 +7,12 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTConditionalExpression extends SimpleNode {
-    public ASTConditionalExpression(int id) {
+class ASTExpression extends SimpleNode {
+    public ASTExpression(int id) {
         super(id);
     }
 
-    public ASTConditionalExpression(JDCParser p, int id) {
+    public ASTExpression(JDCParser p, int id) {
         super(p, id);
         indent = false;
     }

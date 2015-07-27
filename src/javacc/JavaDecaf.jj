@@ -784,20 +784,20 @@ void NameList() :
 
 void Expression() :
 {Token t;}
-{
-  LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
-  Assignment()
-|/*@bgen(jjtree) ConditionalExpression */
-  {
-    ASTConditionalExpression jjtn001 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-  }
-  try {
+{/*@bgen(jjtree) Expression */
+ {
+   ASTExpression jjtn001 = new ASTExpression(this, JJTEXPRESSION);
+   boolean jjtc001 = true;
+   jjtree.openNodeScope(jjtn001);
+ }
+ try {
 /*@egen*/
-  ( {
-  t = getToken(1);
-  }
+ ( LOOKAHEAD( PrimaryExpression() AssignmentOperator() )
+  Assignment()
+|
+{
+   t = getToken(1);
+   } 
   ConditionalExpression()/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
@@ -807,26 +807,26 @@ void Expression() :
   {
   setFirstLastToken(jjtn001, t, getToken(2));
   })/*@bgen(jjtree)*/
-  } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
-    } else {
-      jjtree.popNode();
-    }
-    if (jjte001 instanceof RuntimeException) {
-      throw (RuntimeException)jjte001;
-    }
-    if (jjte001 instanceof ParseException) {
-      throw (ParseException)jjte001;
-    }
-    throw (Error)jjte001;
-  } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-  }
-/*@egen*/                      
+ } catch (Throwable jjte001) {
+   if (jjtc001) {
+     jjtree.clearNodeScope(jjtn001);
+     jjtc001 = false;
+   } else {
+     jjtree.popNode();
+   }
+   if (jjte001 instanceof RuntimeException) {
+     throw (RuntimeException)jjte001;
+   }
+   if (jjte001 instanceof ParseException) {
+     throw (ParseException)jjte001;
+   }
+   throw (Error)jjte001;
+ } finally {
+   if (jjtc001) {
+     jjtree.closeNodeScope(jjtn001, true);
+   }
+ }
+/*@egen*/           
 }
 
 void Assignment() :

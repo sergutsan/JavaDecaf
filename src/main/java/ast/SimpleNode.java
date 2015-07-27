@@ -127,7 +127,7 @@ public class SimpleNode implements Node {
             This prevents the for-loop conditions from being indentation checked, as well as the opening brace of an ASTBlock
          */
         if ((jjtGetParent() instanceof BlockSimpleNode
-                || (this instanceof ASTConditionalExpression))
+                || (this instanceof ASTExpression))
                 && (!(this instanceof ASTBlock))
                 && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode))) {
             ASTUtils.checkIndentation(parser, begin, this);

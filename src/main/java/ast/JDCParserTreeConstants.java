@@ -9,7 +9,7 @@ public interface JDCParserTreeConstants
   public int JJTVOID = 1;
   public int JJTCLASSDECLARATION = 2;
   public int JJTMETHODDECLARATION = 3;
-  public int JJTCONDITIONALEXPRESSION = 4;
+  public int JJTEXPRESSION = 4;
   public int JJTSINGLEEQUALS = 5;
   public int JJTBLOCK = 6;
   public int JJTLOCALVARIABLEDECLARATION = 7;
@@ -35,7 +35,7 @@ public interface JDCParserTreeConstants
     "void",
     "ClassDeclaration",
     "MethodDeclaration",
-    "ConditionalExpression",
+    "Expression",
     "SingleEquals",
     "Block",
     "LocalVariableDeclaration",
@@ -56,4 +56,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=d8d347fa0f46e46ba03348c2fd9726f6 (do not edit this line) */
+/* JavaCC - OriginalChecksum=ed634c110b9d6c566255428464f0232d (do not edit this line) */
