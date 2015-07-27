@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 /**
  * Superclass of conditional loops.
  */
-public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode implements IndentationContainer {
+public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode {
     public ConditionalClosingBraceSimpleNode(int id) {
         super(id);
     }
