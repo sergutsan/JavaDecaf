@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTForBlock extends BlockSimpleNode {
+class ASTForBlock extends SimpleNode{
   public ASTForBlock(int id) {
     super(id);
   }
