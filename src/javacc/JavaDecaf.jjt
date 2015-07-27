@@ -1090,7 +1090,7 @@ void SwitchLabel() :
   ({
       t = getToken(1);
       }
-      "default" ":" { setFirstLastToken(jjtThis, t, getToken(0)); })#DefaultSwitchLabel
+      "default" ":" { setFirstLastToken(jjtThis, t, getToken(1)); })#DefaultSwitchLabel
 
 }
 
