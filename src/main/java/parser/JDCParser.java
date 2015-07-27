@@ -2973,7 +2973,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
     try {
-    t = getToken(0);
+    t = getToken(1);
       jj_consume_token(BREAK);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENTIFIER:

@@ -1721,7 +1721,7 @@ void BreakStatement() :
   try {
 /*@egen*/
   ({
-    t = getToken(0);
+    t = getToken(1);
     } "break" [ <IDENTIFIER> ] ";"/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn001, true);
