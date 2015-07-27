@@ -4,6 +4,8 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
 class ASTAssignment extends SimpleNode {
   public ASTAssignment(int id) {
@@ -14,5 +16,18 @@ class ASTAssignment extends SimpleNode {
     super(p, id);
   }
 
+  public void process(PrintWriter ostr) {
+    /* single equals inside an Assignment node inside a loop condition */
+    Token t = begin;
+
+    while (t != null) {
+      if (t.image.equals("=") && jjtGetParent() instanceof ConditionalClosingBraceSimpleNode) {
+        String warning = "You have used assignment operator \'=\' in a loop condition. \nTo check for equality, use double equals \'==\'.";
+        StyleWarnings.generateWarning(t, parser, warning);
+      }
+      t = t.next;
+    }
+
+  }
 }
 /* JavaCC - OriginalChecksum=0255dc49f2e135d783b37e044b2be3f3 (do not edit this line) */
