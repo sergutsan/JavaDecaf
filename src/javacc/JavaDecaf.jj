@@ -783,35 +783,36 @@ void NameList() :
  */
 
 void Expression() :
+{}
+{
+ ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
+  Assignment()
+  |
+  ConditionalExpression())
+}
+
+void Assignment() :
 {Token t;}
-{/*@bgen(jjtree) Expression */
- {
-   ASTExpression jjtn002 = new ASTExpression(this, JJTEXPRESSION);
-   boolean jjtc002 = true;
-   jjtree.openNodeScope(jjtn002);
- }
- try {
-/*@egen*/
- ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())/*@bgen(jjtree) Expression */
+{/*@bgen(jjtree) Assignment */
   {
-    ASTExpression jjtn001 = new ASTExpression(this, JJTEXPRESSION);
+    ASTAssignment jjtn001 = new ASTAssignment(this, JJTASSIGNMENT);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
   try {
 /*@egen*/
   ({
-    t = getToken(1);
+  t = getToken(1);
   }
-  Assignment()/*@bgen(jjtree)*/
+  PrimaryExpression() AssignmentOperator() Expression()/*@bgen(jjtree)*/
   {
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
   }
 /*@egen*/
   {
-  setFirstLastToken(jjtn001, t, getToken(0));
-  })/*@bgen(jjtree)*/
+    setFirstLastToken(jjtn001, t, getToken(0));
+    })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -832,45 +833,6 @@ void Expression() :
     }
   }
 /*@egen*/           
-|
-{
-   t = getToken(1);
-   }
-  ConditionalExpression()/*@bgen(jjtree)*/
-  {
-    jjtree.closeNodeScope(jjtn002, true);
-    jjtc002 = false;
-  }
-/*@egen*/
-  {
-  setFirstLastToken(jjtn002, t, getToken(2));
-  })/*@bgen(jjtree)*/
- } catch (Throwable jjte002) {
-   if (jjtc002) {
-     jjtree.clearNodeScope(jjtn002);
-     jjtc002 = false;
-   } else {
-     jjtree.popNode();
-   }
-   if (jjte002 instanceof RuntimeException) {
-     throw (RuntimeException)jjte002;
-   }
-   if (jjte002 instanceof ParseException) {
-     throw (ParseException)jjte002;
-   }
-   throw (Error)jjte002;
- } finally {
-   if (jjtc002) {
-     jjtree.closeNodeScope(jjtn002, true);
-   }
- }
-/*@egen*/           
-}
-
-void Assignment() :
-{}
-{
-  PrimaryExpression() AssignmentOperator() Expression()
 }
 
 void AssignmentOperator() :
@@ -880,9 +842,47 @@ void AssignmentOperator() :
 }
 
 void ConditionalExpression() :
-{}
-{
-  ConditionalOrExpression() [ "?" Expression() ":" ConditionalExpression() ]
+{Token t;}
+{/*@bgen(jjtree) ConditionalExpression */
+  {
+    ASTConditionalExpression jjtn001 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+   t = getToken(1);
+  }
+  ConditionalOrExpression() [ "?" Expression() ":" ConditionalExpression() ]/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
+/*@egen*/
+  {
+    setFirstLastToken(jjtn001, t, getToken(2));
+    })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                      
 }
 
 void ConditionalOrExpression() :

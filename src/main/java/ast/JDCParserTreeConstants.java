@@ -9,24 +9,25 @@ public interface JDCParserTreeConstants
   public int JJTVOID = 1;
   public int JJTCLASSDECLARATION = 2;
   public int JJTMETHODDECLARATION = 3;
-  public int JJTEXPRESSION = 4;
-  public int JJTBLOCK = 5;
-  public int JJTLOCALVARIABLEDECLARATION = 6;
-  public int JJTSTATEMENTEXPRESSION = 7;
-  public int JJTSWITCHSTATEMENT = 8;
-  public int JJTCASESWITCHLABEL = 9;
-  public int JJTDEFAULTSWITCHLABEL = 10;
-  public int JJTIFSTATEMENT = 11;
-  public int JJTELSESTATEMENT = 12;
-  public int JJTWHILESTATEMENT = 13;
-  public int JJTDOSTATEMENT = 14;
-  public int JJTFORBLOCK = 15;
-  public int JJTFORSTATEMENT = 16;
-  public int JJTBREAKSTATEMENT = 17;
-  public int JJTRETURNSTATEMENT = 18;
-  public int JJTDECAFCLASS = 19;
-  public int JJTDECAFMAIN = 20;
-  public int JJTDECAFMETHOD = 21;
+  public int JJTASSIGNMENT = 4;
+  public int JJTCONDITIONALEXPRESSION = 5;
+  public int JJTBLOCK = 6;
+  public int JJTLOCALVARIABLEDECLARATION = 7;
+  public int JJTSTATEMENTEXPRESSION = 8;
+  public int JJTSWITCHSTATEMENT = 9;
+  public int JJTCASESWITCHLABEL = 10;
+  public int JJTDEFAULTSWITCHLABEL = 11;
+  public int JJTIFSTATEMENT = 12;
+  public int JJTELSESTATEMENT = 13;
+  public int JJTWHILESTATEMENT = 14;
+  public int JJTDOSTATEMENT = 15;
+  public int JJTFORBLOCK = 16;
+  public int JJTFORSTATEMENT = 17;
+  public int JJTBREAKSTATEMENT = 18;
+  public int JJTRETURNSTATEMENT = 19;
+  public int JJTDECAFCLASS = 20;
+  public int JJTDECAFMAIN = 21;
+  public int JJTDECAFMETHOD = 22;
 
 
   public String[] jjtNodeName = {
@@ -34,7 +35,8 @@ public interface JDCParserTreeConstants
     "void",
     "ClassDeclaration",
     "MethodDeclaration",
-    "Expression",
+    "Assignment",
+    "ConditionalExpression",
     "Block",
     "LocalVariableDeclaration",
     "StatementExpression",
@@ -54,4 +56,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=b54d5f13c035cca0a616c1f6f2c9cb24 (do not edit this line) */
+/* JavaCC - OriginalChecksum=288c2d91ce9d6b96781a958433d6370f (do not edit this line) */

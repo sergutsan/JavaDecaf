@@ -1306,22 +1306,52 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
  * Expression syntax follows.
  */
   final public void Expression() throws ParseException {
+    if (jj_2_16(2147483647)) {
+      Assignment();
+    } else {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FALSE:
+      case NEW:
+      case NULL:
+      case SUPER:
+      case THIS:
+      case TRUE:
+      case INTEGER_LITERAL:
+      case FLOATING_POINT_LITERAL:
+      case CHARACTER_LITERAL:
+      case STRING_LITERAL:
+      case IDENTIFIER:
+      case LPAREN:
+      case BANG:
+      case TILDE:
+      case INCR:
+      case DECR:
+      case PLUS:
+      case MINUS:
+        ConditionalExpression();
+        break;
+      default:
+        jj_la1[50] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+  }
+
+  final public void Assignment() throws ParseException {
  Token t;
-   ASTExpression jjtn002 = new ASTExpression(this, JJTEXPRESSION);
-   boolean jjtc002 = true;
-   jjtree.openNodeScope(jjtn002);
-    try {
-      if (jj_2_16(2147483647)) {
-    ASTExpression jjtn001 = new ASTExpression(this, JJTEXPRESSION);
+    ASTAssignment jjtn001 = new ASTAssignment(this, JJTASSIGNMENT);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
-        try {
-    t = getToken(1);
-          Assignment();
+    try {
+  t = getToken(1);
+      PrimaryExpression();
+      AssignmentOperator();
+      Expression();
     jjtree.closeNodeScope(jjtn001, true);
     jjtc001 = false;
-  setFirstLastToken(jjtn001, t, getToken(0));
-        } catch (Throwable jjte001) {
+    setFirstLastToken(jjtn001, t, getToken(0));
+    } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
       jjtc001 = false;
@@ -1335,68 +1365,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       {if (true) throw (ParseException)jjte001;}
     }
     {if (true) throw (Error)jjte001;}
-        } finally {
+    } finally {
     if (jjtc001) {
       jjtree.closeNodeScope(jjtn001, true);
     }
-        }
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case FALSE:
-        case NEW:
-        case NULL:
-        case SUPER:
-        case THIS:
-        case TRUE:
-        case INTEGER_LITERAL:
-        case FLOATING_POINT_LITERAL:
-        case CHARACTER_LITERAL:
-        case STRING_LITERAL:
-        case IDENTIFIER:
-        case LPAREN:
-        case BANG:
-        case TILDE:
-        case INCR:
-        case DECR:
-        case PLUS:
-        case MINUS:
-   t = getToken(1);
-          ConditionalExpression();
-    jjtree.closeNodeScope(jjtn002, true);
-    jjtc002 = false;
-  setFirstLastToken(jjtn002, t, getToken(2));
-          break;
-        default:
-          jj_la1[50] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-      }
-    } catch (Throwable jjte002) {
-   if (jjtc002) {
-     jjtree.clearNodeScope(jjtn002);
-     jjtc002 = false;
-   } else {
-     jjtree.popNode();
-   }
-   if (jjte002 instanceof RuntimeException) {
-     {if (true) throw (RuntimeException)jjte002;}
-   }
-   if (jjte002 instanceof ParseException) {
-     {if (true) throw (ParseException)jjte002;}
-   }
-   {if (true) throw (Error)jjte002;}
-    } finally {
-   if (jjtc002) {
-     jjtree.closeNodeScope(jjtn002, true);
-   }
     }
-  }
-
-  final public void Assignment() throws ParseException {
-    PrimaryExpression();
-    AssignmentOperator();
-    Expression();
   }
 
   final public void AssignmentOperator() throws ParseException {
@@ -1445,17 +1418,45 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   final public void ConditionalExpression() throws ParseException {
-    ConditionalOrExpression();
-    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case HOOK:
-      jj_consume_token(HOOK);
-      Expression();
-      jj_consume_token(COLON);
-      ConditionalExpression();
-      break;
-    default:
-      jj_la1[52] = jj_gen;
-      ;
+ Token t;
+    ASTConditionalExpression jjtn001 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+    try {
+   t = getToken(1);
+      ConditionalOrExpression();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case HOOK:
+        jj_consume_token(HOOK);
+        Expression();
+        jj_consume_token(COLON);
+        ConditionalExpression();
+        break;
+      default:
+        jj_la1[52] = jj_gen;
+        ;
+      }
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+    setFirstLastToken(jjtn001, t, getToken(2));
+    } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte001;}
+    }
+    if (jjte001 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte001;}
+    }
+    {if (true) throw (Error)jjte001;}
+    } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
     }
   }
 
@@ -3606,16 +3607,16 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3R_248() {
+    if (jj_3R_65()) return true;
+    return false;
+  }
+
   private boolean jj_3R_104() {
     if (jj_3R_113()) return true;
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_164()) jj_scanpos = xsp;
-    return false;
-  }
-
-  private boolean jj_3R_248() {
-    if (jj_3R_65()) return true;
     return false;
   }
 
@@ -3656,13 +3657,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
     }
     }
-    return false;
-  }
-
-  private boolean jj_3R_103() {
-    if (jj_3R_55()) return true;
-    if (jj_3R_57()) return true;
-    if (jj_3R_62()) return true;
     return false;
   }
 
@@ -3711,8 +3705,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_83() {
-    if (jj_3R_104()) return true;
+  private boolean jj_3R_103() {
+    if (jj_3R_55()) return true;
+    if (jj_3R_57()) return true;
+    if (jj_3R_62()) return true;
     return false;
   }
 
@@ -3734,6 +3730,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   private boolean jj_3_31() {
     if (jj_3R_55()) return true;
     if (jj_3R_57()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_83() {
+    if (jj_3R_104()) return true;
     return false;
   }
 
