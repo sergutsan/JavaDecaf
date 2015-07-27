@@ -2786,37 +2786,60 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   final public void DoStatement() throws ParseException {
-    ASTDoStatement jjtn001 = new ASTDoStatement(this, JJTDOSTATEMENT);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
+    ASTDoStatement jjtn002 = new ASTDoStatement(this, JJTDOSTATEMENT);
+    boolean jjtc002 = true;
+    jjtree.openNodeScope(jjtn002);
     try {
     Token t = getToken(1);
       jj_consume_token(DO);
       Block();
-    setFirstLastToken(jjtn001, t, rbrace); //RBRACE
+    setFirstLastToken(jjtn002, t, rbrace); //RBRACE
 
-      jj_consume_token(WHILE);
-      jj_consume_token(LPAREN);
-      Expression();
-      jj_consume_token(RPAREN);
-      jj_consume_token(SEMICOLON);
-    } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
+                  ASTWhileAfterDoStatement jjtn001 = new ASTWhileAfterDoStatement(this, JJTWHILEAFTERDOSTATEMENT);
+                  boolean jjtc001 = true;
+                  jjtree.openNodeScope(jjtn001);
+      try {
+        jj_consume_token(WHILE);
+        jj_consume_token(LPAREN);
+        Expression();
+        jj_consume_token(RPAREN);
+        jj_consume_token(SEMICOLON);
+      } catch (Throwable jjte001) {
+                  if (jjtc001) {
+                    jjtree.clearNodeScope(jjtn001);
+                    jjtc001 = false;
+                  } else {
+                    jjtree.popNode();
+                  }
+                  if (jjte001 instanceof RuntimeException) {
+                    {if (true) throw (RuntimeException)jjte001;}
+                  }
+                  if (jjte001 instanceof ParseException) {
+                    {if (true) throw (ParseException)jjte001;}
+                  }
+                  {if (true) throw (Error)jjte001;}
+      } finally {
+                  if (jjtc001) {
+                    jjtree.closeNodeScope(jjtn001, true);
+                  }
+      }
+    } catch (Throwable jjte002) {
+    if (jjtc002) {
+      jjtree.clearNodeScope(jjtn002);
+      jjtc002 = false;
     } else {
       jjtree.popNode();
     }
-    if (jjte001 instanceof RuntimeException) {
-      {if (true) throw (RuntimeException)jjte001;}
+    if (jjte002 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte002;}
     }
-    if (jjte001 instanceof ParseException) {
-      {if (true) throw (ParseException)jjte001;}
+    if (jjte002 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte002;}
     }
-    {if (true) throw (Error)jjte001;}
+    {if (true) throw (Error)jjte002;}
     } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
+    if (jjtc002) {
+      jjtree.closeNodeScope(jjtn002, true);
     }
     }
   }

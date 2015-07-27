@@ -1147,7 +1147,7 @@ void DoStatement() :
   "do" Block() {
     setFirstLastToken(jjtThis, t, rbrace); //RBRACE
                 }
-                "while" "(" Expression() ")" ";")#DoStatement
+                ("while" "(" Expression() ")" ";")#WhileAfterDoStatement )#DoStatement
 
 }
 
