@@ -5,7 +5,7 @@ import main.java.parser.JDCParser;
 /**
  * Superclass of Block nodes
  */
-public class BlockSimpleNode extends SimpleNode {
+public class BlockSimpleNode extends SimpleNode implements IndentationContainer{
 
     public BlockSimpleNode(int i) {
         super(i);
