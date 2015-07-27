@@ -12,6 +12,8 @@ class ASTBlock extends SimpleNode implements IndentationContainer {
 
   public ASTBlock(JDCParser p, int id) {
     super(p, id);
+    indent = false; //Parent should take care of the indentation
+
   }
 
 }
