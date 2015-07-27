@@ -4,15 +4,17 @@ package main.java.ast;
 
 import main.java.parser.*;
 
-public
-class ASTSwitchStatement extends ClosingBraceSimpleNode {
-  public ASTSwitchStatement(int id) {
-    super(id);
-  }
+import java.io.PrintWriter;
 
-  public ASTSwitchStatement(JDCParser p, int id) {
-    super(p, id);
-  }
+public
+class ASTSwitchStatement extends ConditionalClosingBraceSimpleNode {
+    public ASTSwitchStatement(int id) {
+        super(id);
+    }
+
+    public ASTSwitchStatement(JDCParser p, int id) {
+        super(p, id);
+    }
 
 }
 /* JavaCC - OriginalChecksum=f62d7acfc97a58848fa4c171458d37dd (do not edit this line) */

@@ -132,6 +132,7 @@ public class SimpleNode implements Node {
                 && (!(jjtGetParent() instanceof ConditionalClosingBraceSimpleNode))) {
             ASTUtils.checkIndentation(parser, begin, this);
         }
+
         if (jjtGetNumChildren() > 0) {
             end = ((SimpleNode)jjtGetChild(0)).begin;
         }
