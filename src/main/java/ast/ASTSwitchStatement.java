@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTSwitchStatement extends SimpleNode {
+class ASTSwitchStatement extends ClosingBraceSimpleNode {
   public ASTSwitchStatement(int id) {
     super(id);
   }
