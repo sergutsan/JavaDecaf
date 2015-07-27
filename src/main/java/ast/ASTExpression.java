@@ -28,6 +28,10 @@ class ASTExpression extends SimpleNode {
                 String warning = "You have used single \'|\' instead of double \'||\'. Logical OR in Java is represented using \'||\'.\"";
                 StyleWarnings.generateWarning(t, parser, warning);
             }
+            if (t.image.equals("=") && jjtGetParent() instanceof ConditionalClosingBraceSimpleNode) {
+                String warning = "You have used assignment operator \'=\' in a loop condition. \nTo check for equality, use double equals \'==\'.";
+                StyleWarnings.generateWarning(t, parser, warning);
+            }
             t = t.next;
         }
         super.process(ostr);
