@@ -389,15 +389,25 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
 }
 
 void PackageDeclaration() :
-{}
-{
+{Token t;}
+{ ({
+    t = getToken(1);
+    }
   "package" Name() ";"
+  {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })#PackageDeclaration
 }
 
 void ImportDeclaration() :
-{}
-{
+{Token t;}
+{ ({
+    t = getToken(1);
+    }
   "import" Name() [ "." "*" ] ";"
+  {
+      setFirstLastToken(jjtThis, t, getToken(0));
+      })#ImportDeclaration
 }
 
 void TypeDeclaration() :
