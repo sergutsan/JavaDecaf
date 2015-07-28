@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTSwitchStatement extends ConditionalSimpleNode implements IndentationContainer{
+class ASTSwitchStatement extends ClosingBraceSimpleNode implements IndentationContainer, Indentable {
     public ASTSwitchStatement(int id) {
         super(id);
     }
@@ -17,6 +17,8 @@ class ASTSwitchStatement extends ConditionalSimpleNode implements IndentationCon
     }
 
     public void process(PrintWriter ostr) {
+        setIndentationLevel();
+
         int breakCount = 0;
         int statementCount = 0;
         boolean defaultPresent = false;
