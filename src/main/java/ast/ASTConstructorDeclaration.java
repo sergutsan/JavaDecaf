@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTConstructorDeclaration extends SimpleNode implements Indentable {
+class ASTConstructorDeclaration extends ClosingBraceSimpleNode implements Indentable {
   public ASTConstructorDeclaration(int id) {
     super(id);
   }
