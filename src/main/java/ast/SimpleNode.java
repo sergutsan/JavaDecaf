@@ -138,6 +138,9 @@ public class SimpleNode implements Node {
             end = ((SimpleNode)jjtGetChild(0)).begin;
         }
         while (t != null && t != end){
+            if (ASTUtils.hasComment(t)){
+                print(ASTUtils.getComment(t, this),ostr);
+            }
             print(t, ostr);
             t = t.next;
         }

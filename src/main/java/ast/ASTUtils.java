@@ -54,22 +54,18 @@ public class ASTUtils {
      * @return - the indented token
      */
     protected static Token indent(Token t, SimpleNode node) {
-        if (isNewline(t, node) && node.isDecafClass()) {
+        if ((isNewline(t, node) && node.isDecafClass()) || isComment(t)) {
 
-            Token comment = null;
-            if (!isComment(t)) { //Don't call this when indenting a comment
-                comment = getComment(t, node);
-            }
 
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
 
             Token sT = Token.newToken(0, " ");
             t.specialToken = sT;
-            sT.next = t;
+            //sT.next = t;
             for (int i = 0; i < timesToIndent; i++) {
                 sT.specialToken = Token.newToken(0, " ");
-                /*  Only assign next to sT if i is not the first spe -
+                /*  Only assign next to sT if i is not the first special token -
                 * this is so that the printer knows when to stop printing special tokens */
                 if (i > 0) {
                     sT.specialToken.next = sT;
@@ -81,10 +77,7 @@ public class ASTUtils {
                     sT = sT.specialToken;
                 }
             }
-            if (comment != null) {
-                sT.specialToken = comment;
-                sT.specialToken.next = sT;
-            }
+
         }
 
         return t;
@@ -186,9 +179,7 @@ public class ASTUtils {
             Token tt = token;
             while (tt != null) {
                 if (isComment(tt)) {
-                    tt.specialToken = Token.newToken(0, "\n"); //newline
-                    tt.specialToken.next = tt;
-                    return indent(tt, node);
+                    return indent(tt, node); //indent the comment
                 }
                 tt = tt.specialToken;
             }
