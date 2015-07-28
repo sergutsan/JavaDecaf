@@ -4,11 +4,10 @@ package main.java.ast;
 
 import main.java.parser.*;
 
-import javax.swing.text.Style;
 import java.io.PrintWriter;
 
 public
-class ASTSwitchStatement extends ConditionalClosingBraceSimpleNode implements IndentationContainer{
+class ASTSwitchStatement extends ConditionalSimpleNode implements IndentationContainer{
     public ASTSwitchStatement(int id) {
         super(id);
     }

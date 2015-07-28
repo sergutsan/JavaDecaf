@@ -3,13 +3,9 @@
 package main.java.ast;
 
 import main.java.parser.JDCParser;
-import main.java.parser.JDCParserConstants;
-import main.java.parser.Token;
-
-import java.io.PrintWriter;
 
 public
-class ASTForStatement extends ConditionalClosingBraceSimpleNode {
+class ASTForStatement extends ConditionalSimpleNode {
   public ASTForStatement(int id) {
     super(id);
   }

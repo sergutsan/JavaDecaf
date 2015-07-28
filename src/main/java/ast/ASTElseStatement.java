@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTElseStatement extends ConditionalClosingBraceSimpleNode {
+class ASTElseStatement extends ConditionalSimpleNode {
   public ASTElseStatement(int id) {
     super(id);
   }

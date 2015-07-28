@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 /**
  * Superclass of conditional loops.
  */
-public class ConditionalClosingBraceSimpleNode extends ClosingBraceSimpleNode implements Indentable{
-    public ConditionalClosingBraceSimpleNode(int id) {
+public class ConditionalSimpleNode extends SimpleNode implements Indentable{
+    public ConditionalSimpleNode(int id) {
         super(id);
     }
 
-    public ConditionalClosingBraceSimpleNode(JDCParser p, int id){
+    public ConditionalSimpleNode(JDCParser p, int id){
         super(p, id);
     }
 

@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTDecafMethod extends ClosingBraceSimpleNode implements IndentationContainer {
+class ASTDecafMethod extends SimpleNode implements IndentationContainer {
     public ASTDecafMethod(int id) {
         super(id);
     }
