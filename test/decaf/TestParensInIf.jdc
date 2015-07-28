@@ -1,6 +1,9 @@
-if (isTrue()) {
-    println("Hello world!");
+String s1 = "Hello";
+String s2 = "World";
+if (isTrue() && s1.equals(s2)) {
+    System.out.println("Hello world!");
 }
+
 
 boolean isTrue(){
     return true;

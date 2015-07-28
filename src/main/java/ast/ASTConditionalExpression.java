@@ -32,7 +32,12 @@ class ASTConditionalExpression extends SimpleNode {
         StyleWarnings.generateWarning(t, parser, warning);
       }
 
+      /* Prevent the penultimate token from being left out if it is the same as the end token. */
+      if (t.next == end && t.image.equals(end.image)) {
+        end = end.next;
+      }
       t = t.next;
+
     }
     /*
       If the parent node is a SemicolonSimpleNode, and the next token is a semicolon, replace the
@@ -43,8 +48,9 @@ class ASTConditionalExpression extends SimpleNode {
     }
     super.process(ostr);
 
+    /* print the missing lbrace if this is the child of a switch statement */
     if (jjtGetParent() instanceof ASTSwitchStatement) {
-      ostr.print(" {"); //print the missing lbrace if this is the child of a switch statement
+      ostr.print(" {");
     }
   }
 }
