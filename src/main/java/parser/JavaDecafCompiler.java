@@ -92,7 +92,7 @@ public class JavaDecafCompiler {
                 int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
                 className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
                 if (Character.isDigit(inputFile.getName().charAt(0))) { //Check that first char of file name is not digit
-                    throw new ParseException("Class names in Java cannot begin with a digit. " +
+                    throw new ParseException("Class names in Java cannot begin with a number. " +
                             "Please rename the file.");
                 } else if (Character.isLowerCase(inputFile.getName().charAt(0))) { //Check that first char is uppercase
                     throw new ParseException("Class names in Java must begin with a capital letter. " +
