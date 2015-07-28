@@ -13,16 +13,13 @@ public class TestJavaMultipleMethods2 {
 
     public void meth2() {
         System.out.println("Hello world!");
-
     }
 
     public void meth3() {
         int i = 10;
-
         if (i < 20) {
             i++;
         }
-
     }
 
 
