@@ -26,9 +26,12 @@ public interface JDCParserTreeConstants
   public int JJTFORSTATEMENT = 18;
   public int JJTBREAKSTATEMENT = 19;
   public int JJTRETURNSTATEMENT = 20;
-  public int JJTDECAFCLASS = 21;
-  public int JJTDECAFMAIN = 22;
-  public int JJTDECAFMETHOD = 23;
+  public int JJTCATCH = 21;
+  public int JJTFINALLY = 22;
+  public int JJTTRY = 23;
+  public int JJTDECAFCLASS = 24;
+  public int JJTDECAFMAIN = 25;
+  public int JJTDECAFMETHOD = 26;
 
 
   public String[] jjtNodeName = {
@@ -53,9 +56,12 @@ public interface JDCParserTreeConstants
     "ForStatement",
     "BreakStatement",
     "ReturnStatement",
+    "Catch",
+    "Finally",
+    "Try",
     "DecafClass",
     "DecafMain",
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=3d7f26d74eca200a166ab22f2d1c56fb (do not edit this line) */
+/* JavaCC - OriginalChecksum=d4e0c0b835e73e052a2b708a1be70eb4 (do not edit this line) */

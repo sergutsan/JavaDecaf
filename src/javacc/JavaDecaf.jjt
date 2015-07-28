@@ -1246,9 +1246,17 @@ void TryStatement() :
  */
 {}
 {
-  "try" Block()
-  ( "catch" "(" FormalParameter() ")" Block() )*
-  [ "finally" Block() ]
+  ({
+  Token t = getToken(1);
+  }"try" Block()
+  ({
+    Token t1 = getToken(1);
+    }( "catch" "(" FormalParameter() ")" Block() )* { setFirstLastToken(jjtThis, t1, getToken(0)); })#Catch
+  [ ({
+      Token t2 = getToken(1);
+      }
+      "finally" Block() { setFirstLastToken(jjtThis, t2, getToken(0)); })#Finally ]
+      { setFirstLastToken(jjtThis, t, getToken(0)); })#Try
 }
 
 /**
