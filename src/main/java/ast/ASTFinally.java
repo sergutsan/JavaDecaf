@@ -12,6 +12,7 @@ class ASTFinally extends SimpleNode {
 
   public ASTFinally(JDCParser p, int id) {
     super(p, id);
+    indent = false; //don't indent further than try block
   }
 
 }

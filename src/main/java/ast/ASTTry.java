@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTTry extends SimpleNode {
+class ASTTry extends SimpleNode implements Indentable {
   public ASTTry(int id) {
     super(id);
   }
