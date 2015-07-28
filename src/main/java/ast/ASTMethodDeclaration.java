@@ -8,25 +8,25 @@ import java.io.PrintWriter;
 
 public
 class ASTMethodDeclaration extends SimpleNode implements Indentable {
-  public ASTMethodDeclaration(int id) {
-    super(id);
-  }
-
-  public ASTMethodDeclaration(JDCParser p, int id) {
-    super(p, id);
-  }
-
-  public void process(PrintWriter ostr) {
-    boolean isAbstract = false; //if the method is abstract it will end with a semicolon
-
-    if (end.image.equals(";")) {
-      isAbstract = true;
+    public ASTMethodDeclaration(int id) {
+        super(id);
     }
-    super.process(ostr);
 
-    if (isAbstract) {
-      ostr.print(";");
+    public ASTMethodDeclaration(JDCParser p, int id) {
+        super(p, id);
     }
-  }
+
+    public void process(PrintWriter ostr) {
+        boolean isAbstract = false; //if the method is abstract it will end with a semicolon
+
+        if (end.image.equals(";")) {
+            isAbstract = true;
+        }
+        super.process(ostr);
+
+        if (isAbstract) {
+            ostr.print(";");
+        }
+    }
 }
 /* JavaCC - OriginalChecksum=13d6707ee18c3879af9de89ea775fb8f (do not edit this line) */
