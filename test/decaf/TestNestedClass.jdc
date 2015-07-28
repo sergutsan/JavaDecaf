@@ -1,0 +1,9 @@
+Person p = new Person("Fred");
+
+class Person {
+    private String name;
+
+    Person(String name) {
+        this.name = name;
+    }
+}
