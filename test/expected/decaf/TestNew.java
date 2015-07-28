@@ -1,12 +1,11 @@
 import java.util.Scanner;
 
-public class TestStartWithJavaDocComment {
+public class TestNew {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        /**
-         * Test
-         */
-        System.out.println("Hello");
+        String s = new String("Hello world!");
+        System.out.println(s);
     }
+
 }
