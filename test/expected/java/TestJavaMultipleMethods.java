@@ -22,23 +22,6 @@ public class TestJavaMultipleMethods {
      */
 
     protected static Token checkForSubstitutions(Token currentToken, String prevToken) {
-        if (!prevToken.equals(".")) {
-            switch (currentToken.image) {
-                case "println":
-                    currentToken.image = "System.out.println";
-                    break;
-                case "print":
-                    currentToken.image = "System.out.print";
-                    break;
-                case "readLine":
-                    currentToken.image = "input.readLine"; //input is Scanner
-                    break;
-                case "readInt":
-                    currentToken.image = "input.readInt";
-                    break;
-            }
-        }
-
         return currentToken;
     }
 

@@ -4,5 +4,4 @@ public class TestJavaSingleLineComment {
         //Single line comment
         System.out.println("hello world!");
     }
-
 }

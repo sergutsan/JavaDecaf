@@ -11,5 +11,4 @@ public class TestJavaInnerClass {
             this.value = value;
         }
     }
-
 }

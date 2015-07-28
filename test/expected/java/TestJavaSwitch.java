@@ -5,10 +5,10 @@ public class TestJavaSwitch {
 
         switch (num) {
             case 1:
-                println("one");
+                System.out.println("one");
                 break;
             case 2:
-                println("two");
+                System.out.println("two");
                 break;
             default:
                 break;

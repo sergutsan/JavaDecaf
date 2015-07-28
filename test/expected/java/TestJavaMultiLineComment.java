@@ -6,5 +6,4 @@ public class TestJavaMultiLineComment {
          */
         System.out.println("hello world!");
     }
-
 }

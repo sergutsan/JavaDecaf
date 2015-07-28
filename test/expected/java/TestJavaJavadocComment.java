@@ -6,5 +6,4 @@ public class TestJavaJavadocComment {
          */
         System.out.println("hello world!");
     }
-
 }
