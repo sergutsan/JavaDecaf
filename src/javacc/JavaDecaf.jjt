@@ -445,10 +445,16 @@ void ClassBody() :
 }
 
 void NestedClassDeclaration() :
-{}
+{Token t;}
 {
+  ({
+  t = getToken(1);
+  }
   ( "static" | "abstract" | "final" | "public" | "protected" | "private" )*
   UnmodifiedClassDeclaration()
+  {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })#NestedClassDeclaration
 }
 
 void ClassBodyDeclaration() :
@@ -1022,10 +1028,7 @@ void BlockStatement() :
   LocalVariableDeclaration() ";"
 |
   Statement()
-|
-  UnmodifiedClassDeclaration()
-|
-  UnmodifiedInterfaceDeclaration()
+
 }
 
 void LocalVariableDeclaration() :
