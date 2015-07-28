@@ -9,30 +9,31 @@ public interface JDCParserTreeConstants
   public int JJTVOID = 1;
   public int JJTCLASSDECLARATION = 2;
   public int JJTNESTEDCLASSDECLARATION = 3;
-  public int JJTMETHODDECLARATION = 4;
-  public int JJTASSIGNMENT = 5;
-  public int JJTCONDITIONALEXPRESSION = 6;
-  public int JJTBLOCK = 7;
-  public int JJTLOCALVARIABLEDECLARATION = 8;
-  public int JJTSTATEMENTEXPRESSION = 9;
-  public int JJTSWITCHSTATEMENT = 10;
-  public int JJTCASESWITCHLABEL = 11;
-  public int JJTDEFAULTSWITCHLABEL = 12;
-  public int JJTIFSTATEMENT = 13;
-  public int JJTELSESTATEMENT = 14;
-  public int JJTWHILESTATEMENT = 15;
-  public int JJTDOSTATEMENT = 16;
-  public int JJTWHILEAFTERDO = 17;
-  public int JJTFORBLOCK = 18;
-  public int JJTFORSTATEMENT = 19;
-  public int JJTBREAKSTATEMENT = 20;
-  public int JJTRETURNSTATEMENT = 21;
-  public int JJTCATCH = 22;
-  public int JJTFINALLY = 23;
-  public int JJTTRY = 24;
-  public int JJTDECAFCLASS = 25;
-  public int JJTDECAFMAIN = 26;
-  public int JJTDECAFMETHOD = 27;
+  public int JJTFIELDDECLARATION = 4;
+  public int JJTMETHODDECLARATION = 5;
+  public int JJTASSIGNMENT = 6;
+  public int JJTCONDITIONALEXPRESSION = 7;
+  public int JJTBLOCK = 8;
+  public int JJTLOCALVARIABLEDECLARATION = 9;
+  public int JJTSTATEMENTEXPRESSION = 10;
+  public int JJTSWITCHSTATEMENT = 11;
+  public int JJTCASESWITCHLABEL = 12;
+  public int JJTDEFAULTSWITCHLABEL = 13;
+  public int JJTIFSTATEMENT = 14;
+  public int JJTELSESTATEMENT = 15;
+  public int JJTWHILESTATEMENT = 16;
+  public int JJTDOSTATEMENT = 17;
+  public int JJTWHILEAFTERDO = 18;
+  public int JJTFORBLOCK = 19;
+  public int JJTFORSTATEMENT = 20;
+  public int JJTBREAKSTATEMENT = 21;
+  public int JJTRETURNSTATEMENT = 22;
+  public int JJTCATCH = 23;
+  public int JJTFINALLY = 24;
+  public int JJTTRY = 25;
+  public int JJTDECAFCLASS = 26;
+  public int JJTDECAFMAIN = 27;
+  public int JJTDECAFMETHOD = 28;
 
 
   public String[] jjtNodeName = {
@@ -40,6 +41,7 @@ public interface JDCParserTreeConstants
     "void",
     "ClassDeclaration",
     "NestedClassDeclaration",
+    "FieldDeclaration",
     "MethodDeclaration",
     "Assignment",
     "ConditionalExpression",
@@ -66,4 +68,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=cd130fd48978b05a87c5224ac1fc20c0 (do not edit this line) */
+/* JavaCC - OriginalChecksum=47e2ed3d40e1f23ddef56d67417a5123 (do not edit this line) */

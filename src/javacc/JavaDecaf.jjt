@@ -524,10 +524,16 @@ void InterfaceMemberDeclaration() :
 }
 
 void FieldDeclaration() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+    }
   ( "public" | "protected" | "private" | "static" | "final" | "transient" | "volatile" )*
   Type() VariableDeclarator() ( "," VariableDeclarator() )* ";"
+  {
+  setFirstLastToken(jjtThis, t, getToken(0));
+  })#FieldDeclaration
 }
 
 void VariableDeclarator() :
