@@ -38,7 +38,7 @@ public class ASTUtils {
                     break;
                 case "readDouble":
                     currentToken.image = "input.nextDouble";
-                            break;
+                    break;
                 default:
                     break;
             }
@@ -46,30 +46,16 @@ public class ASTUtils {
 
         return currentToken;
     }
-//
-//    /**
-//     * Find the indentation level of the current node.
-//     * @param currentNode the node to count from
-//     * @return the number of levels to indent
-//     */
-//    protected static int getIndentationLevel(Node currentNode) {
-//        int indentationLevel = 0;
-//        Node counterNode = currentNode;
-//        if (counterNode.jjtGetParent() instanceof ASTDecafBlock) {
-//            indentationLevel = 2; //manually assign because it doesn't know there's a main method
-//        } else {
-//            while (!counterNode.jjtGetParent().toString().equals("CompilationUnit")) {
-//                indentationLevel++;
-//
-//                counterNode = counterNode.jjtGetParent(); //iterate through parents to find out how indented this should be
-//            }
-//        }
-//        return indentationLevel;
-//    }
 
-
+    /**
+     * Indent a token the correct number of times if it appears within a decaf class
+     * @param t - the token to indent
+     * @param node - the node within which the token appears
+     * @return - the indented token
+     */
     protected static Token indent(Token t, SimpleNode node) {
         if (isNewline(t, node) && node.isDecafClass()) {
+            Token comment = getComment(t);
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
             Token sT = Token.newToken(0, " ");
@@ -88,7 +74,11 @@ public class ASTUtils {
                     sT.specialToken.next = sT;
                     }
                 }
+                if (comment != null) {
+                    sT.specialToken = comment;
+                }
             }
+
         return t;
 
     }
@@ -160,7 +150,39 @@ public class ASTUtils {
     public static boolean isComment(Token specialToken){
         return (specialToken != null
                 && specialToken.image.length() > 1
-                && (specialToken.image.substring(0,1).equals("//")
-                || specialToken.image.substring(0,1).equals("/*")));
+                && (specialToken.image.substring(0,2).equals("//")
+                || specialToken.image.substring(0,2).equals("/*")));
+    }
+
+    /**
+     * Check whether a token contains a comment in its special tokens.
+     * @param token the token in question
+     * @return true if there is a comment
+     */
+    public static boolean hasComment(Token token){
+        Token tt = token.specialToken;
+        while (tt != null) {
+            if (isComment(tt)) return true;
+            tt = tt.specialToken;
+        }
+        return false;
+    }
+
+    /**
+     * Find a token's attached comment and return it
+     * @param token the token in question
+     * @return the comment
+     */
+    public static Token getComment(Token token){
+        if (hasComment(token)) {
+            Token tt = token;
+            while (tt != null) {
+                if (isComment(tt)) {
+                    return tt;
+                }
+                tt = tt.specialToken;
+            }
+        }
+        return null;
     }
 }
