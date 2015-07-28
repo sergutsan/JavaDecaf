@@ -127,13 +127,13 @@ public class ParseException extends Exception {
   }
 
     /**
-     * Check the reason for the error - SK
+     * Check the reason for the error
      * @param currentToken the current token
      * @param nextToken the (offending) next token
      * @param expectedTokenSequences the list of expected tokens
      * @return the warning message as a String
      */
-    private static String getReasonForError(Token currentToken, Token nextToken, int[][] expectedTokenSequences){
+    private static String getReasonForError(Token currentToken, Token nextToken, int[][] expectedTokenSequences){ //SK
         String retval = "";
             /* current token is IDENTIFIER and next is any literal - likely missing parenthesis of argument */
         if (isIdentifier(currentToken.kind) && isLiteral(nextToken.kind)) {
@@ -253,34 +253,34 @@ public class ParseException extends Exception {
     }
     /**
      * Check to see if a token is a reserved keyword
-     * @return true if token is a reserved keyword
+     * @return true if token is a reserved keyword, otherwise false
      */
-    public static boolean isReservedKeyword(int kind){
+    public static boolean isReservedKeyword(int kind){  //SK
         return (kind >= JDCParserConstants.ABSTRACT && kind <= JDCParserConstants.WHILE);
     }
 
     /**
      * Check to see if token is an identifier
-     * @return true if identifier
+     * @return true if identifier, otherwise false
      */
-    public static boolean isIdentifier(int kind) {
+    public static boolean isIdentifier(int kind) { //SK
         return (kind == JDCParserConstants.IDENTIFIER);
     }
 
     /**
      * Check to see if a token is a literal
-     * @return true if literal
+     * @return true if literal, otherwise false
      */
-    public static boolean isLiteral(int kind){
+    public static boolean isLiteral(int kind){ //SK
         return (kind >= JDCParserConstants.INTEGER_LITERAL && kind <= JDCParserConstants.STRING_LITERAL);
     }
 
 
     /**
      * Check to see if a token is a primitive type
-     * @return true if primitive type
+     * @return true if primitive type, otherwise false
      */
-    public static boolean isPrimitive(int kind){
+    public static boolean isPrimitive(int kind){ //SK
         return (kind == JDCParserConstants.INT
                 || kind == JDCParserConstants.FLOAT
                 || kind == JDCParserConstants.SHORT

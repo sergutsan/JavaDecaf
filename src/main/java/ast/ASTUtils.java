@@ -9,14 +9,20 @@ import main.java.parser.Token;
  * @author Sophie Koonin
  * */
 public class ASTUtils {
+    /**
+     * The number of spaces to indent
+     */
     private static final int INDENTATION_SPACES = 4;
+    /**
+     * Standard 4-space indentation in String form
+     */
     public static final String INDENTATION = "    ";
 
     /**
-     * Replace all JavaDecaf method calls with the Java equivalents.
-     * To avoid nesting when used with Java method calls, e.g.
-     * System.out.System.out.println, check value of previous token
-     * If it's a full stop, it's likely a Java method call, so no replacement.
+     * Replaces all JavaDecaf method calls with the Java equivalents.
+     * To avoid nesting when used with Java method calls such as
+     * System.out.System.out.println, checks value of previous token.
+     * If it's a full stop, it's likely a Java method call, so no replacement occurs.
      * @param currentToken the token in question
      * @param prevToken the previous token image
      * @return the token, substituted or otherwise
@@ -49,7 +55,7 @@ public class ASTUtils {
     }
 
     /**
-     * Indent a token the correct number of times if it appears within a JavaDecaf class
+     * Indents a token the correct number of times if it appears within a JavaDecaf class
      * @param t the token to indent
      * @param node the node within which the token appears
      * @return the indented token
@@ -85,7 +91,7 @@ public class ASTUtils {
     }
 
     /**
-     * Check the indentation level and generate a warning if not correctly indented.
+     * Checks the indentation level and generate a warning if not correctly indented.
      * @param parser the parser in use
      * @param t the indented token
      * @param node the current node
@@ -127,7 +133,7 @@ public class ASTUtils {
     }
 
     /**
-     * Iterate through specialTokens to see if there is a newline at the end.
+     * Iterates through specialTokens to see if there is a newline at the end.
      * Will return true if specialToken is null (this should only happen at the beginning of a class or DecafBlock)
      * @param t the token in question
      * @param n the containing node
@@ -144,7 +150,7 @@ public class ASTUtils {
     }
 
     /**
-     * Check to see whether a special token is a comment
+     * Checks to see whether a special token is a comment
      * @param specialToken the special token in question
      * @return true if the token is a comment, otherwise false
      */
@@ -156,7 +162,7 @@ public class ASTUtils {
     }
 
     /**
-     * Check whether a token contains a comment in its special tokens.
+     * Checks whether a token contains a comment in its special tokens.
      * @param token the token in question
      * @return true if there is a comment, otherwise false
      */
@@ -170,7 +176,7 @@ public class ASTUtils {
     }
 
     /**
-     * Find a token's attached comment and return it
+     * Finds a token's attached comment and return it
      * @param token the token in question
      * @return the comment, or null if none is present
      */

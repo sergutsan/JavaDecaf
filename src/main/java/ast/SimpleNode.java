@@ -45,14 +45,22 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public class SimpleNode implements Node {
+    /**
+     * The parent node of this node
+     */
     protected Node parent;
+    /**
+     * All child nodes belonging to this node
+     */
     protected Node[] children;
+    /**
+     * The ID of this node
+     */
     protected int id;
+    /**
+     * The parser in use
+     */
     protected JDCParser parser;
-    protected int indentationLevel;
-    protected boolean indent = true;
-    protected static boolean decafClass;
-    protected static boolean decafMethod;
 
     /**
      * Constructor with ID. This is not in use by the main parser class.
@@ -148,24 +156,44 @@ public class SimpleNode implements Node {
 
 // Manually inserted code begins here
     /**
-     * The tokens at the beginning and end of the node.
+     * The tokens at the beginning and end of the node
      */
     protected Token begin, end;
 
     /**
-     * Set the first token in the node to a particular token.
+     * The level to which this node should be indented
+     */
+    protected int indentationLevel;
+
+    /**
+     * Whether or not this node should affect the indentation level of its children
+     */
+    protected boolean indent = true;
+
+    /**
+     * Whether or not this is a JavaDecaf class
+     */
+    protected static boolean decafClass;
+
+    /**
+     * Whether or not this node is in a JavaDecaf method
+     */
+    protected static boolean decafMethod;
+
+    /**
+     * Sets the first token in the node to a particular token.
      * @param t the token to set as the first token.
      */
     public void setFirstToken(Token t) { begin = t; }
 
     /**
-     * Set the first token in the node to a particular token.
+     * Sets the first token in the node to a particular token.
      * @param t the token to set as the last token.
      */
     public void setLastToken(Token t) { end = t; }
 
     /**
-     * Process the contents of the node. Set the node's indentation level, check whether it needs
+     * Processes the contents of the node. Set the node's indentation level, check whether it needs
      * indenting, then print its contents. Finally, process all the node's children.
      * @param ostr the output stream to print to.
      */
@@ -210,7 +238,7 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * Get the node's indentation level
+     * Returns the node's indentation level
      * @return the indentation level
      */
     public int getIndentationLevel() {
@@ -218,7 +246,7 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * Set the node's indentation level by iterating through parents
+     * Sets the node's indentation level by iterating through parents
      */
     public void setIndentationLevel(){
         if (jjtGetParent() != null ) {
@@ -238,7 +266,7 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * Check whether this node is in a JavaDecaf class.
+     * Checks whether this node is in a JavaDecaf class.
      * @return true if this is a JavaDecaf class, otherwise false
      */
     public static boolean isDecafClass(){
@@ -246,13 +274,13 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * Check whether this node is in a Decaf method.
+     * Checks whether this node is in a Decaf method.
      * @return true if this is a Decaf method, otherwise false
      */
     public static boolean isDecafMethod() { return decafMethod; }
 
     /**
-     * Print a token with all its preceding Special Tokens (white space and comments).
+     * Prints a token with all its preceding Special Tokens (white space and comments).
      * This method was already provided.
      * @param t - the token to print
      * @param ostr - the PrintWriter to print to
@@ -270,7 +298,7 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * Escape any special characters.
+     * Escapes any special characters.
      * @param str - The string to escape
      * @return the escaped sequence as a String
      */
