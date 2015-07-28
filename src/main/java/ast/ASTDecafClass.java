@@ -19,7 +19,7 @@ class ASTDecafClass extends ClosingBraceSimpleNode {
     }
 
     public void process(PrintWriter ostr) {
-        String classDec = "import java.util.Scanner;\n\n" +  //Assign the class/main method encapsulation code
+        String classDec = "\nimport java.util.Scanner;\n\n" +  //Assign the class/main method encapsulation code
                 "public class " + parser.getClassName() + " { \n" + ASTUtils.INDENTATION +
                 "private static Scanner input = new Scanner(System.in);\n\n"  + ASTUtils.INDENTATION; //init Scanner for reading from stdin
 
