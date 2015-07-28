@@ -9,5 +9,4 @@ public class TestIfStatement {
             System.out.println("yes");
         }
     }
-
 }

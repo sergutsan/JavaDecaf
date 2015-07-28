@@ -1,0 +1,15 @@
+meth();
+
+/**
+ * Comment
+ */
+ void meth() {
+    return;
+ }
+
+ /**
+  * Comment
+  */
+ void meth2() {
+    return;
+ }
