@@ -103,7 +103,7 @@ public class ASTUtils {
         int expectedIndentation = node.getIndentationLevel();
         int indentationCount = 0;
         Token countToken = t;
-        while (countToken != null) {
+        while (countToken != null && !isComment(countToken)) {
             if (countToken.specialToken != null && countToken.specialToken.image.equals(" ")) {
                 indentationCount++;
             }
@@ -150,5 +150,17 @@ public class ASTUtils {
             sT = sT.specialToken;
         }
         return (sT.image.equals("\n"));
+    }
+
+    /**
+     * Check to see whether a special token is a comment
+     * @param specialToken the special token in question
+     * @return true if the token is a comment
+     */
+    public static boolean isComment(Token specialToken){
+        return (specialToken != null
+                && specialToken.image.length() > 1
+                && (specialToken.image.substring(0,1).equals("//")
+                || specialToken.image.substring(0,1).equals("/*")));
     }
 }
