@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTWhileAfterDo extends SimpleNode {
+class ASTWhileAfterDo extends SemicolonSimpleNode {
   public ASTWhileAfterDo(int id) {
     super(id);
   }
@@ -15,12 +15,5 @@ class ASTWhileAfterDo extends SimpleNode {
   public ASTWhileAfterDo(JDCParser p, int id) {
     super(p, id);
   }
-
-  public void process(PrintWriter ostr) {
-    super.process(ostr);
-
-    ostr.print(";"); //final semicolon
-  }
-
 }
 /* JavaCC - OriginalChecksum=5bad422ec74a354f7e5227f28e0538c8 (do not edit this line) */

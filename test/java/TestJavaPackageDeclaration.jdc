@@ -1,4 +1,4 @@
-package java;
+package test.expected.java;
 
 public class TestJavaPackageDeclaration {
 

@@ -7,19 +7,13 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTFieldDeclaration extends SimpleNode implements Indentable {
+class ASTFieldDeclaration extends SemicolonSimpleNode implements Indentable {
   public ASTFieldDeclaration(int id) {
     super(id);
   }
 
   public ASTFieldDeclaration(JDCParser p, int id) {
     super(p, id);
-  }
-
-  public void process(PrintWriter ostr){
-    super.process(ostr);
-
-    ostr.print(";"); //final semicolon
   }
 }
 /* JavaCC - OriginalChecksum=03378efca1f710cf7e302781097563df (do not edit this line) */
