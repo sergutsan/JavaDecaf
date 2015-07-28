@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 /**
  * Subclass of nodes which need a final semicolon printing at the end
+ * @author Sophie Koonin
  */
 public class SemicolonSimpleNode extends SimpleNode {
 

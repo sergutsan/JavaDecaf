@@ -6,7 +6,7 @@ import main.java.parser.Token;
 import java.io.PrintWriter;
 
 /**
- * This class deals with all the substitutionsin the blocks of methods, loops etc.
+ * This class deals with all the substitutions in the blocks of methods, loops etc.
  * @author Sophie Koonin
  */
 public class StatementVariableSimpleNode extends SimpleNode implements Indentable {
