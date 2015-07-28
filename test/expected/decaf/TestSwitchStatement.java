@@ -5,7 +5,6 @@ public class TestSwitchStatement {
 
     public static void main(String[] args) {
         int num = input.nextInt();
-
         switch (num) {
             case 1:
                 System.out.println("one");

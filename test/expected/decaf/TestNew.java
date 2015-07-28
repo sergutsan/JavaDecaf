@@ -7,5 +7,4 @@ public class TestNew {
         String s = new String("Hello world!");
         System.out.println(s);
     }
-
 }
