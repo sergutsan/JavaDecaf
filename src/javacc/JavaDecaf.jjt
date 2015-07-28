@@ -602,14 +602,20 @@ void FormalParameter() :
 }
 
 void ConstructorDeclaration() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+    }
   [ "public" | "protected" | "private" ]
   <IDENTIFIER> FormalParameters() [ "throws" NameList() ]
   "{"
     [ LOOKAHEAD(ExplicitConstructorInvocation()) ExplicitConstructorInvocation() ]
     ( BlockStatement() )*
   "}"
+  {
+   setFirstLastToken(jjtThis, t, getToken(0));
+  })#ConstructorDeclaration
 }
 
 void ExplicitConstructorInvocation() :
