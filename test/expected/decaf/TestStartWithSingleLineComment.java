@@ -5,6 +5,7 @@ public class TestStartWithSingleLineComment {
 
     public static void main(String[] args) {
         //Comment on first line
+
         System.out.println("Hello");
     }
 }

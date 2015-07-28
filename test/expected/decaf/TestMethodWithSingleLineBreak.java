@@ -10,5 +10,4 @@ public class TestMethodWithSingleLineBreak {
     private static void foo(){
         System.out.println("foo");
     }
-
 }
