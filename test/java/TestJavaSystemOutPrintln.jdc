@@ -1,4 +1,4 @@
-public class TestJavaSoutPrintln {
+public class TestJavaSystemOutPrintln {
 
     public static void main(String[] args) {
         System.out.println("hello world!");

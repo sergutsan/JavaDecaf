@@ -19,7 +19,7 @@ public class TestJavaMultipleMethods {
      * If it's a full stop, it's likely a Java method call, so no replacement.
      * @param currentToken the token in question
      * @param prevToken the previous token image
-      */
+     */
 
     protected static Token checkForSubstitutions(Token currentToken, String prevToken) {
         if (!prevToken.equals(".")) {
@@ -86,9 +86,9 @@ public class TestJavaMultipleMethods {
                 if (i == timesToIndent - 1) {
                     sT.specialToken = new Token(0, "\n");
                     sT.specialToken.next = sT;
-                    }
                 }
             }
+        }
         return t;
 
     }
