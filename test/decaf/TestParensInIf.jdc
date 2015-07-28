@@ -1,0 +1,7 @@
+if (isTrue()) {
+    println("Hello world!");
+}
+
+boolean isTrue(){
+    return true;
+}
