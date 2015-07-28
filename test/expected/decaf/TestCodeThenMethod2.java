@@ -10,6 +10,4 @@ public class TestCodeThenMethod2 {
     private static void sayHi() {
         System.out.println("Hi");
     }
-
-
 }
