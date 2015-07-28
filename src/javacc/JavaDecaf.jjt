@@ -1266,7 +1266,8 @@ void TryStatement() :
 void DecafClass() :
 {}
 { (DecafMain()
-   (DecafMethod())*)#DecafClass
+   (DecafMethod())*
+   (ClassDeclaration())* )#DecafClass
 }
 
 
