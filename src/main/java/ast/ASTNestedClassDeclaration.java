@@ -4,8 +4,10 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
-class ASTNestedClassDeclaration extends SimpleNode implements Indentable {
+class ASTNestedClassDeclaration extends ClosingBraceSimpleNode implements Indentable {
   public ASTNestedClassDeclaration(int id) {
     super(id);
   }
@@ -14,5 +16,12 @@ class ASTNestedClassDeclaration extends SimpleNode implements Indentable {
     super(p, id);
   }
 
+  public void process(PrintWriter ostr){
+    //If it's a decaf class, make this nested class static, or it won't be usable from main
+    if (isDecafClass()){
+      begin.image = "static " + begin.image;
+    }
+    super.process(ostr);
+  }
 }
 /* JavaCC - OriginalChecksum=60a998afc0a3b47314ec064e7392b409 (do not edit this line) */
