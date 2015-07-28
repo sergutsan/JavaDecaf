@@ -39,6 +39,8 @@ public class ASTUtils {
                 case "readDouble":
                     currentToken.image = "input.nextDouble";
                             break;
+                default:
+                    break;
             }
         }
 
