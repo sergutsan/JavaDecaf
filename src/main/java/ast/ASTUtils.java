@@ -55,13 +55,19 @@ public class ASTUtils {
      */
     protected static Token indent(Token t, SimpleNode node) {
         if (isNewline(t, node) && node.isDecafClass()) {
-            Token comment = getComment(t);
+
+            Token comment = null;
+            if (!isComment(t)) { //Don't call this when indenting a comment
+                comment = getComment(t, node);
+            }
+
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
+
             Token sT = Token.newToken(0, " ");
             t.specialToken = sT;
             sT.next = t;
-            for (int i = 0; i<timesToIndent; i++) {
+            for (int i = 0; i < timesToIndent; i++) {
                 sT.specialToken = Token.newToken(0, " ");
                 /*  Only assign next to sT if i is not the first spe -
                 * this is so that the printer knows when to stop printing special tokens */
@@ -72,12 +78,14 @@ public class ASTUtils {
                 if (i == timesToIndent - 1) {
                     sT.specialToken = new Token(0, "\n");
                     sT.specialToken.next = sT;
-                    }
-                }
-                if (comment != null) {
-                    sT.specialToken = comment;
+                    sT = sT.specialToken;
                 }
             }
+            if (comment != null) {
+                sT.specialToken = comment;
+                sT.specialToken.next = sT;
+            }
+        }
 
         return t;
 
@@ -173,12 +181,14 @@ public class ASTUtils {
      * @param token the token in question
      * @return the comment
      */
-    public static Token getComment(Token token){
+    public static Token getComment(Token token, SimpleNode node){
         if (hasComment(token)) {
             Token tt = token;
             while (tt != null) {
                 if (isComment(tt)) {
-                    return tt;
+                    tt.specialToken = Token.newToken(0, "\n"); //newline
+                    tt.specialToken.next = tt;
+                    return indent(tt, node);
                 }
                 tt = tt.specialToken;
             }
