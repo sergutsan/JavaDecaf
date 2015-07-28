@@ -4,8 +4,7 @@ package main.java.ast;
 
 import main.java.parser.*;
 
-public
-class ASTImportDeclaration extends SemicolonSimpleNode {
+public class ASTImportDeclaration extends SemicolonSimpleNode {
   public ASTImportDeclaration(int id) {
     super(id);
   }
@@ -13,6 +12,5 @@ class ASTImportDeclaration extends SemicolonSimpleNode {
   public ASTImportDeclaration(JDCParser p, int id) {
     super(p, id);
   }
-
 }
 /* JavaCC - OriginalChecksum=e36ebc58777487409e65b7efb14ccc1d (do not edit this line) */
