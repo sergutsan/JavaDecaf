@@ -12,6 +12,7 @@ class ASTForBlock extends SimpleNode{
 
   public ASTForBlock(JDCParser p, int id) {
     super(p, id);
+    indent = false;
   }
 
 }
