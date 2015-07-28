@@ -31,9 +31,13 @@ public class StatementVariableSimpleNode extends SimpleNode {
                     ASTUtils.checkIndentation(parser, begin, this);
                 }
             }
+            if (ASTUtils.hasComment(t)){
+                print(ASTUtils.getComment(t, this),ostr);
+            }
             t = ASTUtils.indent(t, this);
 
             t = ASTUtils.checkForSubstitutions(t, prevToken);
+
             print(t, ostr);
             prevToken = t.image;
             t = t.next;

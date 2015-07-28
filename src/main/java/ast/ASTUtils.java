@@ -56,7 +56,6 @@ public class ASTUtils {
     protected static Token indent(Token t, SimpleNode node) {
         if ((isNewline(t, node) && node.isDecafClass()) || isComment(t)) {
 
-
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
 
