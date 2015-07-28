@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 /**
  * Superclass of conditional loops.
+ * @author Sophie Koonin
  */
 public class ConditionalSimpleNode extends SimpleNode implements Indentable{
     public ConditionalSimpleNode(int id) {
@@ -16,9 +17,4 @@ public class ConditionalSimpleNode extends SimpleNode implements Indentable{
         super(p, id);
     }
 
-    public void process(PrintWriter ostr){
-        setIndentationLevel();
-        super.process(ostr);
-
-    }
 }
