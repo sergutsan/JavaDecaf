@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TestMultipleMethods2 {
+public class TestJavaImportDeclaration {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
