@@ -7,4 +7,6 @@ To compile, use mvn compile, or use mvn package to create a JAR archive.
 
 To run the program (prior to final version):
 
-java -jar JavaDecaf-1.0-SNAPSHOT.jar [options] filename
+java -jar JavaDecaf-1.0.jar [options] filename
+
+Documentation can be found in the folder /doc.
