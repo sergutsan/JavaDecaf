@@ -16,10 +16,7 @@ public class ASTDecafMain extends ClosingBraceSimpleNode {
     public ASTDecafMain(JDCParser p, int id) {
         super(p, id);
     }
-    /**
-     * Encapsulate a "loose" block of Decaf code with main method declarations.
-     * @param ostr - output stream writer defined in JDCParser
-     */
+
   public void process (PrintWriter ostr) {
       String mainDec = "public static void main(String[] args) {";
       ostr.print(mainDec);

@@ -19,6 +19,7 @@ public class ASTUtils {
      * If it's a full stop, it's likely a Java method call, so no replacement.
      * @param currentToken the token in question
      * @param prevToken the previous token image
+     * @return the token, substituted or otherwise
       */
 
     protected static Token checkForSubstitutions(Token currentToken, String prevToken) {
@@ -48,10 +49,10 @@ public class ASTUtils {
     }
 
     /**
-     * Indent a token the correct number of times if it appears within a decaf class
-     * @param t - the token to indent
-     * @param node - the node within which the token appears
-     * @return - the indented token
+     * Indent a token the correct number of times if it appears within a JavaDecaf class
+     * @param t the token to indent
+     * @param node the node within which the token appears
+     * @return the indented token
      */
     protected static Token indent(Token t, SimpleNode node) {
         if ((isNewline(t, node) && node.isDecafClass()) || isComment(t)) {
@@ -130,7 +131,7 @@ public class ASTUtils {
      * Will return true if specialToken is null (this should only happen at the beginning of a class or DecafBlock)
      * @param t the token in question
      * @param n the containing node
-     * @return true if the token contains a newline specialToken or a null specialToken
+     * @return true if the token contains a newline specialToken or a null specialToken, otherwise false
      */
     public static boolean isNewline(Token t, SimpleNode n){
         if (t == n.begin
@@ -145,7 +146,7 @@ public class ASTUtils {
     /**
      * Check to see whether a special token is a comment
      * @param specialToken the special token in question
-     * @return true if the token is a comment
+     * @return true if the token is a comment, otherwise false
      */
     public static boolean isComment(Token specialToken){
         return (specialToken != null
@@ -157,7 +158,7 @@ public class ASTUtils {
     /**
      * Check whether a token contains a comment in its special tokens.
      * @param token the token in question
-     * @return true if there is a comment
+     * @return true if there is a comment, otherwise false
      */
     public static boolean hasComment(Token token){
         Token tt = token.specialToken;
@@ -171,7 +172,7 @@ public class ASTUtils {
     /**
      * Find a token's attached comment and return it
      * @param token the token in question
-     * @return the comment
+     * @return the comment, or null if none is present
      */
     public static Token getComment(Token token, SimpleNode node){
         if (hasComment(token)) {

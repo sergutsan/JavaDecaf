@@ -1,7 +1,7 @@
 package main.java.parser;
 
 /**
- * Class containing static methods for throwing out style warnings.
+ * Class containing static method for generating style warnings.
  * @author Sophie Koonin
  */
 public class StyleWarnings {

@@ -41,7 +41,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <main-class>parser.JavaDecafCompiler</main-class>
+                            <main-class>main.java.parser.JavaDecafCompiler</main-class>
                         </manifest>
                     </archive>
                 </configuration>
