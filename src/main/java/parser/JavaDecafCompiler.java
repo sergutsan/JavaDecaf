@@ -67,7 +67,7 @@ public class JavaDecafCompiler {
         if (precompiledClass != null) {
             String returnMessage = "";
             if (parseOnly) { //print success message and finish
-               returnMessage += "Parse completed successfully in " + ((endTime - startTime) / 1000000) + " ms";
+               returnMessage += "Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
             } else {
                 compileJava(precompiledClass); //call the java compiler
                 returnMessage += "JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms";  //only print if successfully compiled
