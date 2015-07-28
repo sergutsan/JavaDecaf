@@ -10,7 +10,7 @@ import java.io.PrintWriter;
  * loops etc.
  * @author Sophie Koonin
  */
-public class StatementVariableSimpleNode extends SimpleNode {
+public class StatementVariableSimpleNode extends SimpleNode implements Indentable {
     public StatementVariableSimpleNode(int id) {
         super(id);
     }
@@ -19,6 +19,10 @@ public class StatementVariableSimpleNode extends SimpleNode {
         super(p, id);
     }
 
+    /**
+     *
+     * @param ostr the output stream to print to.
+     */
     public void process(PrintWriter ostr) {
         setIndentationLevel();
 
@@ -26,24 +30,11 @@ public class StatementVariableSimpleNode extends SimpleNode {
         Token t = begin;
         String prevToken = "";
         while (t != end) {
-            if (t.specialToken != null && ASTUtils.isNewline(t, this)) {
-                if (jjtGetParent() instanceof IndentationContainer) {
-                    ASTUtils.checkIndentation(parser, begin, this);
-                }
-            }
-            if (ASTUtils.hasComment(t)){
-                print(ASTUtils.getComment(t, this),ostr);
-            }
-            t = ASTUtils.indent(t, this);
-
             t = ASTUtils.checkForSubstitutions(t, prevToken);
-
-            print(t, ostr);
             prevToken = t.image;
             t = t.next;
         }
-        //manually print last token
-        print(end, ostr);
+        super.process(ostr);
 
     }
 
