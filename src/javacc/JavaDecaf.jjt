@@ -1267,7 +1267,7 @@ void DecafClass() :
 {}
 { (DecafMain()
    (DecafMethod())*
-   (ClassDeclaration())* )#DecafClass
+   (NestedClassDeclaration())* )#DecafClass
 }
 
 

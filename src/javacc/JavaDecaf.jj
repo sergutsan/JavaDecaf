@@ -1982,7 +1982,7 @@ void DecafClass() :
   try {
 /*@egen*/ (DecafMain()
    (DecafMethod())*
-   (ClassDeclaration())* )/*@bgen(jjtree)*/
+   (NestedClassDeclaration())* )/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
