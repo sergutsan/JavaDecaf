@@ -1,4 +1,4 @@
-public class TestJavaInnerClass {
+public class TestJavaNestedClass {
 
     public static void main(String[] args) {
         System.out.println("hello world!");
