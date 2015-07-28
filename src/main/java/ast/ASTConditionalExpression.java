@@ -17,7 +17,11 @@ class ASTConditionalExpression extends SimpleNode {
   }
 
   public void process(PrintWriter ostr) {
+
     Token t = begin;
+    /*
+      Check the contents of this node to make sure the correct comparison operators have been used
+     */
     while (t!= end) {
       if (t.image.equals("&")) {
         String warning = "\"You have used single \'&\\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.\"";
@@ -29,6 +33,13 @@ class ASTConditionalExpression extends SimpleNode {
       }
 
       t = t.next;
+    }
+    /*
+      If the parent node is a SemicolonSimpleNode, and the next token is a semicolon, replace the
+      end token with a blank token to avoid double semicolons in field declarations
+     */
+    if (jjtGetParent() instanceof SemicolonSimpleNode && begin.next.image.equals(";")) {
+      begin.next.image = "";
     }
     super.process(ostr);
 
