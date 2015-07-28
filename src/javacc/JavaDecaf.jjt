@@ -488,10 +488,15 @@ void MethodDeclarationLookahead() :
 }
 
 void InterfaceDeclaration() :
-{}
-{
+{Token t;}
+{ ({
+    t = getToken(1);
+    }
   ( "abstract" | "public" )*
   UnmodifiedInterfaceDeclaration()
+  {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })#InterfaceDeclaration
 }
 
 void NestedInterfaceDeclaration() :
