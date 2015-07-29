@@ -1010,9 +1010,27 @@ void AllocationExpression() :
  * if there is an expression between the "[...]".
  */
 void ArrayDimensions() :
-{}
+{Token t;}
 {
-  ( LOOKAHEAD(2) "[" Expression() "]" )+ ( LOOKAHEAD(2) "[" "]" )*
+  ( LOOKAHEAD(2) ({
+                    t = getToken(1);
+                    }
+    "["
+    {
+        setFirstLastToken(jjtThis, t, getToken(0));
+    })#ArrayLBracket
+
+        Expression()
+
+    ({
+        t = getToken(1);
+    }
+    "]"
+    {
+        setFirstLastToken(jjtThis, t, getToken(0));
+        })#ArrayRBracket )+
+
+        ( LOOKAHEAD(2) "[" "]" )*
 }
 
 

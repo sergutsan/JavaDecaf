@@ -22,29 +22,31 @@ public interface JDCParserTreeConstants
   public int JJTCONDITIONALOR = 14;
   public int JJTCONDITIONALAND = 15;
   public int JJTARGUMENTS = 16;
-  public int JJTBLOCK = 17;
-  public int JJTLOCALVARIABLEDECLARATION = 18;
-  public int JJTSTATEMENTEXPRESSION = 19;
-  public int JJTSWITCHSTATEMENT = 20;
-  public int JJTCASESWITCHLABEL = 21;
-  public int JJTDEFAULTSWITCHLABEL = 22;
-  public int JJTIFSTATEMENT = 23;
-  public int JJTELSEIFSTATEMENT = 24;
-  public int JJTELSESTATEMENT = 25;
-  public int JJTWHILESTATEMENT = 26;
-  public int JJTDOSTATEMENT = 27;
-  public int JJTWHILEAFTERDO = 28;
-  public int JJTFORSEMICOLON = 29;
-  public int JJTFORBLOCK = 30;
-  public int JJTFORSTATEMENT = 31;
-  public int JJTBREAKSTATEMENT = 32;
-  public int JJTRETURNSTATEMENT = 33;
-  public int JJTCATCH = 34;
-  public int JJTFINALLY = 35;
-  public int JJTTRY = 36;
-  public int JJTDECAFCLASS = 37;
-  public int JJTDECAFMAIN = 38;
-  public int JJTDECAFMETHOD = 39;
+  public int JJTARRAYLBRACKET = 17;
+  public int JJTARRAYRBRACKET = 18;
+  public int JJTBLOCK = 19;
+  public int JJTLOCALVARIABLEDECLARATION = 20;
+  public int JJTSTATEMENTEXPRESSION = 21;
+  public int JJTSWITCHSTATEMENT = 22;
+  public int JJTCASESWITCHLABEL = 23;
+  public int JJTDEFAULTSWITCHLABEL = 24;
+  public int JJTIFSTATEMENT = 25;
+  public int JJTELSEIFSTATEMENT = 26;
+  public int JJTELSESTATEMENT = 27;
+  public int JJTWHILESTATEMENT = 28;
+  public int JJTDOSTATEMENT = 29;
+  public int JJTWHILEAFTERDO = 30;
+  public int JJTFORSEMICOLON = 31;
+  public int JJTFORBLOCK = 32;
+  public int JJTFORSTATEMENT = 33;
+  public int JJTBREAKSTATEMENT = 34;
+  public int JJTRETURNSTATEMENT = 35;
+  public int JJTCATCH = 36;
+  public int JJTFINALLY = 37;
+  public int JJTTRY = 38;
+  public int JJTDECAFCLASS = 39;
+  public int JJTDECAFMAIN = 40;
+  public int JJTDECAFMETHOD = 41;
 
 
   public String[] jjtNodeName = {
@@ -65,6 +67,8 @@ public interface JDCParserTreeConstants
     "ConditionalOr",
     "ConditionalAnd",
     "Arguments",
+    "ArrayLBracket",
+    "ArrayRBracket",
     "Block",
     "LocalVariableDeclaration",
     "StatementExpression",
@@ -90,4 +94,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=68d96ee2c830c8bfe5ea693645e90316 (do not edit this line) */
+/* JavaCC - OriginalChecksum=7e776827f53457b5da860f0e32dd42a7 (do not edit this line) */
