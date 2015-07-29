@@ -8,7 +8,7 @@ import main.java.parser.Token;
 import java.io.PrintWriter;
 
 public
-class ASTStatementExpression extends SimpleNode implements Indentable TNe{
+class ASTStatementExpression extends SimpleNode implements Indentable {
   public ASTStatementExpression(int id) {
     super(id);
   }
