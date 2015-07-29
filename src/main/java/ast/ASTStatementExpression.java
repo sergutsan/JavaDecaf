@@ -8,7 +8,7 @@ import main.java.parser.Token;
 import java.io.PrintWriter;
 
 public
-class ASTStatementExpression extends StatementVariableSimpleNode {
+class ASTStatementExpression extends SimpleNode {
   public ASTStatementExpression(int id) {
     super(id);
   }
@@ -18,6 +18,15 @@ class ASTStatementExpression extends StatementVariableSimpleNode {
   }
 
   public void process(PrintWriter ostr) {
+          /* Iterate through tokens checking each one  */
+    Token t = begin;
+    String prevToken = "";
+    while (t != end) {
+      t = ASTUtils.checkForSubstitutions(t, prevToken);
+      prevToken = t.image;
+      t = t.next;
+    }
+
     Token lastToken = Token.newToken(0,end.image); //Assign value of end to lastToken before end is reassigned in super.process
     super.process(ostr);
     print(lastToken, ostr); //Manually print last token
