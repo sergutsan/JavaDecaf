@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTWhileAfterDo extends SemicolonSimpleNode {
+class ASTWhileAfterDo extends SemicolonSimpleNode implements LastTokenEater {
   public ASTWhileAfterDo(int id) {
     super(id);
   }

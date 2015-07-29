@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTElseStatement extends ConditionalSimpleNode {
+class ASTElseStatement extends SimpleNode {
   public ASTElseStatement(int id) {
     super(id);
   }
