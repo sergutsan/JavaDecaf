@@ -1229,47 +1229,9 @@ void CastLookahead() :
 }
 
 void PostfixExpression() :
-{Token t;}
-{/*@bgen(jjtree) PostfixExpression */
-  {
-    ASTPostfixExpression jjtn001 = new ASTPostfixExpression(this, JJTPOSTFIXEXPRESSION);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-  }
-  try {
-/*@egen*/
-  ({
-    t = getToken(1);
-    }
-  PrimaryExpression() [ "++" | "--" ]/*@bgen(jjtree)*/
-  {
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-  }
-/*@egen*/
-  {
-    setFirstLastToken(jjtn001, t, getToken(1));
-    })/*@bgen(jjtree)*/
-  } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
-    } else {
-      jjtree.popNode();
-    }
-    if (jjte001 instanceof RuntimeException) {
-      throw (RuntimeException)jjte001;
-    }
-    if (jjte001 instanceof ParseException) {
-      throw (ParseException)jjte001;
-    }
-    throw (Error)jjte001;
-  } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-  }
-/*@egen*/                  
+{}
+{
+  PrimaryExpression() [ "++" | "--" ]
 }
 
 void CastExpression() :

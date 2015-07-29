@@ -384,7 +384,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   )
   <EOF>
 		{
-          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
 		  return jjtThis;
 		}
@@ -872,15 +872,9 @@ void CastLookahead() :
 }
 
 void PostfixExpression() :
-{Token t;}
+{}
 {
-  ({
-    t = getToken(1);
-    }
   PrimaryExpression() [ "++" | "--" ]
-  {
-    setFirstLastToken(jjtThis, t, getToken(1));
-    })#PostfixExpression
 }
 
 void CastExpression() :

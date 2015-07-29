@@ -17,28 +17,27 @@ public interface JDCParserTreeConstants
   public int JJTCONSTRUCTORDECLARATION = 9;
   public int JJTASSIGNMENT = 10;
   public int JJTCONDITIONALEXPRESSION = 11;
-  public int JJTPOSTFIXEXPRESSION = 12;
-  public int JJTBLOCK = 13;
-  public int JJTLOCALVARIABLEDECLARATION = 14;
-  public int JJTSTATEMENTEXPRESSION = 15;
-  public int JJTSWITCHSTATEMENT = 16;
-  public int JJTCASESWITCHLABEL = 17;
-  public int JJTDEFAULTSWITCHLABEL = 18;
-  public int JJTIFSTATEMENT = 19;
-  public int JJTELSESTATEMENT = 20;
-  public int JJTWHILESTATEMENT = 21;
-  public int JJTDOSTATEMENT = 22;
-  public int JJTWHILEAFTERDO = 23;
-  public int JJTFORBLOCK = 24;
-  public int JJTFORSTATEMENT = 25;
-  public int JJTBREAKSTATEMENT = 26;
-  public int JJTRETURNSTATEMENT = 27;
-  public int JJTCATCH = 28;
-  public int JJTFINALLY = 29;
-  public int JJTTRY = 30;
-  public int JJTDECAFCLASS = 31;
-  public int JJTDECAFMAIN = 32;
-  public int JJTDECAFMETHOD = 33;
+  public int JJTBLOCK = 12;
+  public int JJTLOCALVARIABLEDECLARATION = 13;
+  public int JJTSTATEMENTEXPRESSION = 14;
+  public int JJTSWITCHSTATEMENT = 15;
+  public int JJTCASESWITCHLABEL = 16;
+  public int JJTDEFAULTSWITCHLABEL = 17;
+  public int JJTIFSTATEMENT = 18;
+  public int JJTELSESTATEMENT = 19;
+  public int JJTWHILESTATEMENT = 20;
+  public int JJTDOSTATEMENT = 21;
+  public int JJTWHILEAFTERDO = 22;
+  public int JJTFORBLOCK = 23;
+  public int JJTFORSTATEMENT = 24;
+  public int JJTBREAKSTATEMENT = 25;
+  public int JJTRETURNSTATEMENT = 26;
+  public int JJTCATCH = 27;
+  public int JJTFINALLY = 28;
+  public int JJTTRY = 29;
+  public int JJTDECAFCLASS = 30;
+  public int JJTDECAFMAIN = 31;
+  public int JJTDECAFMETHOD = 32;
 
 
   public String[] jjtNodeName = {
@@ -54,7 +53,6 @@ public interface JDCParserTreeConstants
     "ConstructorDeclaration",
     "Assignment",
     "ConditionalExpression",
-    "PostfixExpression",
     "Block",
     "LocalVariableDeclaration",
     "StatementExpression",
@@ -78,4 +76,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=bf8015ba458e4dbc7dea4e5ad925e7cd (do not edit this line) */
+/* JavaCC - OriginalChecksum=41240665fb25c39ad3c6b0854c34babb (do not edit this line) */
