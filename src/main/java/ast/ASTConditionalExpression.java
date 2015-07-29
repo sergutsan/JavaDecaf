@@ -46,6 +46,10 @@ class ASTConditionalExpression extends SimpleNode {
     if (begin.next.image.equals(";")) {
        begin.next.image = "";
     }
+    /* Hack to stop double semicolons after postfix expressions */
+    if (begin.next.image.equals("++") || begin.next.image.equals("--")){
+        begin.next.next.image = "";
+    }
     super.process(ostr);
 
     /* print the missing lbrace if this is the child of a switch statement */
