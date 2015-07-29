@@ -1335,7 +1335,7 @@ void Arguments() :
   }
 /*@egen*/
   {
-    setFirstLastToken(jjtn001, t, getToken(1));
+    setFirstLastToken(jjtn001, t, getToken(0));
     })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {

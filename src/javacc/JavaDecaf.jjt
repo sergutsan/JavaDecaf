@@ -966,7 +966,7 @@ void Arguments() :
     }
   "(" [ ArgumentList() ] ")"
   {
-    setFirstLastToken(jjtThis, t, getToken(1));
+    setFirstLastToken(jjtThis, t, getToken(0));
     })#Arguments
 }
 
