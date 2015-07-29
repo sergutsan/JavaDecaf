@@ -8,7 +8,7 @@ import main.java.parser.Token;
 import java.io.PrintWriter;
 
 public
-class ASTStatementExpression extends SimpleNode implements Indentable {
+class ASTStatementExpression extends SimpleNode implements Indentable, LastTokenEater {
   public ASTStatementExpression(int id) {
     super(id);
   }
@@ -27,9 +27,8 @@ class ASTStatementExpression extends SimpleNode implements Indentable {
       t = t.next;
     }
 
-    Token lastToken = Token.newToken(0,end.image); //Assign value of end to lastToken before end is reassigned in super.process
+
     super.process(ostr);
-    print(lastToken, ostr); //Manually print last token
   }
 }
 /* JavaCC - OriginalChecksum=e873b876e7f466c17fe124d220aedcae (do not edit this line) */

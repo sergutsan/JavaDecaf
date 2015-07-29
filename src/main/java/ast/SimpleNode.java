@@ -212,6 +212,9 @@ public class SimpleNode implements Node {
             ASTUtils.indent(t, this);
         }
 
+        Token lastToken = Token.newToken(0,end.image); //Assign value of end to lastToken before end is reassigned
+
+
         /* If the node has children, set end token to first child's begin token.
         This prevents printing duplicate tokens.
          */
@@ -234,6 +237,11 @@ public class SimpleNode implements Node {
         for (int i = 0; i<jjtGetNumChildren(); i++) {
             child = (SimpleNode) jjtGetChild(i);
             child.process(ostr);
+        }
+
+        /* Print any missing last tokens */
+        if (this instanceof LastTokenEater) {
+            print(lastToken, ostr); //Manually print last token
         }
     }
 
