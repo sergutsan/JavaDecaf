@@ -384,7 +384,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   )
   <EOF>
 		{
-          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
 		  return jjtThis;
 		}
@@ -751,7 +751,7 @@ void ConditionalExpression() :
   }
   ConditionalOrExpression() [ "?" Expression() ":" ConditionalExpression() ]
   {
-    setFirstLastToken(jjtThis, t, getToken(2));
+    setFirstLastToken(jjtThis, t, getToken(1));
     })#ConditionalExpression
 }
 
@@ -959,9 +959,15 @@ void NullLiteral() :
 }
 
 void Arguments() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+    }
   "(" [ ArgumentList() ] ")"
+  {
+    setFirstLastToken(jjtThis, t, getToken(1));
+    })#Arguments
 }
 
 void ArgumentList() :
