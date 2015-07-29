@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class TestTernary {
+public class TestPreIncDec {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
