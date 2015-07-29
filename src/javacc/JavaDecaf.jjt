@@ -872,9 +872,15 @@ void CastLookahead() :
 }
 
 void PostfixExpression() :
-{}
+{Token t;}
 {
+  ({
+    t = getToken(1);
+    }
   PrimaryExpression() [ "++" | "--" ]
+  {
+    setFirstLastToken(jjtThis, t, getToken(1));
+    })#PostfixExpression
 }
 
 void CastExpression() :
