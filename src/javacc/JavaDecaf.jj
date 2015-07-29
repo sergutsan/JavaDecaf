@@ -34,7 +34,7 @@ options {
   JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
                            //pass parser object into node constructors
-  //DEBUG_PARSER = true;
+  DEBUG_PARSER = true;
   STATIC = false;
                                  
   OUTPUT_DIRECTORY = "../main/java/parser";
@@ -803,9 +803,58 @@ void VariableInitializer() :
 }
 
 void ArrayInitializer() :
-{}
-{
-  "{" [ VariableInitializer() ( LOOKAHEAD(2) "," VariableInitializer() )* ] [ "," ] "}"
+{Token t;}
+{/*@bgen(jjtree) ArrayInitialiser */
+  {
+    ASTArrayInitialiser jjtn002 = new ASTArrayInitialiser(this, JJTARRAYINITIALISER);
+    boolean jjtc002 = true;
+    jjtree.openNodeScope(jjtn002);
+  }
+  try {
+/*@egen*/
+  ({
+  t = getToken(1);
+  }
+  "{" [ VariableInitializer() ( LOOKAHEAD(2)/*@bgen(jjtree) Comma */
+                                             {
+                                               ASTComma jjtn001 = new ASTComma(this, JJTCOMMA);
+                                               boolean jjtc001 = true;
+                                               jjtree.openNodeScope(jjtn001);
+                                             }
+                                             try {
+/*@egen*/ (",")/*@bgen(jjtree)*/
+                                             } finally {
+                                               if (jjtc001) {
+                                                 jjtree.closeNodeScope(jjtn001, true);
+                                               }
+                                             }
+/*@egen*/       VariableInitializer() )* ] [ "," ] "}"/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn002, true);
+    jjtc002 = false;
+  }
+/*@egen*/
+  { setFirstLastToken(jjtn002, t, getToken(0));})/*@bgen(jjtree)*/
+  } catch (Throwable jjte002) {
+    if (jjtc002) {
+      jjtree.clearNodeScope(jjtn002);
+      jjtc002 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte002 instanceof RuntimeException) {
+      throw (RuntimeException)jjte002;
+    }
+    if (jjte002 instanceof ParseException) {
+      throw (ParseException)jjte002;
+    }
+    throw (Error)jjte002;
+  } finally {
+    if (jjtc002) {
+      jjtree.closeNodeScope(jjtn002, true);
+    }
+  }
+/*@egen*/                 
 }
 
 void MethodDeclaration() :
