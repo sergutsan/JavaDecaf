@@ -1115,41 +1115,52 @@ void ConditionalExpression() :
 void ConditionalOrExpression() :
 {Token t;}
 {
-  ConditionalAndExpression() (/*@bgen(jjtree) ConditionalOr */
-  {
-    ASTConditionalOr jjtn001 = new ASTConditionalOr(this, JJTCONDITIONALOR);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-  }
-  try {
-/*@egen*/
+  ConditionalAndExpression()/*@bgen(jjtree) ConditionalOr */
+                             {
+                               ASTConditionalOr jjtn001 = new ASTConditionalOr(this, JJTCONDITIONALOR);
+                               boolean jjtc001 = true;
+                               jjtree.openNodeScope(jjtn001);
+                             }
+                             try {
+/*@egen*/ (
   ({
      t = getToken(1);
-    }"||"/*@bgen(jjtree)*/
-    {
-      jjtree.closeNodeScope(jjtn001, true);
-      jjtc001 = false;
-    }
-/*@egen*/
-    {
-      setFirstLastToken(jjtn001, t, getToken(1));
-    })/*@bgen(jjtree)*/
-  } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-  }
+    }"||"
+
+    ConditionalAndExpression() )*/*@bgen(jjtree)*/
+                                  {
+                                    jjtree.closeNodeScope(jjtn001, true);
+                                    jjtc001 = false;
+                                  }
+/*@egen*/ {
+                                        setFirstLastToken(jjtn001, t, getToken(1));
+                                      })/*@bgen(jjtree)*/
+                             } catch (Throwable jjte001) {
+                               if (jjtc001) {
+                                 jjtree.clearNodeScope(jjtn001);
+                                 jjtc001 = false;
+                               } else {
+                                 jjtree.popNode();
+                               }
+                               if (jjte001 instanceof RuntimeException) {
+                                 throw (RuntimeException)jjte001;
+                               }
+                               if (jjte001 instanceof ParseException) {
+                                 throw (ParseException)jjte001;
+                               }
+                               throw (Error)jjte001;
+                             } finally {
+                               if (jjtc001) {
+                                 jjtree.closeNodeScope(jjtn001, true);
+                               }
+                             }
 /*@egen*/              
-    ConditionalAndExpression() )*
 }
 
 void ConditionalAndExpression() :
 {Token t;}
 {
-  InclusiveOrExpression()
-  ({
-    t = getToken(1);
-    }/*@bgen(jjtree) ConditionalAnd */
+  InclusiveOrExpression()/*@bgen(jjtree) ConditionalAnd */
   {
     ASTConditionalAnd jjtn001 = new ASTConditionalAnd(this, JJTCONDITIONALAND);
     boolean jjtc001 = true;
@@ -1157,22 +1168,39 @@ void ConditionalAndExpression() :
   }
   try {
 /*@egen*/
-  ( "&&"/*@bgen(jjtree)*/
-   {
-     jjtree.closeNodeScope(jjtn001, true);
-     jjtc001 = false;
-   }
-/*@egen*/
-   {
-    setFirstLastToken(jjtn001, t, getToken(1));
-    })/*@bgen(jjtree)*/
+  ({
+    t = getToken(1);
+    }
+  ( "&&"
+
+    InclusiveOrExpression() )*/*@bgen(jjtree)*/
+                               {
+                                 jjtree.closeNodeScope(jjtn001, true);
+                                 jjtc001 = false;
+                               }
+/*@egen*/ {
+                                   setFirstLastToken(jjtn001, t, getToken(1));
+                                   })/*@bgen(jjtree)*/
+  } catch (Throwable jjte001) {
+    if (jjtc001) {
+      jjtree.clearNodeScope(jjtn001);
+      jjtc001 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte001 instanceof RuntimeException) {
+      throw (RuntimeException)jjte001;
+    }
+    if (jjte001 instanceof ParseException) {
+      throw (ParseException)jjte001;
+    }
+    throw (Error)jjte001;
   } finally {
     if (jjtc001) {
       jjtree.closeNodeScope(jjtn001, true);
     }
   }
 /*@egen*/               
-    InclusiveOrExpression() )*
 }
 
 void InclusiveOrExpression() :
