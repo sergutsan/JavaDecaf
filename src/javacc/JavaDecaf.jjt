@@ -738,14 +738,10 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{Token t = null;}
-{ ({
-    t = getToken(1);
-    }
-  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
-  {
-    setFirstLastToken(jjtThis, t, getToken(1));
-    })#AssignmentOperator
+{}
+{
+  ("=")#SingleEquals | "*=" | "/=" | "%=" | ("+=")#PlusEquals | ("-=")#MinusEquals | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+
 }
 
 void ConditionalExpression() :

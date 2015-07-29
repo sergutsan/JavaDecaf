@@ -1063,32 +1063,49 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{Token t = null;}
-{/*@bgen(jjtree) AssignmentOperator */
+{}
+{/*@bgen(jjtree) SingleEquals */
   {
-    ASTAssignmentOperator jjtn001 = new ASTAssignmentOperator(this, JJTASSIGNMENTOPERATOR);
+    ASTSingleEquals jjtn001 = new ASTSingleEquals(this, JJTSINGLEEQUALS);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
   try {
-/*@egen*/ ({
-    t = getToken(1);
-    }
-  "=" | "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="/*@bgen(jjtree)*/
-  {
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-  }
 /*@egen*/
-  {
-    setFirstLastToken(jjtn001, t, getToken(1));
-    })/*@bgen(jjtree)*/
+  ("=")/*@bgen(jjtree)*/
   } finally {
     if (jjtc001) {
       jjtree.closeNodeScope(jjtn001, true);
     }
   }
-/*@egen*/                   
+/*@egen*/              | "*=" | "/=" | "%=" |/*@bgen(jjtree) PlusEquals */
+                                            {
+                                              ASTPlusEquals jjtn002 = new ASTPlusEquals(this, JJTPLUSEQUALS);
+                                              boolean jjtc002 = true;
+                                              jjtree.openNodeScope(jjtn002);
+                                            }
+                                            try {
+/*@egen*/ ("+=")/*@bgen(jjtree)*/
+                                            } finally {
+                                              if (jjtc002) {
+                                                jjtree.closeNodeScope(jjtn002, true);
+                                              }
+                                            }
+/*@egen*/            |/*@bgen(jjtree) MinusEquals */
+                                                                {
+                                                                  ASTMinusEquals jjtn003 = new ASTMinusEquals(this, JJTMINUSEQUALS);
+                                                                  boolean jjtc003 = true;
+                                                                  jjtree.openNodeScope(jjtn003);
+                                                                }
+                                                                try {
+/*@egen*/ ("-=")/*@bgen(jjtree)*/
+                                                                } finally {
+                                                                  if (jjtc003) {
+                                                                    jjtree.closeNodeScope(jjtn003, true);
+                                                                  }
+                                                                }
+/*@egen*/             | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+
 }
 
 void ConditionalExpression() :

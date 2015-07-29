@@ -16,40 +16,42 @@ public interface JDCParserTreeConstants
   public int JJTMETHODDECLARATION = 8;
   public int JJTCONSTRUCTORDECLARATION = 9;
   public int JJTASSIGNMENT = 10;
-  public int JJTASSIGNMENTOPERATOR = 11;
-  public int JJTTERNARYQUESTIONMARK = 12;
-  public int JJTTERNARYCOLON = 13;
-  public int JJTCONDITIONALEXPRESSION = 14;
-  public int JJTCONDITIONALOR = 15;
-  public int JJTCONDITIONALAND = 16;
-  public int JJTPRIMARYEXPRESSION = 17;
-  public int JJTPRIMARYSUFFIX = 18;
-  public int JJTARGUMENTS = 19;
-  public int JJTARRAYLBRACKET = 20;
-  public int JJTARRAYRBRACKET = 21;
-  public int JJTBLOCK = 22;
-  public int JJTLOCALVARIABLEDECLARATION = 23;
-  public int JJTSTATEMENTEXPRESSION = 24;
-  public int JJTSWITCHSTATEMENT = 25;
-  public int JJTCASESWITCHLABEL = 26;
-  public int JJTDEFAULTSWITCHLABEL = 27;
-  public int JJTIFSTATEMENT = 28;
-  public int JJTELSEIFSTATEMENT = 29;
-  public int JJTELSESTATEMENT = 30;
-  public int JJTWHILESTATEMENT = 31;
-  public int JJTDOSTATEMENT = 32;
-  public int JJTWHILEAFTERDO = 33;
-  public int JJTFORSEMICOLON = 34;
-  public int JJTFORBLOCK = 35;
-  public int JJTFORSTATEMENT = 36;
-  public int JJTBREAKSTATEMENT = 37;
-  public int JJTRETURNSTATEMENT = 38;
-  public int JJTCATCH = 39;
-  public int JJTFINALLY = 40;
-  public int JJTTRY = 41;
-  public int JJTDECAFCLASS = 42;
-  public int JJTDECAFMAIN = 43;
-  public int JJTDECAFMETHOD = 44;
+  public int JJTSINGLEEQUALS = 11;
+  public int JJTPLUSEQUALS = 12;
+  public int JJTMINUSEQUALS = 13;
+  public int JJTTERNARYQUESTIONMARK = 14;
+  public int JJTTERNARYCOLON = 15;
+  public int JJTCONDITIONALEXPRESSION = 16;
+  public int JJTCONDITIONALOR = 17;
+  public int JJTCONDITIONALAND = 18;
+  public int JJTPRIMARYEXPRESSION = 19;
+  public int JJTPRIMARYSUFFIX = 20;
+  public int JJTARGUMENTS = 21;
+  public int JJTARRAYLBRACKET = 22;
+  public int JJTARRAYRBRACKET = 23;
+  public int JJTBLOCK = 24;
+  public int JJTLOCALVARIABLEDECLARATION = 25;
+  public int JJTSTATEMENTEXPRESSION = 26;
+  public int JJTSWITCHSTATEMENT = 27;
+  public int JJTCASESWITCHLABEL = 28;
+  public int JJTDEFAULTSWITCHLABEL = 29;
+  public int JJTIFSTATEMENT = 30;
+  public int JJTELSEIFSTATEMENT = 31;
+  public int JJTELSESTATEMENT = 32;
+  public int JJTWHILESTATEMENT = 33;
+  public int JJTDOSTATEMENT = 34;
+  public int JJTWHILEAFTERDO = 35;
+  public int JJTFORSEMICOLON = 36;
+  public int JJTFORBLOCK = 37;
+  public int JJTFORSTATEMENT = 38;
+  public int JJTBREAKSTATEMENT = 39;
+  public int JJTRETURNSTATEMENT = 40;
+  public int JJTCATCH = 41;
+  public int JJTFINALLY = 42;
+  public int JJTTRY = 43;
+  public int JJTDECAFCLASS = 44;
+  public int JJTDECAFMAIN = 45;
+  public int JJTDECAFMETHOD = 46;
 
 
   public String[] jjtNodeName = {
@@ -64,7 +66,9 @@ public interface JDCParserTreeConstants
     "MethodDeclaration",
     "ConstructorDeclaration",
     "Assignment",
-    "AssignmentOperator",
+    "SingleEquals",
+    "PlusEquals",
+    "MinusEquals",
     "TernaryQuestionMark",
     "TernaryColon",
     "ConditionalExpression",
@@ -100,4 +104,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=a782338265d1fe97071d5eed4084df2f (do not edit this line) */
+/* JavaCC - OriginalChecksum=30edb44551349e3b6192158c0a250dad (do not edit this line) */
