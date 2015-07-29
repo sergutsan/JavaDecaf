@@ -34,7 +34,7 @@ options {
   JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
                            //pass parser object into node constructors
-  DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
   STATIC = false;
                                  
   OUTPUT_DIRECTORY = "../main/java/parser";
