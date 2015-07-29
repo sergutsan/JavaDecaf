@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTReturnStatement extends SemicolonSimpleNode {
+class ASTReturnStatement extends ASTStatementExpression {
   public ASTReturnStatement(int id) {
     super(id);
   }
