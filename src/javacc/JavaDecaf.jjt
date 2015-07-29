@@ -749,7 +749,7 @@ void ConditionalExpression() :
   ({
    t = getToken(1);
   }
-  ConditionalOrExpression() [ "?" Expression() ":" ConditionalExpression() ]
+  ConditionalOrExpression() [("?")#TernaryQuestionMark Expression() (":")#TernaryColon ConditionalExpression() ]
   {
     setFirstLastToken(jjtThis, t, getToken(1));
     })#ConditionalExpression

@@ -1585,43 +1585,61 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   final public void ConditionalExpression() throws ParseException {
  Token t;
-    ASTConditionalExpression jjtn001 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
+    ASTConditionalExpression jjtn003 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
+    boolean jjtc003 = true;
+    jjtree.openNodeScope(jjtn003);
     try {
    t = getToken(1);
       ConditionalOrExpression();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case HOOK:
-        jj_consume_token(HOOK);
+                               ASTTernaryQuestionMark jjtn001 = new ASTTernaryQuestionMark(this, JJTTERNARYQUESTIONMARK);
+                               boolean jjtc001 = true;
+                               jjtree.openNodeScope(jjtn001);
+        try {
+          jj_consume_token(HOOK);
+        } finally {
+                               if (jjtc001) {
+                                 jjtree.closeNodeScope(jjtn001, true);
+                               }
+        }
         Expression();
-        jj_consume_token(COLON);
+                                                                      ASTTernaryColon jjtn002 = new ASTTernaryColon(this, JJTTERNARYCOLON);
+                                                                      boolean jjtc002 = true;
+                                                                      jjtree.openNodeScope(jjtn002);
+        try {
+          jj_consume_token(COLON);
+        } finally {
+                                                                      if (jjtc002) {
+                                                                        jjtree.closeNodeScope(jjtn002, true);
+                                                                      }
+        }
         ConditionalExpression();
         break;
       default:
         jj_la1[52] = jj_gen;
         ;
       }
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
-    setFirstLastToken(jjtn001, t, getToken(1));
-    } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
+    jjtree.closeNodeScope(jjtn003, true);
+    jjtc003 = false;
+    setFirstLastToken(jjtn003, t, getToken(1));
+    } catch (Throwable jjte003) {
+    if (jjtc003) {
+      jjtree.clearNodeScope(jjtn003);
+      jjtc003 = false;
     } else {
       jjtree.popNode();
     }
-    if (jjte001 instanceof RuntimeException) {
-      {if (true) throw (RuntimeException)jjte001;}
+    if (jjte003 instanceof RuntimeException) {
+      {if (true) throw (RuntimeException)jjte003;}
     }
-    if (jjte001 instanceof ParseException) {
-      {if (true) throw (ParseException)jjte001;}
+    if (jjte003 instanceof ParseException) {
+      {if (true) throw (ParseException)jjte003;}
     }
-    {if (true) throw (Error)jjte001;}
+    {if (true) throw (Error)jjte003;}
     } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
+    if (jjtc003) {
+      jjtree.closeNodeScope(jjtn003, true);
     }
     }
   }

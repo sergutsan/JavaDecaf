@@ -1072,41 +1072,67 @@ void ConditionalExpression() :
 {Token t;}
 {/*@bgen(jjtree) ConditionalExpression */
   {
-    ASTConditionalExpression jjtn001 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
+    ASTConditionalExpression jjtn003 = new ASTConditionalExpression(this, JJTCONDITIONALEXPRESSION);
+    boolean jjtc003 = true;
+    jjtree.openNodeScope(jjtn003);
   }
   try {
 /*@egen*/
   ({
    t = getToken(1);
   }
-  ConditionalOrExpression() [ "?" Expression() ":" ConditionalExpression() ]/*@bgen(jjtree)*/
+  ConditionalOrExpression() [/*@bgen(jjtree) TernaryQuestionMark */
+                             {
+                               ASTTernaryQuestionMark jjtn001 = new ASTTernaryQuestionMark(this, JJTTERNARYQUESTIONMARK);
+                               boolean jjtc001 = true;
+                               jjtree.openNodeScope(jjtn001);
+                             }
+                             try {
+/*@egen*/("?")/*@bgen(jjtree)*/
+                             } finally {
+                               if (jjtc001) {
+                                 jjtree.closeNodeScope(jjtn001, true);
+                               }
+                             }
+/*@egen*/                     Expression()/*@bgen(jjtree) TernaryColon */
+                                                                    {
+                                                                      ASTTernaryColon jjtn002 = new ASTTernaryColon(this, JJTTERNARYCOLON);
+                                                                      boolean jjtc002 = true;
+                                                                      jjtree.openNodeScope(jjtn002);
+                                                                    }
+                                                                    try {
+/*@egen*/ (":")/*@bgen(jjtree)*/
+                                                                    } finally {
+                                                                      if (jjtc002) {
+                                                                        jjtree.closeNodeScope(jjtn002, true);
+                                                                      }
+                                                                    }
+/*@egen*/              ConditionalExpression() ]/*@bgen(jjtree)*/
   {
-    jjtree.closeNodeScope(jjtn001, true);
-    jjtc001 = false;
+    jjtree.closeNodeScope(jjtn003, true);
+    jjtc003 = false;
   }
 /*@egen*/
   {
-    setFirstLastToken(jjtn001, t, getToken(1));
+    setFirstLastToken(jjtn003, t, getToken(1));
     })/*@bgen(jjtree)*/
-  } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
+  } catch (Throwable jjte003) {
+    if (jjtc003) {
+      jjtree.clearNodeScope(jjtn003);
+      jjtc003 = false;
     } else {
       jjtree.popNode();
     }
-    if (jjte001 instanceof RuntimeException) {
-      throw (RuntimeException)jjte001;
+    if (jjte003 instanceof RuntimeException) {
+      throw (RuntimeException)jjte003;
     }
-    if (jjte001 instanceof ParseException) {
-      throw (ParseException)jjte001;
+    if (jjte003 instanceof ParseException) {
+      throw (ParseException)jjte003;
     }
-    throw (Error)jjte001;
+    throw (Error)jjte003;
   } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
+    if (jjtc003) {
+      jjtree.closeNodeScope(jjtn003, true);
     }
   }
 /*@egen*/                      
