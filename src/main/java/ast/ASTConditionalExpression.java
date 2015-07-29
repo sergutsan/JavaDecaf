@@ -51,11 +51,6 @@ class ASTConditionalExpression extends SimpleNode {
         begin.next.next.image = "";
     }
     super.process(ostr);
-
-    /* print the missing lbrace if this is the child of a switch statement */
-    if (jjtGetParent() instanceof ASTSwitchStatement) {
-      ostr.print(" {");
-    }
   }
 }
 /* JavaCC - OriginalChecksum=38ffaa9dd63c3f3e866095e4532ecd91 (do not edit this line) */

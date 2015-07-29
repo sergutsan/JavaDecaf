@@ -240,10 +240,18 @@ public class SimpleNode implements Node {
         for (int i = 0; i<jjtGetNumChildren(); i++) {
             child = (SimpleNode) jjtGetChild(i);
             child.process(ostr);
+
+            if (i == 0) {
             /* Prevent loss of parenthesis in loop conditions - print it after the ConditionalExpression
             * but before the Block */
-            if (i==0 && this instanceof ConditionalSimpleNode) {
-                print(Token.newToken(JDCParserConstants.RPAREN, ")"), ostr);
+                if (this instanceof ConditionalSimpleNode) {
+                    ostr.print(")");
+                }
+            /* Prevent loss of parenthesis and opening brace in switch statements - print it after the ConditionalExpression
+            * but before the Block */
+                if (this instanceof ASTSwitchStatement) {
+                    ostr.print(") {");
+                }
             }
         }
 
