@@ -17,7 +17,7 @@ class ASTComma extends SimpleNode {
   }
 
   public void process(PrintWriter ostr) {
-    ostr.print(" ,");
+    ostr.print(",");
   }
 }
 /* JavaCC - OriginalChecksum=c6c47175b999c621eaa750f0554ca2d5 (do not edit this line) */
