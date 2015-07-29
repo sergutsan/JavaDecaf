@@ -1063,48 +1063,32 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{}
-{/*@bgen(jjtree) SingleEquals */
+{Token t;}
+{/*@bgen(jjtree) AssignmentOperator */
   {
-    ASTSingleEquals jjtn001 = new ASTSingleEquals(this, JJTSINGLEEQUALS);
+    ASTAssignmentOperator jjtn001 = new ASTAssignmentOperator(this, JJTASSIGNMENTOPERATOR);
     boolean jjtc001 = true;
     jjtree.openNodeScope(jjtn001);
   }
   try {
+/*@egen*/ ({
+    t = getToken(1);
+    }
+  ("="| "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|=")/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn001, true);
+    jjtc001 = false;
+  }
 /*@egen*/
-  ("=")/*@bgen(jjtree)*/
+  {
+    setFirstLastToken(jjtn001, t, getToken(0));
+    })/*@bgen(jjtree)*/
   } finally {
     if (jjtc001) {
       jjtree.closeNodeScope(jjtn001, true);
     }
   }
-/*@egen*/              | "*=" | "/=" | "%=" |/*@bgen(jjtree) PlusEquals */
-                                            {
-                                              ASTPlusEquals jjtn002 = new ASTPlusEquals(this, JJTPLUSEQUALS);
-                                              boolean jjtc002 = true;
-                                              jjtree.openNodeScope(jjtn002);
-                                            }
-                                            try {
-/*@egen*/ ("+=")/*@bgen(jjtree)*/
-                                            } finally {
-                                              if (jjtc002) {
-                                                jjtree.closeNodeScope(jjtn002, true);
-                                              }
-                                            }
-/*@egen*/            |/*@bgen(jjtree) MinusEquals */
-                                                                {
-                                                                  ASTMinusEquals jjtn003 = new ASTMinusEquals(this, JJTMINUSEQUALS);
-                                                                  boolean jjtc003 = true;
-                                                                  jjtree.openNodeScope(jjtn003);
-                                                                }
-                                                                try {
-/*@egen*/ ("-=")/*@bgen(jjtree)*/
-                                                                } finally {
-                                                                  if (jjtc003) {
-                                                                    jjtree.closeNodeScope(jjtn003, true);
-                                                                  }
-                                                                }
-/*@egen*/             | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+/*@egen*/                   
 
 }
 
@@ -1290,7 +1274,33 @@ void AndExpression() :
 void EqualityExpression() :
 {}
 {
-  InstanceOfExpression() ( ( "==" | "!=" ) InstanceOfExpression() )*
+  InstanceOfExpression() ( (/*@bgen(jjtree) Equals */
+                             {
+                               ASTEquals jjtn001 = new ASTEquals(this, JJTEQUALS);
+                               boolean jjtc001 = true;
+                               jjtree.openNodeScope(jjtn001);
+                             }
+                             try {
+/*@egen*/ ("==")/*@bgen(jjtree)*/
+                             } finally {
+                               if (jjtc001) {
+                                 jjtree.closeNodeScope(jjtn001, true);
+                               }
+                             }
+/*@egen*/        |/*@bgen(jjtree) NotEquals */
+                                             {
+                                               ASTNotEquals jjtn002 = new ASTNotEquals(this, JJTNOTEQUALS);
+                                               boolean jjtc002 = true;
+                                               jjtree.openNodeScope(jjtn002);
+                                             }
+                                             try {
+/*@egen*/ ("!=")/*@bgen(jjtree)*/
+                                             } finally {
+                                               if (jjtc002) {
+                                                 jjtree.closeNodeScope(jjtn002, true);
+                                               }
+                                             }
+/*@egen*/           ) InstanceOfExpression() )*
 }
 
 void InstanceOfExpression() :
@@ -1300,9 +1310,31 @@ void InstanceOfExpression() :
 }
 
 void RelationalExpression() :
-{}
+{Token t;}
 {
-  ShiftExpression() ( ( "<" | ">" | "<=" | ">=" ) ShiftExpression() )*
+  ShiftExpression() (/*@bgen(jjtree) RelationalOperator */
+                      {
+                        ASTRelationalOperator jjtn001 = new ASTRelationalOperator(this, JJTRELATIONALOPERATOR);
+                        boolean jjtc001 = true;
+                        jjtree.openNodeScope(jjtn001);
+                      }
+                      try {
+/*@egen*/ ({
+    t = getToken(1);
+    }
+    (("<" | ">" | "<=" | ">=")/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    }
+/*@egen*/
+    { setFirstLastToken(jjtn001, t, getToken(1));}))/*@bgen(jjtree)*/
+                      } finally {
+                        if (jjtc001) {
+                          jjtree.closeNodeScope(jjtn001, true);
+                        }
+                      }
+/*@egen*/                    ShiftExpression() )*
 }
 
 void ShiftExpression() :
@@ -1376,7 +1408,33 @@ void CastLookahead() :
 void PostfixExpression() :
 {}
 {
-  PrimaryExpression() [ "++" | "--" ]
+  PrimaryExpression() [/*@bgen(jjtree) Increment */
+                        {
+                          ASTIncrement jjtn001 = new ASTIncrement(this, JJTINCREMENT);
+                          boolean jjtc001 = true;
+                          jjtree.openNodeScope(jjtn001);
+                        }
+                        try {
+/*@egen*/ ("++")/*@bgen(jjtree)*/
+                        } finally {
+                          if (jjtc001) {
+                            jjtree.closeNodeScope(jjtn001, true);
+                          }
+                        }
+/*@egen*/           |/*@bgen(jjtree) Decrement */
+                                           {
+                                             ASTDecrement jjtn002 = new ASTDecrement(this, JJTDECREMENT);
+                                             boolean jjtc002 = true;
+                                             jjtree.openNodeScope(jjtn002);
+                                           }
+                                           try {
+/*@egen*/ ("--")/*@bgen(jjtree)*/
+                                           } finally {
+                                             if (jjtc002) {
+                                               jjtree.closeNodeScope(jjtn002, true);
+                                             }
+                                           }
+/*@egen*/           ]
 }
 
 void CastExpression() :

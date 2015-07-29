@@ -738,9 +738,14 @@ void Assignment() :
 }
 
 void AssignmentOperator() :
-{}
-{
-  ("=")#SingleEquals | "*=" | "/=" | "%=" | ("+=")#PlusEquals | ("-=")#MinusEquals | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|="
+{Token t;}
+{ ({
+    t = getToken(1);
+    }
+  ("="| "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|=")
+  {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })#AssignmentOperator
 
 }
 
@@ -804,7 +809,7 @@ void AndExpression() :
 void EqualityExpression() :
 {}
 {
-  InstanceOfExpression() ( ( "==" | "!=" ) InstanceOfExpression() )*
+  InstanceOfExpression() ( ( ("==")#Equals | ("!=")#NotEquals ) InstanceOfExpression() )*
 }
 
 void InstanceOfExpression() :
@@ -814,9 +819,13 @@ void InstanceOfExpression() :
 }
 
 void RelationalExpression() :
-{}
+{Token t;}
 {
-  ShiftExpression() ( ( "<" | ">" | "<=" | ">=" ) ShiftExpression() )*
+  ShiftExpression() ( ({
+    t = getToken(1);
+    }
+    (("<" | ">" | "<=" | ">=")
+    { setFirstLastToken(jjtThis, t, getToken(1));}))#RelationalOperator ShiftExpression() )*
 }
 
 void ShiftExpression() :
@@ -890,7 +899,7 @@ void CastLookahead() :
 void PostfixExpression() :
 {}
 {
-  PrimaryExpression() [ "++" | "--" ]
+  PrimaryExpression() [ ("++")#Increment | ("--")#Decrement ]
 }
 
 void CastExpression() :
