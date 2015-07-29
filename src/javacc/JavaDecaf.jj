@@ -1933,9 +1933,9 @@ void ForStatement() :
 }
 {/*@bgen(jjtree) ForStatement */
   {
-    ASTForStatement jjtn002 = new ASTForStatement(this, JJTFORSTATEMENT);
-    boolean jjtc002 = true;
-    jjtree.openNodeScope(jjtn002);
+    ASTForStatement jjtn003 = new ASTForStatement(this, JJTFORSTATEMENT);
+    boolean jjtc003 = true;
+    jjtree.openNodeScope(jjtn003);
   }
   try {
 /*@egen*/
@@ -1943,60 +1943,73 @@ void ForStatement() :
     t = getToken(1);
     }
     "for" "("
-            ForInit() ";" [ Expression() ] ";" [ ForUpdate() ]
+            ForInit() ";" [ Expression() ]/*@bgen(jjtree) ForSemicolon */
+                                           {
+                                             ASTForSemicolon jjtn001 = new ASTForSemicolon(this, JJTFORSEMICOLON);
+                                             boolean jjtc001 = true;
+                                             jjtree.openNodeScope(jjtn001);
+                                           }
+                                           try {
+/*@egen*/ (";")/*@bgen(jjtree)*/
+                                           } finally {
+                                             if (jjtc001) {
+                                               jjtree.closeNodeScope(jjtn001, true);
+                                             }
+                                           }
+/*@egen*/              [ ForUpdate() ]
             ")"/*@bgen(jjtree) ForBlock */
                 {
-                  ASTForBlock jjtn001 = new ASTForBlock(this, JJTFORBLOCK);
-                  boolean jjtc001 = true;
-                  jjtree.openNodeScope(jjtn001);
+                  ASTForBlock jjtn002 = new ASTForBlock(this, JJTFORBLOCK);
+                  boolean jjtc002 = true;
+                  jjtree.openNodeScope(jjtn002);
                 }
                 try {
 /*@egen*/ (Block())/*@bgen(jjtree)*/
-                } catch (Throwable jjte001) {
-                  if (jjtc001) {
-                    jjtree.clearNodeScope(jjtn001);
-                    jjtc001 = false;
+                } catch (Throwable jjte002) {
+                  if (jjtc002) {
+                    jjtree.clearNodeScope(jjtn002);
+                    jjtc002 = false;
                   } else {
                     jjtree.popNode();
                   }
-                  if (jjte001 instanceof RuntimeException) {
-                    throw (RuntimeException)jjte001;
+                  if (jjte002 instanceof RuntimeException) {
+                    throw (RuntimeException)jjte002;
                   }
-                  if (jjte001 instanceof ParseException) {
-                    throw (ParseException)jjte001;
+                  if (jjte002 instanceof ParseException) {
+                    throw (ParseException)jjte002;
                   }
-                  throw (Error)jjte001;
+                  throw (Error)jjte002;
                 } finally {
-                  if (jjtc001) {
-                    jjtree.closeNodeScope(jjtn001, true);
+                  if (jjtc002) {
+                    jjtree.closeNodeScope(jjtn002, true);
                   }
                 }
 /*@egen*/         /*@bgen(jjtree)*/
              {
-               jjtree.closeNodeScope(jjtn002, true);
-               jjtc002 = false;
+               jjtree.closeNodeScope(jjtn003, true);
+               jjtc003 = false;
              }
 /*@egen*/
              {
-    setFirstLastToken(jjtn002, t, getToken(0));
+    setFirstLastToken(jjtn003, t, getToken(0));
              })/*@bgen(jjtree)*/
-  } catch (Throwable jjte002) {
-    if (jjtc002) {
-      jjtree.clearNodeScope(jjtn002);
-      jjtc002 = false;
+  } catch (Throwable jjte003) {
+    if (jjtc003) {
+      jjtree.clearNodeScope(jjtn003);
+      jjtc003 = false;
     } else {
       jjtree.popNode();
     }
-    if (jjte002 instanceof RuntimeException) {
-      throw (RuntimeException)jjte002;
+    if (jjte003 instanceof RuntimeException) {
+      throw (RuntimeException)jjte003;
     }
-    if (jjte002 instanceof ParseException) {
-      throw (ParseException)jjte002;
+    if (jjte003 instanceof ParseException) {
+      throw (ParseException)jjte003;
     }
-    throw (Error)jjte002;
+    throw (Error)jjte003;
   } finally {
-    if (jjtc002) {
-      jjtree.closeNodeScope(jjtn002, true);
+    if (jjtc003) {
+      jjtree.closeNodeScope(jjtn003, true);
     }
   }
 /*@egen*/              //Do not permit braceless statements - SK

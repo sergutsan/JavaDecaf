@@ -1209,7 +1209,7 @@ void ForStatement() :
     t = getToken(1);
     }
     "for" "("
-            ForInit() ";" [ Expression() ] ";" [ ForUpdate() ]
+            ForInit() ";" [ Expression() ] (";")#ForSemicolon [ ForUpdate() ]
             ")" (Block())#ForBlock
              {
     setFirstLastToken(jjtThis, t, getToken(0));
