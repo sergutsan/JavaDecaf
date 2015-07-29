@@ -744,7 +744,7 @@ void AssignmentOperator() :
     }
   ("="| "*=" | "/=" | "%=" | "+=" | "-=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|=")
   {
-    setFirstLastToken(jjtThis, t, getToken(0));
+    setFirstLastToken(jjtThis, t, getToken(1));
     })#AssignmentOperator
 
 }
@@ -807,9 +807,9 @@ void AndExpression() :
 }
 
 void EqualityExpression() :
-{}
+{Token t;}
 {
-  InstanceOfExpression() ( ( ("==")#Equals | ("!=")#NotEquals ) InstanceOfExpression() )*
+  InstanceOfExpression() ( ({t = getToken(1);} ("==" | "!=" ) {setFirstLastToken(jjtThis, t, getToken(1));})#EqualityOperator InstanceOfExpression() )*
 }
 
 void InstanceOfExpression() :
@@ -841,15 +841,15 @@ void AdditiveExpression() :
 }
 
 void MultiplicativeExpression() :
-{}
+{Token t;}
 {
-  UnaryExpression() ( ( "*" | "/" | "%" ) UnaryExpression() )*
+  UnaryExpression() ( ({ t = getToken(1); } ( "*" | "/" | "%" ) { setFirstLastToken(jjtThis, t, getToken(0));})#MultiplicativeOperator UnaryExpression() )*
 }
 
 void UnaryExpression() :
-{}
+{Token t;}
 {
-  ( "+" | "-" ) UnaryExpression()
+  ({ t = getToken(1); } ( "+" | "-" ) { setFirstLastToken(jjtThis, t, getToken(0));})#UnaryOperator UnaryExpression()
 |
   PreIncrementExpression()
 |

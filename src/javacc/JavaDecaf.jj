@@ -1081,7 +1081,7 @@ void AssignmentOperator() :
   }
 /*@egen*/
   {
-    setFirstLastToken(jjtn001, t, getToken(0));
+    setFirstLastToken(jjtn001, t, getToken(1));
     })/*@bgen(jjtree)*/
   } finally {
     if (jjtc001) {
@@ -1272,35 +1272,27 @@ void AndExpression() :
 }
 
 void EqualityExpression() :
-{}
+{Token t;}
 {
-  InstanceOfExpression() ( (/*@bgen(jjtree) Equals */
-                             {
-                               ASTEquals jjtn001 = new ASTEquals(this, JJTEQUALS);
-                               boolean jjtc001 = true;
-                               jjtree.openNodeScope(jjtn001);
+  InstanceOfExpression() (/*@bgen(jjtree) EqualityOperator */
+                           {
+                             ASTEqualityOperator jjtn001 = new ASTEqualityOperator(this, JJTEQUALITYOPERATOR);
+                             boolean jjtc001 = true;
+                             jjtree.openNodeScope(jjtn001);
+                           }
+                           try {
+/*@egen*/ ({t = getToken(1);} ("==" | "!=" )/*@bgen(jjtree)*/
+                                                              {
+                                                                jjtree.closeNodeScope(jjtn001, true);
+                                                                jjtc001 = false;
+                                                              }
+/*@egen*/ {setFirstLastToken(jjtn001, t, getToken(1));})/*@bgen(jjtree)*/
+                           } finally {
+                             if (jjtc001) {
+                               jjtree.closeNodeScope(jjtn001, true);
                              }
-                             try {
-/*@egen*/ ("==")/*@bgen(jjtree)*/
-                             } finally {
-                               if (jjtc001) {
-                                 jjtree.closeNodeScope(jjtn001, true);
-                               }
-                             }
-/*@egen*/        |/*@bgen(jjtree) NotEquals */
-                                             {
-                                               ASTNotEquals jjtn002 = new ASTNotEquals(this, JJTNOTEQUALS);
-                                               boolean jjtc002 = true;
-                                               jjtree.openNodeScope(jjtn002);
-                                             }
-                                             try {
-/*@egen*/ ("!=")/*@bgen(jjtree)*/
-                                             } finally {
-                                               if (jjtc002) {
-                                                 jjtree.closeNodeScope(jjtn002, true);
-                                               }
-                                             }
-/*@egen*/           ) InstanceOfExpression() )*
+                           }
+/*@egen*/                  InstanceOfExpression() )*
 }
 
 void InstanceOfExpression() :
@@ -1350,15 +1342,51 @@ void AdditiveExpression() :
 }
 
 void MultiplicativeExpression() :
-{}
+{Token t;}
 {
-  UnaryExpression() ( ( "*" | "/" | "%" ) UnaryExpression() )*
+  UnaryExpression() (/*@bgen(jjtree) MultiplicativeOperator */
+                      {
+                        ASTMultiplicativeOperator jjtn001 = new ASTMultiplicativeOperator(this, JJTMULTIPLICATIVEOPERATOR);
+                        boolean jjtc001 = true;
+                        jjtree.openNodeScope(jjtn001);
+                      }
+                      try {
+/*@egen*/ ({ t = getToken(1); } ( "*" | "/" | "%" )/*@bgen(jjtree)*/
+                                                                {
+                                                                  jjtree.closeNodeScope(jjtn001, true);
+                                                                  jjtc001 = false;
+                                                                }
+/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(0));})/*@bgen(jjtree)*/
+                      } finally {
+                        if (jjtc001) {
+                          jjtree.closeNodeScope(jjtn001, true);
+                        }
+                      }
+/*@egen*/                        UnaryExpression() )*
 }
 
 void UnaryExpression() :
-{}
-{
-  ( "+" | "-" ) UnaryExpression()
+{Token t;}
+{/*@bgen(jjtree) UnaryOperator */
+  {
+    ASTUnaryOperator jjtn001 = new ASTUnaryOperator(this, JJTUNARYOPERATOR);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({ t = getToken(1); } ( "+" | "-" )/*@bgen(jjtree)*/
+                                      {
+                                        jjtree.closeNodeScope(jjtn001, true);
+                                        jjtc001 = false;
+                                      }
+/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(0));})/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/               UnaryExpression()
 |
   PreIncrementExpression()
 |
