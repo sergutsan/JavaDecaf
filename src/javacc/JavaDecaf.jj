@@ -1113,15 +1113,66 @@ void ConditionalExpression() :
 }
 
 void ConditionalOrExpression() :
-{}
+{Token t;}
 {
-  ConditionalAndExpression() ( "||" ConditionalAndExpression() )*
+  ConditionalAndExpression() (/*@bgen(jjtree) ConditionalOr */
+  {
+    ASTConditionalOr jjtn001 = new ASTConditionalOr(this, JJTCONDITIONALOR);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ({
+     t = getToken(1);
+    }"||"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    }
+/*@egen*/
+    {
+      setFirstLastToken(jjtn001, t, getToken(1));
+    })/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/              
+    ConditionalAndExpression() )*
 }
 
 void ConditionalAndExpression() :
-{}
+{Token t;}
 {
-  InclusiveOrExpression() ( "&&" InclusiveOrExpression() )*
+  InclusiveOrExpression()
+  ({
+    t = getToken(1);
+    }/*@bgen(jjtree) ConditionalAnd */
+  {
+    ASTConditionalAnd jjtn001 = new ASTConditionalAnd(this, JJTCONDITIONALAND);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/
+  ( "&&"/*@bgen(jjtree)*/
+   {
+     jjtree.closeNodeScope(jjtn001, true);
+     jjtc001 = false;
+   }
+/*@egen*/
+   {
+    setFirstLastToken(jjtn001, t, getToken(1));
+    })/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/               
+    InclusiveOrExpression() )*
 }
 
 void InclusiveOrExpression() :

@@ -756,15 +756,30 @@ void ConditionalExpression() :
 }
 
 void ConditionalOrExpression() :
-{}
+{Token t;}
 {
-  ConditionalAndExpression() ( "||" ConditionalAndExpression() )*
+  ConditionalAndExpression() (
+  ({
+     t = getToken(1);
+    }"||"
+    {
+      setFirstLastToken(jjtThis, t, getToken(1));
+    })#ConditionalOr
+    ConditionalAndExpression() )*
 }
 
 void ConditionalAndExpression() :
-{}
+{Token t;}
 {
-  InclusiveOrExpression() ( "&&" InclusiveOrExpression() )*
+  InclusiveOrExpression()
+  ({
+    t = getToken(1);
+    }
+  ( "&&"
+   {
+    setFirstLastToken(jjtThis, t, getToken(1));
+    })#ConditionalAnd
+    InclusiveOrExpression() )*
 }
 
 void InclusiveOrExpression() :
