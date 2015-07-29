@@ -897,9 +897,9 @@ void CastLookahead() :
 }
 
 void PostfixExpression() :
-{}
+{Token t;}
 {
-  PrimaryExpression() [ ("++")#Increment | ("--")#Decrement ]
+  PrimaryExpression() [ ({t = getToken(1); } ("++" | "--") { setFirstLastToken(jjtThis, t, getToken(1));})#IncrementDecrement ]
 }
 
 void CastExpression() :

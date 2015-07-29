@@ -1434,35 +1434,27 @@ void CastLookahead() :
 }
 
 void PostfixExpression() :
-{}
+{Token t;}
 {
-  PrimaryExpression() [/*@bgen(jjtree) Increment */
+  PrimaryExpression() [/*@bgen(jjtree) IncrementDecrement */
                         {
-                          ASTIncrement jjtn001 = new ASTIncrement(this, JJTINCREMENT);
+                          ASTIncrementDecrement jjtn001 = new ASTIncrementDecrement(this, JJTINCREMENTDECREMENT);
                           boolean jjtc001 = true;
                           jjtree.openNodeScope(jjtn001);
                         }
                         try {
-/*@egen*/ ("++")/*@bgen(jjtree)*/
+/*@egen*/ ({t = getToken(1); } ("++" | "--")/*@bgen(jjtree)*/
+                                                           {
+                                                             jjtree.closeNodeScope(jjtn001, true);
+                                                             jjtc001 = false;
+                                                           }
+/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(1));})/*@bgen(jjtree)*/
                         } finally {
                           if (jjtc001) {
                             jjtree.closeNodeScope(jjtn001, true);
                           }
                         }
-/*@egen*/           |/*@bgen(jjtree) Decrement */
-                                           {
-                                             ASTDecrement jjtn002 = new ASTDecrement(this, JJTDECREMENT);
-                                             boolean jjtc002 = true;
-                                             jjtree.openNodeScope(jjtn002);
-                                           }
-                                           try {
-/*@egen*/ ("--")/*@bgen(jjtree)*/
-                                           } finally {
-                                             if (jjtc002) {
-                                               jjtree.closeNodeScope(jjtn002, true);
-                                             }
-                                           }
-/*@egen*/           ]
+/*@egen*/                    ]
 }
 
 void CastExpression() :
