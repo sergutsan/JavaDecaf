@@ -2162,6 +2162,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   final public void AdditiveExpression() throws ParseException {
     trace_call("AdditiveExpression");
     try {
+ Token t;
       MultiplicativeExpression();
       label_29:
       while (true) {
@@ -2174,17 +2175,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           jj_la1[65] = jj_gen;
           break label_29;
         }
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case PLUS:
-          jj_consume_token(PLUS);
-          break;
-        case MINUS:
-          jj_consume_token(MINUS);
-          break;
-        default:
-          jj_la1[66] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
+                                 ASTAdditiveOperator jjtn001 = new ASTAdditiveOperator(this, JJTADDITIVEOPERATOR);
+                                 boolean jjtc001 = true;
+                                 jjtree.openNodeScope(jjtn001);
+        try {
+                                  t = getToken(1);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case PLUS:
+            jj_consume_token(PLUS);
+            break;
+          case MINUS:
+            jj_consume_token(MINUS);
+            break;
+          default:
+            jj_la1[66] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
+                                                                    jjtree.closeNodeScope(jjtn001, true);
+                                                                    jjtc001 = false;
+                                                                    setFirstLastToken(jjtn001, t, getToken(1));
+        } finally {
+                                 if (jjtc001) {
+                                   jjtree.closeNodeScope(jjtn001, true);
+                                 }
         }
         MultiplicativeExpression();
       }
@@ -2232,7 +2246,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           }
                                                                   jjtree.closeNodeScope(jjtn001, true);
                                                                   jjtc001 = false;
-                                                                  setFirstLastToken(jjtn001, t, getToken(0));
+                                                                  setFirstLastToken(jjtn001, t, getToken(1));
         } finally {
                         if (jjtc001) {
                           jjtree.closeNodeScope(jjtn001, true);
@@ -2248,34 +2262,20 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   final public void UnaryExpression() throws ParseException {
     trace_call("UnaryExpression");
     try {
- Token t;
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case PLUS:
       case MINUS:
-    ASTUnaryOperator jjtn001 = new ASTUnaryOperator(this, JJTUNARYOPERATOR);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-        try {
-     t = getToken(1);
-          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case PLUS:
-            jj_consume_token(PLUS);
-            break;
-          case MINUS:
-            jj_consume_token(MINUS);
-            break;
-          default:
-            jj_la1[69] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-          }
-                                        jjtree.closeNodeScope(jjtn001, true);
-                                        jjtc001 = false;
-                                        setFirstLastToken(jjtn001, t, getToken(0));
-        } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case PLUS:
+          jj_consume_token(PLUS);
+          break;
+        case MINUS:
+          jj_consume_token(MINUS);
+          break;
+        default:
+          jj_la1[69] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
         }
         UnaryExpression();
         break;
@@ -6246,17 +6246,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_190() {
-    if (jj_3R_197()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_169() {
-    if (jj_scan_token(DECR)) return true;
-    if (jj_3R_57()) return true;
-    return false;
-  }
-
   private boolean jj_3R_236() {
     Token xsp;
     xsp = jj_scanpos;
@@ -6265,6 +6254,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_scan_token(95)) return true;
     }
     if (jj_3R_220()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_190() {
+    if (jj_3R_197()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_169() {
+    if (jj_scan_token(DECR)) return true;
+    if (jj_3R_57()) return true;
     return false;
   }
 

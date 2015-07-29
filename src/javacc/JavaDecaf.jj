@@ -1336,9 +1336,27 @@ void ShiftExpression() :
 }
 
 void AdditiveExpression() :
-{}
+{Token t;}
 {
-  MultiplicativeExpression() ( ( "+" | "-" ) MultiplicativeExpression() )*
+  MultiplicativeExpression() (/*@bgen(jjtree) AdditiveOperator */
+                               {
+                                 ASTAdditiveOperator jjtn001 = new ASTAdditiveOperator(this, JJTADDITIVEOPERATOR);
+                                 boolean jjtc001 = true;
+                                 jjtree.openNodeScope(jjtn001);
+                               }
+                               try {
+/*@egen*/ ({ t = getToken(1); } ( "+" | "-" )/*@bgen(jjtree)*/
+                                                                  {
+                                                                    jjtree.closeNodeScope(jjtn001, true);
+                                                                    jjtc001 = false;
+                                                                  }
+/*@egen*/{ setFirstLastToken(jjtn001, t, getToken(1));})/*@bgen(jjtree)*/
+                               } finally {
+                                 if (jjtc001) {
+                                   jjtree.closeNodeScope(jjtn001, true);
+                                 }
+                               }
+/*@egen*/                  MultiplicativeExpression() )*
 }
 
 void MultiplicativeExpression() :
@@ -1356,7 +1374,7 @@ void MultiplicativeExpression() :
                                                                   jjtree.closeNodeScope(jjtn001, true);
                                                                   jjtc001 = false;
                                                                 }
-/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(0));})/*@bgen(jjtree)*/
+/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(1));})/*@bgen(jjtree)*/
                       } finally {
                         if (jjtc001) {
                           jjtree.closeNodeScope(jjtn001, true);
@@ -1366,27 +1384,9 @@ void MultiplicativeExpression() :
 }
 
 void UnaryExpression() :
-{Token t;}
-{/*@bgen(jjtree) UnaryOperator */
-  {
-    ASTUnaryOperator jjtn001 = new ASTUnaryOperator(this, JJTUNARYOPERATOR);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-  }
-  try {
-/*@egen*/
-  ({ t = getToken(1); } ( "+" | "-" )/*@bgen(jjtree)*/
-                                      {
-                                        jjtree.closeNodeScope(jjtn001, true);
-                                        jjtc001 = false;
-                                      }
-/*@egen*/ { setFirstLastToken(jjtn001, t, getToken(0));})/*@bgen(jjtree)*/
-  } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-  }
-/*@egen*/               UnaryExpression()
+{}
+{
+  ( "+" | "-" ) UnaryExpression()
 |
   PreIncrementExpression()
 |

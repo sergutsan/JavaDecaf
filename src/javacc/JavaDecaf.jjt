@@ -835,21 +835,21 @@ void ShiftExpression() :
 }
 
 void AdditiveExpression() :
-{}
+{Token t;}
 {
-  MultiplicativeExpression() ( ( "+" | "-" ) MultiplicativeExpression() )*
+  MultiplicativeExpression() ( ({ t = getToken(1); } ( "+" | "-" ){ setFirstLastToken(jjtThis, t, getToken(1));})#AdditiveOperator MultiplicativeExpression() )*
 }
 
 void MultiplicativeExpression() :
 {Token t;}
 {
-  UnaryExpression() ( ({ t = getToken(1); } ( "*" | "/" | "%" ) { setFirstLastToken(jjtThis, t, getToken(0));})#MultiplicativeOperator UnaryExpression() )*
+  UnaryExpression() ( ({ t = getToken(1); } ( "*" | "/" | "%" ) { setFirstLastToken(jjtThis, t, getToken(1));})#MultiplicativeOperator UnaryExpression() )*
 }
 
 void UnaryExpression() :
-{Token t;}
+{}
 {
-  ({ t = getToken(1); } ( "+" | "-" ) { setFirstLastToken(jjtThis, t, getToken(0));})#UnaryOperator UnaryExpression()
+  ( "+" | "-" ) UnaryExpression()
 |
   PreIncrementExpression()
 |

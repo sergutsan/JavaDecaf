@@ -24,8 +24,8 @@ public interface JDCParserTreeConstants
   public int JJTCONDITIONALAND = 16;
   public int JJTEQUALITYOPERATOR = 17;
   public int JJTRELATIONALOPERATOR = 18;
-  public int JJTMULTIPLICATIVEOPERATOR = 19;
-  public int JJTUNARYOPERATOR = 20;
+  public int JJTADDITIVEOPERATOR = 19;
+  public int JJTMULTIPLICATIVEOPERATOR = 20;
   public int JJTINCREMENT = 21;
   public int JJTDECREMENT = 22;
   public int JJTPRIMARYEXPRESSION = 23;
@@ -78,8 +78,8 @@ public interface JDCParserTreeConstants
     "ConditionalAnd",
     "EqualityOperator",
     "RelationalOperator",
+    "AdditiveOperator",
     "MultiplicativeOperator",
-    "UnaryOperator",
     "Increment",
     "Decrement",
     "PrimaryExpression",
@@ -112,4 +112,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=4d9d360d4d2e5da910c5d8ad2015b9fa (do not edit this line) */
+/* JavaCC - OriginalChecksum=10e052744ce999dedf1cd2aa0628d91e (do not edit this line) */
