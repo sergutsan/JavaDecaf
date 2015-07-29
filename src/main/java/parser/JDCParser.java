@@ -199,7 +199,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(0);
                   jjtree.closeNodeScope(jjtn000, true);
                   jjtc000 = false;
-          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
                   {if (true) return jjtn000;}
     } catch (Throwable jjte000) {

@@ -401,7 +401,7 @@ ASTCompilationUnit CompilationUnit()                  :
                 }
 /*@egen*/
 		{
-          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
 		  return jjtn000;
 		}/*@bgen(jjtree)*/
