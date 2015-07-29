@@ -1627,7 +1627,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   final public void ConditionalOrExpression() throws ParseException {
- Token t;
+ Token t = null;
     ConditionalAndExpression();
                                ASTConditionalOr jjtn001 = new ASTConditionalOr(this, JJTCONDITIONALOR);
                                boolean jjtc001 = true;
@@ -1672,7 +1672,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   }
 
   final public void ConditionalAndExpression() throws ParseException {
- Token t;
+ Token t = null;
     InclusiveOrExpression();
     ASTConditionalAnd jjtn001 = new ASTConditionalAnd(this, JJTCONDITIONALAND);
     boolean jjtc001 = true;

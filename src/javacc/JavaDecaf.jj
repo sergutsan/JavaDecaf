@@ -1113,7 +1113,7 @@ void ConditionalExpression() :
 }
 
 void ConditionalOrExpression() :
-{Token t;}
+{Token t = null;}
 {
   ConditionalAndExpression()/*@bgen(jjtree) ConditionalOr */
                              {
@@ -1158,7 +1158,7 @@ void ConditionalOrExpression() :
 }
 
 void ConditionalAndExpression() :
-{Token t;}
+{Token t = null;}
 {
   InclusiveOrExpression()/*@bgen(jjtree) ConditionalAnd */
   {

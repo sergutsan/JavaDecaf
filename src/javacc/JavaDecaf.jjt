@@ -756,7 +756,7 @@ void ConditionalExpression() :
 }
 
 void ConditionalOrExpression() :
-{Token t;}
+{Token t = null;}
 {
   ConditionalAndExpression() (
   ({
@@ -769,7 +769,7 @@ void ConditionalOrExpression() :
 }
 
 void ConditionalAndExpression() :
-{Token t;}
+{Token t = null;}
 {
   InclusiveOrExpression()
   ({
