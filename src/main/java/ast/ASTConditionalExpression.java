@@ -40,10 +40,12 @@ class ASTConditionalExpression extends SimpleNode {
 
     }
     /*
-      If the parent node is a SemicolonSimpleNode, and the next token is a semicolon, replace the
+      If the parent node is a SemicolonSimpleNode or grandparent is StatementExpression, and the next token is a semicolon, replace the
       end token with a blank token to avoid double semicolons in field declarations
      */
-    if (jjtGetParent() instanceof SemicolonSimpleNode && begin.next.image.equals(";")) {
+    if ((jjtGetParent() instanceof SemicolonSimpleNode
+            || jjtGetParent().jjtGetParent() instanceof ASTStatementExpression)
+            && begin.next.image.equals(";")) {
       begin.next.image = "";
     }
     super.process(ostr);
