@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTArguments extends ASTStatementExpression {
+class ASTArguments extends SimpleNode implements LastTokenEater {
   public ASTArguments(int id) {
     super(id);
   }
