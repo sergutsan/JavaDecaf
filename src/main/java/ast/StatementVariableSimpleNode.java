@@ -9,7 +9,7 @@ import java.io.PrintWriter;
  * This class deals with all the substitutions in the blocks of methods, loops etc.
  * @author Sophie Koonin
  */
-public class StatementVariableSimpleNode extends SimpleNode implements Indentable {
+public class StatementVariableSimpleNode extends SemicolonSimpleNode implements Indentable {
     public StatementVariableSimpleNode(int id) {
         super(id);
     }
