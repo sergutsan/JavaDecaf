@@ -32,9 +32,7 @@ public class StatementVariableSimpleNode extends SimpleNode implements Indentabl
             prevToken = t.image;
             t = t.next;
         }
-        Token lastToken = end; //Assign value of end to lastToken before end is reassigned in super.process
         super.process(ostr);
-        print(lastToken, ostr); //manually print last token.
 
     }
 

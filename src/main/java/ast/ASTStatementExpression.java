@@ -16,5 +16,11 @@ class ASTStatementExpression extends StatementVariableSimpleNode {
   public ASTStatementExpression(JDCParser p, int id) {
     super(p, id);
   }
+
+  public void process(PrintWriter ostr) {
+    Token lastToken = Token.newToken(0,end.image); //Assign value of end to lastToken before end is reassigned in super.process
+    super.process(ostr);
+    print(lastToken, ostr); //Manually print last token
+  }
 }
 /* JavaCC - OriginalChecksum=e873b876e7f466c17fe124d220aedcae (do not edit this line) */
