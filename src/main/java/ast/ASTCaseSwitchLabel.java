@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTCaseSwitchLabel extends SimpleNode implements IndentationContainer, Indentable {
+class ASTCaseSwitchLabel extends SimpleNode implements IndentationContainer, Indentable, LastTokenEater {
   public ASTCaseSwitchLabel(int id) {
     super(id);
   }
