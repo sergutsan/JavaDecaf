@@ -384,6 +384,8 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   )
   <EOF>
 		{
+          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+
 		  return jjtThis;
 		}
 }

@@ -401,6 +401,9 @@ ASTCompilationUnit CompilationUnit()                  :
                 }
 /*@egen*/
 		{
+		   
+                ((SimpleNode)jjtree.rootNode()).dump(">");
+
 		  return jjtn000;
 		}/*@bgen(jjtree)*/
                 } catch (Throwable jjte000) {
