@@ -27,21 +27,22 @@ public interface JDCParserTreeConstants
   public int JJTCASESWITCHLABEL = 19;
   public int JJTDEFAULTSWITCHLABEL = 20;
   public int JJTIFSTATEMENT = 21;
-  public int JJTELSESTATEMENT = 22;
-  public int JJTWHILESTATEMENT = 23;
-  public int JJTDOSTATEMENT = 24;
-  public int JJTWHILEAFTERDO = 25;
-  public int JJTFORSEMICOLON = 26;
-  public int JJTFORBLOCK = 27;
-  public int JJTFORSTATEMENT = 28;
-  public int JJTBREAKSTATEMENT = 29;
-  public int JJTRETURNSTATEMENT = 30;
-  public int JJTCATCH = 31;
-  public int JJTFINALLY = 32;
-  public int JJTTRY = 33;
-  public int JJTDECAFCLASS = 34;
-  public int JJTDECAFMAIN = 35;
-  public int JJTDECAFMETHOD = 36;
+  public int JJTELSEIFSTATEMENT = 22;
+  public int JJTELSESTATEMENT = 23;
+  public int JJTWHILESTATEMENT = 24;
+  public int JJTDOSTATEMENT = 25;
+  public int JJTWHILEAFTERDO = 26;
+  public int JJTFORSEMICOLON = 27;
+  public int JJTFORBLOCK = 28;
+  public int JJTFORSTATEMENT = 29;
+  public int JJTBREAKSTATEMENT = 30;
+  public int JJTRETURNSTATEMENT = 31;
+  public int JJTCATCH = 32;
+  public int JJTFINALLY = 33;
+  public int JJTTRY = 34;
+  public int JJTDECAFCLASS = 35;
+  public int JJTDECAFMAIN = 36;
+  public int JJTDECAFMETHOD = 37;
 
 
   public String[] jjtNodeName = {
@@ -67,6 +68,7 @@ public interface JDCParserTreeConstants
     "CaseSwitchLabel",
     "DefaultSwitchLabel",
     "IfStatement",
+    "ElseIfStatement",
     "ElseStatement",
     "WhileStatement",
     "DoStatement",
@@ -84,4 +86,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=fc02738a15dde07a84aa20489cea49a6 (do not edit this line) */
+/* JavaCC - OriginalChecksum=816ad6dd183da2a8e7258301640b1fdf (do not edit this line) */

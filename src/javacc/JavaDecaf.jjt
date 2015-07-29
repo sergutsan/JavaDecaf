@@ -1165,8 +1165,17 @@ void IfStatement() :
   "if" "(" Expression() ")" Block()   {
                                        setFirstLastToken(jjtThis, t, rbrace);
                                        })#IfStatement
-                                       [ LOOKAHEAD(1) (
+                                       [
+
+                                      (LOOKAHEAD(2) ({
+                                        t = getToken(1);
+                                        }
+                                        "else" "if" "(" Expression() ")" Block()
                                        {
+                                          setFirstLastToken(jjtThis, t, rbrace);
+                                          })#ElseIfStatement )*
+
+                                       ({
                                        t = getToken(1);
                                        }
                                        "else" Block()
