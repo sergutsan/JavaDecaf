@@ -212,7 +212,7 @@ public class SimpleNode implements Node {
             ASTUtils.indent(t, this);
         }
 
-        Token lastToken;
+        Token lastToken = null;
             if (this instanceof LastTokenEater && end != null) {
                 lastToken = Token.newToken(0,end.image); //Assign value of end to lastToken before end is reassigned
             }
