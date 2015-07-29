@@ -7,7 +7,7 @@ public class TestNestedClass {
         Person p = new Person("Fred");
     }
 
-    class Person {
+    static class Person {
         private String name;
 
         public Person(String name) {
