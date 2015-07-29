@@ -384,7 +384,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   )
   <EOF>
 		{
-          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
 		  return jjtThis;
 		}
@@ -1194,10 +1194,10 @@ void WhileAfterDo() :
 {Token t;}
 {
 ({ t = getToken(1); }
-"while" "(" Expression() ")" ";"
+"while" "(" Expression() ")"
 {
     setFirstLastToken(jjtThis, t, getToken(0));
-})#WhileAfterDo
+})#WhileAfterDo ";"
 }
 
 void ForStatement() :

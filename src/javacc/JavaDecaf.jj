@@ -401,7 +401,7 @@ ASTCompilationUnit CompilationUnit()                  :
                 }
 /*@egen*/
 		{
-          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
 		  return jjtn000;
 		}/*@bgen(jjtree)*/
@@ -1896,7 +1896,7 @@ void WhileAfterDo() :
 try {
 /*@egen*/
 ({ t = getToken(1); }
-"while" "(" Expression() ")" ";"/*@bgen(jjtree)*/
+"while" "(" Expression() ")"/*@bgen(jjtree)*/
 {
   jjtree.closeNodeScope(jjtn001, true);
   jjtc001 = false;
@@ -1924,7 +1924,7 @@ try {
     jjtree.closeNodeScope(jjtn001, true);
   }
 }
-/*@egen*/             
+/*@egen*/              ";"
 }
 
 void ForStatement() :

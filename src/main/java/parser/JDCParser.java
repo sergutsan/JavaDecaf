@@ -199,7 +199,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(0);
                   jjtree.closeNodeScope(jjtn000, true);
                   jjtc000 = false;
-          ((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
+          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
 
                   {if (true) return jjtn000;}
     } catch (Throwable jjte000) {
@@ -3014,7 +3014,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       jj_consume_token(LPAREN);
       Expression();
       jj_consume_token(RPAREN);
-      jj_consume_token(SEMICOLON);
   jjtree.closeNodeScope(jjtn001, true);
   jjtc001 = false;
     setFirstLastToken(jjtn001, t, getToken(0));
@@ -3037,6 +3036,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     jjtree.closeNodeScope(jjtn001, true);
   }
     }
+    jj_consume_token(SEMICOLON);
   }
 
   final public void ForStatement() throws ParseException {
