@@ -33,7 +33,7 @@ options {
   JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
   NODE_USES_PARSER = true; //pass parser object into node constructors
-  DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
   STATIC = false;
   NODE_PACKAGE = "main.java.ast";
   OUTPUT_DIRECTORY = "../main/java/parser";
