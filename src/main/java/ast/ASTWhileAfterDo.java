@@ -16,10 +16,5 @@ class ASTWhileAfterDo extends SimpleNode implements LastTokenEater, FinalSemicol
     super(p, id);
   }
 
-  @Override
-  public void process(PrintWriter ostr) {
-    super.process(ostr);
-    ostr.print(";"); //Manually print last semicolon
-  }
 }
 /* JavaCC - OriginalChecksum=5bad422ec74a354f7e5227f28e0538c8 (do not edit this line) */
