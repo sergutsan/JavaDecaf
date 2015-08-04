@@ -4,8 +4,10 @@ package main.java.ast;
 
 import main.java.parser.*;
 
+import java.io.PrintWriter;
+
 public
-class ASTForSemicolon extends SemicolonSimpleNode {
+class ASTForSemicolon extends SimpleNode {
   public ASTForSemicolon(int id) {
     super(id);
   }
@@ -14,5 +16,8 @@ class ASTForSemicolon extends SemicolonSimpleNode {
     super(p, id);
   }
 
+  public void process(PrintWriter ostr) {
+    ostr.print(";");
+  }
 }
 /* JavaCC - OriginalChecksum=6dd1f30d923f431053fb3f6897d897c3 (do not edit this line) */
