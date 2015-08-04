@@ -259,6 +259,11 @@ public class SimpleNode implements Node {
         if (this instanceof LastTokenEater) {
             print(lastToken, ostr); //Manually print last token
         }
+
+        /* Print any missing semicolons */
+        if (this instanceof FinalSemicolonEater) {
+            ostr.print(";");
+        }
     }
 
     /**
