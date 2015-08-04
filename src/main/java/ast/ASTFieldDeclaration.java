@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTFieldDeclaration extends SemicolonSimpleNode implements Indentable {
+class ASTFieldDeclaration extends SimpleNode implements Indentable, LastTokenEater {
   public ASTFieldDeclaration(int id) {
     super(id);
   }

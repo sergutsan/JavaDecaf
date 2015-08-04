@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 public
-class ASTPackageDeclaration extends SemicolonSimpleNode {
+class ASTPackageDeclaration extends SimpleNode implements LastTokenEater {
   public ASTPackageDeclaration(int id) {
     super(id);
   }
