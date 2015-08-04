@@ -111,7 +111,7 @@ public class ASTUtils {
          - need to account for this to prevent unnecessary warnings
          */
         if (node.isDecafClass()) {
-            if (node.isDecafMethod()){
+            if (!node.isDecafMethod()){
                 expectedIndentation-=1;
             }
             expectedIndentation -= 1;
