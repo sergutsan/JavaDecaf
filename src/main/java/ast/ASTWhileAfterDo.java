@@ -7,13 +7,19 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTWhileAfterDo extends SemicolonSimpleNode implements LastTokenEater {
+class ASTWhileAfterDo extends SimpleNode implements LastTokenEater, FinalSemicolonEater {
   public ASTWhileAfterDo(int id) {
     super(id);
   }
 
   public ASTWhileAfterDo(JDCParser p, int id) {
     super(p, id);
+  }
+
+  @Override
+  public void process(PrintWriter ostr) {
+    super.process(ostr);
+    ostr.print(";"); //Manually print last semicolon
   }
 }
 /* JavaCC - OriginalChecksum=5bad422ec74a354f7e5227f28e0538c8 (do not edit this line) */
