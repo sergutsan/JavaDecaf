@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTDecafMethod extends SimpleNode implements IndentationContainer {
+class ASTDecafMethod extends SimpleNode {
     public ASTDecafMethod(int id) {
         super(id);
     }
