@@ -116,7 +116,7 @@ public class ParseException extends Exception {
         }
       retval += add_escapes(nextToken.image); //print the offending token
     }
-    retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
+    retval += "\" at line " + currentToken.endLine + ", column " + currentToken.endColumn;
     retval += "." + eol;
 
       /* check reason for error - SK */
