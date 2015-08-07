@@ -72,7 +72,7 @@ public class JDCParser {
     */
     private static void isLegalMethodName(Token t) throws ParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
-            throw new ParseException(t, "method");
+            throw new MethodNameException(t);
         }
     }
 
@@ -83,7 +83,7 @@ public class JDCParser {
         */
     private static void isLegalClassName(Token t) throws ClassnameException {
             if (Character.isLowerCase(t.image.charAt(0))){
-                throw new ClassnameException(t);
+                throw new ClassNameException(t);
             }
         }
     /**
@@ -100,7 +100,7 @@ public class JDCParser {
                     }
                 }
                 if (lowerCount != 0) {
-                     throw new ParseException(t, "variable");
+                     throw new VariableNameException(t);
                 }
 
 
