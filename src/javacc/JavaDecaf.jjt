@@ -157,7 +157,6 @@ SPECIAL_TOKEN : /* COMMENTS */
 | <MULTI_LINE_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 }
 
-
 TOKEN : /* RESERVED WORDS AND LITERALS */
 {
   < ABSTRACT: "abstract" >
@@ -1196,32 +1195,32 @@ void IfStatement() :
  */
 {
     Token t;
-    }
+}
 {
-  (
-  {
+  ({
     t = getToken(1);
   }
-  "if" "(" Expression() ")" Block()   {
-                                       setFirstLastToken(jjtThis, t, rbrace);
-                                       })#IfStatement
-                                       [
+  "if" "(" Expression() ")" Block()
+    {
+        setFirstLastToken(jjtThis, t, getToken(0));
+    })#IfStatement
 
-                                      (LOOKAHEAD(2) ({
-                                        t = getToken(1);
-                                        }
-                                        "else" "if" "(" Expression() ")" Block()
-                                       {
-                                          setFirstLastToken(jjtThis, t, rbrace);
-                                          })#ElseIfStatement )*
+   [(LOOKAHEAD(2)
+   ({
+    t = getToken(1);
+    }
+    "else" "if" "(" Expression() ")" Block()
+   {
+      setFirstLastToken(jjtThis, t, getToken(0));
+   })#ElseIfStatement )*
 
-                                       ({
-                                       t = getToken(1);
-                                       }
-                                       "else" Block()
-                                       {
-                                        setFirstLastToken(jjtThis, t, rbrace);
-                                        })#ElseStatement ]
+   ({
+   t = getToken(1);
+   }
+   "else" Block()
+   {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })#ElseStatement ]
      //Do not permit braceless statements - SK
 
 
