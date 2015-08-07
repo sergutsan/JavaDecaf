@@ -87,8 +87,8 @@ public class JDCParser {
             }
         }
     /**
-        *  Test whether a given identifier is a legal variable name: must begin with lower case letter.
-        * This does not allow variable names in capitals e.g. constant names.
+        *  Test whether a given identifier is a legal variable name: must begin with lower case letter
+        * unless the variable is in all caps (constant name)
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
@@ -100,6 +100,8 @@ public class JDCParser {
                         lowerCount++;
                     }
                 }
+                /* if the first letter is a capital and there are lower case letters in the rest of the name,
+                    throw an exception */
                 if (lowerCount != 0) {
                      throw new VariableNameParseException(t);
                 }
