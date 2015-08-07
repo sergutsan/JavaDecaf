@@ -48,12 +48,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         }
     /**
         *  Test whether a given identifier is a legal variable name: must begin with lower case letter
-        * unless the variable is final
+        * unless the variable is in all caps (constant name)
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    private static void isLegalVariableName(Token thisToken) throws ParseException {
-            if (Character.isUpperCase(thisToken.image.charAt(0))) {
+    private static void isLegalVariableName(Token t) throws ParseException {
+            if (Character.isUpperCase(t.image.charAt(0))) {
                 int lowerCount = 0;
                 for (char c: t.image.toCharArray()) {
                     if (Character.isLowerCase(c)) {
@@ -62,7 +62,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
                 }
                 /* if the first letter is a capital and there are lower case letters in the rest of the name,
                     throw an exception */
-                if (lowerCount != 0 ) {
+                if (lowerCount != 0) {
                      throw new VariableNameParseException(t);
                 }
 
