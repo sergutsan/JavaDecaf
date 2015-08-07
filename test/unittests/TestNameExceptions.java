@@ -1,4 +1,4 @@
-package style;
+package unittests;
 
 import main.java.parser.*;
 import org.junit.*;
