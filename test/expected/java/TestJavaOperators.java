@@ -12,7 +12,7 @@ public class TestJavaOperators {
         int q = i > j ? i : j;
         int r = i <= j ? i : j;
         int s = i <= j ? i : j;
-        int t = i == j? i : j;
-        int u = i != j? i : j;
+        int t = i == j ? i : j;
+        int u = i != j ? i : j;
     }
 }
