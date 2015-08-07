@@ -3,10 +3,10 @@ package main.java.parser;
 /**
  * Exception thrown when classname is not acceptable according to Java convention.
  */
-public class ClassNameException extends ParseException {
+public class ClassNameParseException extends ParseException {
     protected static final String EOL = System.getProperty("line.separator", "\n");
 
-    public ClassNameException(Token t){
+    public ClassNameParseException(Token t){
         super(initMessage(t));
     }
 

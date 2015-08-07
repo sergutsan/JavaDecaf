@@ -43,7 +43,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         */
     private static void isLegalClassName(Token t) throws ClassnameException {
             if (Character.isLowerCase(t.image.charAt(0))){
-                throw new ClassNameException(t);
+                throw new ClassNameParseException(t);
             }
         }
     /**
