@@ -56,15 +56,6 @@ public class ParseException extends Exception {
     super(message);
   }
 
-    /** Constructor with token and reason code. Thrown by invalid
-     * variable, method or class names in JDCParser. SK
-     * @param t - the offending token
-     * @param reason - string value of reason for exception
-     */
-    public ParseException(Token t, String reason) {
-        super(initWithReason(t, reason));
-
-    }
   /**
    * This is the last token that has been consumed successfully.  If
    * this object has been created due to a parse error, the token
@@ -227,30 +218,7 @@ public class ParseException extends Exception {
         }
         return retval;
     }
-    /**
-     * Initialise the exception with a reason code
-     * @param t - the offending token
-     * @param reason - the reason for the exception being thrown
-     * @return error message
-     * SK
-     */
-    private static String initWithReason(Token t, String reason){
-        String retval = "Encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn + "." + EOL;
-        switch (reason) {
-            case "method" : /* Bad method name */
-                retval += "Method names should begin with a lower case letter. They should also be verbs. e.g.:" + EOL +
-                        "getNumber()" + EOL + "update()"+ EOL + "reverseString()" + EOL + "increment()";
-                break;
-            case "variable" : /* Bad variable name */
-                retval += "Variable names should begin with a lower case letter. They should also be nouns. e.g.:" + EOL +
-                        "int myNum" + EOL + "String name" + EOL + "Person person1" + EOL + "int maxSize";
-                break;
-            case "class" : /* Bad class name */
-                retval += "Class names should begin with a capital letter. They should also be nouns. e.g.:" + EOL +
-                        "class Person" + EOL + "class FractionCalculator" + EOL + "class FlyingAnimal";
-        }
-        return retval;
-    }
+
     /**
      * Check to see if a token is a reserved keyword
      * @return true if token is a reserved keyword, otherwise false
