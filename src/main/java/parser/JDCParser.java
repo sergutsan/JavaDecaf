@@ -30,7 +30,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
-    private static void isLegalMethodName(Token t) throws ParseException {
+    private static void isLegalMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
             throw new MethodNameParseException(t);
         }
@@ -41,7 +41,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * Throw ClassNameParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    private static void isLegalClassName(Token t) throws Parse {
+    private static void isLegalClassName(Token t) throws ClassNameParseException {
             if (Character.isLowerCase(t.image.charAt(0))){
                 throw new ClassNameParseException(t);
             }
@@ -52,7 +52,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    private static void isLegalVariableName(Token t) throws ParseException {
+    private static void isLegalVariableName(Token t) throws VariableNameParseException {
             if (Character.isUpperCase(t.image.charAt(0))) {
                 int lowerCount = 0;
                 for (char c: t.image.toCharArray()) {
