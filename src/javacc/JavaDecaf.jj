@@ -76,7 +76,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
-    public static void isLegalMethodName(Token t) throws MethodNameParseException {
+    public static void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
             throw new MethodNameParseException(t);
         }
@@ -87,7 +87,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
         * Throw ClassNameParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    public static void isLegalClassName(Token t) throws ClassNameParseException {
+    public static void checkClassName(Token t) throws ClassNameParseException {
             if (Character.isLowerCase(t.image.charAt(0))){
                 throw new ClassNameParseException(t);
             }
@@ -98,7 +98,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    public static void isLegalVariableName(Token t) throws VariableNameParseException {
+    public static void checkVariableName(Token t) throws VariableNameParseException {
             if (Character.isUpperCase(t.image.charAt(0))) {
                 int lowerCount = 0;
                 for (char c: t.image.toCharArray()) {
@@ -580,7 +580,7 @@ void ClassDeclaration() :
 void UnmodifiedClassDeclaration() :
 {}
 {
-  "class" <IDENTIFIER> { isLegalClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
+  "class" <IDENTIFIER> { checkClassName(getToken(0)); } [ "extends" Name() ] [ "implements" NameList() ]
   ClassBody()
 }
 
@@ -661,7 +661,7 @@ void MethodDeclarationLookahead() :
 {}
 {
   ( "public" | "protected" | "private" | "static" | "abstract" | "final" | "native" | "synchronized" )*
-  ResultType() <IDENTIFIER> { isLegalMethodName(getToken(0)); //test the method name
+  ResultType() <IDENTIFIER> { checkMethodName(getToken(0)); //test the method name
    } "("
 }
 
@@ -792,7 +792,7 @@ void VariableDeclarator() :
 void VariableDeclaratorId() :
 {}
 {
-  <IDENTIFIER> {isLegalVariableName(getToken(0));} ( "[" "]" )*
+  <IDENTIFIER> { checkVariableName(getToken(0)); } ( "[" "]" )*
 }
 
 void VariableInitializer() :
@@ -912,7 +912,7 @@ void MethodDeclarator() :
 {}
 {
   <IDENTIFIER> {
-  isLegalMethodName(getToken(0)); //test the method name
+  checkMethodName(getToken(0)); //test the method name
                   }
   FormalParameters() ( "[" "]" )*
 }

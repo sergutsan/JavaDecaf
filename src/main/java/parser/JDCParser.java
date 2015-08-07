@@ -30,7 +30,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
-    public static void isLegalMethodName(Token t) throws MethodNameParseException {
+    public static void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
             throw new MethodNameParseException(t);
         }
@@ -41,7 +41,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * Throw ClassNameParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    public static void isLegalClassName(Token t) throws ClassNameParseException {
+    public static void checkClassName(Token t) throws ClassNameParseException {
             if (Character.isLowerCase(t.image.charAt(0))){
                 throw new ClassNameParseException(t);
             }
@@ -52,7 +52,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    public static void isLegalVariableName(Token t) throws VariableNameParseException {
+    public static void checkVariableName(Token t) throws VariableNameParseException {
             if (Character.isUpperCase(t.image.charAt(0))) {
                 int lowerCount = 0;
                 for (char c: t.image.toCharArray()) {
@@ -390,7 +390,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   final public void UnmodifiedClassDeclaration() throws ParseException {
     jj_consume_token(CLASS);
     jj_consume_token(IDENTIFIER);
-                         isLegalClassName(getToken(0));
+                         checkClassName(getToken(0));
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case EXTENDS:
       jj_consume_token(EXTENDS);
@@ -614,7 +614,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
     ResultType();
     jj_consume_token(IDENTIFIER);
-                              isLegalMethodName(getToken(0)); //test the method name
+                              checkMethodName(getToken(0)); //test the method name
 
     jj_consume_token(LPAREN);
   }
@@ -909,7 +909,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   final public void VariableDeclaratorId() throws ParseException {
     jj_consume_token(IDENTIFIER);
-                isLegalVariableName(getToken(0));
+                 checkVariableName(getToken(0));
     label_12:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1147,7 +1147,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   final public void MethodDeclarator() throws ParseException {
     jj_consume_token(IDENTIFIER);
-  isLegalMethodName(getToken(0)); //test the method name
+  checkMethodName(getToken(0)); //test the method name
 
     FormalParameters();
     label_15:
@@ -5592,12 +5592,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_147() {
-    if (jj_scan_token(EXTENDS)) return true;
-    if (jj_3R_51()) return true;
-    return false;
-  }
-
   private boolean jj_3R_140() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
@@ -5611,6 +5605,12 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     if (jj_3R_244()) jj_scanpos = xsp;
     if (jj_scan_token(RPAREN)) return true;
     if (jj_3R_69()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_147() {
+    if (jj_scan_token(EXTENDS)) return true;
+    if (jj_3R_51()) return true;
     return false;
   }
 
