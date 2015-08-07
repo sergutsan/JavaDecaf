@@ -5,3 +5,4 @@ public class TestJavaPrimitiveArray1D {
         int[] numbers2 = new int[5];
         numbers2[3] = 4;
     }
+}
