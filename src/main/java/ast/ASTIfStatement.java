@@ -5,7 +5,7 @@ package main.java.ast;
 import main.java.parser.JDCParser;
 
 public
-class ASTIfStatement extends ConditionalSimpleNode {
+class ASTIfStatement extends IndentableConditionalSimpleNode {
   public ASTIfStatement(int id) {
     super(id);
   }

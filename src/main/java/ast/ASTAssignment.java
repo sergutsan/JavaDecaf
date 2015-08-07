@@ -21,7 +21,7 @@ class ASTAssignment extends SimpleNode {
     Token t = begin;
 
     while (t != null) {
-      if (t.image.equals("=") && jjtGetParent() instanceof ConditionalSimpleNode) {
+      if (t.image.equals("=") && jjtGetParent() instanceof IndentableConditionalSimpleNode) {
         String warning = "You have used assignment operator \'=\' in a loop condition. \nTo check for equality, use double equals \'==\'.";
         StyleWarnings.generateWarning(t, parser, warning);
       }

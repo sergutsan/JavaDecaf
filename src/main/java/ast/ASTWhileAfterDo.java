@@ -7,7 +7,7 @@ import main.java.parser.*;
 import java.io.PrintWriter;
 
 public
-class ASTWhileAfterDo extends SimpleNode implements LastTokenEater, FinalSemicolonEater {
+class ASTWhileAfterDo extends ConditionalSimpleNode implements LastTokenEater {
   public ASTWhileAfterDo(int id) {
     super(id);
   }

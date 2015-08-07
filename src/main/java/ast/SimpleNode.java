@@ -244,7 +244,7 @@ public class SimpleNode implements Node {
             if (i == 0) {
             /* Prevent loss of parenthesis in loop conditions - print it after the ConditionalExpression
             * but before the Block */
-                if ((this instanceof ConditionalSimpleNode || this instanceof ASTElseIfStatement))  {
+                if (this instanceof ConditionalSimpleNode)  {
                     ostr.print(")");
                 }
             /* Prevent loss of parenthesis and opening brace in switch statements - print it after the ConditionalExpression
