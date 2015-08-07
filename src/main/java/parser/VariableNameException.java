@@ -3,7 +3,7 @@ package main.java.parser;
 /**
  * Exception thrown when variable name is not acceptable according to Java convention.
  */
-public class VariableNameException extends Exception {
+public class VariableNameException extends ParseException {
     protected static final String EOL = System.getProperty("line.separator", "\n");
 
     public VariableNameException(Token t){
