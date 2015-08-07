@@ -54,7 +54,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
 
 /*@egen*/
     private List<String> warnings = new ArrayList<String>(); // list of warnings
-    private Token rbrace = Token.newToken(73, "}");
     private String className;
 
 /* Constructor with className calls normal constructor. */
@@ -2253,7 +2252,7 @@ void WhileStatement() :
      }
 /*@egen*/ //Do not permit braceless statements - SK
      {
-        setFirstLastToken(jjtn001, t, getToken(0)); //RBRACE
+        setFirstLastToken(jjtn001, t, getToken(0));
      })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {
@@ -2296,7 +2295,7 @@ void DoStatement() :
                  jjtc001 = false;
                }
 /*@egen*/ {
-    setFirstLastToken(jjtn001, t, rbrace); //RBRACE
+    setFirstLastToken(jjtn001, t, getToken(0));
                 })/*@bgen(jjtree)*/
   } catch (Throwable jjte001) {
     if (jjtc001) {

@@ -48,7 +48,6 @@ import java.util.ArrayList;
 
 public class JDCParser {
     private List<String> warnings = new ArrayList<String>(); // list of warnings
-    private Token rbrace = Token.newToken(73, "}");
     private String className;
 
 /* Constructor with className calls normal constructor. */
@@ -1235,7 +1234,7 @@ void WhileStatement() :
    }
   "while" "(" Expression() ")" Block() //Do not permit braceless statements - SK
      {
-        setFirstLastToken(jjtThis, t, getToken(0)); //RBRACE
+        setFirstLastToken(jjtThis, t, getToken(0));
      })#WhileStatement
 
 }
@@ -1246,7 +1245,7 @@ void DoStatement() :
     Token t = getToken(1);
     }
   "do" Block() {
-    setFirstLastToken(jjtThis, t, rbrace); //RBRACE
+    setFirstLastToken(jjtThis, t, getToken(0));
                 })#DoStatement
 
      WhileAfterDo()

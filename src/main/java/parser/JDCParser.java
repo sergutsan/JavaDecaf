@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
   protected JJTJDCParserState jjtree = new JJTJDCParserState();private List<String> warnings = new ArrayList<String>(); // list of warnings
-    private Token rbrace = Token.newToken(73, "}");
     private String className;
 
 /* Constructor with className calls normal constructor. */
@@ -3265,8 +3264,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       Block();
        jjtree.closeNodeScope(jjtn001, true);
        jjtc001 = false;
-        setFirstLastToken(jjtn001, t, getToken(0)); //RBRACE
-
+        setFirstLastToken(jjtn001, t, getToken(0));
     } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
@@ -3298,8 +3296,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       Block();
                  jjtree.closeNodeScope(jjtn001, true);
                  jjtc001 = false;
-    setFirstLastToken(jjtn001, t, rbrace); //RBRACE
-
+    setFirstLastToken(jjtn001, t, getToken(0));
     } catch (Throwable jjte001) {
     if (jjtc001) {
       jjtree.clearNodeScope(jjtn001);
