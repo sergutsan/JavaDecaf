@@ -3,10 +3,10 @@ package main.java.parser;
 /**
  * Exception thrown when method name is not acceptable according to Java convention.
  */
-public class MethodNameException extends ParseException {
+public class MethodNameParseException extends ParseException {
     protected static final String EOL = System.getProperty("line.separator", "\n");
 
-    public MethodNameException(Token t){
+    public MethodNameParseException(Token t){
         super(initMessage(t));
     }
 

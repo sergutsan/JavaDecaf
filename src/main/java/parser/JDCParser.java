@@ -27,27 +27,28 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
     /**
     *  Test whether a given identifier is a legal method name: must begin with lower case letter.
-    * Throw ParseException if not legal.
+    * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
     private static void isLegalMethodName(Token t) throws ParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
-            throw new MethodNameException(t);
+            throw new MethodNameParseException(t);
         }
     }
 
     /**
         *  Test whether a given identifier is a legal class name: must begin with upper case letter.
-        * Throw ParseException if not legal.
+        * Throw ClassNameParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    private static void isLegalClassName(Token t) throws ClassnameException {
+    private static void isLegalClassName(Token t) throws Parse {
             if (Character.isLowerCase(t.image.charAt(0))){
                 throw new ClassNameParseException(t);
             }
         }
     /**
         *  Test whether a given identifier is a legal variable name: must begin with lower case letter.
+        * This does not allow variable names in capitals e.g. constant names.
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
@@ -60,7 +61,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
                     }
                 }
                 if (lowerCount != 0) {
-                     throw new VariableNameException(t);
+                     throw new VariableNameParseException(t);
                 }
 
 
