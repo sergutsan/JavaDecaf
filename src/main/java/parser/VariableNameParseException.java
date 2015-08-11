@@ -17,8 +17,8 @@ public class VariableNameParseException extends ParseException {
      */
     public static String initMessage(Token t) {
         String message = "Error: encountered variable name " + t.image + " at line " + t.beginLine + ", column "+ t.beginColumn +
-                ". Variable names should begin with a lower case letter, with all subsequent words in CamelCase: only constants which are" +
-                " declared \"final\" should be in capitals. They should also be nouns. e.g.:" + EOL +
+                ". Variable names should begin with a lower case letter, with all subsequent words in CamelCase:" + EOL +
+                "only constants which are declared \"final\" should be in capitals. They should also be nouns. e.g.:" + EOL +
                 "int myNum" + EOL + "int heightOfTallestBuilding" + EOL + "String name" + EOL + "Person person1" + EOL + "final int PI = 3.14";
         return message;
 
