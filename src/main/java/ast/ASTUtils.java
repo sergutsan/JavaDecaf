@@ -133,14 +133,23 @@ public class ASTUtils {
     }
 
     /**
-     * Iterates through specialTokens to see if there is a newline at the end.
-     * Will return true if specialToken is null and parent node is not a ForStatement
-     * @param t the token in question
-     * @param n the node containing the token
-     * @return true if the token contains a newline specialToken or a null specialToken, otherwise false
+     * Version of isNewline that checks type of parent node before calling isNewline(Token)
+     * @param t - the token in question
+     * @param n - the node containing the token
+     * @return true if the token is a new line and the parent is not a ForStatement
      */
     public static boolean isNewline(Token t, SimpleNode n){
-        if (t.specialToken == null && (!(n.jjtGetParent() instanceof ASTForStatement))) return true;
+        return (!(n.jjtGetParent() instanceof ASTForStatement)) && isNewline(t);
+    }
+
+    /**
+     * Iterates through specialTokens to see if there is a newline at the end.
+     * Will return true if specialToken is null
+     * @param t the token in question
+     * @return true if the token contains a newline specialToken or a null specialToken, otherwise false
+     */
+    public static boolean isNewline(Token t){
+        if (t.specialToken == null) return true;
         Token sT = t;
         while (sT.specialToken != null){
             sT = sT.specialToken;
