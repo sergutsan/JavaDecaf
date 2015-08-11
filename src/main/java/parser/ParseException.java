@@ -2,6 +2,8 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package main.java.parser;
 
+import main.java.ast.ASTUtils;
+
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
@@ -137,7 +139,7 @@ public class ParseException extends Exception {
       /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
         } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
                 (nextToken.kind == JDCParserConstants.EOF ||
-                        (expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON && !isReservedKeyword(nextToken.kind)))) {
+                        (expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON && ASTUtils.isNewline(nextToken)))) {
             retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
 
           /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
