@@ -159,7 +159,7 @@ public class ASTUtils {
         while (sT.specialToken != null){
             sT = sT.specialToken;
         }
-        return (sT.image.equals(EOL));
+        return (sT.image.equals(EOL) || sT.image.equals("\n"));
     }
 
     /**
