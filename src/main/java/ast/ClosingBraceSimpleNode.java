@@ -30,7 +30,7 @@ public class ClosingBraceSimpleNode extends SimpleNode {
         }
 
         Token closingBrace = Token.newToken(73, indentation + "}");
-        closingBrace.specialToken = new Token(0, "\n");
+        closingBrace.specialToken = new Token(0, ASTUtils.EOL);
         print(closingBrace,ostr);
 
     }
