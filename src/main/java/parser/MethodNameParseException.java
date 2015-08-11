@@ -17,7 +17,8 @@ public class MethodNameParseException extends ParseException {
      */
     public static String initMessage(Token t) {
         String message = "Error: encountered method name " + t.image + " at line " + t.beginLine + ", column "+ t.beginColumn +
-                ". Method names should begin with a lower case letter, with all subsequent words in CamelCase. They should also be verbs. e.g.:" + EOL +
+                ". Method names should begin with a lower case letter, with all subsequent words in CamelCase." + EOL +
+                "They should also be verbs. e.g.:" + EOL +
                 "getNumber()" + EOL + "update()" + EOL + "replaceAllEvenNumbers()" + EOL + "reverseString()" + EOL + "increment()";
         return message;
 
