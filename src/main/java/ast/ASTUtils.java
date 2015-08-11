@@ -19,6 +19,11 @@ public class ASTUtils {
     public static final String INDENTATION = "    ";
 
     /**
+     * This system's newline separator
+     */
+    public static final String EOL = System.getProperty("line.separator", "\n");
+
+    /**
      * Replaces all JavaDecaf method calls with the Java equivalents.
      * To avoid nesting when used with Java method calls such as
      * System.out.System.out.println, checks value of previous token.
@@ -78,7 +83,7 @@ public class ASTUtils {
                 }
                 sT = sT.specialToken;
                 if (i == timesToIndent - 1) {
-                    sT.specialToken = new Token(0, "\n");
+                    sT.specialToken = new Token(0, EOL);
                     sT.specialToken.next = sT;
                     sT = sT.specialToken;
                 }
@@ -154,7 +159,7 @@ public class ASTUtils {
         while (sT.specialToken != null){
             sT = sT.specialToken;
         }
-        return (sT.image.equals("\n"));
+        return (sT.image.equals(EOL));
     }
 
     /**

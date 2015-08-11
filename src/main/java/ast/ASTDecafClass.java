@@ -5,6 +5,7 @@ package main.java.ast;
 import main.java.parser.*;
 
 import java.io.PrintWriter;
+import static main.java.ast.ASTUtils.EOL;
 
 public
 class ASTDecafClass extends ClosingBraceSimpleNode {
@@ -19,9 +20,9 @@ class ASTDecafClass extends ClosingBraceSimpleNode {
     }
 
     public void process(PrintWriter ostr) {
-        String classDec = "\nimport java.util.Scanner;\n\n" +  //Assign the class/main method encapsulation code
-                "public class " + parser.getClassName() + " { \n" + ASTUtils.INDENTATION +
-                "private static Scanner input = new Scanner(System.in);\n\n"  + ASTUtils.INDENTATION; //init Scanner for reading from stdin
+        String classDec = EOL + "import java.util.Scanner;" + EOL + EOL +  //Assign the class/main method encapsulation code
+                "public class " + parser.getClassName() + " { " + EOL + ASTUtils.INDENTATION +
+                "private static Scanner input = new Scanner(System.in);" + EOL + EOL  + ASTUtils.INDENTATION; //init Scanner for reading from stdin
 
         ostr.print(classDec);
         super.process(ostr);
