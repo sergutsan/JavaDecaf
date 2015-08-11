@@ -104,13 +104,12 @@ public class JavaDecafCompiler {
                 parser = new JDCParser(new FileInputStream(inputFile), className);
                 node = parser.CompilationUnit();
                 node.process(ostr);
-                ostr.close();
                 parser.printWarnings(); //print any warnings that arise
+                ostr.close();
                 return className + ".java"; //return the finished filename to signal successful compilation
             }catch  (StringIndexOutOfBoundsException e) {
                 System.out.println("Error: Please make sure your file has the extension .jdc");
             } catch (ParseException e) {
-                System.out.println("Errors during compilation: ");
                 System.out.println(e.getMessage());
             } catch (FileNotFoundException e) {
                     System.out.println("Error: File " + inputFile + " not found.");
