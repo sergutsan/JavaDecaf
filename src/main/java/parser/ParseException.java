@@ -137,7 +137,7 @@ public class ParseException extends Exception {
       /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
         } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
                 (nextToken.kind == JDCParserConstants.EOF ||
-                        expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON)) {
+                        (expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON && !isReservedKeyword(nextToken.kind)))) {
             retval += "You may be missing a semicolon after \"" + currentToken.image + "\"";
 
           /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
