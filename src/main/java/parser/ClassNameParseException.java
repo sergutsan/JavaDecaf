@@ -17,7 +17,7 @@ public class ClassNameParseException extends ParseException {
      */
     public static String initMessage(Token t) {
         String message = "Error: encountered class name " + t.image + " at line " + t.beginLine + ", column "+ t.beginColumn +
-                ". Class names should begin with a capital letter, and be written in CamelCase. They should also be nouns. e.g.:" + EOL +
+                ". Class names should begin with a capital letter, and be written in CamelCase."+EOL+"They should also be nouns. e.g.:" + EOL +
                 "class Person" + EOL + "class FractionCalculator" + EOL + "class FlyingAnimal";
         return message;
 
