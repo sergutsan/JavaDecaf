@@ -136,13 +136,21 @@ public class ParseException extends Exception {
         } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && nextToken.kind == JDCParserConstants.EOF) {
             retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
 
+           /* Current token is RPAREN, literal or IDENTIFIER and next token is LPAREN, or LBRACE or SEMICOLON + expected token is RPAREN
+           * Missing right parenthesis */
+        } else if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
+                && ((nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
+                && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN))
+                || nextToken.kind == JDCParserConstants.LPAREN) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
+            retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
+
       /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
         } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
                 (nextToken.kind == JDCParserConstants.EOF ||
                         ((expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON
                                 || (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON))
                                 && ASTUtils.isNewline(nextToken)))) {
-            retval += "You may be missing a semicolon after \"" + currentToken.image + ".\"";
+            retval += "You may be missing a semicolon after \"" + currentToken.image + "\".";
 
           /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
         } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) {
@@ -160,14 +168,6 @@ public class ParseException extends Exception {
       /*  Current token is ASSIGN and next token is GT or LT - <= or >= in incorrect order */
         } else if (currentToken.kind == JDCParserConstants.ASSIGN && (nextToken.kind == JDCParserConstants.GT || nextToken.kind == JDCParserConstants.LT)) {
             retval += "Did you mean: " + nextToken.image + currentToken.image;
-
-          /* Current token is RPAREN, literal or IDENTIFIER and next token is LBRACE or SEMICOLON, and expected token is RPAREN
-           * Missing right parenthesis */
-        } else if ((currentToken.kind == JDCParserConstants.RPAREN || currentToken.kind == JDCParserConstants.LPAREN
-                || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
-                && (nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
-                && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN)) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
-            retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
 
           /* Current token is RPAREN and next is SEMICOLON, and first expected token is 'throws' - method declaration with semicolon */
         } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.THROWS) { //rparen, semicolon, and first expected token is 'throws'

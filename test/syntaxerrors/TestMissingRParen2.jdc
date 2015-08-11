@@ -1,0 +1,5 @@
+println("Please key in a word:");
+String s1 = readLine();
+println("please key in another word:");
+String s2 = readLine(;
+println("You entered: " + s1 + s2;
