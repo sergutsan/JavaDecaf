@@ -61,7 +61,7 @@ public class ASTUtils {
      * @return the indented token
      */
     protected static Token indent(Token t, SimpleNode node) {
-        if ((isNewline(t) && node.isDecafClass()) || isComment(t)) {
+        if ((isNewline(t,node) && node.isDecafClass()) || isComment(t)) {
 
             int indentationLevel = node.getIndentationLevel();
             int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
@@ -134,12 +134,13 @@ public class ASTUtils {
 
     /**
      * Iterates through specialTokens to see if there is a newline at the end.
-     * Will return true if specialToken is null (this should only happen at the beginning of a class or DecafBlock)
+     * Will return true if specialToken is null and parent node is not a ForStatement
      * @param t the token in question
+     * @param n the node containing the token
      * @return true if the token contains a newline specialToken or a null specialToken, otherwise false
      */
-    public static boolean isNewline(Token t){
-        if (t.specialToken == null) return true;
+    public static boolean isNewline(Token t, SimpleNode n){
+        if (t.specialToken == null && (!(n.jjtGetParent() instanceof ASTForStatement))) return true;
         Token sT = t;
         while (sT.specialToken != null){
             sT = sT.specialToken;
