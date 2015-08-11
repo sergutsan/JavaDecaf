@@ -1,2 +1,2 @@
- int[][] numbers2 = new int[5][5];
- numbers2[0][1] = 5;
+int[][] numbers2 = new int[5][5];
+numbers2[0][1] = 5;
