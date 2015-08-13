@@ -9,6 +9,7 @@ import javax.tools.ToolProvider;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.io.input.BOMInputStream;
 
 /**
  * The main compiler class. Runs the precompiler on an input file then calls the system java compiler on it.
@@ -101,7 +102,7 @@ public class JavaDecafCompiler {
                 if (ostr == null) {
                     ostr = new PrintWriter(new FileWriter(className + ".java"));
                 }
-                parser = new JDCParser(new FileInputStream(inputFile), className);
+                parser = new JDCParser(new BOMInputStream(new FileInputStream(inputFile)), className);
                 node = parser.CompilationUnit();
                 node.process(ostr);
                 parser.printWarnings(); //print any warnings that arise
