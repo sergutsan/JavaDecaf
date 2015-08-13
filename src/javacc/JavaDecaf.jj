@@ -56,9 +56,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     private List<String> warnings = new ArrayList<String>(); // list of warnings
     private String className;
 
-/* Constructor with className calls normal constructor. */
-    public JDCParser(FileInputStream fis, String className){
-        this(fis);
+/* Constructor with className calls normal constructor with encoding. */
+    public JDCParser(InputStream fis, String className, String encoding){
+        this(fis, encoding);
         this.className = className;
 
     }
