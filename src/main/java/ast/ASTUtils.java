@@ -19,7 +19,7 @@ public class ASTUtils {
     public static final String INDENTATION = "    ";
 
     /**
-     * This system's newline separator
+     * This system's newline separator - default to \n if none found
      */
     public static final String EOL = System.getProperty("line.separator", "\n");
 
