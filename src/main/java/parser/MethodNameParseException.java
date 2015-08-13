@@ -1,4 +1,4 @@
-package main.java.parser;
+package parser;
 
 /**
  * Exception thrown when method name is not acceptable according to Java convention.

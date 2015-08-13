@@ -1,4 +1,4 @@
-package main.java.parser;
+package parser;
 
 /**
  * Class containing static method for generating style warnings.
