@@ -106,8 +106,12 @@ public class ASTUtils {
         int indentationCount = 0;
         Token countToken = t;
         while (countToken != null && !isComment(countToken)) {
-            if (countToken.specialToken != null && countToken.specialToken.image.equals(" ")) {
-                indentationCount++;
+            if (countToken.specialToken != null) {
+                if (countToken.specialToken.image.equals(" ")) {
+                    indentationCount++;
+                } else if (countToken.specialToken.image.equals("\t")) {
+                    indentationCount += 4; //one tab = 4 spaces
+                }
             }
             countToken = countToken.specialToken;
         }
