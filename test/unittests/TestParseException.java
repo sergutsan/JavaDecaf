@@ -1,7 +1,7 @@
 package unittests;
 
 import org.junit.*;
-import main.java.parser.ParseException;
+import parser.ParseException;
 
 import static org.junit.Assert.*;
 /**

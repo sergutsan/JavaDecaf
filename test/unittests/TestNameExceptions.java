@@ -1,6 +1,6 @@
 package unittests;
 
-import main.java.parser.*;
+import parser.*;
 import org.junit.*;
 
 /**
