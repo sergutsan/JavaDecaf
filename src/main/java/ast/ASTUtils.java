@@ -1,8 +1,8 @@
-package main.java.ast;
+package ast;
 
-import main.java.parser.JDCParser;
-import main.java.parser.StyleWarnings;
-import main.java.parser.Token;
+import parser.JDCParser;
+import parser.StyleWarnings;
+import parser.Token;
 
 /**
  * Utilities class for AST nodes.

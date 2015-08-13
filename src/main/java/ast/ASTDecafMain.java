@@ -1,8 +1,8 @@
-package main.java.ast;
+package ast;
 
 
 /* JJT: 0.2.2 */
-import main.java.parser.JDCParser;
+import parser.JDCParser;
 
 
 import java.io.*;

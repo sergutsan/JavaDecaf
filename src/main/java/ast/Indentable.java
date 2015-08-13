@@ -1,4 +1,4 @@
-package main.java.ast;
+package ast;
 
 /**
  * Interface for any nodes which need to be indented or checked for correct indentation.

@@ -1,9 +1,9 @@
-package main.java.ast;
+package ast;
 
-import main.java.ast.ASTUtils;
-import main.java.ast.SimpleNode;
-import main.java.parser.JDCParser;
-import main.java.parser.Token;
+import ast.ASTUtils;
+import ast.SimpleNode;
+import parser.JDCParser;
+import parser.Token;
 
 import java.io.PrintWriter;
 

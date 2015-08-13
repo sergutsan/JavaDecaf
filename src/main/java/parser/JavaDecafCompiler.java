@@ -1,6 +1,6 @@
 package parser;
 
-import main.java.ast.ASTCompilationUnit;
+import ast.ASTCompilationUnit;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;

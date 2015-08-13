@@ -2,7 +2,7 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package parser;
 
-import main.java.ast.ASTUtils;
+import ast.ASTUtils;
 
 /**
  * This exception is thrown when parse errors are encountered.

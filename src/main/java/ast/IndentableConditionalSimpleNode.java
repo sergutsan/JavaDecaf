@@ -1,6 +1,6 @@
-package main.java.ast;
+package ast;
 
-import main.java.parser.JDCParser;
+import parser.JDCParser;
 
 import java.io.PrintWriter;
 

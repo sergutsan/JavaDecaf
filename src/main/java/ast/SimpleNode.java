@@ -1,4 +1,4 @@
-package main.java.ast;
+package ast;
 /*
  * Original code from JavaCC (see copyright notice).
  * Modified by Sophie Koonin 2015. Javadoc comments are mine, even where methods were not
@@ -40,7 +40,7 @@ package main.java.ast;
  * The superclass of all AST nodes. Contains logic for processing most nodes.
  */
 
-import main.java.parser.*;
+import parser.*;
 
 import java.io.PrintWriter;
 
@@ -72,7 +72,7 @@ public class SimpleNode implements Node {
 
     /**
      * Constructor with parser - this is the one in use.
-     * Should not be called manually - called automatically by main.java.parser.JDCParser.
+     * Should not be called manually - called automatically by parser.JDCParser.
       * @param p the parser
      * @param i the ID of the node (automatic)
      */
