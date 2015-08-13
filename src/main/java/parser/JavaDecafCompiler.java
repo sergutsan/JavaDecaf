@@ -102,7 +102,7 @@ public class JavaDecafCompiler {
                 if (ostr == null) {
                     ostr = new PrintWriter(new FileWriter(className + ".java"));
                 }
-                parser = new JDCParser(new BOMInputStream(new FileInputStream(inputFile), false), className);
+                parser = new JDCParser(new BOMInputStream(new FileInputStream(inputFile), false), className, "UTF-8");
                 node = parser.CompilationUnit();
                 node.process(ostr);
                 parser.printWarnings(); //print any warnings that arise
