@@ -36,14 +36,14 @@ options {
                            //pass parser object into node constructors
   //DEBUG_PARSER = true;
   STATIC = false;
-                                 
+                       
   OUTPUT_DIRECTORY = "../main/java/parser";
                                                
 }
 
 PARSER_BEGIN(JDCParser)
-package main.java.parser;
-import main.java.ast.*;
+package parser;
+import ast.*;
 
 import java.io.*;
 import java.util.List;
