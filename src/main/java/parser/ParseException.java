@@ -160,7 +160,8 @@ public class ParseException extends Exception {
         /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases
          * missing quotation mark, not separating method arguments with a comma, or bad concatenation
          */
-        } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
+        } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) &&
+                (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN)) {
             retval += "You may be missing a quotation mark." +
                     "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(greeting + name + \"!\")\"; ." +
                     "\nIf these variables are separate method arguments, they should be separated by commas, e.g.: \nmethod(arg1, arg 2);";
