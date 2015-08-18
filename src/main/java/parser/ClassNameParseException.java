@@ -10,6 +10,9 @@ public class ClassNameParseException extends ParseException {
         super(initMessage(t));
     }
 
+    public ClassNameParseException(String message) {
+        super(message);
+    }
     /**
      * Initialise the message for this exception with the name of the class
      * @param t the token of the classname
