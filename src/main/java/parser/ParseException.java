@@ -15,109 +15,109 @@ import ast.ASTUtils;
  */
 public class ParseException extends Exception {
 
-  /**
-   * The version identifier for this Serializable class.
-   * Increment only if the <i>serialized</i> form of the
-   * class changes.
-   */
-  private static final long serialVersionUID = 1L;
+    /**
+     * The version identifier for this Serializable class.
+     * Increment only if the <i>serialized</i> form of the
+     * class changes.
+     */
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * This constructor is used by the method "generateParseException"
-   * in the generated parser.  Calling this constructor generates
-   * a new object of this type with the fields "currentToken",
-   * "expectedTokenSequences", and "tokenImage" set.
-   */
-  public ParseException(Token currentTokenVal,
-                        int[][] expectedTokenSequencesVal,
-                        String[] tokenImageVal
-                       )
-  {
-    super(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal));
-    currentToken = currentTokenVal;
-    expectedTokenSequences = expectedTokenSequencesVal;
-    tokenImage = tokenImageVal;
-  }
+    /**
+     * This constructor is used by the method "generateParseException"
+     * in the generated parser.  Calling this constructor generates
+     * a new object of this type with the fields "currentToken",
+     * "expectedTokenSequences", and "tokenImage" set.
+     */
+    public ParseException(Token currentTokenVal,
+                          int[][] expectedTokenSequencesVal,
+                          String[] tokenImageVal
+    )
+    {
+        super(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal));
+        currentToken = currentTokenVal;
+        expectedTokenSequences = expectedTokenSequencesVal;
+        tokenImage = tokenImageVal;
+    }
 
-  /**
-   * The following constructors are for use by you for whatever
-   * purpose you can think of.  Constructing the exception in this
-   * manner makes the exception behave in the normal way - i.e., as
-   * documented in the class "Throwable".  The fields "errorToken",
-   * "expectedTokenSequences", and "tokenImage" do not contain
-   * relevant information.  The JavaCC generated code does not use
-   * these constructors.
-   */
+    /**
+     * The following constructors are for use by you for whatever
+     * purpose you can think of.  Constructing the exception in this
+     * manner makes the exception behave in the normal way - i.e., as
+     * documented in the class "Throwable".  The fields "errorToken",
+     * "expectedTokenSequences", and "tokenImage" do not contain
+     * relevant information.  The JavaCC generated code does not use
+     * these constructors.
+     */
 
-  public ParseException() {
-    super();
-  }
+    public ParseException() {
+        super();
+    }
 
-  /** Constructor with message. */
-  public ParseException(String message) {
-    super(message);
-  }
+    /** Constructor with message. */
+    public ParseException(String message) {
+        super(message);
+    }
 
-  /**
-   * This is the last token that has been consumed successfully.  If
-   * this object has been created due to a parse error, the token
-   * followng this token will (therefore) be the first error token.
-   */
-  public Token currentToken;
+    /**
+     * This is the last token that has been consumed successfully.  If
+     * this object has been created due to a parse error, the token
+     * followng this token will (therefore) be the first error token.
+     */
+    public Token currentToken;
 
-  /**
-   * Each entry in this array is an array of integers.  Each array
-   * of integers represents a sequence of tokens (by their ordinal
-   * values) that is expected at this point of the parse.
-   */
-  public int[][] expectedTokenSequences;
+    /**
+     * Each entry in this array is an array of integers.  Each array
+     * of integers represents a sequence of tokens (by their ordinal
+     * values) that is expected at this point of the parse.
+     */
+    public int[][] expectedTokenSequences;
 
-  /**
-   * This is a reference to the "tokenImage" array of the generated
-   * parser within which the parse error occurred.  This array is
-   * defined in the generated ...Constants interface.
-   */
-  public String[] tokenImage;
+    /**
+     * This is a reference to the "tokenImage" array of the generated
+     * parser within which the parse error occurred.  This array is
+     * defined in the generated ...Constants interface.
+     */
+    public String[] tokenImage;
 
     /* Begin modified code by SK */
 
-  /**
-   * It uses "currentToken" and "expectedTokenSequences" to generate a parse
-   * error message and returns it.  If this object has been created
-   * due to a parse error, and you do not catch it (it gets thrown
-   * from the parser) the correct error message
-   * gets displayed.
-   */
-  private static String initialise(Token currentToken,
-                           int[][] expectedTokenSequences,
-                           String[] tokenImage) {
-    String eol = System.getProperty("line.separator", "\n");
+    /**
+     * It uses "currentToken" and "expectedTokenSequences" to generate a parse
+     * error message and returns it.  If this object has been created
+     * due to a parse error, and you do not catch it (it gets thrown
+     * from the parser) the correct error message
+     * gets displayed.
+     */
+    private static String initialise(Token currentToken,
+                                     int[][] expectedTokenSequences,
+                                     String[] tokenImage) {
+        String eol = System.getProperty("line.separator", "\n");
 
-    String retval = "\nEncountered \"";
-      if (currentToken.image == null) {   //if current token is null, probably caused by lookahead, move to next token (avoid NullPointerException) - SK
-          currentToken = currentToken.next;
-      }
-    Token nextToken = currentToken.next;
-    for (int i = 0; i < expectedTokenSequences[0].length; i++) {
-      if (i != 0) retval += " ";
-
-      retval += currentToken.image; //print the token appearing before the error
-      retval += "\" followed by \"";
-        if (nextToken.kind == 0) {  //end of file
-            retval += "end of file";
-            break;
+        String retval = "\nEncountered \"";
+        if (currentToken.image == null) {   //if current token is null, probably caused by lookahead, move to next token (avoid NullPointerException) - SK
+            currentToken = currentToken.next;
         }
-      retval += add_escapes(nextToken.image); //print the offending token
-    }
-    retval += "\" at line " + currentToken.endLine + ", column " + currentToken.endColumn;
-    retval += "." + eol;
+        Token nextToken = currentToken.next;
+        for (int i = 0; i < expectedTokenSequences[0].length; i++) {
+            if (i != 0) retval += " ";
+
+            retval += currentToken.image; //print the token appearing before the error
+            retval += "\" followed by \"";
+            if (nextToken.kind == 0) {  //end of file
+                retval += "end of file";
+                break;
+            }
+            retval += add_escapes(nextToken.image); //print the offending token
+        }
+        retval += "\" at line " + currentToken.endLine + ", column " + currentToken.endColumn;
+        retval += "." + eol;
 
       /* check reason for error - SK */
 
-      retval += getReasonForError(currentToken, nextToken, expectedTokenSequences);
+        retval += getReasonForError(currentToken, nextToken, expectedTokenSequences);
 
-    return retval;
-  }
+        return retval;
+    }
 
     /**
      * Check the reason for the error
@@ -137,7 +137,7 @@ public class ParseException extends Exception {
             retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
 
 
-        } else if (expectedTokenSequences.length>1) {
+        } else if (expectedTokenSequences.length>1) { //only perform following checks if expectedTokenSequences > 1 (avoid OOB error)
 
            /* Current token is RPAREN, literal or IDENTIFIER and next token is LPAREN, or LBRACE or SEMICOLON + expected token is RPAREN
            * Missing right parenthesis */
@@ -147,12 +147,12 @@ public class ParseException extends Exception {
                     || nextToken.kind == JDCParserConstants.LPAREN) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
                 retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
 
-      /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
+            /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
             } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
                     (nextToken.kind == JDCParserConstants.EOF ||
                             ((expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON
-                                || expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON))
-                                && ASTUtils.isNewline(nextToken))) {
+                                    || expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON))
+                                    && ASTUtils.isNewline(nextToken))) {
                 retval += "You may be missing a semicolon after \"" + currentToken.image + "\".";
 
                 /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases
@@ -272,60 +272,60 @@ public class ParseException extends Exception {
     }
     /* End of modified code by SK */
 
-  /**
-   * The end of line string for this machine.
-   */
-  protected static final String EOL = System.getProperty("line.separator", "\n");
+    /**
+     * The end of line string for this machine.
+     */
+    protected static final String EOL = System.getProperty("line.separator", "\n");
 
-  /**
-   * Used to convert raw characters to their escaped version
-   * when these raw version cannot be used as part of an ASCII
-   * string literal.
-   */
-  static String add_escapes(String str) {
-      StringBuffer retval = new StringBuffer();
-      char ch;
-      for (int i = 0; i < str.length(); i++) {
-        switch (str.charAt(i))
-        {
-           case 0 :
-              continue;
-           case '\b':
-              retval.append("\\b");
-              continue;
-           case '\t':
-              retval.append("\\t");
-              continue;
-           case '\n':
-              retval.append("\\n");
-              continue;
-           case '\f':
-              retval.append("\\f");
-              continue;
-           case '\r':
-              retval.append("\\r");
-              continue;
-           case '\"':;
-              retval.append("\\\"");
-              continue;
-           case '\'':
-              retval.append("\\\'");
-              continue;
-           case '\\':
-              retval.append("\\\\");
-              continue;
-           default:
-              if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
-                 String s = "0000" + Integer.toString(ch, 16);
-                 retval.append("\\u" + s.substring(s.length() - 4, s.length()));
-              } else {
-                 retval.append(ch);
-              }
-              continue;
+    /**
+     * Used to convert raw characters to their escaped version
+     * when these raw version cannot be used as part of an ASCII
+     * string literal.
+     */
+    static String add_escapes(String str) {
+        StringBuffer retval = new StringBuffer();
+        char ch;
+        for (int i = 0; i < str.length(); i++) {
+            switch (str.charAt(i))
+            {
+                case 0 :
+                    continue;
+                case '\b':
+                    retval.append("\\b");
+                    continue;
+                case '\t':
+                    retval.append("\\t");
+                    continue;
+                case '\n':
+                    retval.append("\\n");
+                    continue;
+                case '\f':
+                    retval.append("\\f");
+                    continue;
+                case '\r':
+                    retval.append("\\r");
+                    continue;
+                case '\"':;
+                    retval.append("\\\"");
+                    continue;
+                case '\'':
+                    retval.append("\\\'");
+                    continue;
+                case '\\':
+                    retval.append("\\\\");
+                    continue;
+                default:
+                    if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
+                        String s = "0000" + Integer.toString(ch, 16);
+                        retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+                    } else {
+                        retval.append(ch);
+                    }
+                    continue;
+            }
         }
-      }
-      return retval.toString();
-   }
+        return retval.toString();
+    }
 
 }
 /* JavaCC - OriginalChecksum=16ba3edbb338127335444b2b77a37aa1 (do not edit this line) */
