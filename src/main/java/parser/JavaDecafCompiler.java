@@ -162,7 +162,8 @@ public class JavaDecafCompiler {
                 "\noptions:"+
                 "\n-p, -parse      Parse-only mode - disable Java compiler stage" +
                 "\n-v, -version    Display version number" +
-                "\n -c, -console   Print parser results to console (enables parse-only mode)" +
+                "\n -c, -console   Change output mode to console, not file (enables parse-only mode)" +
+                "\n -d, -debug     Enable debugging mode - show parser trace" +
                 "\n-help           Show help";
 
         System.out.println(usage);
