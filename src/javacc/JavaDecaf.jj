@@ -34,7 +34,7 @@ options {
   JAVA_UNICODE_ESCAPE = true;
   ERROR_REPORTING = true;
                            //pass parser object into node constructors
-  //DEBUG_PARSER = true;
+  DEBUG_PARSER = true;
   STATIC = false;
                        
   OUTPUT_DIRECTORY = "../main/java/parser";
@@ -60,6 +60,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
     public JDCParser(InputStream fis, String className, String encoding){
         this(fis, encoding);
         this.className = className;
+        this.disable_tracing(); //Default - no debug
 
     }
 
@@ -402,9 +403,7 @@ ASTCompilationUnit CompilationUnit()                  :
                 }
 /*@egen*/
 		{
-          //((SimpleNode)jjtree.rootNode()).dump(">"); //DEBUG - dump tree to console
-
-		  return jjtn000;
+          return jjtn000;
 		}/*@bgen(jjtree)*/
                 } catch (Throwable jjte000) {
                   if (jjtc000) {

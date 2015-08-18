@@ -18,6 +18,7 @@ import org.apache.commons.io.input.BOMInputStream;
  */
 public class JavaDecafCompiler {
     private static final double VERSION = 1.0;
+    private boolean debug = false;
 
     public static void main(String[] args) throws Exception {
         JavaDecafCompiler decaf = new JavaDecafCompiler();
@@ -50,6 +51,9 @@ public class JavaDecafCompiler {
         if (argsList.contains("-help")) {
             printUsage();
             System.exit(0); //stop any further execution as there may not be a filename given
+        }
+        if (argsList.contains("-d") || argsList.contains("-debug")) {
+            debug = true;
         }
 
 
@@ -91,7 +95,7 @@ public class JavaDecafCompiler {
      */
     public String precompile(File inputFile, PrintWriter ostr) {
         JDCParser parser;
-        ASTCompilationUnit node;
+        ASTCompilationUnit parseTree;
         String className = "";
             try {
                 int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
@@ -107,8 +111,11 @@ public class JavaDecafCompiler {
                     ostr = new PrintWriter(new FileWriter(className + ".java"));
                 }
                 parser = new JDCParser(new BOMInputStream(new FileInputStream(inputFile), false), className, "UTF-8");
-                node = parser.CompilationUnit();
-                node.process(ostr);
+                if (debug) {
+                    parser.enable_tracing(); //enable debugging mode if requested
+                }
+                parseTree = parser.CompilationUnit();
+                parseTree.process(ostr); //run the parser
                 parser.printWarnings(); //print any warnings that arise
                 ostr.close();
                 return className + ".java"; //return the finished filename to signal successful compilation
