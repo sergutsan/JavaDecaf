@@ -112,15 +112,15 @@ public class ParseException extends Exception {
         retval += "\" at line " + currentToken.endLine + ", column " + currentToken.endColumn;
         retval += "." + eol;
 
-      /* check reason for error - SK */
 
-        retval += getReasonForError(currentToken, nextToken, expectedTokenSequences);
+        retval += getReasonForError(currentToken, nextToken, expectedTokenSequences); //check reason for error - SK
+
 
         return retval;
     }
 
     /**
-     * Check the reason for the error
+     * Check the reason for the error - SK
      * @param currentToken the current token
      * @param nextToken the (offending) next token
      * @param expectedTokenSequences the list of expected tokens
