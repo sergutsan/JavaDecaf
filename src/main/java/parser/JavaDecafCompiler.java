@@ -45,7 +45,7 @@ public class JavaDecafCompiler {
         }
         if (argsList.contains("-p") || argsList.contains("-parse")) {
             parseOnly = true;
-            System.out.println("Parse only mode enabled");
+            System.out.println("JavaDecaf: Parse only mode enabled");
         }
         if (argsList.contains("-help")) {
             printUsage();
@@ -68,10 +68,14 @@ public class JavaDecafCompiler {
         if (precompiledClass != null) {
             String returnMessage = "";
             if (parseOnly) { //print success message and finish
-               returnMessage += "Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
+               returnMessage += "JavaDecaf: Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
             } else {
-                compileJava(precompiledClass); //call the java compiler
-                returnMessage += "JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms";  //only print if successfully compiled
+                try {
+                    compileJava(precompiledClass); //call the java compiler
+                    returnMessage += "JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms";  //only print if successfully compiled
+                } catch (CompilerException e) {
+                    returnMessage += e.getMessage();
+                }
             }
             System.out.println(returnMessage);
         }
@@ -127,11 +131,14 @@ public class JavaDecafCompiler {
      * Run the system Java compiler on a java class.
      * @param filename the name of the file to compile
      */
-    public void compileJava(String filename) {
+    public void compileJava(String filename) throws CompilerException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
         if (compiler == null) {
             System.setProperty("java.home",System.getenv("JAVA_HOME")); //this should work on BBK lab computers
             compiler = ToolProvider.getSystemJavaCompiler(); //set it again
+            if (compiler == null) { //if still no compiler found
+                 throw new CompilerException("Unable to find system Java compiler. Please check your environment variables, or use the alternative version of JavaDecaf provided.");
+            }
         }
         StandardJavaFileManager fileMgr = compiler.getStandardFileManager(null, null, null); //get file manager
         Iterable<? extends JavaFileObject> fileToCompile = fileMgr.getJavaFileObjects(filename); //init file to compile from filename
