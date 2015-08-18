@@ -100,7 +100,7 @@ public class JavaDecafCompiler {
                     throw new ParseException("Class names in Java cannot begin with a number. " +
                             "Please rename the file.");
                 } else if (Character.isLowerCase(inputFile.getName().charAt(0))) { //Check that first char is uppercase
-                    throw new ParseException("Class names in Java must begin with a capital letter. " +
+                    throw new ClassNameParseException("File names in JavaDecaf must begin with a capital letter. " +
                             "Please rename the file.");
                 }
                 if (ostr == null) {
