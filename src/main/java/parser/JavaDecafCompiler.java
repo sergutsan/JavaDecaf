@@ -131,9 +131,9 @@ public class JavaDecafCompiler {
                 }
                 ostr.close();
                 return className + ".java"; //return the finished filename to signal successful compilation
-            }catch  (StringIndexOutOfBoundsException e) {
+            }catch  (StringIndexOutOfBoundsException e) { //Bad filename
                 System.out.println("Error: Please make sure your file has the extension .jdc");
-            } catch (ParseException e) {
+            } catch (ParseException e) { //This shouldn't happen, but catch anyway
                 System.out.println(e.getMessage());
             } catch (FileNotFoundException e) {
                     System.out.println("Error: File " + inputFile + " not found.");
