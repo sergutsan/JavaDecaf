@@ -881,7 +881,6 @@ void ArrayInitializer() :
 void MethodDeclaration() :
 {Token t;}
 {
-  try {
   (/*@bgen(jjtree) MethodDeclaration */
   {
     ASTMethodDeclaration jjtn001 = new ASTMethodDeclaration(this, JJTMETHODDECLARATION);
@@ -927,10 +926,6 @@ void MethodDeclaration() :
     }
   }
 /*@egen*/                  )
-  } catch (ParseException ex) {
-       addErrorMessage(ex);
-{ return; }
-   }
 }
 
 void MethodDeclarator() :
@@ -1087,15 +1082,12 @@ void NameList() :
 void Expression() :
 {}
 {
- try {
+
      ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
       Assignment()
       |
       ConditionalExpression())
-  } catch (ParseException ex) {
-      addErrorMessage(ex);
-{ return; }
-  }
+
 }
 
 void Assignment() :
@@ -1858,8 +1850,6 @@ void ArrayDimensions() :
 void Statement() :
 {}
 {
-  try {
-
   LOOKAHEAD(2)
   LabeledStatement()
 |
@@ -1891,9 +1881,6 @@ void Statement() :
 |
   TryStatement()
 
-    } catch (ParseException ex) {
-          addErrorMessage(ex);
-      }
 }
 
 void LabeledStatement() :

@@ -607,7 +607,6 @@ void ArrayInitializer() :
 void MethodDeclaration() :
 {Token t;}
 {
-  try {
   (
   ({
     t = getToken(1);
@@ -621,10 +620,6 @@ void MethodDeclaration() :
   ){ setFirstLastToken(jjtThis, t, getToken(0));
        }
        )#MethodDeclaration)
-  } catch (ParseException ex) {
-       addErrorMessage(ex);
-{ return; }
-   }
 }
 
 void MethodDeclarator() :
@@ -749,15 +744,12 @@ void NameList() :
 void Expression() :
 {}
 {
- try {
+
      ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
       Assignment()
       |
       ConditionalExpression())
-  } catch (ParseException ex) {
-      addErrorMessage(ex);
-{ return; }
-  }
+
 }
 
 void Assignment() :
@@ -1094,8 +1086,6 @@ void ArrayDimensions() :
 void Statement() :
 {}
 {
-  try {
-
   LOOKAHEAD(2)
   LabeledStatement()
 |
@@ -1127,9 +1117,6 @@ void Statement() :
 |
   TryStatement()
 
-    } catch (ParseException ex) {
-          addErrorMessage(ex);
-      }
 }
 
 void LabeledStatement() :
