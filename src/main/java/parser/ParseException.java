@@ -137,40 +137,6 @@ public class ParseException extends Exception {
             retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
 
 
-        } else if (expectedTokenSequences.length>1) { //only perform following checks if expectedTokenSequences > 1 (avoid OOB error)
-
-           /* Current token is RPAREN, literal or IDENTIFIER and next token is LPAREN, or LBRACE or SEMICOLON + expected token is RPAREN
-           * Missing right parenthesis */
-            if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
-                    && ((nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
-                    && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN))
-                    || nextToken.kind == JDCParserConstants.LPAREN) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
-                retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
-
-            /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
-            } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
-                    (nextToken.kind == JDCParserConstants.EOF ||
-                            ((expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON
-                                    || expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON))
-                                    && ASTUtils.isNewline(nextToken))) {
-                retval += "You may be missing a semicolon after \"" + currentToken.image + "\".";
-
-                /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases
-                * missing quotation mark, not separating method arguments with a comma, or bad concatenation */
-
-            } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) &&
-                    expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
-                retval += "You may be missing a quotation mark." +
-                        "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(greeting + name + \"!\")\"; ." +
-                        "\nIf these variables are separate method arguments, they should be separated by commas, e.g.: \nmethod(arg1, arg 2);";
-
-                 /* Next token is RBRACKET or RBRACE, when RPAREN expected - wrong kind of bracket used*/
-            } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && (expectedTokenSequences[1][0] == JDCParserConstants.RPAREN || expectedTokenSequences[0][0] == JDCParserConstants.RPAREN)) {
-                retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
-
-            }
-
-          /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
         } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) {
             retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash, e.g.: \nprintln(\"say \\\"hello\\\"!\") ." +
                     "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(\"hello\" + name + \"!\")\"; .";
@@ -226,6 +192,42 @@ public class ParseException extends Exception {
             retval += "Method and variable names should not begin with a number or be entirely numeric, e.g.:\n" +
                     "Acceptable: void method1(), int num1\n" +
                     "Not acceptable: void 1(), int 1st";
+        }
+        if (expectedTokenSequences.length>1 && retval.equals("")) { //only perform following checks if expectedTokenSequences > 1 (avoid OOB error) and retval empty
+
+           /* Current token is RPAREN, literal or IDENTIFIER and next token is LPAREN, or LBRACE or SEMICOLON + expected token is RPAREN
+           * Missing right parenthesis */
+            if ((currentToken.kind == JDCParserConstants.RPAREN || isLiteral(currentToken.kind) || isIdentifier(currentToken.kind))
+                    && ((nextToken.kind == JDCParserConstants.LBRACE || nextToken.kind == JDCParserConstants.SEMICOLON)
+                    && (expectedTokenSequences.length>1 && expectedTokenSequences[1][0] == JDCParserConstants.RPAREN))
+                    || nextToken.kind == JDCParserConstants.LPAREN) { //check length of expectedTokenSequences to avoid loop with semicolon being caught here
+                retval += "You may be missing a closing parenthesis after \"" + currentToken.image + "\".";
+
+            /* current token is RPAREN, IDENTIFIER or any literal, and next token is EOF or a newline - missing semicolon at end of line*/
+            } else if ((currentToken.kind == JDCParserConstants.RPAREN || isIdentifier(currentToken.kind) || isLiteral(currentToken.kind)) &&
+                    (nextToken.kind == JDCParserConstants.EOF ||
+                            ((expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON
+                                    || expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON))
+                                    && ASTUtils.isNewline(nextToken))) {
+                retval += "You may be missing a semicolon after \"" + currentToken.image + "\".";
+
+                /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases
+                * missing quotation mark, not separating method arguments with a comma, or bad concatenation */
+
+            } else if (isIdentifier(currentToken.kind) && (isIdentifier(nextToken.kind) || isLiteral(nextToken.kind)) &&
+                    expectedTokenSequences[1][0] == JDCParserConstants.RPAREN) {
+                retval += "You may be missing a quotation mark." +
+                        "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(greeting + name + \"!\")\"; ." +
+                        "\nIf these variables are separate method arguments, they should be separated by commas, e.g.: \nmethod(arg1, arg 2);";
+
+                 /* Next token is RBRACKET or RBRACE, when RPAREN expected - wrong kind of bracket used*/
+            } else if ((nextToken.kind == JDCParserConstants.RBRACKET || nextToken.kind == JDCParserConstants.RBRACE) && (expectedTokenSequences[1][0] == JDCParserConstants.RPAREN || expectedTokenSequences[0][0] == JDCParserConstants.RPAREN)) {
+                retval += "You may have used a brace { } or square bracket [ ] instead of a parenthesis ( ).";
+
+            }
+
+
+          /* current token is STRING_LITERAL and next token is IDENTIFIER - bad concatenation or no escaping of special chars */
         }
         return retval;
     }
