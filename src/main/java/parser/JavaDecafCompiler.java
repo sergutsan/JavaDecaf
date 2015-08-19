@@ -22,14 +22,7 @@ public class JavaDecafCompiler {
 
     public static void main(String[] args) throws Exception {
         JavaDecafCompiler decaf = new JavaDecafCompiler();
-
-        // Check that there are enough args
-        if (args.length > 0) {
-            decaf.launch(args);
-        } else {
-            System.out.println("usage: \"javadecaf [options] filename\"" +
-            "\nType \"javadecaf -help\" to view options");
-        }
+        decaf.launch(args);
     }
 
     /**
@@ -38,6 +31,10 @@ public class JavaDecafCompiler {
      * @param args  - the command line arguments
      */
     public void launch(String[] args){
+        if (args.length == 0) {
+            printUsage();
+            return; //stop
+        }
         Boolean parseOnly = false; //indicates Parse Only mode (no Java Compiler)
         /* Command line parameters */
         List<String> argsList = Arrays.asList(args);
@@ -50,7 +47,7 @@ public class JavaDecafCompiler {
         }
         if (argsList.contains("-help")) {
             printUsage();
-            System.exit(0); //stop any further execution as there may not be a filename given
+            return; //stop any further execution as there may not be a filename given
         }
         if (argsList.contains("-d") || argsList.contains("-debug")) {
             debug = true;
@@ -178,8 +175,8 @@ public class JavaDecafCompiler {
                 "\noptions:"+
                 "\n-p, -parse      Parse-only mode - disable Java compiler stage" +
                 "\n-v, -version    Display version number" +
-                "\n -c, -console   Change output mode to console, not file (enables parse-only mode)" +
-                "\n -d, -debug     Enable debugging mode - show parser trace" +
+                "\n-c, -console    Change output mode to console, not file (enables parse-only mode)" +
+                "\n-d, -debug      Enable debugging mode - show parser trace" +
                 "\n-help           Show help";
 
         System.out.println(usage);
