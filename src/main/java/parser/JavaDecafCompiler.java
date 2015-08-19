@@ -68,9 +68,8 @@ public class JavaDecafCompiler {
         }
         String precompiledClass = precompile(inputFile, ostr);
         long endTime = System.nanoTime();
-
+        String returnMessage = "";
         if (precompiledClass != null) {
-            String returnMessage = "";
             if (parseOnly) { //print success message and finish
                returnMessage += "JavaDecaf: Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
             } else {
@@ -81,8 +80,11 @@ public class JavaDecafCompiler {
                     returnMessage += e.getMessage();
                 }
             }
-            System.out.println(returnMessage);
+        } else {
+            returnMessage += "JavaDecaf: Compilation completed with errors";
         }
+        System.out.println(returnMessage);
+
 
     }
 
@@ -117,6 +119,12 @@ public class JavaDecafCompiler {
                 parseTree = parser.CompilationUnit();
                 parseTree.process(ostr); //run the parser
                 parser.printWarnings(); //print any warnings that arise
+                if (parser.hasErrors()) {
+                    for (String ex: parser.getErrorList()) {
+                        System.out.println(ex);
+                    }
+                    return null; //don't exit successfully
+                }
                 ostr.close();
                 return className + ".java"; //return the finished filename to signal successful compilation
             }catch  (StringIndexOutOfBoundsException e) {

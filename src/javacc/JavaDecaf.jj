@@ -54,6 +54,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
 
 /*@egen*/
     private List<String> warnings = new ArrayList<String>(); // list of warnings
+    private List<String> errors = new ArrayList<String>(); //list of errors
     private String className;
 
 /* Constructor with className calls normal constructor with encoding. */
@@ -143,6 +144,22 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants/*@egen*
      protected int getWarningCount(){
         return warnings.size();
         }
+
+     /**
+     * Get the error list
+     * @return the list of errors
+     */
+     protected List<String> getErrorList() {
+        return errors;
+     }
+
+     /**
+     * See if the error list contains any errors
+     * @return true if there are errors, false otherwise
+     */
+     protected boolean hasErrors() {
+        return errors.size() > 0;
+     }
 
 
 }
@@ -384,8 +401,9 @@ ASTCompilationUnit CompilationUnit()                  :
   jjtree.openNodeScope(jjtn000);
 /*@egen*/}
 {/*@bgen(jjtree) CompilationUnit */
-                try {
+    try {
 /*@egen*/
+    try {
 		{
 		  jjtn000.setFirstToken(getToken(1));
 		}
@@ -396,7 +414,10 @@ ASTCompilationUnit CompilationUnit()                  :
   |
   DecafClass()	//SK
   )
-  <EOF>/*@bgen(jjtree)*/
+  <EOF>
+      } catch (ParseException ex) {
+          recoverFromError(SEMICOLON, ex);
+      }/*@bgen(jjtree)*/
                 {
                   jjtree.closeNodeScope(jjtn000, true);
                   jjtc000 = false;
@@ -405,25 +426,25 @@ ASTCompilationUnit CompilationUnit()                  :
 		{
           return jjtn000;
 		}/*@bgen(jjtree)*/
-                } catch (Throwable jjte000) {
-                  if (jjtc000) {
-                    jjtree.clearNodeScope(jjtn000);
-                    jjtc000 = false;
-                  } else {
-                    jjtree.popNode();
-                  }
-                  if (jjte000 instanceof RuntimeException) {
-                    throw (RuntimeException)jjte000;
-                  }
-                  if (jjte000 instanceof ParseException) {
-                    throw (ParseException)jjte000;
-                  }
-                  throw (Error)jjte000;
-                } finally {
-                  if (jjtc000) {
-                    jjtree.closeNodeScope(jjtn000, true);
-                  }
-                }
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
 /*@egen*/
 }
 
@@ -533,7 +554,8 @@ void TypeDeclaration() :
 
 void ClassDeclaration() :
 {Token t;}
-{/*@bgen(jjtree) ClassDeclaration */
+{
+   try {/*@bgen(jjtree) ClassDeclaration */
   {
     ASTClassDeclaration jjtn001 = new ASTClassDeclaration(this, JJTCLASSDECLARATION);
     boolean jjtc001 = true;
@@ -574,6 +596,9 @@ void ClassDeclaration() :
     }
   }
 /*@egen*/                 
+    } catch (ParseException ex) {
+          recoverFromError(SEMICOLON, ex);
+      }
 }
 
 void UnmodifiedClassDeclaration() :
@@ -860,6 +885,7 @@ void ArrayInitializer() :
 void MethodDeclaration() :
 {Token t;}
 {
+  try {
   (/*@bgen(jjtree) MethodDeclaration */
   {
     ASTMethodDeclaration jjtn001 = new ASTMethodDeclaration(this, JJTMETHODDECLARATION);
@@ -905,6 +931,9 @@ void MethodDeclaration() :
     }
   }
 /*@egen*/                  )
+  } catch (ParseException ex) {
+       recoverFromError(SEMICOLON, ex);
+   }
 }
 
 void MethodDeclarator() :
@@ -1061,10 +1090,14 @@ void NameList() :
 void Expression() :
 {}
 {
- ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
-  Assignment()
-  |
-  ConditionalExpression())
+ try {
+     ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
+      Assignment()
+      |
+      ConditionalExpression())
+  } catch (ParseException ex) {
+      recoverFromError(SEMICOLON, ex);
+  }
 }
 
 void Assignment() :
@@ -1827,6 +1860,8 @@ void ArrayDimensions() :
 void Statement() :
 {}
 {
+  try {
+
   LOOKAHEAD(2)
   LabeledStatement()
 |
@@ -1857,6 +1892,10 @@ void Statement() :
   SynchronizedStatement()
 |
   TryStatement()
+
+    } catch (ParseException ex) {
+          recoverFromError(SEMICOLON, ex);
+      }
 }
 
 void LabeledStatement() :
@@ -2719,64 +2758,17 @@ void TryStatement() :
 
 void DecafClass() :
 {}
-{/*@bgen(jjtree) DecafClass */
-  {
-    ASTDecafClass jjtn001 = new ASTDecafClass(this, JJTDECAFCLASS);
-    boolean jjtc001 = true;
-    jjtree.openNodeScope(jjtn001);
-  }
-  try {
-/*@egen*/ (DecafMain()
-   (DecafMethod())*
-   (NestedClassDeclaration())* )/*@bgen(jjtree)*/
-  } catch (Throwable jjte001) {
-    if (jjtc001) {
-      jjtree.clearNodeScope(jjtn001);
-      jjtc001 = false;
-    } else {
-      jjtree.popNode();
-    }
-    if (jjte001 instanceof RuntimeException) {
-      throw (RuntimeException)jjte001;
-    }
-    if (jjte001 instanceof ParseException) {
-      throw (ParseException)jjte001;
-    }
-    throw (Error)jjte001;
-  } finally {
-    if (jjtc001) {
-      jjtree.closeNodeScope(jjtn001, true);
-    }
-  }
-/*@egen*/           
-}
-
-
-/*
- * Unencapsulated Decaf floating code or methods
- */
-void DecafMain() :
-{Token t;}
-{/*@bgen(jjtree) DecafMain */
+{   try {/*@bgen(jjtree) DecafClass */
     {
-      ASTDecafMain jjtn001 = new ASTDecafMain(this, JJTDECAFMAIN);
+      ASTDecafClass jjtn001 = new ASTDecafClass(this, JJTDECAFCLASS);
       boolean jjtc001 = true;
       jjtree.openNodeScope(jjtn001);
     }
     try {
 /*@egen*/
-    ({
-    t = getToken(1);
-    }
-    (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
-    {
-      jjtree.closeNodeScope(jjtn001, true);
-      jjtc001 = false;
-    }
-/*@egen*/
-    {
-    setFirstLastToken(jjtn001, t, getToken(0));
-    })/*@bgen(jjtree)*/
+    (DecafMain()
+   (DecafMethod())*
+   (NestedClassDeclaration())* )/*@bgen(jjtree)*/
     } catch (Throwable jjte001) {
       if (jjtc001) {
         jjtree.clearNodeScope(jjtn001);
@@ -2796,7 +2788,62 @@ void DecafMain() :
         jjtree.closeNodeScope(jjtn001, true);
       }
     }
+/*@egen*/           
+       } catch (ParseException ex) {
+           recoverFromError(SEMICOLON, ex);
+       }
+}
+
+
+/*
+ * Unencapsulated Decaf floating code or methods
+ */
+void DecafMain() :
+{Token t;}
+{
+    try {/*@bgen(jjtree) DecafMain */
+        {
+          ASTDecafMain jjtn001 = new ASTDecafMain(this, JJTDECAFMAIN);
+          boolean jjtc001 = true;
+          jjtree.openNodeScope(jjtn001);
+        }
+        try {
+/*@egen*/
+        ({
+        t = getToken(1);
+        }
+        (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
+        {
+          jjtree.closeNodeScope(jjtn001, true);
+          jjtc001 = false;
+        }
+/*@egen*/
+        {
+        setFirstLastToken(jjtn001, t, getToken(0));
+        })/*@bgen(jjtree)*/
+        } catch (Throwable jjte001) {
+          if (jjtc001) {
+            jjtree.clearNodeScope(jjtn001);
+            jjtc001 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte001 instanceof RuntimeException) {
+            throw (RuntimeException)jjte001;
+          }
+          if (jjte001 instanceof ParseException) {
+            throw (ParseException)jjte001;
+          }
+          throw (Error)jjte001;
+        } finally {
+          if (jjtc001) {
+            jjtree.closeNodeScope(jjtn001, true);
+          }
+        }
 /*@egen*/            
+    } catch (ParseException ex) {
+        recoverFromError(SEMICOLON, ex);
+    }
 }
 
 /*
@@ -2814,7 +2861,7 @@ void DecafMethod() :
     try {
 /*@egen*/
     ({
-    t = getToken(1); //first word of method declaraton - likely the return type
+    t = getToken(1); //first word of method declaration - likely the return type
     t.specialToken.image = " "; //remove the newline from the first token
     /* If there's two newlines before the method, remove the special token to avoid
      too many line breaks */
@@ -2858,4 +2905,14 @@ JAVACODE
 void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
     jjtThis.setFirstToken(t1);
     jjtThis.setLastToken(t2);
+}
+
+JAVACODE
+void recoverFromError(int endKind, ParseException ex) {
+    errors.add(ex.getMessage());
+    System.out.println("Attempting recovery");
+    Token t;
+    do {
+        t = getNextToken();
+    } while (t.kind != endKind && t.kind != EOF);
 }

@@ -48,6 +48,7 @@ import java.util.ArrayList;
 
 public class JDCParser {
     private List<String> warnings = new ArrayList<String>(); // list of warnings
+    private List<String> errors = new ArrayList<String>(); //list of errors
     private String className;
 
 /* Constructor with className calls normal constructor with encoding. */
@@ -137,6 +138,22 @@ public class JDCParser {
      protected int getWarningCount(){
         return warnings.size();
         }
+
+     /**
+     * Get the error list
+     * @return the list of errors
+     */
+     protected List<String> getErrorList() {
+        return errors;
+     }
+
+     /**
+     * See if the error list contains any errors
+     * @return true if there are errors, false otherwise
+     */
+     protected boolean hasErrors() {
+        return errors.size() > 0;
+     }
 
 
 }
@@ -374,6 +391,7 @@ TOKEN : /* OPERATORS */
 ASTCompilationUnit CompilationUnit() #CompilationUnit :
 {}
 {
+    try {
 		{
 		  jjtThis.setFirstToken(getToken(1));
 		}
@@ -385,6 +403,9 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   DecafClass()	//SK
   )
   <EOF>
+      } catch (ParseException ex) {
+          recoverFromError(SEMICOLON, ex);
+      }
 		{
           return jjtThis;
 		}
@@ -433,6 +454,7 @@ void TypeDeclaration() :
 void ClassDeclaration() :
 {Token t;}
 {
+   try {
   ({
     t = getToken(1);
   }
@@ -441,6 +463,9 @@ void ClassDeclaration() :
   {
     setFirstLastToken(jjtThis, t, getToken(0));
   })#ClassDeclaration
+    } catch (ParseException ex) {
+          recoverFromError(SEMICOLON, ex);
+      }
 }
 
 void UnmodifiedClassDeclaration() :
@@ -586,6 +611,7 @@ void ArrayInitializer() :
 void MethodDeclaration() :
 {Token t;}
 {
+  try {
   (
   ({
     t = getToken(1);
@@ -599,6 +625,9 @@ void MethodDeclaration() :
   ){ setFirstLastToken(jjtThis, t, getToken(0));
        }
        )#MethodDeclaration)
+  } catch (ParseException ex) {
+       recoverFromError(SEMICOLON, ex);
+   }
 }
 
 void MethodDeclarator() :
@@ -723,10 +752,14 @@ void NameList() :
 void Expression() :
 {}
 {
- ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
-  Assignment()
-  |
-  ConditionalExpression())
+ try {
+     ( LOOKAHEAD( PrimaryExpression() AssignmentOperator())
+      Assignment()
+      |
+      ConditionalExpression())
+  } catch (ParseException ex) {
+      recoverFromError(SEMICOLON, ex);
+  }
 }
 
 void Assignment() :
@@ -1063,6 +1096,8 @@ void ArrayDimensions() :
 void Statement() :
 {}
 {
+  try {
+
   LOOKAHEAD(2)
   LabeledStatement()
 |
@@ -1093,6 +1128,10 @@ void Statement() :
   SynchronizedStatement()
 |
   TryStatement()
+
+    } catch (ParseException ex) {
+          recoverFromError(SEMICOLON, ex);
+      }
 }
 
 void LabeledStatement() :
@@ -1367,9 +1406,13 @@ void TryStatement() :
 
 void DecafClass() :
 {}
-{ (DecafMain()
+{   try {
+    (DecafMain()
    (DecafMethod())*
    (NestedClassDeclaration())* )#DecafClass
+       } catch (ParseException ex) {
+           recoverFromError(SEMICOLON, ex);
+       }
 }
 
 
@@ -1379,13 +1422,17 @@ void DecafClass() :
 void DecafMain() :
 {Token t;}
 {
-    ({
-    t = getToken(1);
+    try {
+        ({
+        t = getToken(1);
+        }
+        (LOOKAHEAD(3) BlockStatement())+
+        {
+        setFirstLastToken(jjtThis, t, getToken(0));
+        })  #DecafMain
+    } catch (ParseException ex) {
+        recoverFromError(SEMICOLON, ex);
     }
-    (LOOKAHEAD(3) BlockStatement())+
-    {
-    setFirstLastToken(jjtThis, t, getToken(0));
-    })  #DecafMain
 }
 
 /*
@@ -1396,7 +1443,7 @@ void DecafMethod() :
 {Token t;}
 {
     ({
-    t = getToken(1); //first word of method declaraton - likely the return type
+    t = getToken(1); //first word of method declaration - likely the return type
     t.specialToken.image = " "; //remove the newline from the first token
     /* If there's two newlines before the method, remove the special token to avoid
      too many line breaks */
@@ -1415,4 +1462,14 @@ JAVACODE
 void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
     jjtThis.setFirstToken(t1);
     jjtThis.setLastToken(t2);
+}
+
+JAVACODE
+void recoverFromError(int endKind, ParseException ex) {
+    errors.add(ex.getMessage());
+    System.out.println("Attempting recovery");
+    Token t;
+    do {
+        t = getNextToken();
+    } while (t.kind != endKind && t.kind != EOF);
 }
