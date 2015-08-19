@@ -93,7 +93,7 @@ public class ParseException extends Exception {
                                      String[] tokenImage) {
         String eol = System.getProperty("line.separator", "\n");
 
-        String retval = "\nEncountered \"";
+        String retval = eol + "Error: Encountered \"";
         if (currentToken.image == null) {   //if current token is null, probably caused by lookahead, move to next token (avoid NullPointerException) - SK
             currentToken = currentToken.next;
         }
