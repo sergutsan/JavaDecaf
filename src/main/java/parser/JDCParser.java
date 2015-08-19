@@ -32,9 +32,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
-    public static void checkMethodName(Token t) throws MethodNameParseException {
+    public void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
-            throw new MethodNameParseException(t);
+           errors.add((new MethodNameParseException(t)).getMessage());
         }
     }
 
@@ -43,9 +43,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * Throw ClassNameParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    public static void checkClassName(Token t) throws ClassNameParseException {
+    public void checkClassName(Token t) throws ClassNameParseException {
             if (Character.isLowerCase(t.image.charAt(0))){
-                throw new ClassNameParseException(t);
+                errors.add((new ClassNameParseException(t)).getMessage());
             }
         }
     /**
@@ -54,7 +54,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * Throw ParseException if not legal.
         * @param t - the token of the identifier in question
         */
-    public static void checkVariableName(Token t) throws VariableNameParseException {
+    public void checkVariableName(Token t) throws VariableNameParseException {
             if (Character.isUpperCase(t.image.charAt(0))) {
                 int lowerCount = 0;
                 for (char c: t.image.toCharArray()) {
@@ -65,7 +65,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
                 /* if the first letter is a capital and there are lower case letters in the rest of the name,
                     throw an exception */
                 if (lowerCount != 0) {
-                     throw new VariableNameParseException(t);
+                     errors.add((new VariableNameParseException(t)).getMessage());
                 }
 
 
