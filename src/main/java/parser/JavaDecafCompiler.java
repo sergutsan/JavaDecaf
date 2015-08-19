@@ -139,7 +139,7 @@ public class JavaDecafCompiler {
                 System.out.println(e.getMessage());
                 if (e.errorCode != TokenMgrError.LEXICAL_ERROR) e.printStackTrace(); //only print stack trace if error is not lexical (i.e. problem with compiler)
             }catch (Exception ex) {
-                System.out.println("An internal error has occurred in the compiler. Details to follow:");
+                System.out.println("An internal error has occurred in the compiler:");
                 ex.printStackTrace();
             }
         return null;

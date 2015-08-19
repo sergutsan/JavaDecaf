@@ -134,7 +134,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   jjtree.openNodeScope(jjtn000);
       try {
         try {
-                  jjtn000.setFirstToken(getToken(1));
+          jjtn000.setFirstToken(getToken(1));
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case PACKAGE:
             PackageDeclaration();
@@ -221,10 +221,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           }
           jj_consume_token(0);
         } catch (ParseException ex) {
-          recoverFromError(SEMICOLON, ex);
+          recoverFromError(JDCParserConstants.SEMICOLON, ex);
         }
-                  jjtree.closeNodeScope(jjtn000, true);
-                  jjtc000 = false;
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
           {if (true) return jjtn000;}
       } catch (Throwable jjte000) {
       if (jjtc000) {
@@ -429,7 +429,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
         }
       } catch (ParseException ex) {
-          recoverFromError(SEMICOLON, ex);
+          recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
     } finally {
       trace_return("ClassDeclaration");
@@ -1266,7 +1266,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
         }
       } catch (ParseException ex) {
-       recoverFromError(SEMICOLON, ex);
+       recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
     } finally {
       trace_return("MethodDeclaration");
@@ -1728,7 +1728,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           }
         }
       } catch (ParseException ex) {
-      recoverFromError(SEMICOLON, ex);
+      recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
     } finally {
       trace_return("Expression");
@@ -3109,7 +3109,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           }
         }
       } catch (ParseException ex) {
-          recoverFromError(SEMICOLON, ex);
+          recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
     } finally {
       trace_return("Statement");
@@ -4312,7 +4312,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       }
         }
       } catch (ParseException ex) {
-           recoverFromError(SEMICOLON, ex);
+           recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
     } finally {
       trace_return("DecafClass");
@@ -4364,7 +4364,7 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
           }
         }
       } catch (ParseException ex) {
-        recoverFromError(SEMICOLON, ex);
+        recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
     } finally {
       trace_return("DecafMain");
@@ -4443,9 +4443,9 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     trace_call("recoverFromError");
     try {
     errors.add(ex.getMessage());
-    System.out.println("Attempting recovery");
+
     Token t;
-    do {
+     do {
         t = getNextToken();
     } while (t.kind != endKind && t.kind != EOF);
     } finally {

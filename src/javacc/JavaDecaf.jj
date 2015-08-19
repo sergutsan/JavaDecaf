@@ -404,9 +404,9 @@ ASTCompilationUnit CompilationUnit()                  :
     try {
 /*@egen*/
     try {
-		{
-		  jjtn000.setFirstToken(getToken(1));
-		}
+        {
+          jjtn000.setFirstToken(getToken(1));
+        }
   [ PackageDeclaration() ]
   ( ImportDeclaration() )*
   ( LOOKAHEAD(3) //avoid choice conflict - SK
@@ -416,16 +416,16 @@ ASTCompilationUnit CompilationUnit()                  :
   )
   <EOF>
       } catch (ParseException ex) {
-          recoverFromError(SEMICOLON, ex);
+          recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }/*@bgen(jjtree)*/
-                {
-                  jjtree.closeNodeScope(jjtn000, true);
-                  jjtc000 = false;
-                }
+        {
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+        }
 /*@egen*/
-		{
+        {
           return jjtn000;
-		}/*@bgen(jjtree)*/
+        }/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -597,7 +597,7 @@ void ClassDeclaration() :
   }
 /*@egen*/                 
     } catch (ParseException ex) {
-          recoverFromError(SEMICOLON, ex);
+          recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
 }
 
@@ -932,7 +932,7 @@ void MethodDeclaration() :
   }
 /*@egen*/                  )
   } catch (ParseException ex) {
-       recoverFromError(SEMICOLON, ex);
+       recoverFromError(JDCParserConstants.SEMICOLON, ex);
    }
 }
 
@@ -1096,7 +1096,7 @@ void Expression() :
       |
       ConditionalExpression())
   } catch (ParseException ex) {
-      recoverFromError(SEMICOLON, ex);
+      recoverFromError(JDCParserConstants.SEMICOLON, ex);
   }
 }
 
@@ -1894,7 +1894,7 @@ void Statement() :
   TryStatement()
 
     } catch (ParseException ex) {
-          recoverFromError(SEMICOLON, ex);
+          recoverFromError(JDCParserConstants.SEMICOLON, ex);
       }
 }
 
@@ -2790,7 +2790,7 @@ void DecafClass() :
     }
 /*@egen*/           
        } catch (ParseException ex) {
-           recoverFromError(SEMICOLON, ex);
+           recoverFromError(JDCParserConstants.SEMICOLON, ex);
        }
 }
 
@@ -2842,7 +2842,7 @@ void DecafMain() :
         }
 /*@egen*/            
     } catch (ParseException ex) {
-        recoverFromError(SEMICOLON, ex);
+        recoverFromError(JDCParserConstants.SEMICOLON, ex);
     }
 }
 
@@ -2910,9 +2910,9 @@ void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
 JAVACODE
 void recoverFromError(int endKind, ParseException ex) {
     errors.add(ex.getMessage());
-    System.out.println("Attempting recovery");
+
     Token t;
-    do {
+     do {
         t = getNextToken();
     } while (t.kind != endKind && t.kind != EOF);
 }
