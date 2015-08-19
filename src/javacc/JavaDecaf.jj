@@ -414,6 +414,8 @@ ASTCompilationUnit CompilationUnit()                  :
   <EOF>
       } catch (ParseException ex) {
           addErrorMessage(ex);
+          recoverFromError(SEMICOLON);
+
       }/*@bgen(jjtree)*/
         {
           jjtree.closeNodeScope(jjtn000, true);
@@ -551,8 +553,7 @@ void TypeDeclaration() :
 
 void ClassDeclaration() :
 {Token t;}
-{
-   try {/*@bgen(jjtree) ClassDeclaration */
+{/*@bgen(jjtree) ClassDeclaration */
   {
     ASTClassDeclaration jjtn001 = new ASTClassDeclaration(this, JJTCLASSDECLARATION);
     boolean jjtc001 = true;
@@ -593,10 +594,7 @@ void ClassDeclaration() :
     }
   }
 /*@egen*/                 
-    } catch (ParseException ex) {
-          addErrorMessage(ex);
-{ return; }
-      }
+
 }
 
 void UnmodifiedClassDeclaration() :
@@ -2758,7 +2756,7 @@ void TryStatement() :
 
 void DecafClass() :
 {}
-{   try {/*@bgen(jjtree) DecafClass */
+{/*@bgen(jjtree) DecafClass */
     {
       ASTDecafClass jjtn001 = new ASTDecafClass(this, JJTDECAFCLASS);
       boolean jjtc001 = true;
@@ -2789,10 +2787,7 @@ void DecafClass() :
       }
     }
 /*@egen*/           
-       } catch (ParseException ex) {
-           addErrorMessage(ex);
-{ return; }
-       }
+
 }
 
 
@@ -2913,3 +2908,11 @@ void addErrorMessage(ParseException ex) {
         errors.add(msg);
     }
 }
+
+JAVACODE
+void recoverFromError(int endKind) {
+    Token t;
+    do {
+        t = getNextToken();
+    } while (t.kind != endKind && t.kind != EOF);
+    }

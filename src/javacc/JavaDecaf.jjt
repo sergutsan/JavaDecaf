@@ -402,6 +402,8 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   <EOF>
       } catch (ParseException ex) {
           addErrorMessage(ex);
+          recoverFromError(SEMICOLON);
+
       }
         {
           return jjtThis;
@@ -451,7 +453,6 @@ void TypeDeclaration() :
 void ClassDeclaration() :
 {Token t;}
 {
-   try {
   ({
     t = getToken(1);
   }
@@ -460,10 +461,7 @@ void ClassDeclaration() :
   {
     setFirstLastToken(jjtThis, t, getToken(0));
   })#ClassDeclaration
-    } catch (ParseException ex) {
-          addErrorMessage(ex);
-{ return; }
-      }
+
 }
 
 void UnmodifiedClassDeclaration() :
@@ -1406,14 +1404,11 @@ void TryStatement() :
 
 void DecafClass() :
 {}
-{   try {
+{
     (DecafMain()
    (DecafMethod())*
    (NestedClassDeclaration())* )#DecafClass
-       } catch (ParseException ex) {
-           addErrorMessage(ex);
-{ return; }
-       }
+
 }
 
 
@@ -1470,3 +1465,11 @@ void addErrorMessage(ParseException ex) {
         errors.add(msg);
     }
 }
+
+JAVACODE
+void recoverFromError(int endKind) {
+    Token t;
+    do {
+        t = getNextToken();
+    } while (t.kind != endKind && t.kind != EOF);
+    }
