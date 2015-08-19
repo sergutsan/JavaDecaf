@@ -157,7 +157,7 @@ public class ParseException extends Exception {
       /* Next token is if, for or while and the following token is NOT a RPAREN - missing parentheses around loop condition.
       * Lookahead will spot this error, hence currentToken will be the one before the loop keyword. */
         } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE)
-                && nextToken.next.kind != JDCParserConstants.RPAREN) {
+                && (nextToken.next != null && nextToken.next.kind != JDCParserConstants.RPAREN)) {
             retval += "You may have forgotten parentheses around the loop condition."+
                     "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
                     "if (x > y) {\n" +
