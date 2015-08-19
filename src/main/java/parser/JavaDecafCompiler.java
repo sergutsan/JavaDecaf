@@ -66,6 +66,7 @@ public class JavaDecafCompiler {
             parseOnly = true;
             ostr = new PrintWriter(System.out);
         }
+        System.out.println("JavaDecaf: Compiling file " + filename + "...");
         String precompiledClass = precompile(inputFile, ostr);
         long endTime = System.nanoTime();
         String returnMessage = "";
