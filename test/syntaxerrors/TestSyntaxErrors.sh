@@ -5,7 +5,7 @@
 for file in *.jdc
 do
 	echo "Exception testing: compiling $file"
-	java -cp ../../target/classes/ main.java.parser.JavaDecafCompiler -p $file
+	java -cp ../../lib/*:../../target/classes/ parser.JavaDecafCompiler -p $file
 	echo "-------------------"
 done
 echo "Finished!"

@@ -7,7 +7,7 @@ do
 	filejava="${file%.*}"
 	filejava="$filejava.java"
 	echo "Compiling $file"
-	java -cp ../../target/classes/ main.java.parser.JavaDecafCompiler -p $file
+	java -cp ../../lib/*;../../target/classes/ parser.JavaDecafCompiler -p $file
 	#echo "-----"
 	#diff -b -s $filejava ../expected/$filejava
 	echo "-------------------"
