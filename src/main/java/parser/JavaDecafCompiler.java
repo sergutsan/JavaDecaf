@@ -118,12 +118,16 @@ public class JavaDecafCompiler {
                 }
                 parseTree = parser.CompilationUnit();
                 parseTree.process(ostr); //run the parser
-                parser.printWarnings(); //print any warnings that arise
+                if (parser.hasWarnings()) {
+                    for (String warning: parser.getWarningList()) {
+                        System.out.println(warning);
+                    }
+                }
                 if (parser.hasErrors()) {
                     for (String ex: parser.getErrorList()) {
                         System.out.println(ex);
                     }
-                    return null; //don't exit successfully
+                    return null; //don't return successfully
                 }
                 ostr.close();
                 return className + ".java"; //return the finished filename to signal successful compilation

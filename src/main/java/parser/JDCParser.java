@@ -81,22 +81,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         }
 
      /**
-     * Print the contents of the warning list, if there are any
-     * Include an escape sequence to print each warning in yellow
-     *
+     * Get the warning list
+     * @return the list of warnings
      */
-     protected void printWarnings() {
-        for (String warning: warnings) {
-            System.out.println(warning);
-            }
+     protected List<String> getWarningList() {
+        return warnings;
      }
 
      /**
-     * Get the number of warnings in the internal list.
-     * @return the number of warnings
+     * see if the warning list contains any warnings
+     * @return true if there are warnings, false otherwise
      */
-     protected int getWarningCount(){
-        return warnings.size();
+     protected boolean hasWarnings(){
+        return warnings.size() > 0;
         }
 
      /**
@@ -4691,6 +4688,27 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     finally { jj_save(33, xla); }
   }
 
+  private boolean jj_3R_85() {
+    if (jj_3R_104()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_69() {
+    if (jj_scan_token(LBRACE)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_93()) { jj_scanpos = xsp; break; }
+    }
+    if (jj_scan_token(RBRACE)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_84() {
+    if (jj_3R_103()) return true;
+    return false;
+  }
+
   private boolean jj_3R_65() {
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_scan_token(COLON)) return true;
@@ -5709,6 +5727,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3_33() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(25)) jj_scanpos = xsp;
+    if (jj_3R_66()) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
   private boolean jj_3_9() {
     Token xsp;
     while (true) {
@@ -5716,15 +5743,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       if (jj_3R_54()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(INTERFACE)) return true;
-    return false;
-  }
-
-  private boolean jj_3_33() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(25)) jj_scanpos = xsp;
-    if (jj_3R_66()) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
     return false;
   }
 
@@ -6929,27 +6947,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   private boolean jj_3R_93() {
     if (jj_3R_67()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_85() {
-    if (jj_3R_104()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_69() {
-    if (jj_scan_token(LBRACE)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_93()) { jj_scanpos = xsp; break; }
-    }
-    if (jj_scan_token(RBRACE)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_84() {
-    if (jj_3R_103()) return true;
     return false;
   }
 
