@@ -413,7 +413,7 @@ ASTCompilationUnit CompilationUnit()                  :
   )
   <EOF>
       } catch (ParseException ex) {
-          recoverFromError(JDCParserConstants.SEMICOLON, ex);
+          addErrorMessage(ex);
       }/*@bgen(jjtree)*/
         {
           jjtree.closeNodeScope(jjtn000, true);
@@ -594,7 +594,8 @@ void ClassDeclaration() :
   }
 /*@egen*/                 
     } catch (ParseException ex) {
-          recoverFromError(JDCParserConstants.SEMICOLON, ex);
+          addErrorMessage(ex);
+{ return; }
       }
 }
 
@@ -929,7 +930,8 @@ void MethodDeclaration() :
   }
 /*@egen*/                  )
   } catch (ParseException ex) {
-       recoverFromError(JDCParserConstants.SEMICOLON, ex);
+       addErrorMessage(ex);
+{ return; }
    }
 }
 
@@ -1093,7 +1095,8 @@ void Expression() :
       |
       ConditionalExpression())
   } catch (ParseException ex) {
-      recoverFromError(JDCParserConstants.SEMICOLON, ex);
+      addErrorMessage(ex);
+{ return; }
   }
 }
 
@@ -1891,7 +1894,7 @@ void Statement() :
   TryStatement()
 
     } catch (ParseException ex) {
-          recoverFromError(JDCParserConstants.SEMICOLON, ex);
+          addErrorMessage(ex);
       }
 }
 
@@ -2787,7 +2790,8 @@ void DecafClass() :
     }
 /*@egen*/           
        } catch (ParseException ex) {
-           recoverFromError(JDCParserConstants.SEMICOLON, ex);
+           addErrorMessage(ex);
+{ return; }
        }
 }
 
@@ -2797,50 +2801,48 @@ void DecafClass() :
  */
 void DecafMain() :
 {Token t;}
-{
-    try {/*@bgen(jjtree) DecafMain */
-        {
-          ASTDecafMain jjtn001 = new ASTDecafMain(this, JJTDECAFMAIN);
-          boolean jjtc001 = true;
-          jjtree.openNodeScope(jjtn001);
-        }
-        try {
-/*@egen*/
-        ({
-        t = getToken(1);
-        }
-        (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
-        {
-          jjtree.closeNodeScope(jjtn001, true);
-          jjtc001 = false;
-        }
-/*@egen*/
-        {
-        setFirstLastToken(jjtn001, t, getToken(0));
-        })/*@bgen(jjtree)*/
-        } catch (Throwable jjte001) {
-          if (jjtc001) {
-            jjtree.clearNodeScope(jjtn001);
-            jjtc001 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte001 instanceof RuntimeException) {
-            throw (RuntimeException)jjte001;
-          }
-          if (jjte001 instanceof ParseException) {
-            throw (ParseException)jjte001;
-          }
-          throw (Error)jjte001;
-        } finally {
-          if (jjtc001) {
-            jjtree.closeNodeScope(jjtn001, true);
-          }
-        }
-/*@egen*/            
-    } catch (ParseException ex) {
-        recoverFromError(JDCParserConstants.SEMICOLON, ex);
+{/*@bgen(jjtree) DecafMain */
+    {
+      ASTDecafMain jjtn001 = new ASTDecafMain(this, JJTDECAFMAIN);
+      boolean jjtc001 = true;
+      jjtree.openNodeScope(jjtn001);
     }
+    try {
+/*@egen*/
+
+    ({
+    t = getToken(1);
+    }
+    (LOOKAHEAD(3) BlockStatement())+/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn001, true);
+      jjtc001 = false;
+    }
+/*@egen*/
+    {
+    setFirstLastToken(jjtn001, t, getToken(0));
+    })/*@bgen(jjtree)*/
+    } catch (Throwable jjte001) {
+      if (jjtc001) {
+        jjtree.clearNodeScope(jjtn001);
+        jjtc001 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte001 instanceof RuntimeException) {
+        throw (RuntimeException)jjte001;
+      }
+      if (jjte001 instanceof ParseException) {
+        throw (ParseException)jjte001;
+      }
+      throw (Error)jjte001;
+    } finally {
+      if (jjtc001) {
+        jjtree.closeNodeScope(jjtn001, true);
+      }
+    }
+/*@egen*/            
+
 }
 
 /*
@@ -2905,11 +2907,9 @@ void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
 }
 
 JAVACODE
-void recoverFromError(int endKind, ParseException ex) {
-    errors.add(ex.getMessage());
-
-    Token t;
-     do {
-        t = getNextToken();
-    } while (t.kind != endKind && t.kind != EOF);
+void addErrorMessage(ParseException ex) {
+    String msg = ex.getMessage();
+    if (!errors.contains(msg)) {
+        errors.add(msg);
+    }
 }

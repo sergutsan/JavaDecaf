@@ -401,7 +401,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
   )
   <EOF>
       } catch (ParseException ex) {
-          recoverFromError(JDCParserConstants.SEMICOLON, ex);
+          addErrorMessage(ex);
       }
         {
           return jjtThis;
@@ -461,7 +461,8 @@ void ClassDeclaration() :
     setFirstLastToken(jjtThis, t, getToken(0));
   })#ClassDeclaration
     } catch (ParseException ex) {
-          recoverFromError(JDCParserConstants.SEMICOLON, ex);
+          addErrorMessage(ex);
+{ return; }
       }
 }
 
@@ -623,7 +624,8 @@ void MethodDeclaration() :
        }
        )#MethodDeclaration)
   } catch (ParseException ex) {
-       recoverFromError(JDCParserConstants.SEMICOLON, ex);
+       addErrorMessage(ex);
+{ return; }
    }
 }
 
@@ -755,7 +757,8 @@ void Expression() :
       |
       ConditionalExpression())
   } catch (ParseException ex) {
-      recoverFromError(JDCParserConstants.SEMICOLON, ex);
+      addErrorMessage(ex);
+{ return; }
   }
 }
 
@@ -1127,7 +1130,7 @@ void Statement() :
   TryStatement()
 
     } catch (ParseException ex) {
-          recoverFromError(JDCParserConstants.SEMICOLON, ex);
+          addErrorMessage(ex);
       }
 }
 
@@ -1408,7 +1411,8 @@ void DecafClass() :
    (DecafMethod())*
    (NestedClassDeclaration())* )#DecafClass
        } catch (ParseException ex) {
-           recoverFromError(JDCParserConstants.SEMICOLON, ex);
+           addErrorMessage(ex);
+{ return; }
        }
 }
 
@@ -1419,17 +1423,15 @@ void DecafClass() :
 void DecafMain() :
 {Token t;}
 {
-    try {
-        ({
-        t = getToken(1);
-        }
-        (LOOKAHEAD(3) BlockStatement())+
-        {
-        setFirstLastToken(jjtThis, t, getToken(0));
-        })  #DecafMain
-    } catch (ParseException ex) {
-        recoverFromError(JDCParserConstants.SEMICOLON, ex);
+
+    ({
+    t = getToken(1);
     }
+    (LOOKAHEAD(3) BlockStatement())+
+    {
+    setFirstLastToken(jjtThis, t, getToken(0));
+    })  #DecafMain
+
 }
 
 /*
@@ -1462,11 +1464,9 @@ void setFirstLastToken(SimpleNode jjtThis, Token t1, Token t2) {
 }
 
 JAVACODE
-void recoverFromError(int endKind, ParseException ex) {
-    errors.add(ex.getMessage());
-
-    Token t;
-     do {
-        t = getNextToken();
-    } while (t.kind != endKind && t.kind != EOF);
+void addErrorMessage(ParseException ex) {
+    String msg = ex.getMessage();
+    if (!errors.contains(msg)) {
+        errors.add(msg);
+    }
 }
