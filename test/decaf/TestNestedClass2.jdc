@@ -1,0 +1,9 @@
+Person p1 = new Person();
+p1.talk();
+
+class Person {
+    void talk() {
+        println("Hello!");
+    }
+
+}
