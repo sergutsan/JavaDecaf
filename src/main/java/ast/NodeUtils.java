@@ -120,7 +120,7 @@ public class NodeUtils {
          - need to account for this to prevent unnecessary warnings
          */
         if (node.isDecafClass()) {
-            if (!node.isDecafMethod()){
+            if (node.isDecafMain()){
                 expectedIndentation-=1;
             }
             expectedIndentation -= 1;
