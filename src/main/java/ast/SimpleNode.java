@@ -176,9 +176,9 @@ public class SimpleNode implements Node {
     protected static boolean decafClass;
 
     /**
-     * Whether or not this node is in a JavaDecaf method
+     * Whether or not this node is in a JavaDecaf main method
      */
-    protected static boolean decafMethod;
+    protected static boolean decafMain;
 
     /**
      * Sets the first token in the node to a particular token.
@@ -301,7 +301,7 @@ public class SimpleNode implements Node {
      * Checks whether this node is in a Decaf method.
      * @return true if this is a Decaf method, otherwise false
      */
-    public static boolean isDecafMethod() { return decafMethod; }
+    public static boolean isDecafMain() { return decafMain; }
 
     /**
      * Prints a token with all its preceding Special Tokens (white space and comments).

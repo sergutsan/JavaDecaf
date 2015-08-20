@@ -18,10 +18,12 @@ public class ASTDecafMain extends ClosingBraceSimpleNode {
     }
 
   public void process (PrintWriter ostr) {
+      decafMain = true;
       String mainDec = "public static void main(String[] args) {";
       ostr.print(mainDec);
 
       super.process(ostr);
+      decafMain = false;
   }
 
 }
