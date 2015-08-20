@@ -118,12 +118,12 @@ public class JavaDecafCompiler {
                 parseTree.process(ostr); //run the parser
                 if (parser.hasWarnings()) {
                     for (String warning: parser.getWarningList()) {
-                        System.out.println(warning);
+                        System.err.println(warning);
                     }
                 }
                 if (parser.hasErrors()) {
                     for (String ex: parser.getErrorList()) {
-                        System.out.println(ex);
+                        System.err.println(ex);
                     }
                     return null; //don't return successfully
                 }
