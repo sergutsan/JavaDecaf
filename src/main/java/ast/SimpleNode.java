@@ -204,12 +204,12 @@ public class SimpleNode implements Node {
             Indentation checking should only happen if the node is an Indentable node, and its parent is an IndentationContainer.
          */
         if (jjtGetParent() instanceof IndentationContainer && this instanceof Indentable) {
-            ASTUtils.checkIndentation(parser, begin, this);
+            NodeUtils.checkIndentation(parser, begin, this);
         }
 
         /* Indent any Indentable that requires indenting. */
         if (this instanceof Indentable) {
-            ASTUtils.indent(t, this);
+            NodeUtils.indent(t, this);
         }
 
         Token lastToken = null;
@@ -228,8 +228,8 @@ public class SimpleNode implements Node {
         /* Iterate through node's tokens and print them */
         while (t != null && t != end){
             /* Check for comments - prevent them being lost */
-            if (ASTUtils.hasComment(t)){
-                print(ASTUtils.getComment(t, this),ostr);
+            if (NodeUtils.hasComment(t)){
+                print(NodeUtils.getComment(t, this),ostr);
             }
             print(t, ostr);
             t = t.next;

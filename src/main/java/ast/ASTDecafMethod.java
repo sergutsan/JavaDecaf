@@ -19,7 +19,7 @@ class ASTDecafMethod extends SimpleNode {
 
     public void process(PrintWriter ostr){
         decafMethod = true;
-        String methodDec = ASTUtils.EOL + ASTUtils.EOL + ASTUtils.INDENTATION + "private static";
+        String methodDec = NodeUtils.EOL + NodeUtils.EOL + NodeUtils.INDENTATION + "private static";
         ostr.print(methodDec);
 
         super.process(ostr);

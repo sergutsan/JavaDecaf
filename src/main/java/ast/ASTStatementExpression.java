@@ -22,7 +22,7 @@ class ASTStatementExpression extends SimpleNode implements Indentable, LastToken
     Token t = begin;
     String prevToken = "";
     while (t != end) {
-      t = ASTUtils.checkForSubstitutions(t, prevToken);
+      t = NodeUtils.checkForSubstitutions(t, prevToken);
       prevToken = t.image;
       t = t.next;
     }

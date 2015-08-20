@@ -2,7 +2,7 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package parser;
 
-import ast.ASTUtils;
+import ast.NodeUtils;
 
 /**
  * This exception is thrown when parse errors are encountered.
@@ -208,7 +208,7 @@ public class ParseException extends Exception {
                     (nextToken.kind == JDCParserConstants.EOF ||
                             ((expectedTokenSequences[0][0] == JDCParserConstants.SEMICOLON
                                     || expectedTokenSequences[1][0] == JDCParserConstants.SEMICOLON))
-                                    && ASTUtils.isNewline(nextToken))) {
+                                    && NodeUtils.isNewline(nextToken))) {
                 retval += "You may be missing a semicolon after \"" + currentToken.image + "\".";
 
                 /* current token is IDENTIFIER,  next is IDENTIFIER or any literal, and parser expects a RPAREN - this expected token is common to all test cases

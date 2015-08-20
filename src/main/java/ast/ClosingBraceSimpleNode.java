@@ -1,7 +1,5 @@
 package ast;
 
-import ast.ASTUtils;
-import ast.SimpleNode;
 import parser.JDCParser;
 import parser.Token;
 
@@ -26,11 +24,11 @@ public class ClosingBraceSimpleNode extends SimpleNode {
         String indentation = "";
 
         for (int i = 0; i<indentationLevel; i++) {
-            indentation += ASTUtils.INDENTATION;
+            indentation += NodeUtils.INDENTATION;
         }
 
         Token closingBrace = Token.newToken(73, indentation + "}");
-        closingBrace.specialToken = new Token(0, ASTUtils.EOL);
+        closingBrace.specialToken = new Token(0, NodeUtils.EOL);
         print(closingBrace,ostr);
 
     }

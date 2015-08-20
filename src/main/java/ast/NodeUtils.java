@@ -8,7 +8,7 @@ import parser.Token;
  * Utilities class for AST nodes.
  * @author Sophie Koonin
  * */
-public class ASTUtils {
+public class NodeUtils {
     /**
      * The number of spaces to indent
      */
@@ -69,7 +69,7 @@ public class ASTUtils {
         if ((isNewline(t,node) && node.isDecafClass()) || isComment(t)) {
 
             int indentationLevel = node.getIndentationLevel();
-            int timesToIndent = ASTUtils.INDENTATION_SPACES * indentationLevel;
+            int timesToIndent = NodeUtils.INDENTATION_SPACES * indentationLevel;
 
             Token sT = Token.newToken(0, " ");
             t.specialToken = sT;
