@@ -24,7 +24,7 @@ class ASTConditionalExpression extends SimpleNode {
      */
     while (t!= end) {
       if (t.image.equals("&")) {
-        String warning = "\"You have used single \'&\\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.\"";
+        String warning = "\"You have used single \'&\' instead of double \'&&\'. Logical AND in Java is represented using \'&&\'.\"";
         StyleWarnings.generateWarning(t, parser, warning);
       }
       if (t.image.equals("|")) {
