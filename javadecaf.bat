@@ -1,2 +1,2 @@
 @echo off
-java -jar JavaDecafCompiler.jar %*
+java -jar JavaDecaf-*.jar %*
