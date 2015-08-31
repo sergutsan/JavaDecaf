@@ -8,6 +8,8 @@ The latest version to download is available under "Releases"; if you have downlo
 ## Manual
 The manual is included within the ZIP as a PDF file.
 
+Javadoc for this project can be found in the folder /doc.
+
 ## Running the Compiler
 *Windows:* javadecaf MyFile.jdc
 
@@ -16,5 +18,3 @@ The manual is included within the ZIP as a PDF file.
 ## Troubleshooting
 #### Windows: NullPointerException in JavaDecafCompiler.compileJava
 Rename javadecaf.bat to javadecaf.old, then rename javadecaf-alternative.bat to javadecaf.bat. Run as before.
-
-Documentation can be found in the folder /doc.
