@@ -9,7 +9,7 @@ The latest version to download is available under "Releases"; if you have downlo
 The manual is included within the ZIP as a PDF file.
 
 ## Running the Compiler
-*Windows:* javadecaf MyFile.jdc
+*Windows:* javadecaf MyFile.jdc  return
 *Mac/Linux:* ./javadecaf MyFile.jdc
 
 ## Troubleshooting
