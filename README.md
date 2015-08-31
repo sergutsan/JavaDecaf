@@ -14,7 +14,7 @@ The manual is included within the ZIP as a PDF file.
 *Mac/Linux:* ./javadecaf MyFile.jdc
 
 ## Troubleshooting
-### Windows: NullPointerException upon running JavaDecaf
+#### Windows: NullPointerException upon running JavaDecaf
 Rename javadecaf.bat to javadecaf.old, then rename javadecaf-alternative.bat to javadecaf.bat. Run as before.
 
 Documentation can be found in the folder /doc.
