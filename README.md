@@ -18,3 +18,4 @@ Javadoc for this project can be found in the folder /doc.
 ## Troubleshooting
 #### Windows: NullPointerException in JavaDecafCompiler.compileJava
 Rename javadecaf.bat to javadecaf.old, then rename javadecaf-alternative.bat to javadecaf.bat. Run as before.
+
