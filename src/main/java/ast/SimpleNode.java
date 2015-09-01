@@ -63,6 +63,31 @@ public class SimpleNode implements Node {
     protected JDCParser parser;
 
     /**
+     * The tokens at the beginning and end of the node
+     */
+    protected Token begin, end;
+
+    /**
+     * The level to which this node should be indented - SK
+     */
+    protected int indentationLevel;
+
+    /**
+     * Whether or not this node should affect the indentation level of its children - SK
+     */
+    protected boolean indent = true;
+
+    /**
+     * Whether or not this is a JavaDecaf class - SK
+     */
+    protected static boolean decafClass;
+
+    /**
+     * Whether or not this node is in a JavaDecaf main method - SK
+     */
+    protected static boolean decafMain;
+
+    /**
      * Constructor with ID. This is not in use by the main parser class.
      * @param i the ID of the node.
      */
@@ -154,31 +179,6 @@ public class SimpleNode implements Node {
         }
     }
 
-// Manually inserted code begins here
-    /**
-     * The tokens at the beginning and end of the node
-     */
-    protected Token begin, end;
-
-    /**
-     * The level to which this node should be indented
-     */
-    protected int indentationLevel;
-
-    /**
-     * Whether or not this node should affect the indentation level of its children
-     */
-    protected boolean indent = true;
-
-    /**
-     * Whether or not this is a JavaDecaf class
-     */
-    protected static boolean decafClass;
-
-    /**
-     * Whether or not this node is in a JavaDecaf main method
-     */
-    protected static boolean decafMain;
 
     /**
      * Sets the first token in the node to a particular token.
@@ -191,6 +191,10 @@ public class SimpleNode implements Node {
      * @param t the token to set as the last token.
      */
     public void setLastToken(Token t) { end = t; }
+
+    /*
+        BEGIN MODIFIED CODE BY SK
+     */
 
     /**
      * Processes the contents of the node. Set the node's indentation level, check whether it needs
@@ -302,6 +306,11 @@ public class SimpleNode implements Node {
      * @return true if this is a Decaf method, otherwise false
      */
     public static boolean isDecafMain() { return decafMain; }
+
+    /*
+     * END MODIFIED CODE BY SK
+     * /
+
 
     /**
      * Prints a token with all its preceding Special Tokens (white space and comments).
