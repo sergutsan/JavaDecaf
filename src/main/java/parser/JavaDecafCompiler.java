@@ -165,6 +165,9 @@ public class JavaDecafCompiler {
         List<String> argOptions = Arrays.asList("-cp", "."); //command line options - set classpath to current working directory
         JavaCompiler.CompilationTask compTask = compiler.getTask(null, fileMgr, null, null, null, fileToCompile); //init compilation task with file mgr and file to compile
         compTask.call(); //compile the file
+        // TODO: if compTask.call() returns true, may execute resulting CLASS
+	//       this may require to add another CMD flag for three possible behaviours: 
+	//       compile and (if no errors) execute, only compile to CLASS, only pre-compile into Java
     }
 
     /**
@@ -172,12 +175,12 @@ public class JavaDecafCompiler {
      */
     public void printUsage(){
         String usage = "usage: javadecaf [options] filename" +
-                "\noptions:"+
-                "\n-p, -parse      Parse-only mode - disable Java compiler stage" +
-                "\n-v, -version    Display version number" +
-                "\n-c, -console    Change output mode to console, not file (enables parse-only mode)" +
-                "\n-d, -debug      Enable debugging mode - show parser trace" +
-                "\n-help           Show help";
+                "\n  options:"+
+                "\n  -p, -parse      Parse-only mode - disable Java compiler stage" +
+                "\n  -v, -version    Display version number" +
+                "\n  -c, -console    Change output mode to console, not file (enables parse-only mode)" +
+                "\n  -d, -debug      Enable debugging mode - show parser trace" +
+                "\n  -help           Show help";
 
         System.out.println(usage);
     }
