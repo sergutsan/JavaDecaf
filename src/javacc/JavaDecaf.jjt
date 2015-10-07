@@ -1044,7 +1044,7 @@ void Arguments() :
 void ArgumentList() :
 {}
 {
-  Expression() ( "," Expression() )*
+  Expression() ( (",")#Comma Expression() )*
 }
 
 void AllocationExpression() :
