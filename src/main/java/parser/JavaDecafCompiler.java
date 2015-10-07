@@ -127,7 +127,7 @@ public class JavaDecafCompiler {
                     }
                     return null; //don't return successfully
                 }
-                ostr.close();
+                ostr.close(); // FIXME: should this writer be closed before looking at the errors to ensure it is always closed? -- SG
                 return className + ".java"; //return the finished filename to signal successful compilation
             }catch  (StringIndexOutOfBoundsException e) { //Bad filename
                 System.out.println("Error: Please make sure your file has the extension .jdc");
