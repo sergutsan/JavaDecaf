@@ -64,15 +64,15 @@ public class JavaDecafCompiler {
             ostr = new PrintWriter(System.out);
         }
         System.out.println("JavaDecaf: Compiling file " + filename + "...");
-        String precompiledClass = precompile(inputFile, ostr);
+        String javaFile = crossCompileFromJdcToJava(inputFile, ostr);
         long endTime = System.nanoTime();
         String returnMessage = "";
-        if (precompiledClass != null) {
+        if (javaFile != null) {
             if (parseOnly) { //print success message and finish
                returnMessage += "JavaDecaf: Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
             } else {
                 try {
-                    compileJava(precompiledClass); //call the java compiler
+                    compileJava(javaFile); //call the java compiler
                     returnMessage += "JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms";  //only print if successfully compiled
                 } catch (CompilerException e) {
                     returnMessage += e.getMessage();
@@ -93,7 +93,7 @@ public class JavaDecafCompiler {
      * @param ostr the PrintWriter to print to (file or console)
      * @return the filename of the converted java file, null if something goes wrong
      */
-    public String precompile(File inputFile, PrintWriter ostr) {
+    public String crossCompileFromJdcToJava(File inputFile, PrintWriter ostr) {
         JDCParser parser;
         ASTCompilationUnit parseTree;
         String className = "";
