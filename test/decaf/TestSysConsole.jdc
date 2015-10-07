@@ -1,0 +1,3 @@
+String foo = System.console().readLine();
+
+String bar = One().two().three();

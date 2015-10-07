@@ -993,7 +993,8 @@ void PrimarySuffix() :
                                               setFirstLastToken(jjtThis, t, getToken(0));
                                               })#PrimarySuffix
 |
-  "." <IDENTIFIER>
+  ({t = getToken(1);}"." <IDENTIFIER> {
+                                        setFirstLastToken(jjtThis, t, getToken(0));})#PrimarySuffixIdentifier
 |
   Arguments()
 

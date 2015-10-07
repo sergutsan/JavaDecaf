@@ -1,0 +1,5 @@
+int x = two(a, b);
+
+int y = three(a, b, c);
+
+int z = four(a,b,c,d);
