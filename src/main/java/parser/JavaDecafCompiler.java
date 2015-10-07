@@ -72,7 +72,7 @@ public class JavaDecafCompiler {
                returnMessage += "JavaDecaf: Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
             } else {
                 try {
-                    compileJava(javaFile); //call the java compiler
+                    compileJavaFile(javaFile); //call the java compiler
                     returnMessage += "JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms";  //only print if successfully compiled
                 } catch (CompilerException e) {
                     returnMessage += e.getMessage();
@@ -151,7 +151,7 @@ public class JavaDecafCompiler {
      * Run the system Java compiler on a java class.
      * @param filename the name of the file to compile
      */
-    public void compileJava(String filename) throws CompilerException {
+    public void compileJavaFile(String filename) throws CompilerException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
         if (compiler == null) {
             System.setProperty("java.home",System.getenv("JAVA_HOME")); //this should work on BBK lab computers
