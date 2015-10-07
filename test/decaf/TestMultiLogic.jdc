@@ -1,0 +1,24 @@
+if (x == y && y == z && z != null) {
+    println("Hello");
+}
+
+if (x == y || y == z && z != null) {
+    println("Hello");
+}
+
+
+if (x == y && y == z && z != null && x == z) {
+    println("Hello");
+}
+
+
+
+if (x == y && y == z || z != null && x == z) {
+    println("Hello");
+}
+
+
+
+if ((x == y && y == z) || (z != null && x == z)) {
+    println("Hello");
+}
