@@ -432,6 +432,7 @@ ASTCompilationUnit CompilationUnit()                  :
     }
 /*@egen*/
     {
+      //((SimpleNode)jjtree.rootNode()).dump(">"); //Dump nodes to console
       return jjtn000;
     }/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
@@ -1256,7 +1257,7 @@ void ConditionalOrExpression() :
                              }
                              try {
 /*@egen*/ (
-  ({
+  (LOOKAHEAD(2) {
      t = getToken(1);
     }"||"
 
@@ -1304,13 +1305,13 @@ void ConditionalAndExpression() :
   ({
     t = getToken(1);
     }
-  ( "&&"
+  ( LOOKAHEAD(2) "&&"
 
-    InclusiveOrExpression() )*/*@bgen(jjtree)*/
-                               {
-                                 jjtree.closeNodeScope(jjtn001, true);
-                                 jjtc001 = false;
-                               }
+   ConditionalOrExpression() )*/*@bgen(jjtree)*/
+                                {
+                                  jjtree.closeNodeScope(jjtn001, true);
+                                  jjtc001 = false;
+                                }
 /*@egen*/ {
                                    setFirstLastToken(jjtn001, t, getToken(1));
                                    })/*@bgen(jjtree)*/

@@ -415,6 +415,7 @@ ASTCompilationUnit CompilationUnit() #CompilationUnit :
 
   }
     {
+      //((SimpleNode)jjtree.rootNode()).dump(">"); //Dump nodes to console
       return jjtThis;
     }
 }
@@ -803,7 +804,7 @@ void ConditionalOrExpression() :
 {Token t = null;}
 {
   ConditionalAndExpression() (
-  ({
+  (LOOKAHEAD(2) {
      t = getToken(1);
     }"||"
 
@@ -819,9 +820,9 @@ void ConditionalAndExpression() :
   ({
     t = getToken(1);
     }
-  ( "&&"
+  ( LOOKAHEAD(2) "&&"
 
-    InclusiveOrExpression() )* {
+   ConditionalOrExpression() )* {
                                    setFirstLastToken(jjtThis, t, getToken(1));
                                    })#ConditionalAnd
 }
