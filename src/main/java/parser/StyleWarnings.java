@@ -16,7 +16,14 @@ public class StyleWarnings {
     public static void generateWarning(Token t, JDCParser parser, String message) {
         String warning = "Warning: encountered \"" + t.image + "\" at line " + t.endLine + ", column " + t.endColumn +
                 ": " + message;
-        parser.addWarning(warning);
+	  /*
+	   * FIXME: disabling warnings for now. 
+	   * 
+	   * TODO: 
+	   *   - set levels of warning on the command line
+	   *   - fix the indentation warnings
+	   */
+        // FIXME: disabling for now  ----> parser.addWarning(warning);
     }
 
 }
