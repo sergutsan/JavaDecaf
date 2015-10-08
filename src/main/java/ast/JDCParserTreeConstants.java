@@ -32,32 +32,33 @@ public interface JDCParserTreeConstants
   public int JJTPRIMARYEXPRESSION = 24;
   public int JJTPARENSEXPRESSION = 25;
   public int JJTPRIMARYSUFFIX = 26;
-  public int JJTARGUMENTS = 27;
-  public int JJTARRAYLBRACKET = 28;
-  public int JJTARRAYRBRACKET = 29;
-  public int JJTBLOCK = 30;
-  public int JJTLOCALVARIABLEDECLARATION = 31;
-  public int JJTSTATEMENTEXPRESSION = 32;
-  public int JJTSWITCHSTATEMENT = 33;
-  public int JJTCASESWITCHLABEL = 34;
-  public int JJTDEFAULTSWITCHLABEL = 35;
-  public int JJTIFSTATEMENT = 36;
-  public int JJTELSEIFSTATEMENT = 37;
-  public int JJTELSESTATEMENT = 38;
-  public int JJTWHILESTATEMENT = 39;
-  public int JJTDOSTATEMENT = 40;
-  public int JJTWHILEAFTERDO = 41;
-  public int JJTFORSEMICOLON = 42;
-  public int JJTFORBLOCK = 43;
-  public int JJTFORSTATEMENT = 44;
-  public int JJTBREAKSTATEMENT = 45;
-  public int JJTRETURNSTATEMENT = 46;
-  public int JJTCATCH = 47;
-  public int JJTFINALLY = 48;
-  public int JJTTRY = 49;
-  public int JJTDECAFCLASS = 50;
-  public int JJTDECAFMAIN = 51;
-  public int JJTDECAFMETHOD = 52;
+  public int JJTPRIMARYSUFFIXIDENTIFIER = 27;
+  public int JJTARGUMENTS = 28;
+  public int JJTARRAYLBRACKET = 29;
+  public int JJTARRAYRBRACKET = 30;
+  public int JJTBLOCK = 31;
+  public int JJTLOCALVARIABLEDECLARATION = 32;
+  public int JJTSTATEMENTEXPRESSION = 33;
+  public int JJTSWITCHSTATEMENT = 34;
+  public int JJTCASESWITCHLABEL = 35;
+  public int JJTDEFAULTSWITCHLABEL = 36;
+  public int JJTIFSTATEMENT = 37;
+  public int JJTELSEIFSTATEMENT = 38;
+  public int JJTELSESTATEMENT = 39;
+  public int JJTWHILESTATEMENT = 40;
+  public int JJTDOSTATEMENT = 41;
+  public int JJTWHILEAFTERDO = 42;
+  public int JJTFORSEMICOLON = 43;
+  public int JJTFORBLOCK = 44;
+  public int JJTFORSTATEMENT = 45;
+  public int JJTBREAKSTATEMENT = 46;
+  public int JJTRETURNSTATEMENT = 47;
+  public int JJTCATCH = 48;
+  public int JJTFINALLY = 49;
+  public int JJTTRY = 50;
+  public int JJTDECAFCLASS = 51;
+  public int JJTDECAFMAIN = 52;
+  public int JJTDECAFMETHOD = 53;
 
 
   public String[] jjtNodeName = {
@@ -88,6 +89,7 @@ public interface JDCParserTreeConstants
     "PrimaryExpression",
     "ParensExpression",
     "PrimarySuffix",
+    "PrimarySuffixIdentifier",
     "Arguments",
     "ArrayLBracket",
     "ArrayRBracket",
@@ -116,4 +118,4 @@ public interface JDCParserTreeConstants
     "DecafMethod",
   };
 }
-/* JavaCC - OriginalChecksum=90b7229ea5a99ba79bcbd733388db9a7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=8639021baa439511cce4d2c645aa3f4c (do not edit this line) */
