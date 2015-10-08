@@ -201,7 +201,7 @@ public class SimpleNode implements Node {
      * indenting, then print its contents. Finally, process all the node's children.
      * @param ostr the output stream to print to.
      */
-    public void process (PrintWriter ostr) {
+    public void process(PrintWriter ostr) {
         setIndentationLevel();
         Token t = begin;
         /*

@@ -43,7 +43,7 @@ public class NodeUtils {
                     currentToken.image = "System.out.print";
                     break;
                 case "readLine":
-                    currentToken.image = "input.next"; //input is Scanner
+                    currentToken.image = "input.nextLine"; //input is Scanner
                     break;
                 case "readInt":
                     currentToken.image = "input.nextInt";

@@ -64,15 +64,15 @@ public class JavaDecafCompiler {
             ostr = new PrintWriter(System.out);
         }
         System.out.println("JavaDecaf: Compiling file " + filename + "...");
-        String precompiledClass = precompile(inputFile, ostr);
+        String javaFile = crossCompileFromJdcToJava(inputFile, ostr);
         long endTime = System.nanoTime();
         String returnMessage = "";
-        if (precompiledClass != null) {
+        if (javaFile != null) {
             if (parseOnly) { //print success message and finish
                returnMessage += "JavaDecaf: Parse completed in " + ((endTime - startTime) / 1000000) + " ms";
             } else {
                 try {
-                    compileJava(precompiledClass); //call the java compiler
+                    compileJavaFile(javaFile); //call the java compiler
                     returnMessage += "JavaDecaf: Compilation finished in " + ((endTime - startTime) / 1000000) + " ms";  //only print if successfully compiled
                 } catch (CompilerException e) {
                     returnMessage += e.getMessage();
@@ -93,7 +93,7 @@ public class JavaDecafCompiler {
      * @param ostr the PrintWriter to print to (file or console)
      * @return the filename of the converted java file, null if something goes wrong
      */
-    public String precompile(File inputFile, PrintWriter ostr) {
+    public String crossCompileFromJdcToJava(File inputFile, PrintWriter ostr) {
         JDCParser parser;
         ASTCompilationUnit parseTree;
         String className = "";
@@ -127,7 +127,7 @@ public class JavaDecafCompiler {
                     }
                     return null; //don't return successfully
                 }
-                ostr.close();
+                ostr.close(); // FIXME: should this writer be closed before looking at the errors to ensure it is always closed? -- SG
                 return className + ".java"; //return the finished filename to signal successful compilation
             }catch  (StringIndexOutOfBoundsException e) { //Bad filename
                 System.out.println("Error: Please make sure your file has the extension .jdc");
@@ -151,7 +151,7 @@ public class JavaDecafCompiler {
      * Run the system Java compiler on a java class.
      * @param filename the name of the file to compile
      */
-    public void compileJava(String filename) throws CompilerException {
+    public void compileJavaFile(String filename) throws CompilerException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); //get the local system java compiler
         if (compiler == null) {
             System.setProperty("java.home",System.getenv("JAVA_HOME")); //this should work on BBK lab computers
@@ -165,6 +165,9 @@ public class JavaDecafCompiler {
         List<String> argOptions = Arrays.asList("-cp", "."); //command line options - set classpath to current working directory
         JavaCompiler.CompilationTask compTask = compiler.getTask(null, fileMgr, null, null, null, fileToCompile); //init compilation task with file mgr and file to compile
         compTask.call(); //compile the file
+        // TODO: if compTask.call() returns true, may execute resulting CLASS
+	//       this may require to add another CMD flag for three possible behaviours: 
+	//       compile and (if no errors) execute, only compile to CLASS, only pre-compile into Java
     }
 
     /**
@@ -172,12 +175,12 @@ public class JavaDecafCompiler {
      */
     public void printUsage(){
         String usage = "usage: javadecaf [options] filename" +
-                "\noptions:"+
-                "\n-p, -parse      Parse-only mode - disable Java compiler stage" +
-                "\n-v, -version    Display version number" +
-                "\n-c, -console    Change output mode to console, not file (enables parse-only mode)" +
-                "\n-d, -debug      Enable debugging mode - show parser trace" +
-                "\n-help           Show help";
+                "\n  options:"+
+                "\n  -p, -parse      Parse-only mode - disable Java compiler stage" +
+                "\n  -v, -version    Display version number" +
+                "\n  -c, -console    Change output mode to console, not file (enables parse-only mode)" +
+                "\n  -d, -debug      Enable debugging mode - show parser trace" +
+                "\n  -help           Show help";
 
         System.out.println(usage);
     }
