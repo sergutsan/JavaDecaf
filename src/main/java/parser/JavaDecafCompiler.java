@@ -17,7 +17,7 @@ import org.apache.commons.io.input.BOMInputStream;
  * @author Sophie Koonin
  */
 public class JavaDecafCompiler {
-    private static final double VERSION = 1.0;
+    private static final double VERSION = 1.1;
     private boolean debug = false;
 
     public static void main(String[] args) throws Exception {
@@ -115,7 +115,7 @@ public class JavaDecafCompiler {
                     parser.enable_tracing(); //enable debugging mode if requested
                 }
                 parseTree = parser.CompilationUnit();
-                parseTree.process(ostr); //run the parser
+                parseTree.process(ostr); //run the parser and write result on disk in the absence of errors
                 if (parser.hasWarnings()) {
                     for (String warning: parser.getWarningList()) {
                         System.err.println(warning);
