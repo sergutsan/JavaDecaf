@@ -17,7 +17,7 @@ import org.apache.commons.io.input.BOMInputStream;
  * @author Sophie Koonin
  */
 public class JavaDecafCompiler {
-    private static final double VERSION = 1.0;
+    private static final double VERSION = 1.1;
     private boolean debug = false;
 
     public static void main(String[] args) throws Exception {
