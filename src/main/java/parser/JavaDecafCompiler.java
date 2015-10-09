@@ -40,6 +40,7 @@ public class JavaDecafCompiler {
         List<String> argsList = Arrays.asList(args);
         if (argsList.contains("-v") || argsList.contains("-version")) {
             System.out.println("JavaDecaf Compiler version " + VERSION);
+            if (argsList.size() == 1) return; //if only arg is -v, don't try and compile
             //TODO change this to read from maven version?
         }
         if (argsList.contains("-p") || argsList.contains("-parse")) {
