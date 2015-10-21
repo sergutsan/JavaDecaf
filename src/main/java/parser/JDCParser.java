@@ -5,6 +5,7 @@ import ast.*;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
   protected JJTJDCParserState jjtree = new JJTJDCParserState();private List<String> warnings = new ArrayList<String>(); // list of warnings
@@ -28,14 +29,22 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
 
     /**
-    *  Test whether a given identifier is a legal method name: must begin with lower case letter.
+    * Test whether a given identifier is a legal method name: must begin with lower case letter
+    * and must not be equal to any of the methods in java.lang.Object. 
+    * 
     * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
     public void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
            errors.add((new MethodNameParseException(t)).getMessage());
-        }
+        } else {
+		String[] methodsInJavaLangObject = {"clone", "equals", "finalize", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait"};
+		List<String> reservedMethodNames = Arrays.asList(methodsInJavaLangObject);
+		if (reservedMethodNames.contains(t.image)) {
+		    errors.add((new MethodNameTakenException(t)).getMessage());
+		}
+	  }
     }
 
     /**
