@@ -17,7 +17,7 @@ import org.apache.commons.io.input.BOMInputStream;
  * @author Sophie Koonin
  */
 public class JavaDecafCompiler {
-    private static final double VERSION = 1.0;
+    private static final double VERSION = 1.1;
     private boolean debug = false;
 
     public static void main(String[] args) throws Exception {
@@ -40,6 +40,8 @@ public class JavaDecafCompiler {
         List<String> argsList = Arrays.asList(args);
         if (argsList.contains("-v") || argsList.contains("-version")) {
             System.out.println("JavaDecaf Compiler version " + VERSION);
+            if (argsList.size() == 1) return; //if only arg is -v, don't try and compile
+            //TODO change this to read from maven version?
         }
         if (argsList.contains("-p") || argsList.contains("-parse")) {
             parseOnly = true;
@@ -115,7 +117,7 @@ public class JavaDecafCompiler {
                     parser.enable_tracing(); //enable debugging mode if requested
                 }
                 parseTree = parser.CompilationUnit();
-                parseTree.process(ostr); //run the parser
+                parseTree.process(ostr); //run the parser and write result on disk in the absence of errors
                 if (parser.hasWarnings()) {
                     for (String warning: parser.getWarningList()) {
                         System.err.println(warning);
