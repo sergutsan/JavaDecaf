@@ -59,19 +59,16 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 	  if (!Character.isLetter(firstChar)) {
 		errors.add((new VariableNameParseException(t)).getMessage());
 	  } else if (Character.isUpperCase(firstChar)) {
-                boolean allCaps = true;
-                for (char c: t.image.toCharArray()) {
-                    if (Character.isLowerCase(c)) {
-                        allCaps = false;
-                    }
-                }
-                /* if the first letter is a capital and there are lower case letters in the rest of the name,
-                    throw an exception */
-                if (!allCaps) {
-                     errors.add((new VariableNameParseException(t)).getMessage());
-                }
-            }
-        }
+		// maybe a constant?
+		for (char c: t.image.toCharArray()) {
+		    if (Character.isLowerCase(c)) {
+			  // alas, not a constant; just bad capitalisation
+			  errors.add((new VariableNameParseException(t)).getMessage());
+			  break;
+		    }
+		}
+	  }
+    }
 
     /**
      * Add a warning to the internal warning list to be printed at the end.
