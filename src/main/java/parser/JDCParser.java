@@ -30,20 +30,32 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
     /**
     * Test whether a given identifier is a legal method name: must begin with lower case letter
-    * and must not be equal to any of the methods in java.lang.Object. 
+    * and must not be equal to any of the methods in java.lang.Object or to any of the methods
+    * defined by Java Decaf. 
     * 
-    * Throw MethodNameParseException if not legal.
+    * @throw MethodNameParseException if the name starts with a capital letter
+    * @throw MethodNameParseTakenException if the name is used by methods of java.lang.Object
+    * @throw MethodNameParseTakenDecafException if the name is used by Java Decaf
     * @param t - the token of the identifier in question
     */
     public void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
            errors.add((new MethodNameParseException(t)).getMessage());
-        } else {
-		String[] methodsInJavaLangObject = {"clone", "equals", "finalize", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait"};
-		List<String> reservedMethodNames = Arrays.asList(methodsInJavaLangObject);
-		if (reservedMethodNames.contains(t.image)) {
-		    errors.add((new MethodNameTakenException(t)).getMessage());
-		}
+	     return;
+        } 
+
+	  String[] methodsInJavaLangObject = {"clone", "equals", "finalize", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait"};
+	  List<String> reservedMethodNames = Arrays.asList(methodsInJavaLangObject);
+	  if (reservedMethodNames.contains(t.image)) {
+		errors.add((new MethodNameTakenException(t)).getMessage());
+		return;
+	  }
+
+	  String[] javaDecafMethods = {"print", "println", "readLine", "readInt", "readDouble"};
+	  reservedMethodNames = Arrays.asList(javaDecafMethods);
+	  if (reservedMethodNames.contains(t.image)) {
+		errors.add((new MethodNameTakenDecafException(t)).getMessage());
+		return;
 	  }
     }
 
