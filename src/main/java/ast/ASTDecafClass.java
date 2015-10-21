@@ -20,12 +20,22 @@ class ASTDecafClass extends SimpleNode {
     }
 
     public void process(PrintWriter ostr) {
+	  String TAB = NodeUtils.INDENTATION;
         String classDec = EOL + "import java.util.Scanner;" + EOL + EOL +  //Assign the class/main method encapsulation code
-                "public class " + parser.getClassName() + " { " + EOL + NodeUtils.INDENTATION +
-                "private static Scanner __input = new Scanner(System.in);" + EOL + EOL  + NodeUtils.INDENTATION; //init Scanner for reading from stdin
+                "public class " + parser.getClassName() + " { " + EOL + TAB +
+                "private static Scanner __input = new Scanner(System.in);" + EOL + EOL  + TAB; //init Scanner for reading from stdin
 
         ostr.print(classDec);
         super.process(ostr);
+
+	  // Add JavaDecaf methods
+	  String print   = EOL + TAB + "public static void print(String s)   { System.out.print(s); }"   + EOL;
+	  String println = EOL + TAB + "public static void println(String s) { System.out.println(s); }" + EOL;
+	  String readLine  = EOL + TAB + "public static String readLine()  { return __input.nextLine(); }" + EOL;
+	  String readInt   = EOL + TAB + "public static int    readInt()   { return Integer.parseInt(readLine());  }" + EOL;
+	  String readDouble= EOL + TAB + "public static double readdouble(){ return Double.parseDouble(readLine());}" + EOL;
+	  ostr.print(print + println + readLine + readInt + readDouble);
+
 	  ClosingBraceSimpleNode.closeBracket(ostr, indentationLevel);
     }
 
