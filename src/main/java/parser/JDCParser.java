@@ -56,19 +56,17 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         */
     public void checkVariableName(Token t) throws VariableNameParseException {
             if (Character.isUpperCase(t.image.charAt(0))) {
-                int lowerCount = 0;
+                boolean allCaps = true;
                 for (char c: t.image.toCharArray()) {
                     if (Character.isLowerCase(c)) {
-                        lowerCount++;
+                        allCaps = false;
                     }
                 }
                 /* if the first letter is a capital and there are lower case letters in the rest of the name,
                     throw an exception */
-                if (lowerCount != 0) {
+                if (!allCaps) {
                      errors.add((new VariableNameParseException(t)).getMessage());
                 }
-
-
             }
         }
 
