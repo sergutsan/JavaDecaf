@@ -28,13 +28,13 @@ class ASTDecafClass extends SimpleNode {
         ostr.print(classDec);
         super.process(ostr);
 
-	  // Add JavaDecaf methods
-	  String print   = EOL + TAB + "public static void print(String s)   { System.out.print(s); }"   + EOL;
-	  String println = EOL + TAB + "public static void println(String s) { System.out.println(s); }" + EOL;
+	  // Add JavaDecaf "read" methods; "print" methods are not added because it is just too much unnecessary
+	  // boilerplate (there are 10 polymorphic versions of System.out.println()): it is much simpler and
+	  // cleaner to replace printX for System.out.printX in the AST. 
 	  String readLine  = EOL + TAB + "public static String readLine()  { return __input.nextLine(); }" + EOL;
 	  String readInt   = EOL + TAB + "public static int    readInt()   { return Integer.parseInt(readLine());  }" + EOL;
 	  String readDouble= EOL + TAB + "public static double readdouble(){ return Double.parseDouble(readLine());}" + EOL;
-	  ostr.print(print + println + readLine + readInt + readDouble);
+	  ostr.print(readLine + readInt + readDouble);
 
 	  ClosingBraceSimpleNode.closeBracket(ostr, indentationLevel);
     }
