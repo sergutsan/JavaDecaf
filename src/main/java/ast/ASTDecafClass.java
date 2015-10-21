@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import static ast.NodeUtils.EOL;
 
 public
-class ASTDecafClass extends ClosingBraceSimpleNode {
+class ASTDecafClass extends SimpleNode {
     public ASTDecafClass(int id) {
         super(id);
     }
@@ -26,6 +26,7 @@ class ASTDecafClass extends ClosingBraceSimpleNode {
 
         ostr.print(classDec);
         super.process(ostr);
+	  ClosingBraceSimpleNode.closeBracket(ostr, indentationLevel);
     }
 
 

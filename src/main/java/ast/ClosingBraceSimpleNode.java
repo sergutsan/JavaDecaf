@@ -20,17 +20,19 @@ public class ClosingBraceSimpleNode extends SimpleNode {
 
     public void process(PrintWriter ostr) {
         super.process(ostr);
+	  ClosingBraceSimpleNode.closeBracket(ostr, indentationLevel);
+    }
 
+    public static void closeBracket(PrintWriter ostr, int indentLevel) {
         String indentation = "";
 
-        for (int i = 0; i<indentationLevel; i++) {
+        for (int i = 0; i < indentLevel; i++) {
             indentation += NodeUtils.INDENTATION;
         }
 
         Token closingBrace = Token.newToken(73, indentation + "}");
         closingBrace.specialToken = new Token(0, NodeUtils.EOL);
         print(closingBrace,ostr);
-
     }
 
 }
