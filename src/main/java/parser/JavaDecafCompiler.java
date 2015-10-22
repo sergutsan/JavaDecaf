@@ -155,9 +155,27 @@ public class JavaDecafCompiler {
 	  if (Character.isDigit(jdcFilename.charAt(0))) { //Check that first char of file name is not digit
 		throw new ClassNameParseException("File names in JavaDecaf cannot begin with a number. " +
 							    "Please rename the file.");
-	  } else if (Character.isLowerCase(jdcFilename.charAt(0))) { //Check that first char is uppercase
+	  } 
+	  if (Character.isLowerCase(jdcFilename.charAt(0))) { //Check that first char is uppercase
 		throw new ClassNameParseException("File names in JavaDecaf must begin with a capital letter. " +
 							    "Please rename the file.");
+	  }
+	  for (char c: jdcFilename.toCharArray()) {
+		if (!isValidFilenameCharacter(c)) {
+		    throw new ClassNameParseException("File names in JavaDecaf must be composed only of letters, " + 
+								  "numbers, and underscores. Please rename the file.");
+		}
+	  }
+    }
+
+    /**
+     * Returns true if the character is a letter, number, or underscore, false otherwise. 
+     */
+    private boolean isValidFilenameCharacter(char c) {
+	  if (Character.isLetter(c) || Character.isDigit(c) || c == '_') {
+		return true;
+	  } else {
+		return false;
 	  }
     }
 
