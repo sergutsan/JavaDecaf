@@ -21,10 +21,11 @@ class ASTDecafClass extends SimpleNode {
 
     public void process(PrintWriter ostr) {
 	  String TAB = NodeUtils.INDENTATION;
-        String classDec = EOL + "import java.util.Scanner;" + EOL + EOL +  //Assign the class/main method encapsulation code
-		"public class " + parser.getClassName() + " { " + EOL + TAB;
+	  // FIXME: This is all in one to keep line numbers in the Java code as close as possible to the Java Decaf code.
+	  //        This should be addressed better by capturing the errors of javac and subtracting from them. 
+        String topBoilerPlate = "import java.util.Scanner;" + "public class " + parser.getClassName() + " { ";
 
-        ostr.print(classDec);
+        ostr.print(topBoilerPlate);
         super.process(ostr);
 
 	  // Add JavaDecaf "read" methods; "print" methods are not added because it is just too much unnecessary
