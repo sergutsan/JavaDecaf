@@ -60,14 +60,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     }
 
     /**
-        *  Test whether a given identifier is a legal class name: must begin with upper case letter.
-        * Throw ClassNameParseException if not legal.
+        * Test whether a given identifier is a legal class name: must begin with upper case letter and
+	  * must be different from the name of the containing script. 
+        * @throw ClassNameParseException if the name does not start with a capital letter
+        * @throw ClassNameSameAsScriptException if the name is the same as the containing script
         * @param t - the token of the identifier in question
         */
     public void checkClassName(Token t) throws ClassNameParseException {
             if (Character.isLowerCase(t.image.charAt(0))){
                 errors.add((new ClassNameParseException(t)).getMessage());
             }
+		if (this.getClassName().equals(t.image)) {
+		    errors.add((new ClassNameSameAsScriptException(t)).getMessage());
+		}
         }
     /**
         *  Test whether a given identifier is a legal variable name: must begin with lower case letter
