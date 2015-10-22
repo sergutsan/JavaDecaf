@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import static ast.NodeUtils.EOL;
 
 public
-class ASTDecafClass extends ClosingBraceSimpleNode {
+class ASTDecafClass extends SimpleNode {
     public ASTDecafClass(int id) {
         super(id);
     }
@@ -20,12 +20,23 @@ class ASTDecafClass extends ClosingBraceSimpleNode {
     }
 
     public void process(PrintWriter ostr) {
+	  String TAB = NodeUtils.INDENTATION;
         String classDec = EOL + "import java.util.Scanner;" + EOL + EOL +  //Assign the class/main method encapsulation code
-                "public class " + parser.getClassName() + " { " + EOL + NodeUtils.INDENTATION +
-                "private static Scanner __input = new Scanner(System.in);" + EOL + EOL  + NodeUtils.INDENTATION; //init Scanner for reading from stdin
+                "public class " + parser.getClassName() + " { " + EOL + TAB +
+                "private static Scanner __input = new Scanner(System.in);" + EOL + EOL  + TAB; //init Scanner for reading from stdin
 
         ostr.print(classDec);
         super.process(ostr);
+
+	  // Add JavaDecaf "read" methods; "print" methods are not added because it is just too much unnecessary
+	  // boilerplate (there are 10 polymorphic versions of System.out.println()): it is much simpler and
+	  // cleaner to replace printX for System.out.printX in the AST. 
+	  String readLine  = EOL + TAB + "public static String readLine()  { return __input.nextLine(); }" + EOL;
+	  String readInt   = EOL + TAB + "public static int    readInt()   { return Integer.parseInt(readLine());  }" + EOL;
+	  String readDouble= EOL + TAB + "public static double readdouble(){ return Double.parseDouble(readLine());}" + EOL;
+	  ostr.print(readLine + readInt + readDouble);
+
+	  ClosingBraceSimpleNode.closeBracket(ostr, indentationLevel);
     }
 
 

@@ -318,7 +318,7 @@ public class SimpleNode implements Node {
      * @param t - the token to print
      * @param ostr - the PrintWriter to print to
      */
-    protected void print(Token t, PrintWriter ostr) {
+    protected static void print(Token t, PrintWriter ostr) {
         Token tt = t.specialToken;
         if (tt != null) {
             while (tt.specialToken != null) tt = tt.specialToken;
@@ -335,7 +335,7 @@ public class SimpleNode implements Node {
      * @param str - The string to escape
      * @return the escaped sequence as a String
      */
-    private String addUnicodeEscapes(String str) {
+    private static String addUnicodeEscapes(String str) {
         String retval = "";
         char ch;
         for (int i = 0; i < str.length(); i++) {
