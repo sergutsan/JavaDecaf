@@ -65,7 +65,7 @@ public class JavaDecafCompiler {
             parseOnly = true;
             ostr = new PrintWriter(System.out);
         }
-        System.out.println("JavaDecaf: Compiling file " + filename + "...");
+        System.out.println("JavaDecaf: Compiling file '" + filename + "'...");
         String javaFile = crossCompileFromJdcToJava(inputFile, ostr);
         long endTime = System.nanoTime();
         String returnMessage = "";
