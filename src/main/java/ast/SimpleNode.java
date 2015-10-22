@@ -302,8 +302,8 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * Checks whether this node is in a Decaf method.
-     * @return true if this is a Decaf method, otherwise false
+     * Checks whether this node is in the Decaf main method.
+     * @return true if this is the Decaf main method, otherwise false
      */
     public static boolean isDecafMain() { return decafMain; }
 
