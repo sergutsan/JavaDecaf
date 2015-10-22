@@ -134,9 +134,7 @@ public class ParseException extends Exception {
 
       /* current token is SEMICOLON or RBRACE and next is EOF - missing RBRACE */
         } else if ((currentToken.kind == JDCParserConstants.SEMICOLON || currentToken.kind == JDCParserConstants.RBRACE) && nextToken.kind == JDCParserConstants.EOF) {
-            retval += "You may have forgotten a closing brace } after \"" + currentToken.image + "\"";
-
-
+            retval += "You may have forgotten a closing brace } at some point.";
         } else if (currentToken.kind == JDCParserConstants.STRING_LITERAL && isIdentifier(nextToken.kind)) {
             retval += "If you are using quotation marks within a string, you need to escape them by adding a backslash, e.g.: \nprintln(\"say \\\"hello\\\"!\") ." +
                     "\nIf you are trying to join multiple strings, make sure you concatenate them with + , e.g.: \nprintln(\"hello\" + name + \"!\")\"; .";
