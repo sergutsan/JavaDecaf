@@ -101,9 +101,9 @@ public class JavaDecafCompiler {
         String className = "";
             try {
 		    String filename = inputFile.getName();
-		    checkValidName(filename);
 		    int index = filename.indexOf("."); //get the index of the full stop for substring
 		    className = filename.substring(0, index); //get the name of the class from the filename (before extension)
+		    checkValidJavaDecafFileName(className);
                 if (ostr == null) {
                     ostr = new PrintWriter(new FileWriter(className + ".java"));
                 }
@@ -151,17 +151,17 @@ public class JavaDecafCompiler {
      * 
      * @throws ClassNameParseException if the name of the file is not valid. 
      */
-    private void checkValidName(String jdcFilename) throws ClassNameParseException {
-	  if (Character.isDigit(jdcFilename.charAt(0))) { //Check that first char of file name is not digit
+    private void checkValidJavaDecafFileName(String s) throws ClassNameParseException {
+	  if (Character.isDigit(s.charAt(0))) { //Check that first char of file name is not digit
 		throw new ClassNameParseException("File names in JavaDecaf cannot begin with a number. " +
 							    "Please rename the file.");
 	  } 
-	  if (Character.isLowerCase(jdcFilename.charAt(0))) { //Check that first char is uppercase
+	  if (Character.isLowerCase(s.charAt(0))) { //Check that first char is uppercase
 		throw new ClassNameParseException("File names in JavaDecaf must begin with a capital letter. " +
 							    "Please rename the file.");
 	  }
-	  for (char c: jdcFilename.toCharArray()) {
-		if (!isValidFilenameCharacter(c)) {
+	  for (char c: s.toCharArray()) {
+		if (!isValidCharacterForJavaDecafFileName(c)) {
 		    throw new ClassNameParseException("File names in JavaDecaf must be composed only of letters, " + 
 								  "numbers, and underscores. Please rename the file.");
 		}
@@ -171,7 +171,7 @@ public class JavaDecafCompiler {
     /**
      * Returns true if the character is a letter, number, or underscore, false otherwise. 
      */
-    private boolean isValidFilenameCharacter(char c) {
+    private boolean isValidCharacterForJavaDecafFileName(char c) {
 	  if (Character.isLetter(c) || Character.isDigit(c) || c == '_') {
 		return true;
 	  } else {

@@ -158,36 +158,34 @@ public class ParseException extends Exception {
       * Lookahead will spot this error, hence currentToken will be the one before the loop keyword. */
         } else if ((nextToken.kind == JDCParserConstants.IF || nextToken.kind == JDCParserConstants.FOR || nextToken.kind == JDCParserConstants.WHILE)
                 && (nextToken.next != null && nextToken.next.kind != JDCParserConstants.RPAREN)) {
-            retval += "You may have forgotten parentheses around the loop condition."+
-                    "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
-                    "if (x > y) {\n" +
-                    "    println(x);\n" +
-                    "}";
-
+            retval += "You may have forgotten parentheses around a boolean condition.\n"+
+                    "Boolean condition in branches (\'if\') or loops (\'while\', \'for\') must be in parentheses () and \n" + 
+		        "the body of the branch or loop must be inside curly braces { }, e.g.: \n" +
+                    "if (x > y) {                 for (int i = 0; i < 10; i++) {           \n" +
+                    "    println(x);                  println(i);                          \n" +
+                    "}                            }                                          ";
           /* Current token is IF, FOR or WHILE, and next token is NOT RPAREN - this is the same as previous error but without lookahead */
         } else if ((currentToken.kind == JDCParserConstants.IF || currentToken.kind == JDCParserConstants.FOR || currentToken.kind == JDCParserConstants.WHILE)
                 && nextToken.kind != JDCParserConstants.RPAREN) { //error with loop, no lookahead - currentToken is loop keyword
-            retval += "You may have forgotten parentheses around the loop condition."+
-                    "\n\'if\', \'for\' and \'while\' loop conditions should be in parentheses () and the loop body should be in curly braces { }, e.g.: \n" +
-                    "if (x > y) {\n" +
-                    "    println(x);\n" +
-                    "}";
-
+            retval += "You may have forgotten parentheses around a boolean condition."+
+                    "Boolean condition in branches (\'if\') or loops (\'while\', \'for\') must be in parentheses () and \n" + 
+		        "the body of the branch or loop must be inside curly braces { }, e.g.: \n" +
+                    "if (x > y) {                 for (int i = 0; i < 10; i++) {           \n" +
+                    "    println(x);                  println(i);                          \n" +
+                    "}                            }                                          ";
           /* Current token is IDENTIFIER or primitive and next token is ASSIGN - no variable name declared */
         } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind)) && nextToken.kind == JDCParserConstants.ASSIGN) {
             retval += "You may have forgotten to define a name for a variable, e.g.: int myNum = 5; ";
-
       /* Current token is RPAREN and next is SEMICOLON, and LBRACE expected - semicolon inserted after loop condition */
         } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind == JDCParserConstants.SEMICOLON && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
             retval += "You may have inserted a semicolon after a loop condition. This will cause the statement to be evaluated incorrectly.";
 
           /* Current token is RPAREN and next is NOT a LBRACE when one is expected - loop/branch statement without curly braces */
         } else if (currentToken.kind == JDCParserConstants.RPAREN && nextToken.kind != JDCParserConstants.LBRACE && expectedTokenSequences[0][0] == JDCParserConstants.LBRACE) {
-            retval += "Loop statements must be contained in curly braces, e.g.:\n " +
-                    "if (x > y) {\n" +
-                    "    println(x);\n" +
-                    "}";
-
+            retval += "The body of a branch (\'if\') or loop (\'while\', \'for\') must be inside curly braces, e.g.:\n " +
+                    "if (x > y) {                 for (int i = 0; i < 10; i++) {           \n" +
+                    "    println(x);                  println(i);                          \n" +
+                    "}                            }                                          ";
         } else if ((isIdentifier(currentToken.kind) || isPrimitive(currentToken.kind))  && nextToken.kind == JDCParserConstants.DIGIT){
             retval += "Method and variable names should not begin with a number or be entirely numeric, e.g.:\n" +
                     "Acceptable: void method1(), int num1\n" +
