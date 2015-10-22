@@ -100,15 +100,10 @@ public class JavaDecafCompiler {
         ASTCompilationUnit parseTree;
         String className = "";
             try {
-                int index = inputFile.getName().indexOf("."); //get the index of the full stop for substring
-                className = inputFile.getName().substring(0, index); //get the name of the class from the filename (before extension)
-                if (Character.isDigit(inputFile.getName().charAt(0))) { //Check that first char of file name is not digit
-                    throw new ClassNameParseException("File names in JavaDecaf cannot begin with a number. " +
-                            "Please rename the file.");
-                } else if (Character.isLowerCase(inputFile.getName().charAt(0))) { //Check that first char is uppercase
-                    throw new ClassNameParseException("File names in JavaDecaf must begin with a capital letter. " +
-                            "Please rename the file.");
-                }
+		    String filename = inputFile.getName();
+		    checkValidName(filename);
+		    int index = filename.indexOf("."); //get the index of the full stop for substring
+		    className = filename.substring(0, index); //get the name of the class from the filename (before extension)
                 if (ostr == null) {
                     ostr = new PrintWriter(new FileWriter(className + ".java"));
                 }
@@ -131,7 +126,7 @@ public class JavaDecafCompiler {
                 }
                 ostr.close(); // FIXME: should this writer be closed before looking at the errors to ensure it is always closed? -- SG
                 return className + ".java"; //return the finished filename to signal successful compilation
-            }catch  (StringIndexOutOfBoundsException e) { //Bad filename
+            } catch  (StringIndexOutOfBoundsException e) { //Bad filename
                 System.out.println("Error: Please make sure your file has the extension .jdc");
             } catch (ParseException e) { //This shouldn't happen, but catch anyway
                 System.out.println(e.getMessage());
@@ -147,6 +142,23 @@ public class JavaDecafCompiler {
                 ex.printStackTrace();
             }
         return null;
+    }
+
+    /**
+     * Checks that the name of the file is adequate, e.g.:
+     *   - Starts with a capital letter
+     *   - Does not contain spaces
+     * 
+     * @throws ClassNameParseException if the name of the file is not valid. 
+     */
+    private void checkValidName(String jdcFilename) throws ClassNameParseException {
+	  if (Character.isDigit(jdcFilename.charAt(0))) { //Check that first char of file name is not digit
+		throw new ClassNameParseException("File names in JavaDecaf cannot begin with a number. " +
+							    "Please rename the file.");
+	  } else if (Character.isLowerCase(jdcFilename.charAt(0))) { //Check that first char is uppercase
+		throw new ClassNameParseException("File names in JavaDecaf must begin with a capital letter. " +
+							    "Please rename the file.");
+	  }
     }
 
     /**
