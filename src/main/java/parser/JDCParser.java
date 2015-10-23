@@ -5,7 +5,6 @@ import ast.*;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
   protected JJTJDCParserState jjtree = new JJTJDCParserState();private List<String> warnings = new ArrayList<String>(); // list of warnings
@@ -29,50 +28,25 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
 
     /**
-    * Test whether a given identifier is a legal method name: must begin with lower case letter
-    * and must not be equal to any of the methods in java.lang.Object or to any of the methods
-    * defined by Java Decaf. 
-    * 
-    * @throw MethodNameParseException if the name starts with a capital letter
-    * @throw MethodNameParseTakenException if the name is used by methods of java.lang.Object
-    * @throw MethodNameParseTakenDecafException if the name is used by Java Decaf
+    *  Test whether a given identifier is a legal method name: must begin with lower case letter.
+    * Throw MethodNameParseException if not legal.
     * @param t - the token of the identifier in question
     */
     public void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
            errors.add((new MethodNameParseException(t)).getMessage());
-	     return;
-        } 
-
-	  String[] methodsInJavaLangObject = {"clone", "equals", "finalize", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait"};
-	  List<String> reservedMethodNames = Arrays.asList(methodsInJavaLangObject);
-	  if (reservedMethodNames.contains(t.image)) {
-		errors.add((new MethodNameTakenException(t)).getMessage());
-		return;
-	  }
-
-	  String[] javaDecafMethods = {"print", "println", "readLine", "readInt", "readDouble"};
-	  reservedMethodNames = Arrays.asList(javaDecafMethods);
-	  if (reservedMethodNames.contains(t.image)) {
-		errors.add((new MethodNameTakenDecafException(t)).getMessage());
-		return;
-	  }
+        }
     }
 
     /**
-        * Test whether a given identifier is a legal class name: must begin with upper case letter and
-	  * must be different from the name of the containing script. 
-        * @throw ClassNameParseException if the name does not start with a capital letter
-        * @throw ClassNameSameAsScriptException if the name is the same as the containing script
+        *  Test whether a given identifier is a legal class name: must begin with upper case letter.
+        * Throw ClassNameParseException if not legal.
         * @param t - the token of the identifier in question
         */
     public void checkClassName(Token t) throws ClassNameParseException {
             if (Character.isLowerCase(t.image.charAt(0))){
                 errors.add((new ClassNameParseException(t)).getMessage());
             }
-		if (this.getClassName().equals(t.image)) {
-		    errors.add((new ClassNameSameAsScriptException(t)).getMessage());
-		}
         }
     /**
         *  Test whether a given identifier is a legal variable name: must begin with lower case letter
@@ -81,20 +55,22 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
         * @param t - the token of the identifier in question
         */
     public void checkVariableName(Token t) throws VariableNameParseException {
-	  char firstChar = t.image.charAt(0);
-	  if (!Character.isLetter(firstChar)) {
-		errors.add((new VariableNameParseException(t)).getMessage());
-	  } else if (Character.isUpperCase(firstChar)) {
-		// maybe a constant?
-		for (char c: t.image.toCharArray()) {
-		    if (Character.isLowerCase(c)) {
-			  // alas, not a constant; just bad capitalisation
-			  errors.add((new VariableNameParseException(t)).getMessage());
-			  break;
-		    }
-		}
-	  }
-    }
+            if (Character.isUpperCase(t.image.charAt(0))) {
+                int lowerCount = 0;
+                for (char c: t.image.toCharArray()) {
+                    if (Character.isLowerCase(c)) {
+                        lowerCount++;
+                    }
+                }
+                /* if the first letter is a capital and there are lower case letters in the rest of the name,
+                    throw an exception */
+                if (lowerCount != 0) {
+                     errors.add((new VariableNameParseException(t)).getMessage());
+                }
+
+
+            }
+        }
 
     /**
      * Add a warning to the internal warning list to be printed at the end.
@@ -4049,16 +4025,30 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   final public void ContinueStatement() throws ParseException {
     trace_call("ContinueStatement");
     try {
-      jj_consume_token(CONTINUE);
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IDENTIFIER:
-        jj_consume_token(IDENTIFIER);
-        break;
-      default:
-        jj_la1[103] = jj_gen;
-        ;
+  Token t;
+    ASTContinueStatement jjtn001 = new ASTContinueStatement(this, JJTCONTINUESTATEMENT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+      try {
+    t = getToken(1);
+        jj_consume_token(CONTINUE);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case IDENTIFIER:
+          jj_consume_token(IDENTIFIER);
+          break;
+        default:
+          jj_la1[103] = jj_gen;
+          ;
+        }
+        jj_consume_token(SEMICOLON);
+     jjtree.closeNodeScope(jjtn001, true);
+     jjtc001 = false;
+    setFirstLastToken(jjtn001,t,getToken(0));
+      } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
       }
-      jj_consume_token(SEMICOLON);
     } finally {
       trace_return("ContinueStatement");
     }
@@ -5160,6 +5150,11 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3_36() {
+    if (jj_3R_69()) return true;
+    return false;
+  }
+
   private boolean jj_3R_222() {
     if (jj_scan_token(LBRACKET)) return true;
     if (jj_scan_token(RBRACKET)) return true;
@@ -5168,11 +5163,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   private boolean jj_3R_79() {
     if (jj_3R_104()) return true;
-    return false;
-  }
-
-  private boolean jj_3_36() {
-    if (jj_3R_69()) return true;
     return false;
   }
 
@@ -5280,14 +5270,14 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_135() {
-    if (jj_3R_155()) return true;
-    return false;
-  }
-
   private boolean jj_3R_247() {
     if (jj_scan_token(FINALLY)) return true;
     if (jj_3R_71()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_135() {
+    if (jj_3R_155()) return true;
     return false;
   }
 
@@ -5326,6 +5316,19 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
   private boolean jj_3R_106() {
     if (jj_3R_113()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_150() {
+    if (jj_scan_token(TRY)) return true;
+    if (jj_3R_71()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_246()) { jj_scanpos = xsp; break; }
+    }
+    xsp = jj_scanpos;
+    if (jj_3R_247()) jj_scanpos = xsp;
     return false;
   }
 
@@ -5369,19 +5372,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_150() {
-    if (jj_scan_token(TRY)) return true;
-    if (jj_3R_71()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_246()) { jj_scanpos = xsp; break; }
-    }
-    xsp = jj_scanpos;
-    if (jj_3R_247()) jj_scanpos = xsp;
-    return false;
-  }
-
   private boolean jj_3R_177() {
     if (jj_3R_55()) return true;
     Token xsp;
@@ -5397,9 +5387,23 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3R_149() {
+    if (jj_scan_token(SYNCHRONIZED)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_66()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_71()) return true;
+    return false;
+  }
+
   private boolean jj_3R_138() {
     if (jj_scan_token(ASSIGN)) return true;
     if (jj_3R_55()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_167() {
+    if (jj_3R_66()) return true;
     return false;
   }
 
@@ -5415,15 +5419,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_149() {
-    if (jj_scan_token(SYNCHRONIZED)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_66()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_71()) return true;
-    return false;
-  }
-
   private boolean jj_3R_98() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
@@ -5435,8 +5430,10 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
-  private boolean jj_3R_167() {
+  private boolean jj_3R_148() {
+    if (jj_scan_token(THROW)) return true;
     if (jj_3R_66()) return true;
+    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
@@ -5455,13 +5452,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
   private boolean jj_3_27() {
     if (jj_scan_token(DOT)) return true;
     if (jj_3R_65()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_148() {
-    if (jj_scan_token(THROW)) return true;
-    if (jj_3R_66()) return true;
-    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
@@ -5519,6 +5509,15 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
     return false;
   }
 
+  private boolean jj_3R_147() {
+    if (jj_scan_token(RETURN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_167()) jj_scanpos = xsp;
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
   private boolean jj_3R_137() {
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
@@ -5526,15 +5525,6 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       xsp = jj_scanpos;
       if (jj_3R_161()) { jj_scanpos = xsp; break; }
     }
-    return false;
-  }
-
-  private boolean jj_3R_147() {
-    if (jj_scan_token(RETURN)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_167()) jj_scanpos = xsp;
-    if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
@@ -7200,18 +7190,21 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
       for (int i = 0; i < jj_endpos; i++) {
         jj_expentry[i] = jj_lasttokens[i];
       }
-      jj_entries_loop: for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
+      boolean exists = false;
+      for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
+        exists = true;
         int[] oldentry = (int[])(it.next());
         if (oldentry.length == jj_expentry.length) {
           for (int i = 0; i < jj_expentry.length; i++) {
             if (oldentry[i] != jj_expentry[i]) {
-              continue jj_entries_loop;
+              exists = false;
+              break;
             }
           }
-          jj_expentries.add(jj_expentry);
-          break jj_entries_loop;
+          if (exists) break;
         }
       }
+      if (!exists) jj_expentries.add(jj_expentry);
       if (pos != 0) jj_lasttokens[(jj_endpos = pos) - 1] = kind;
     }
   }

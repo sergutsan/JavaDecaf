@@ -2605,9 +2605,31 @@ void BreakStatement() :
 }
 
 void ContinueStatement() :
-{}
-{
-  "continue" [ <IDENTIFIER> ] ";"
+{ Token t; }
+{/*@bgen(jjtree) ContinueStatement */
+  {
+    ASTContinueStatement jjtn001 = new ASTContinueStatement(this, JJTCONTINUESTATEMENT);
+    boolean jjtc001 = true;
+    jjtree.openNodeScope(jjtn001);
+  }
+  try {
+/*@egen*/ ({
+    t = getToken(1);
+   } "continue" [ <IDENTIFIER> ] ";"/*@bgen(jjtree)*/
+   {
+     jjtree.closeNodeScope(jjtn001, true);
+     jjtc001 = false;
+   }
+/*@egen*/
+   {
+    setFirstLastToken(jjtn001,t,getToken(0));
+   })/*@bgen(jjtree)*/
+  } finally {
+    if (jjtc001) {
+      jjtree.closeNodeScope(jjtn001, true);
+    }
+  }
+/*@egen*/                  
 }
 
 void ReturnStatement() :
