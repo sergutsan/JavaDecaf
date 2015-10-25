@@ -16,8 +16,8 @@ public class MethodNameTakenDecafException extends ParseException {
      * @return the error message
      */
     public static String initMessage(Token t) {
-        String message = "Error: encountered method name " + t.image + "() at line " + t.beginLine + ", column "+ t.beginColumn +
-		". The following method names are reserved by Java Decaf and cannot be used: " + EOL +
+        String message = "Error: encountered method name " + t.image + "() at line " + t.beginLine + ", column "+ t.beginColumn + "." +
+		EOL + "The following method names are reserved by Java Decaf and cannot be used: " + EOL +
 		"print, println, readDouble, readInt, readLine." + EOL; 
         return message;
 

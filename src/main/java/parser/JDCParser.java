@@ -5,6 +5,7 @@ import ast.*;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCParserConstants {/*@bgen(jjtree)*/
   protected JJTJDCParserState jjtree = new JJTJDCParserState();private List<String> warnings = new ArrayList<String>(); // list of warnings
@@ -28,49 +29,76 @@ public class JDCParser/*@bgen(jjtree)*/implements JDCParserTreeConstants, JDCPar
 
 
     /**
-    *  Test whether a given identifier is a legal method name: must begin with lower case letter.
-    * Throw MethodNameParseException if not legal.
-    * @param t - the token of the identifier in question
-    */
+     * Test whether a given identifier is a legal method name: must begin with lower case letter
+     * and must not be equal to any of the methods in java.lang.Object or to any of the methods
+     * defined by Java Decaf. 
+     * 
+     * @throw MethodNameParseException if the name starts with a capital letter
+     * @throw MethodNameParseTakenException if the name is used by methods of java.lang.Object
+     * @throw MethodNameParseTakenDecafException if the name is used by Java Decaf
+     *
+     * @param t the token of the identifier in question
+     */
     public void checkMethodName(Token t) throws MethodNameParseException {
         if (Character.isUpperCase(t.image.charAt(0))){
            errors.add((new MethodNameParseException(t)).getMessage());
-        }
+           return;
+        } 
+
+	  String[] methodsInJavaLangObject = {"clone", "equals", "finalize", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait"};
+	  List<String> reservedMethodNames = Arrays.asList(methodsInJavaLangObject);
+	  if (reservedMethodNames.contains(t.image)) {
+		errors.add((new MethodNameTakenException(t)).getMessage());
+		return;
+	  }
+
+	  String[] javaDecafMethods = {"print", "println", "readLine", "readInt", "readDouble"};
+	  reservedMethodNames = Arrays.asList(javaDecafMethods);
+	  if (reservedMethodNames.contains(t.image)) {
+		errors.add((new MethodNameTakenDecafException(t)).getMessage());
+		return;
+	  }
     }
 
     /**
-        *  Test whether a given identifier is a legal class name: must begin with upper case letter.
-        * Throw ClassNameParseException if not legal.
-        * @param t - the token of the identifier in question
-        */
+     * Test whether a given identifier is a legal class name: must begin with upper case letter and
+     * must be different from the name of the containing script. 
+     * @throw ClassNameParseException if the name does not start with a capital letter
+     * @throw ClassNameSameAsScriptException if the name is the same as the containing script
+     * @param t the token of the identifier in question
+     */
     public void checkClassName(Token t) throws ClassNameParseException {
-            if (Character.isLowerCase(t.image.charAt(0))){
-                errors.add((new ClassNameParseException(t)).getMessage());
-            }
-        }
+	  if (Character.isLowerCase(t.image.charAt(0))){
+		errors.add((new ClassNameParseException(t)).getMessage());
+		return;
+	  }
+	  if (this.getClassName().equals(t.image)) {
+		errors.add((new ClassNameSameAsScriptException(t)).getMessage());
+		return;
+	  }
+    }
+
     /**
-        *  Test whether a given identifier is a legal variable name: must begin with lower case letter
-        * unless the variable is in all caps (constant name)
-        * Throw ParseException if not legal.
-        * @param t - the token of the identifier in question
-        */
+     * Test whether a given identifier is a legal variable name: must begin with lower case letter
+     * unless the variable is in all caps (constant name)
+     * Throw ParseException if not legal.
+     * @param t - the token of the identifier in question
+     */
     public void checkVariableName(Token t) throws VariableNameParseException {
-            if (Character.isUpperCase(t.image.charAt(0))) {
-                int lowerCount = 0;
-                for (char c: t.image.toCharArray()) {
-                    if (Character.isLowerCase(c)) {
-                        lowerCount++;
-                    }
-                }
-                /* if the first letter is a capital and there are lower case letters in the rest of the name,
-                    throw an exception */
-                if (lowerCount != 0) {
-                     errors.add((new VariableNameParseException(t)).getMessage());
-                }
-
-
-            }
-        }
+         char firstChar = t.image.charAt(0);
+         if (!Character.isLetter(firstChar)) {
+               errors.add((new VariableNameParseException(t)).getMessage());
+         } else if (Character.isUpperCase(firstChar)) {
+               // maybe a constant?
+               for (char c: t.image.toCharArray()) {
+                   if (Character.isLowerCase(c)) {
+                         // alas, not a constant; just bad capitalisation
+                         errors.add((new VariableNameParseException(t)).getMessage());
+                         break;
+                   }
+               }
+         }
+    }
 
     /**
      * Add a warning to the internal warning list to be printed at the end.

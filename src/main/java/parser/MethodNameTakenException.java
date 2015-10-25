@@ -16,8 +16,8 @@ public class MethodNameTakenException extends ParseException {
      * @return the error message
      */
     public static String initMessage(Token t) {
-        String message = "Error: encountered method name " + t.image + "() at line " + t.beginLine + ", column "+ t.beginColumn +
-		". The following method names are reserved by Java and cannot be used: " + EOL +
+        String message = "Error: encountered method name " + t.image + "() at line " + t.beginLine + ", column "+ t.beginColumn + "." + 
+		EOL + "The following method names are reserved by Java and cannot be used: " + EOL +
 		"clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait." + EOL; 
         return message;
 
