@@ -1,12 +1,6 @@
 #!/bin/sh
 echo -n "What version is this (e.g. 1.0)? "
 read VERSION
-mvn clean && mvn package || exit
-if [ ! -e ./target/JavaDecaf-${VERSION}.jar ]; then
-    echo "Could not find ./target/JavaDecaf-${VERSION}.jar."
-    echo "Aborting..."
-    exit 1
-fi
 TARGET_DIR=/tmp/JavaDecaf-$VERSION
 if [ -e $TARGET_DIR ]; then
     echo
@@ -20,6 +14,12 @@ fi
 if ! which zip > /dev/null; then
     echo "The program 'zip' could not be found. "
     echo "Please install zip and start again."
+    exit 1
+fi
+mvn clean && mvn package || exit
+if [ ! -e ./target/JavaDecaf-${VERSION}.jar ]; then
+    echo "Could not find ./target/JavaDecaf-${VERSION}.jar."
+    echo "Aborting..."
     exit 1
 fi
 
