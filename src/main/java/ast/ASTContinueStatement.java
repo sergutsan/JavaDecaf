@@ -5,7 +5,7 @@ package ast;
 import parser.*;
 
 public
-class ASTContinueStatement extends SimpleNode {
+class ASTContinueStatement extends SimpleNode implements Indentable {
   public ASTContinueStatement(int id) {
     super(id);
   }

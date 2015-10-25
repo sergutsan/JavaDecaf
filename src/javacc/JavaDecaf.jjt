@@ -1351,12 +1351,13 @@ void BreakStatement() :
 
 void ContinueStatement() :
 { Token t; }
-{ ({
+{
+  ({
     t = getToken(1);
-   } "continue" [ <IDENTIFIER> ] ";"
-   {
-    setFirstLastToken(jjtThis,t,getToken(0));
-   })#ContinueStatement
+    } "continue" [ <IDENTIFIER> ] ";"
+    {
+    setFirstLastToken(jjtThis, t, getToken(1));
+    })#ContinueStatement
 }
 
 void ReturnStatement() :
