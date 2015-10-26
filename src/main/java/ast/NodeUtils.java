@@ -42,17 +42,6 @@ public class NodeUtils {
                 case "print":
                     currentToken.image = "System.out.print";
                     break;
-		    /*
-                case "readLine":
-                    currentToken.image = "__input.nextLine"; //input is Scanner
-                    break;
-                case "readInt":
-                    currentToken.image = "__input.nextInt";
-                    break;
-                case "readDouble":
-                    currentToken.image = "__input.nextDouble";
-                    break;
-		    */
                 default:
                     break;
             }
