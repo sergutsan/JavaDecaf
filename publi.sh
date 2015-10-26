@@ -45,6 +45,7 @@ echo 'int n = readInt();'                       >> $HELLO_WORLD_2
 echo 'println("Nice to meet you, " + s);'       >> $HELLO_WORLD_2
 echo ' '                                        >> $HELLO_WORLD_2
 cd /tmp
+chmod +x $SHELL_SCRIPT 
 echo "Adding files to ZIP..."
 if zip -r JavaDecaf-${VERSION}.zip JavaDecaf-$VERSION/*; then 
    echo File JavaDecaf-${VERSION}.zip created successfully. 
