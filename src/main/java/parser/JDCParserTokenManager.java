@@ -4,6 +4,7 @@ import ast.*;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /** Token Manager. */
 public class JDCParserTokenManager implements JDCParserConstants

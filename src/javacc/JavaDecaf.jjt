@@ -916,13 +916,21 @@ void MultiplicativeExpression() :
 void UnaryExpression() :
 {}
 {
-  ( "+" | "-" ) UnaryExpression()
+  ( "+" ) UnaryExpression()
+|
+  MinusUnaryExpression()
 |
   PreIncrementExpression()
 |
   PreDecrementExpression()
 |
   UnaryExpressionNotPlusMinus()
+}
+
+void MinusUnaryExpression() :
+{Token t;}
+{
+  ({ t = getToken(1); } ( "-" ) { setFirstLastToken(jjtThis, t, getToken(1)); })#MinusSign UnaryExpression()
 }
 
 void PreIncrementExpression() :
